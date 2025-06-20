@@ -1,0 +1,20 @@
+Goals for today:
+
+Finish qk::Layer to also respond to on_attach() and on_detach()
+Begin porting the integrated console from an older iteration of the engine
+Create the first (and possibly only) layer included in the engine
+UILayer	= { UIContext, Client& }
+	Implement on_attach(), on_event(), draw() and on_detach()
+
+
+Need to decouple the layer status shit. Make it fire events via entt::dispatcher instead, and have the Client (who has an Application&) react to it.
+
+
+
+
+
+Actor = {std::vector <entt::entity>, entt::registry& (from Client)}
+
+Scene = {entt::registry, std::vector<Actor>}
+
+Client = {Server* (upgrade to ports in due time), ConvarRegistry, entt::dispatcher, Scene }

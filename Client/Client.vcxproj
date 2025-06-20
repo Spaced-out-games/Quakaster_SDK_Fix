@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{b675d33b-6119-4ad1-8766-0c3ea3944aa8}</ProjectGuid>
+    <RootNamespace>Client</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WINSOCK_DEPRECATED_NO_WARNINGS;HAS_INET_PTON;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quakaster\src;D:\C++ Libraries\glm\glm;%(AdditionalIncludeDirectories);D:\C++ Libraries\glm;D:\C++ Libraries\SDL2\include;D:\C++ Libraries\entt\entt\single_include;D:\C++ Libraries\glew-2.2.0\include;D:\C++ Libraries\imgui\imgui;D:\C++ Libraries\enet-master\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\C++ Libraries\SDL2\lib\x64;D:\C++ Libraries\glew-2.2.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;opengl32.lib;Ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quakaster\src;%(AdditionalIncludeDirectories);D:\C++ SDKs\Vulkan\Include;D:\C++ Libraries\glm;D:\C++ Libraries\glfw-3.4\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\C++ SDKs\Vulkan\Lib;D:\C++ Libraries\glfw-3.4\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Quakaster\Quakaster.vcxproj">
+      <Project>{8e423c39-2b45-4da4-a1f4-9f4b49aefe86}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\C++ Libraries\enet-master\callbacks.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\compress.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\host.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\list.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\packet.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\peer.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\protocol.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\unix.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\win32.c" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\imgui.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\imgui_demo.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\imgui_draw.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\imgui_tables.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="game.cpp" />
+    <ClCompile Include="GameLayer.cpp" />
+    <ClCompile Include="GUILayer.cpp" />
+    <ClCompile Include="LevelLayer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="help.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="game.h" />
+    <ClInclude Include="GameLayer.h" />
+    <ClInclude Include="GUILayer.h" />
+    <ClInclude Include="LevelLayer.h" />
+    <ClInclude Include="vertex_attribute_setup.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

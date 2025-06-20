@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Quakaster.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\EBO.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\Context.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\gl_utils.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\graphics_init.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\import.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\TestShader.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\VAO.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\VBO.h" />
+    <ClInclude Include="src\Quakaster\qklog\logging.h" />
+    <ClInclude Include="src\Quakaster\qkmath\Camera.h" />
+    <ClInclude Include="src\Quakaster\qknet\Client.h" />
+    <ClInclude Include="src\Quakaster\qknet\Convar.h" />
+    <ClInclude Include="src\Quakaster\qkui\Widgets\ConsoleUI.h" />
+    <ClInclude Include="src\Quakaster\qkui\Widgets\DemoWidget.h" />
+    <ClInclude Include="src\Quakaster\qkui\import.h" />
+    <ClInclude Include="src\Quakaster\qkui\UIContext.h" />
+    <ClInclude Include="src\Quakaster\qkui\UIWidget.h" />
+    <ClInclude Include="src\Quakaster\qk\Application.h" />
+    <ClInclude Include="src\Quakaster\Core.h" />
+    <ClInclude Include="src\Quakaster\EntryPoint.h" />
+    <ClInclude Include="src\Quakaster\qkmath\qkmath.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\Window.h" />
+    <ClInclude Include="src\Quakaster\qk\Layer.h" />
+    <ClInclude Include="src\Quakaster\qk\QKTL.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\C++ Libraries\enet-master\callbacks.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\compress.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\host.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\list.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\packet.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\peer.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\protocol.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\unix.c" />
+    <ClCompile Include="D:\C++ Libraries\enet-master\win32.c" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\imgui.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\imgui_demo.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\imgui_draw.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\imgui_tables.cpp" />
+    <ClCompile Include="D:\C++ Libraries\imgui\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\Quakaster\Core.cpp" />
+    <ClCompile Include="src\Quakaster\qkg\GL\Context.cpp" />
+    <ClCompile Include="src\Quakaster\qkg\GL\EBO.cpp" />
+    <ClCompile Include="src\Quakaster\qkg\GL\graphics_init.cpp" />
+    <ClCompile Include="src\Quakaster\qkg\GL\TestShader.cpp" />
+    <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp" />
+    <ClCompile Include="src\Quakaster\qkg\GL\VBO.cpp" />
+    <ClCompile Include="src\Quakaster\qklog\logging.cpp" />
+    <ClCompile Include="src\Quakaster\qkmath\Camera.cpp" />
+    <ClCompile Include="src\Quakaster\qknet\Convar.cpp" />
+    <ClCompile Include="src\Quakaster\qkui\Widgets\ConsoleUI.cpp" />
+    <ClCompile Include="src\Quakaster\qkui\Widgets\DemoWidget.cpp" />
+    <ClCompile Include="src\Quakaster\qkui\UIContext.cpp" />
+    <ClCompile Include="src\Quakaster\qkui\UIWidget.cpp" />
+    <ClCompile Include="src\Quakaster\qk\Application.cpp" />
+    <ClCompile Include="src\Quakaster\qkg\GL\Window.cpp" />
+    <ClCompile Include="src\Quakaster\qk\Layer.cpp" />
+    <ClCompile Include="src\Quakaster\qk\QKTL.cpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8e423c39-2b45-4da4-a1f4-9f4b49aefe86}</ProjectGuid>
+    <RootNamespace>Quakaster</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Quakaster_Engine</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL;_WINSOCK_DEPRECATED_NO_WARNINGS;HAS_INET_PTON</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>D:\C++ Libraries\glm;D:\C++ Libraries\entt\entt\single_include;D:\C++ Libraries\SDL2\include;D:\C++ Libraries\glew-2.2.0\include;D:\C++ Libraries\imgui\imgui;D:\C++ Libraries\enet-master\include</AdditionalIncludeDirectories>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\C++ Libraries\SDL2\lib\x64;D:\C++ Libraries\glew-2.2.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;SDL2.lib;opengl32.lib;Ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>move /Y "$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\$(Configuration)-$(Platform)\Client\"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);D:\C++ SDKs\Vulkan\Include;D:\C++ Libraries\glm;D:\C++ Libraries\glfw-3.4\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\C++ SDKs\Vulkan\Lib;D:\C++ Libraries\glfw-3.4\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>move /Y "$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\$(Configuration)-$(Platform)\Client"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
