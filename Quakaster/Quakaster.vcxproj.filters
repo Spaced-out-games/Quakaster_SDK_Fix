@@ -42,9 +42,6 @@
     <ClInclude Include="src\Quakaster\qkg\GL\graphics_init.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\Context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Quakaster\qk\Layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -87,7 +84,13 @@
     <ClInclude Include="src\Quakaster\qkg\GL\gl_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\TestShader.h">
+    <ClInclude Include="src\Quakaster\qkg\GL\GraphicsPipeline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkg\GL\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkg\GL\ShaderInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -102,9 +105,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qkg\GL\graphics_init.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quakaster\qkg\GL\Context.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qk\Layer.cpp">
@@ -191,7 +191,13 @@
     <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkg\GL\TestShader.cpp">
+    <ClCompile Include="src\Quakaster\qkg\GL\GraphicsPipeline.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkg\GL\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkg\GL\ShaderInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
