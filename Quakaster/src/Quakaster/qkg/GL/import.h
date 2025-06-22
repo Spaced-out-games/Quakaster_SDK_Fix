@@ -5,10 +5,12 @@
 #include <SDL.h>
 
 #include "Window.h"
-#include "Context.h"
+#include "GraphicsPipeline.h"
 
 
 #include "graphics_init.h"
 #include "VAO.h"
 #include "VBO.h"
 #include "EBO.h"
+#include "Shader.h"
+#include "ShaderInstance.h"
