@@ -33,3 +33,20 @@ std::vector <GLuint> indices = {
     3, 2, 6,
     6, 7, 3
 };
+
+const char* default_frag =
+"#version 330 core\n"
+"out vec4 FragColor;\n"
+"void main() {\n"
+"    FragColor = vec4(1.0, 0.0, 1.0, 1.0); // Purple for maximum visibility\n"
+"}";
+
+
+const char* default_vert =
+"#version 330 core\n"
+"layout(location = 0) in vec3 aPos;\n"
+"void main() {\n"
+"    gl_Position = vec4(aPos, 1.0);\n"
+"}";
+
+

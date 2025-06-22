@@ -21,32 +21,32 @@ void Game::init() {
 
 	qk::init_SDL_GL(3, 3);
 
-	qkg::make_window(window, 720, 720, std::string("Test"));
+	qkg::make_window(window, 720, 720, "Test");
 
 
-	context.init(window);
-	check_gl_error("game::init()::context::init");
+	pipeline.init(window);
 
 
-	qk::init_GLEW() << '\n';
-	std::cout << "GL_VERSION: " << glGetString(GL_VERSION) << '\n';
+	qk::init_GLEW();
 
 
-	check_gl_error("game::init()::init_glew");
 
 	glClearColor(0, 200, 255, 255);
 	glViewport(0, 0, 720, 720);
 
 
 
-	UIcontext.init(context.m_GLContext, window.m_Window);
+	UIcontext.init(pipeline, window);
 	
 	console_widget = UIcontext.add_widget(new ConsoleUI());
 	
+
+
+
 	
 	
 	layers.insert(new GUILayer(&UIcontext));
-	layers.insert(new GameLayer());
+	//layers.insert(new GameLayer());
 
 	#include "test_vertices.h" // just a lil' cleaner
 
@@ -62,6 +62,14 @@ void Game::init() {
 	ebo.init(indices);
 	ebo.bind();
 
+	qkg::Shader shader;
+	shader.attach_shader(GL_FRAGMENT_SHADER, default_frag);
+	shader.attach_shader(GL_VERTEX_SHADER, default_vert);
+	shader_instance.set_program(qkg::compile_shader(shader));
+
+
+
+
 }
 
 
@@ -71,12 +79,16 @@ int Game::run()
 {
 	
 
+	shader_instance.bind();
+
+
 	// main loop. Runs until there's an error code.
 	while (!qk::status)
 	{
 		layers.render();
 		layers.propagate_events();
 
+		glDrawElements(GL_TRIANGLES, ebo.size(), GL_UNSIGNED_INT, 0);
 
 		//UIcontext.end();
 		window.swap();
