@@ -14,18 +14,32 @@ namespace qkui
 	{
 		SDL_Window* m_Target;
 		uint8_t m_EmptyCount = 0;
-		std::vector<UIWidget*> m_Widgets;
+		std::vector<UIWidget*> m_Widgets; // Might be worth making this an array instead?
 		public:
 			ImGuiContext* m_Context;
 			UIContext();
 			~UIContext();
 			ImGuiIO& IO();
-			inline void init(SDL_GLContext& context, SDL_Window* window);
+
+			// Legacy support
+			inline void init(SDL_GLContext context, SDL_Window* window);
+
+			// Quakaster compatability layer
+			inline void init(qkg::GraphicsPipeline& pipeline, qkg::Window& window);
+
+			// Begins an ImGui frame. Might be worth moving this into draw()
 			inline void begin();
+
+			// Draws all the ImGui widgets.
 			inline void draw();
+
+			// Renders out the ImGui widgets. Might be worth moving this into draw()
 			inline void end();
 
+			// Adds a widget to the UIContext.
 			inline [[nodiscard]] uint8_t add_widget(UIWidget* widget);
+
+			// Removes a widget from the UIContext.
 			inline bool remove_widget(uint8_t handle);
 
 	};

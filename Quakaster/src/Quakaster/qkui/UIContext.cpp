@@ -3,11 +3,14 @@
 
 namespace qkui
 {
+	class qkg::GraphicsPipeline;
+
 	UIContext::UIContext()
 	{
 		m_Target = nullptr;
+		m_Context = nullptr;
 	}
-	void UIContext::init(SDL_GLContext& context, SDL_Window* window)
+	void UIContext::init(SDL_GLContext context, SDL_Window* window)
 	{
 		m_Target = window;
 		IMGUI_CHECKVERSION();
@@ -16,6 +19,10 @@ namespace qkui
 
 		ImGui_ImplSDL2_InitForOpenGL(m_Target, context);
 		ImGui_ImplOpenGL3_Init("#version 330");
+	}
+	void UIContext::init(qkg::GraphicsPipeline& pipeline, qkg::Window& window)
+	{
+		init(pipeline.m_GLContext, window.m_Window);
 
 	}
 
