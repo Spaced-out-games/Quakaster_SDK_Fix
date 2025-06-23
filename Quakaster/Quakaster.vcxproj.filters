@@ -149,33 +149,6 @@
     <ClCompile Include="src\Quakaster\qknet\Convar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\C++ Libraries\enet-master\callbacks.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\C++ Libraries\enet-master\compress.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\C++ Libraries\enet-master\host.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\C++ Libraries\enet-master\list.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\C++ Libraries\enet-master\packet.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\C++ Libraries\enet-master\peer.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\C++ Libraries\enet-master\protocol.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\C++ Libraries\enet-master\unix.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\C++ Libraries\enet-master\win32.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Quakaster\qk\QKTL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -198,6 +171,33 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qkg\GL\ShaderInstance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\enet-master\callbacks.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\enet-master\compress.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\enet-master\host.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\enet-master\list.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\enet-master\packet.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\enet-master\peer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\enet-master\protocol.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\enet-master\unix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\enet-master\win32.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
