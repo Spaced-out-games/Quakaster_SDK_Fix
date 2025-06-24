@@ -37,6 +37,7 @@
     <ClInclude Include="src\Quakaster\qkg\GL\Window.h" />
     <ClInclude Include="src\Quakaster\qk\Layer.h" />
     <ClInclude Include="src\Quakaster\qk\QKTL.h" />
+    <ClInclude Include="thirdparty\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quakaster\Core.cpp" />
