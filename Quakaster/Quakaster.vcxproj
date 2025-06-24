@@ -124,13 +124,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL;_WINSOCK_DEPRECATED_NO_WARNINGS;HAS_INET_PTON</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>D:\C++ Libraries\glm;$(SolutionDir)Quakaster\thirdparty\entt\entt\single_include;$(SolutionDir)Quakaster\thirdparty\SDL2\include;D:\C++ Libraries\glew-2.2.0\include;D:\C++ Libraries\imgui\imgui;$(SolutionDir)Quakaster\thirdparty\enet-master\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quakaster\thirdparty\glm;$(SolutionDir)Quakaster\thirdparty\entt\entt\single_include;$(SolutionDir)Quakaster\thirdparty\SDL2\include;$(SolutionDir)Quakaster\thirdparty\glew-2.2.0\include;D:\C++ Libraries\imgui\imgui;$(SolutionDir)Quakaster\thirdparty\enet-master\include</AdditionalIncludeDirectories>
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Quakaster\thirdparty\SDL2\lib\x64;D:\C++ Libraries\glew-2.2.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Quakaster\thirdparty\SDL2\lib\x64;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;SDL2.lib;opengl32.lib;Ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>

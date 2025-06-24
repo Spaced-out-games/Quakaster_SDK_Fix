@@ -57,7 +57,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WINSOCK_DEPRECATED_NO_WARNINGS;HAS_INET_PTON;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quakaster\src;D:\C++ Libraries\glm\glm;%(AdditionalIncludeDirectories);D:\C++ Libraries\glm;$(SolutionDir)Quakaster\thirdparty\SDL2\include;$(SolutionDir)Quakaster\thirdparty\entt\entt\single_include;D:\C++ Libraries\glew-2.2.0\include;D:\C++ Libraries\imgui\imgui;$(SolutionDir)Quakaster\thirdparty\enet-master\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quakaster\src;$(SolutionDir)Quakaster\thirdparty\glm;%(AdditionalIncludeDirectories);D:\C++ Libraries\glm;$(SolutionDir)Quakaster\thirdparty\SDL2\include;$(SolutionDir)Quakaster\thirdparty\entt\entt\single_include;$(SolutionDir)Quakaster\thirdparty\glew-2.2.0\include;D:\C++ Libraries\imgui\imgui;$(SolutionDir)Quakaster\thirdparty\enet-master\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
