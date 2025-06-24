@@ -46,7 +46,7 @@ void Game::init() {
 	
 	
 	layers.insert(new GUILayer(&UIcontext));
-	//layers.insert(new GameLayer());
+	layers.insert(new GameLayer());
 
 	#include "test_vertices.h" // just a lil' cleaner
 
