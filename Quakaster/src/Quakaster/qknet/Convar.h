@@ -106,9 +106,11 @@ namespace qk
 
 }
 
+/*
 namespace cl
 {
 	extern QK_API float fov_desired;
 }
 
 QK_DECLARE_CONVAR(fov_desired);
+*/

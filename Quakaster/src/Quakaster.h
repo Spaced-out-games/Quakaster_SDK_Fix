@@ -15,6 +15,8 @@
 #include "Quakaster/qklog/logging.h"
 #include "Quakaster/EntryPoint.h"
 
+#include "Quakaster/qkmath/qkmath.h"
+
 // load the appropriate backend
 
 #ifdef QK_GRAPHICS_BACKEND_GL

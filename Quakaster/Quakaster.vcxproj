@@ -38,6 +38,7 @@
     <ClInclude Include="src\Quakaster\qk\Layer.h" />
     <ClInclude Include="src\Quakaster\qk\QKTL.h" />
     <ClInclude Include="thirdparty\stb_image.h" />
+    <ClInclude Include="thirdparty\tiny_obj_loader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quakaster\Core.cpp" />
@@ -75,6 +76,9 @@
     <ClCompile Include="thirdparty\imgui\imgui\imgui_draw.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui_tables.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui_widgets.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="copypasta.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

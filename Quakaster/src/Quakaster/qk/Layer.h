@@ -24,8 +24,8 @@ namespace qk {
 	class QK_API LayerStack
 	{
 		uint8_t m_EmptyCount = 0;
-		SDL_Event m_Event;
-		std::vector<Layer*> m_Layers;
+		SDL_Event m_Event{};
+		std::vector<Layer*> m_Layers{};
 		public:
 			inline [[nodiscard]] uint8_t insert(Layer* layer);
 			inline bool remove(uint8_t index);

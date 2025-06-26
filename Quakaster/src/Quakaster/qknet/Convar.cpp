@@ -52,10 +52,10 @@ namespace qk
 	QK_API ConvarRegistry convars;
 
 }
-
+/*
 namespace cl
 {
 	QK_API float fov_desired = 50.0f;
 }
 
-QK_DEFINE_CONVAR(fov_desired, "fov_desired", cl::fov_desired);
+QK_DEFINE_CONVAR(fov_desired, "fov_desired", cl::fov_desired);*/

@@ -44,9 +44,10 @@ const char* default_frag =
 
 const char* default_vert =
 "#version 330 core\n"
+"uniform mat4 u_Proj;\n"
+"uniform mat4 u_View;\n"
 "layout(location = 0) in vec3 aPos;\n"
 "void main() {\n"
-"    gl_Position = vec4(aPos, 1.0);\n"
+"    gl_Position = u_Proj * u_View * vec4(aPos, 1.0);\n"
 "}";
-
 

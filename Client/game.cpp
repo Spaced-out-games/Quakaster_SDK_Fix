@@ -2,6 +2,7 @@
 #include "GameLayer.h"
 #include "GUILayer.h"
 #include "vertex_attribute_setup.h"
+#include <cmath> // for sin, cos
 qk::Application* create_application(int argc, char** argv) { return new Game(argc, argv); }
 
 
@@ -21,7 +22,7 @@ void Game::init() {
 
 	qk::init_SDL_GL(3, 3);
 
-	qkg::make_window(window, 720, 720, "Test");
+	qkg::make_window(window, 1920, 1080, "Test");
 
 
 	pipeline.init(window);
@@ -29,18 +30,17 @@ void Game::init() {
 
 	qk::init_GLEW();
 
-
-
+	
+	glDisable(GL_CULL_FACE);
 	glClearColor(0, 200, 255, 255);
-	glViewport(0, 0, 720, 720);
+	glViewport(0, 0, 1920, 1080);
 
-
+	
 
 	UIcontext.init(pipeline, window);
 	
 	console_widget = UIcontext.add_widget(new ConsoleUI());
 	
-
 
 
 	
@@ -68,7 +68,11 @@ void Game::init() {
 	shader_instance.set_program(qkg::compile_shader(shader));
 
 
-
+	camera.set_aspect(16.0f / 9.0f);
+	camera.set_fov(120.0f);
+	camera.set_near(0.001f);
+	camera.set_far(1000.0f);
+	projection = camera.projection();
 
 }
 
@@ -77,14 +81,31 @@ void Game::init() {
 
 int Game::run()
 {
+	//todo: get a basic sine and cosine going
 	
+	vec3 eye = { 0.0, 1.0, 1.0f }; // camera position
+	vec3 target = { 0.0f, 0.0f, 0.0f };              // look-at point
+	vec3 up = { 0.0f, 0.0f, 1.0f };              // z-up
+
+	glm::mat4 view = glm::lookAt(eye, target, up);
 
 	shader_instance.bind();
+	GLuint proj_location = shader_instance.get_uniform_location("u_Proj");
+	GLuint view_location = shader_instance.get_uniform_location("u_View");
 
+	//glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat*)&projection);
+
+	float t = 0;
+	shader_instance.set_uniform(proj_location, &projection, qkg::gl_primitive_type::MAT4);
 
 	// main loop. Runs until there's an error code.
 	while (!qk::status)
 	{
+		vec3 eye = { sin(t), cos(t), 1.0f }; // camera position
+		view = glm::lookAt(eye, target, up);
+		t += 0.001;
+		shader_instance.set_uniform(view_location, &view, qkg::gl_primitive_type::MAT4);
+
 		layers.render();
 		layers.propagate_events();
 

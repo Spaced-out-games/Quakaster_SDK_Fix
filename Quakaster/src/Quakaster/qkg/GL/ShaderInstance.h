@@ -6,6 +6,35 @@
 namespace qkg
 {
 
+	enum class gl_primitive_type
+	{
+		// scalars
+		FLOAT,
+		INT,
+		BOOL,
+		UINT,
+		// vector types
+		VEC2,
+		VEC3,
+		VEC4,
+		
+		IVEC2,
+		IVEC3,
+		IVEC4,
+
+		UVEC2,
+		UVEC3,
+		UVEC4,
+
+		// matrix types
+		MAT2,
+		MAT3,
+		MAT4,
+		SAMPLER_2D,
+		SAMPLER_CUBE,
+		SAMPLER_2D_ARRAY
+	};
+
 	class Shader;
 
 	class QK_API ShaderInstance
@@ -15,10 +44,13 @@ namespace qkg
 			ShaderInstance();
 			~ShaderInstance();
 			ShaderInstance(GLuint program);
-			inline void set_program(GLuint program);
-
-			inline void bind() const;
+			void set_program(GLuint program);
+			GLuint program() const;
+			void bind() const;
 			static void unbind();
+			GLuint get_uniform_location(const char* name);
+
+			void set_uniform(GLuint location, const void* uniform, gl_primitive_type type);
 
 	};
 }

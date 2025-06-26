@@ -2,9 +2,9 @@
 #include "qkmath.h"
 #include "../Core.h"
 
-#ifdef INCLUDE_QKENT
-	#include <entt/entt.hpp>
-#endif
+
+
+
 
 
 namespace qk
@@ -13,23 +13,28 @@ namespace qk
 	{
 		
 
-		tagged_float m_Fov; // might be controlled by r_fov
-		tagged_float m_Near; // might be controlled by r_near
-		tagged_float m_Far; // might be controlled by r_far
-		tagged_float m_AspectRatio; // might be controlled by r_aspect
+		float m_Fov; // might be controlled by r_fov
+		float m_Near; // might be controlled by r_near
+		float m_Far; // might be controlled by r_far
+		float m_AspectRatio; // might be controlled by r_aspect
 
 		public:
 		
 		// Creates a camera with its state stored internally.
 		Camera(float FOV, float Aspect, float Near, float Far);
 
-		// Creastes a camera with its state stored externally. Great for linking against convars
-		Camera(float* FOV_ptr, float* Aspect_ptr, float* Near_ptr, float* Far_ptr);
-		
+
+
+		// Default camera binds to convars
+		Camera();
+
 		// Gets the projection matrix
 		mat4 projection();
 
 		// some getters and setters to come...
-
+		void set_fov(float new_fov);
+		void set_near(float new_near);
+		void set_far(float new_far);
+		void set_aspect(float new_aspect);
 	};
 }

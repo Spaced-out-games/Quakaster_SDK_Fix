@@ -96,6 +96,9 @@
     <ClInclude Include="thirdparty\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="thirdparty\tiny_obj_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quakaster\qk\Application.cpp">
@@ -203,5 +206,8 @@
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_sdl2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="copypasta.txt" />
   </ItemGroup>
 </Project>
