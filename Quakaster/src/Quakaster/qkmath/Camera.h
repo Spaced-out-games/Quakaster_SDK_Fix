@@ -1,27 +1,31 @@
 #pragma once
+#include "../qk/QKTL.h"
 #include "qkmath.h"
 #include "../Core.h"
 
 
 
-
+//class FloatPtrUnion;
 
 
 namespace qk
 {
 	class QK_API Camera
 	{
-		
-
-		float m_Fov; // might be controlled by r_fov
-		float m_Near; // might be controlled by r_near
-		float m_Far; // might be controlled by r_far
-		float m_AspectRatio; // might be controlled by r_aspect
+		FloatPtrUnion m_Fov;
+		FloatPtrUnion m_Near;
+		FloatPtrUnion m_Far;
+		FloatPtrUnion m_AspectRatio;
 
 		public:
 		
 		// Creates a camera with its state stored internally.
 		Camera(float FOV, float Aspect, float Near, float Far);
+
+		// Creates a camera with its state bound
+		Camera(float* FOV_ptr, float* Aspect_ptr, float* Near_ptr, float* Far_ptr);
+
+
 
 
 

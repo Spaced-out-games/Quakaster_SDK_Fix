@@ -68,10 +68,10 @@ void Game::init() {
 	shader_instance.set_program(qkg::compile_shader(shader));
 
 
-	camera.set_aspect(16.0f / 9.0f);
-	camera.set_fov(120.0f);
-	camera.set_near(0.001f);
-	camera.set_far(1000.0f);
+	//camera.set_aspect(16.0f / 9.0f);
+	//camera.set_fov(100.0f);
+	//camera.set_near(0.001f);
+	//camera.set_far(1000.0f);
 	projection = camera.projection();
 
 }
@@ -95,7 +95,17 @@ int Game::run()
 
 	//glUniformMatrix4fv(location, 1, GL_FALSE, (const GLfloat*)&projection);
 
+
+
 	float t = 0;
+
+	FloatPtrUnion fpu(&t);
+
+	std::cout << fpu.get();
+	t = 1.0;
+	std::cout << fpu.get();
+
+
 	shader_instance.set_uniform(proj_location, &projection, qkg::gl_primitive_type::MAT4);
 
 	// main loop. Runs until there's an error code.

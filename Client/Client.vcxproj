@@ -112,7 +112,6 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameLayer.cpp" />
     <ClCompile Include="GUILayer.cpp" />
-    <ClCompile Include="LevelLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="help.txt" />
@@ -121,7 +120,6 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="GameLayer.h" />
     <ClInclude Include="GUILayer.h" />
-    <ClInclude Include="LevelLayer.h" />
     <ClInclude Include="vertex_attribute_setup.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

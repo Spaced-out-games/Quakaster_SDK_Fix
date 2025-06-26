@@ -11,7 +11,14 @@ namespace qk {
 	{
 
 	}
+	Camera::Camera(float* FOV_ptr, float* Aspect_ptr, float* Near_ptr, float* Far_ptr) :
+		m_Fov(FOV_ptr),
+		m_AspectRatio(Aspect_ptr),
+		m_Near(Near_ptr),
+		m_Far(Far_ptr)
+	{
 
+	}
 
 
 	Camera::Camera(): m_Fov(120.0f), m_AspectRatio(16.0f/9.0f), m_Near(0.0001f), m_Far(1000.0f)
@@ -21,7 +28,7 @@ namespace qk {
 
 	mat4 Camera::projection()
 	{
-		return glm::perspective(glm::radians(m_Fov), m_AspectRatio, m_Near, m_Far);
+		return glm::perspective(glm::radians(m_Fov.get()), m_AspectRatio.get(), m_Near.get(), m_Far.get());
 	}
 	void Camera::set_fov(float new_fov)
 	{

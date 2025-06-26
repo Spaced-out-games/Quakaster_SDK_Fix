@@ -1,6 +1,14 @@
 #include <Quakaster.h>
 
 
+namespace cl
+{
+	float fov_desired = 70.0f;
+	float r_near = 0.0001f;
+	float r_far = 1000.0f;
+	float r_aspect_ratio = 16.0f / 9.0f;
+}
+
 struct Game : public qk::Application {
 
 	//private: keep it public while im debugging
@@ -16,7 +24,7 @@ struct Game : public qk::Application {
 		qkg::ShaderInstance shader_instance;
 		qk::Camera camera;
 	public:
-		Game(int argc, char** argv) : Application(argc, argv) {}
+		Game(int argc, char** argv) : Application(argc, argv), camera(&cl::fov_desired, &cl::r_aspect_ratio,&cl::r_near, &cl::r_far) {}
 		~Game() {}
 
 		void init() override;
