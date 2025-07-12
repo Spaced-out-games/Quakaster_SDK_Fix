@@ -33,7 +33,7 @@ namespace qkg
 
     }
 
-    uint32_t EBO::size() const {
+    size_t EBO::size() const {
         return m_Size; // Return the stored index count
     }
 

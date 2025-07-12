@@ -1,6 +1,6 @@
 #pragma once
 #include "../../Core.h"
-#include "import.h"
+#include <GL/glew.h> // For OpenGL types
 #include <vector>
 #include <iostream>
 #include <cassert>
@@ -24,11 +24,11 @@ namespace qkg
 
         void init(const std::vector<uint32_t>& indices);
 
-        uint32_t size() const;
+        size_t size() const;
 
     private:
+        size_t m_Size = 0;
         GLuint m_EBO = 0;
-        uint32_t m_Size = 0;
     };
 
 }
