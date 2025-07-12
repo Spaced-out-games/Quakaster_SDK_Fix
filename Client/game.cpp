@@ -1,34 +1,43 @@
 #include "game.h"
-#include "GameLayer.h"
-#include "GUILayer.h"
 #include "vertex_attribute_setup.h"
 #include <cmath> // for sin, cos
+#include "boost/pfr.hpp"
+
+
 qk::Application* create_application(int argc, char** argv) { return new Game(argc, argv); }
 
 
-// Just a reminder of what all you changed:
-// Removed ImGui .cpp includes from the Client, so we can figure out why glGenBuffers is
-// unresolved even though it's not being used explicitly by my code (maybe ImGui is calling it!)
-// You also removed glew32s.lib from Client, since the current hypothesis is that
-// GLEW's context is not persistent across DLL boundaries. 
-// TODO: Change VBO::init<T> to be generic, passing void*, sizeof(T), and length...
-// ...since templates like to be a pain in the ass. Why? We need that glGenBuffers call for testing, and templates like kicking my nuts
+/* TODO: set up proper error systems for:
+	Window
+	GraphicsPipeline
+	UIContext
+	GUILayer
+	QKBaseLayer
 
-// You could also make a namespace that wraps OpenGL calls so that they CAN be exported through the DLL, eg, QK_API void qkg::glGenBuffers(...); This would slow calls down, but it would make the compiler STFU
+*/
 
+struct Vertex
+{
+	vec3 p;
+	vec3 n;
+};
 
 
 void Game::init() {
+	Vertex v = { {0,0,0}, {1,1,1} };
+	auto field_count = boost::pfr::get<0>(v);
+	std::cout << field_count.x;
 
-	qk::init_SDL_GL(3, 3);
+	qk::SDL_init_backend(3, 3);
 
 	qkg::make_window(window, 1920, 1080, "Test");
 
 
-	pipeline.init(window);
+	pipeline.init((SDL_Window*)window);
 
 
-	qk::init_GLEW();
+	// Initializes GLEW
+	qk::SDL_init_backend_symbol_loader();
 
 	
 	glDisable(GL_CULL_FACE);
@@ -37,16 +46,15 @@ void Game::init() {
 
 	
 
-	UIcontext.init(pipeline, window);
+	UIcontext.init((SDL_GLContext)pipeline, (SDL_Window*)window);
 	
 	console_widget = UIcontext.add_widget(new ConsoleUI());
 	
 
 
 	
-	
-	layers.insert(new GUILayer(&UIcontext));
-	layers.insert(new GameLayer());
+	layers.insert(new qk::GUILayer(&UIcontext));
+	layers.insert(new qk::QKBaseLayer());
 
 	#include "test_vertices.h" // just a lil' cleaner
 
@@ -113,13 +121,12 @@ int Game::run()
 	{
 		vec3 eye = { sin(t), cos(t), 1.0f }; // camera position
 		view = glm::lookAt(eye, target, up);
-		t += 0.001;
+		t += 0.001f;
 		shader_instance.set_uniform(view_location, &view, qkg::gl_primitive_type::MAT4);
 
 		layers.render();
 		layers.propagate_events();
-
-		glDrawElements(GL_TRIANGLES, ebo.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, (GLsizei)ebo.size(), GL_UNSIGNED_INT, 0);
 
 		//UIcontext.end();
 		window.swap();
