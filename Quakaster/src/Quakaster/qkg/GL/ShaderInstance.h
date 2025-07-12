@@ -1,6 +1,6 @@
 #pragma once
 #include "../../Core.h"
-#include "import.h"
+#include <GL/glew.h>
 #include "Shader.h"
 
 namespace qkg
