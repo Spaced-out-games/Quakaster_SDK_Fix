@@ -1,5 +1,6 @@
 #include "Application.h"
-//#include "SDL2/SDL.h"
+#include <SDL.h>
+
 
 namespace qk {
     Application::Application(int argc, char** argv) {
