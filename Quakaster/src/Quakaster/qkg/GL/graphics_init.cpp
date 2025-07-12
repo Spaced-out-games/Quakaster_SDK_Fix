@@ -1,43 +1,43 @@
 #include "graphics_init.h"
+#include <SDL.h>
+#include "../../logging.h"
+#include <stdexcept>
 
 using namespace qk;
 
 namespace qk {
 	// Initializes SDL for OpenGL v. M.m
-	void init_SDL_GL(int version_major, int version_minor)
+	void SDL_init_backend(int version_major, int version_minor, int version_patch)
 	{
-		#ifdef _DEBUG
-			log("Initializing SDL and OpenGL 3.3", LOG_INFO, CAT_GRAPHICS);
-		#else // I swear to fucking god I hate the autoindent of #endif
-		#endif
+        int status = SDL_Init(SDL_INIT_VIDEO);
+        if (status != 0)
+        {
+            //log("SDL Initialization failed: " + std::string(SDL_GetError()), LOG_ERROR_CRITICAL, CAT_GRAPHICS);
+            throw std::runtime_error("SDL failed to initialize: " + std::string(SDL_GetError()));
+        }
 
 
-		SDL_Init(SDL_INIT_VIDEO);
-
+        log("SDL initialized successfully", LOG_INFO, CAT_GRAPHICS);
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, version_major);
-
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, version_minor);
-
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
-
 	}
 
-	GLenum init_GLEW()
-	{
-		SDL_GLContext currentContext = SDL_GL_GetCurrentContext();
-		if (currentContext == nullptr) {
-			std::cerr << "No OpenGL context is current!\n";
-		}
-		else {
-			std::cout << "[ENGINE] OpenGL context is current at: " << currentContext << "\n";
-		}
-		glewExperimental = GL_TRUE;
-		auto a = glewInit();
-		std::cout << "glGenBuffers: " << glGenBuffers << '\n';
-		std::cout << "GLEW status: " << a << '\n';
+    // updat this when you get a chance to use qk::Error
+    void SDL_init_backend_symbol_loader()
+    {
+        SDL_GLContext currentContext = SDL_GL_GetCurrentContext();
+        if (!currentContext) {
+            __debugbreak();  // Or return false, depending on your policy
+            throw std::runtime_error("[GLEW] No current OpenGL context\n");
+        }
 
-		return a;
-	}
+        glewExperimental = GL_TRUE;
+        GLenum error = glewInit();
+        if (error != GLEW_OK) {
+            __debugbreak();  // Fatal error in debug mode
+            throw std::runtime_error("[GLEW] failed to initialize" + std::string((const char*)glewGetErrorString(error)));
+        }
+    }
 
 }

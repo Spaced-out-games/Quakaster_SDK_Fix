@@ -1,10 +1,14 @@
 #pragma once
-#include "import.h"
+#include "../../Core.h"
+#include <GL/glew.h>
+
 
 namespace qk {
-	// Initializes the graphics API
-	void QK_API init_SDL_GL(int version_major, int version_minor);
-	GLenum QK_API init_GLEW();
+	// Initializes the backend (OpenGL, Vulkan, DirectX, etc)
+	void QK_API SDL_init_backend(int version_major, int version_minor, int version_patch = 0);
+
+	// Initializes the symbol loader
+	void QK_API SDL_init_backend_symbol_loader();
 
 }
 
