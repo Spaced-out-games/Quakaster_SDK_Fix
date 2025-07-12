@@ -7,17 +7,7 @@ namespace qk
 {
 	// note: Might be a good idea to create an enum for error codes
 
-	enum class Error : int {
-		OKAY,
-		SDL_INIT_FAILURE,
-		GLEW_INIT_FAILURE,
-		WINDOW_CREATE_FAILURE,
-		IMGUI_INIT_FAILURE,
-		OUT_OF_MEMORY,
-		OUT_OF_BOUNDS,
-
-		
-	};
+	
 
 
 	LogMessage::LogMessage(std::string message, Severity severity, Category category) : text(message), severity(severity), category(category)
