@@ -1,7 +1,6 @@
 #pragma once
 #include "../../Core.h"
-#include "import.h"
-#include "gl_utils.h"
+#include <GL/glew.h>
 namespace qkg
 {
     class QK_API VAO {

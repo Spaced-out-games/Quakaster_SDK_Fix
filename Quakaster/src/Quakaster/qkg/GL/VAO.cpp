@@ -1,5 +1,8 @@
 #include "VAO.h"
 
+//for debugging
+#include "gl_utils.h"
+
 namespace qkg
 {
     VAO::VAO() {}
