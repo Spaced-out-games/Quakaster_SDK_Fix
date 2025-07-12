@@ -21,18 +21,18 @@ namespace qk
 
 
 
-	[[nodiscard]] uint8_t LayerStack::insert(Layer* layer)
+	[[nodiscard]] size_t LayerStack::insert(Layer* layer)
 	{
 		if (!m_EmptyCount)
 		{
-			uint8_t handle = m_Layers.size();
+			size_t handle = m_Layers.size();
 			m_Layers.push_back(layer);
 			layer->on_attach();
 			return handle;
 		}
 
 		// otherwise, we gotta look for the first empty space
-		for (uint8_t i = 0; i < m_Layers.size(); i++)
+		for (size_t i = 0; i < m_Layers.size(); i++)
 		{
 			// found an empty slot
 			if (m_Layers[i] == nullptr)
@@ -43,10 +43,10 @@ namespace qk
 				return i;
 			}
 		}
-		return UINT8_MAX;
+		return SIZE_MAX;
 
 	}
-	bool LayerStack::remove(uint8_t handle)
+	bool LayerStack::remove(size_t handle)
 	{
 		// make sure it's in range, exit if not
 		if (handle >= m_Layers.size()) return false;
