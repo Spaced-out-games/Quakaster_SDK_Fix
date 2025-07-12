@@ -1,17 +1,20 @@
 #include "Window.h"
 #include <SDL.h>
 #include <sstream>
+#include "../logging.h"
+#include <stdexcept>
+
 
 using namespace qk;
 
 namespace qkg
 {
-	Window::Window(): m_Window(nullptr)
+	Window::Window(): m_Window(nullptr), m_Width(0), m_Height(0)
 	{
 		// since this is a defualt constructor that is just for allocating memory, it's not appropriate to log the allocation
 	}
 
-	bool Window::init()
+	void Window::init()
 	{
 		m_Window = SDL_CreateWindow(
 			m_Title.c_str(),
@@ -23,11 +26,9 @@ namespace qkg
 		);
 
 		if (!m_Window) {
-			fprintf(stderr, "Failed to create SDL_Window: %s\n", SDL_GetError());
-			exit(1);
+			throw std::runtime_error("SDL_CreateWindow returned nullptr");
 		}
 
-		return m_Window != nullptr;
 	}
 
 	void Window::vertical_sync(int interval)
@@ -40,7 +41,7 @@ namespace qkg
 	{
 		if (!m_Window)
 		{
-			qk::log("~Window() at nullptr", LOG_ERROR_SEVERE, CAT_GRAPHICS);
+			throw std::runtime_error("~Window() called when m_Window was nullptr.");
 			return;
 		}
 
@@ -53,7 +54,7 @@ namespace qkg
 	void Window::swap()
 	{
 		#ifdef _DEBUG
-		if (!m_Window) qk::log("Window::swap() ran on uninitialized window!", LOG_ERROR_CRITICAL, CAT_GRAPHICS);
+		if (!m_Window)  throw std::runtime_error("Window::swap() called at nullptr");
 		#endif
 		SDL_GL_SwapWindow(m_Window);
 	}
@@ -66,6 +67,10 @@ namespace qkg
 		window.m_Title = title;
 		window.init();
 	}
+	 Window::operator SDL_Window* () const {
+		 return m_Window;
+	 }
+
 
 
 }

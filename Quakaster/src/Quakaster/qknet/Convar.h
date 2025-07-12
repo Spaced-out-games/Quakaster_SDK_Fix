@@ -2,7 +2,7 @@
 #include "../Core.h"
 #include <entt/entt.hpp>
 #include <sstream>
-#include "../qklog/logging.h"
+//#include "../qklog/logging.h"
 #include <enet/enet.h>
 namespace qk
 {
