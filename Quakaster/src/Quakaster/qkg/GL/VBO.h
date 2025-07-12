@@ -2,7 +2,7 @@
 #include "../../Core.h"
 #include "../../qkmath/qkmath.h"
 #include "gl_utils.h"
-#include "import.h"
+#include <GL/glew.h>
 #include <iostream>
 #include <vector>
 #include <cassert>
