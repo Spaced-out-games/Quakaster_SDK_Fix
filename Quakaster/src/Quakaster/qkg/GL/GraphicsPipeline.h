@@ -1,11 +1,12 @@
 #pragma once
 #include "../../Core.h"
+#include "../../logging.h"
 
-#include "import.h"
+#include <SDL.h>
+
 #include <vector>
 namespace qkg {
 
-	struct Window;
 
 	class QK_API GraphicsPipeline
 	{
@@ -13,8 +14,8 @@ namespace qkg {
 			SDL_GLContext m_GLContext;
 			GraphicsPipeline();
 			~GraphicsPipeline();
-			inline void init(Window& window);
 			inline void init(SDL_Window* window);
-			const SDL_GLContext& context();
+			//const SDL_GLContext& context();
+			explicit operator SDL_GLContext() const;
 	};
 }

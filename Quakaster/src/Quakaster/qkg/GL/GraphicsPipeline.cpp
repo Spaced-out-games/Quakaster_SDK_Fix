@@ -1,11 +1,13 @@
 #include "GraphicsPipeline.h"
-#include "Window.h"
+#include "../Window.h"
 #include <sstream>
+#include <stdexcept>
+
 
 using namespace qk;
 
 namespace qkg {
-	GraphicsPipeline::GraphicsPipeline()
+	GraphicsPipeline::GraphicsPipeline(): m_GLContext(nullptr)
 	{
 
 	}
@@ -19,7 +21,12 @@ namespace qkg {
 		if (m_GLContext)						  
 		{										  
 			SDL_GL_DeleteContext(m_GLContext);	  
-		}										  
+		}
+		else
+		{
+			throw std::runtime_error("SDL failed to initialize: " + std::string(SDL_GetError()));
+
+		}
 	}
 
 	void GraphicsPipeline::init(SDL_Window* window)
@@ -29,11 +36,12 @@ namespace qkg {
 		SDL_GL_SetSwapInterval(1);
 	}
 
-	void GraphicsPipeline::init(Window& window)
-	{
-		init(window.m_Window);
-	}
-	const SDL_GLContext& GraphicsPipeline::context() { return m_GLContext; }
 
+	//const SDL_GLContext& GraphicsPipeline::context() { return m_GLContext; }
+
+	GraphicsPipeline::operator SDL_GLContext() const
+	{
+		return m_GLContext;
+	}
 	
 }
