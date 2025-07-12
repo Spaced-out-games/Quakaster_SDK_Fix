@@ -1,0 +1,11 @@
+TODO:
+	Make a Mesh abstraction:
+		holds (and owns) a type-agnostic vector, as well as a std::vector<GLuint> for the EBO (optionally).
+
+
+	Make a UniformManager abstraction:
+		stores a entt::id_type -> UniformView map (generated from entt::hashed_string)
+		UniformView = {GLuint, non-void*, type}
+
+	Make a MeshInstance abstraction - it holds the VAO for now, might store the VBO in the future
+		when we get around to storing the VBO, we need a MeshConfiguration to replace VBOs.
