@@ -19,13 +19,22 @@
 	#define QK_DEFINE_CONVAR(name, id, T_ref) qk::Convar name(id, T_ref)
 #endif
 
+namespace qk
+{
+	// Quakaster error codes. Might remove.
+	enum class Error : int {
+		OKAY,
+		SDL_INIT_FAILURE,
+		GLEW_INIT_FAILURE,
+		WINDOW_CREATE_FAILURE,
+		IMGUI_INIT_FAILURE,
+		OUT_OF_MEMORY,
+		OUT_OF_BOUNDS,
 
-// Loads the core types
-#include "qk/Application.h"
-#include "qk/Layer.h"
-#include "qk/QKTL.h"
 
-#include "qknet/Convar.h"
+	};
+}
+
 
 
 namespace qk {
