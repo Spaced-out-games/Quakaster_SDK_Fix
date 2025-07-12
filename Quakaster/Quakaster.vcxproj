@@ -12,29 +12,34 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Quakaster.h" />
+    <ClInclude Include="src\Quakaster\qkg\defaults.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\EBO.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\gl_utils.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\GraphicsPipeline.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\graphics_init.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\import.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\Shader.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\ShaderInstance.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\VAO.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\VBO.h" />
-    <ClInclude Include="src\Quakaster\qklog\logging.h" />
+    <ClInclude Include="src\Quakaster\qkg\qkg.h" />
+    <ClInclude Include="src\Quakaster\logging.h" />
     <ClInclude Include="src\Quakaster\qkmath\Camera.h" />
     <ClInclude Include="src\Quakaster\qknet\Client.h" />
     <ClInclude Include="src\Quakaster\qknet\Convar.h" />
+    <ClInclude Include="src\Quakaster\qkui\defaults.h" />
+    <ClInclude Include="src\Quakaster\qkui\qkui.h" />
     <ClInclude Include="src\Quakaster\qkui\Widgets\ConsoleUI.h" />
-    <ClInclude Include="src\Quakaster\qkui\Widgets\DemoWidget.h" />
-    <ClInclude Include="src\Quakaster\qkui\import.h" />
     <ClInclude Include="src\Quakaster\qkui\UIContext.h" />
     <ClInclude Include="src\Quakaster\qkui\UIWidget.h" />
+    <ClInclude Include="src\Quakaster\qkui\Widgets\DemoWidget.h" />
     <ClInclude Include="src\Quakaster\qk\Application.h" />
     <ClInclude Include="src\Quakaster\Core.h" />
     <ClInclude Include="src\Quakaster\EntryPoint.h" />
     <ClInclude Include="src\Quakaster\qkmath\qkmath.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\Window.h" />
+    <ClInclude Include="src\Quakaster\qkg\Window.h" />
+    <ClInclude Include="src\Quakaster\qk\defaults.h" />
+    <ClInclude Include="src\Quakaster\qk\default\QKBaseLayer.h" />
+    <ClInclude Include="src\Quakaster\qk\default\GUILayer.h" />
     <ClInclude Include="src\Quakaster\qk\Layer.h" />
     <ClInclude Include="src\Quakaster\qk\QKTL.h" />
     <ClInclude Include="thirdparty\stb_image.h" />
@@ -49,15 +54,17 @@
     <ClCompile Include="src\Quakaster\qkg\GL\ShaderInstance.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\VBO.cpp" />
-    <ClCompile Include="src\Quakaster\qklog\logging.cpp" />
+    <ClCompile Include="src\Quakaster\logging.cpp" />
     <ClCompile Include="src\Quakaster\qkmath\Camera.cpp" />
     <ClCompile Include="src\Quakaster\qknet\Convar.cpp" />
     <ClCompile Include="src\Quakaster\qkui\Widgets\ConsoleUI.cpp" />
-    <ClCompile Include="src\Quakaster\qkui\Widgets\DemoWidget.cpp" />
     <ClCompile Include="src\Quakaster\qkui\UIContext.cpp" />
     <ClCompile Include="src\Quakaster\qkui\UIWidget.cpp" />
+    <ClCompile Include="src\Quakaster\qkui\Widgets\DemoWidget.cpp" />
     <ClCompile Include="src\Quakaster\qk\Application.cpp" />
-    <ClCompile Include="src\Quakaster\qkg\GL\Window.cpp" />
+    <ClCompile Include="src\Quakaster\qkg\Window.cpp" />
+    <ClCompile Include="src\Quakaster\qk\default\QKBaseLayer.cpp" />
+    <ClCompile Include="src\Quakaster\qk\default\GUILayer.cpp" />
     <ClCompile Include="src\Quakaster\qk\Layer.cpp" />
     <ClCompile Include="src\Quakaster\qk\QKTL.cpp" />
     <ClCompile Include="thirdparty\enet-master\callbacks.c" />
@@ -79,6 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="copypasta.txt" />
+    <Text Include="todo.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -115,8 +123,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)</OutDir>
@@ -126,14 +135,14 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL;_WINSOCK_DEPRECATED_NO_WARNINGS;HAS_INET_PTON</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL;_WINSOCK_DEPRECATED_NO_WARNINGS;HAS_INET_PTON;QK_GRAPHICS_BACKEND=1;GLEW_STATIC;SDL_MAIN_HANDLED</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quakaster\thirdparty\glm;$(SolutionDir)Quakaster\thirdparty\entt\entt\single_include;$(SolutionDir)Quakaster\thirdparty\SDL2\include;$(SolutionDir)Quakaster\thirdparty\glew-2.2.0\include;$(SolutionDir)Quakaster\thirdparty\imgui\imgui;$(SolutionDir)Quakaster\thirdparty\enet-master\include</AdditionalIncludeDirectories>
-      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quakaster\thirdparty\glm;$(SolutionDir)Quakaster\thirdparty\entt\entt\single_include;$(SolutionDir)Quakaster\thirdparty\SDL2\include;$(SolutionDir)Quakaster\thirdparty\glew-2.2.0\include;$(SolutionDir)Quakaster\thirdparty\imgui\imgui;$(SolutionDir)Quakaster\thirdparty\enet-master\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\pfr\include</AdditionalIncludeDirectories>
+      <AssemblerOutput>NoListing</AssemblerOutput>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Quakaster\thirdparty\SDL2\lib\x64;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;SDL2.lib;opengl32.lib;Ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>

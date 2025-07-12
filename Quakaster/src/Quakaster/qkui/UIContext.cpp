@@ -3,7 +3,6 @@
 
 namespace qkui
 {
-	class qkg::GraphicsPipeline;
 
 	UIContext::UIContext()
 	{
@@ -20,11 +19,7 @@ namespace qkui
 		ImGui_ImplSDL2_InitForOpenGL(m_Target, context);
 		ImGui_ImplOpenGL3_Init("#version 330");
 	}
-	void UIContext::init(qkg::GraphicsPipeline& pipeline, qkg::Window& window)
-	{
-		init(pipeline.m_GLContext, window.m_Window);
 
-	}
 
 	ImGuiIO& UIContext::IO() { return ImGui::GetIO(); }
 

@@ -1,9 +1,13 @@
 #pragma once
-#include "../qkg/GL/import.h"
+#include <GL/glew.h>
+#include <SDL.h>
+//#include "../qkg/GL/import.h"
 #include "imgui.h"
 #include "backends/imgui_impl_sdl2.h"
 #include "backends/imgui_impl_opengl3.h"
 #include "UIWidget.h"
+
+
 
 
 namespace qkui
@@ -12,9 +16,10 @@ namespace qkui
 
 	class QK_API UIContext
 	{
-		SDL_Window* m_Target;
-		uint8_t m_EmptyCount = 0;
-		std::vector<UIWidget*> m_Widgets; // Might be worth making this an array instead?
+		private:
+			SDL_Window* m_Target;
+			uint8_t m_EmptyCount = 0;
+			std::vector<UIWidget*> m_Widgets; // Might be worth making this an array instead?
 		public:
 			ImGuiContext* m_Context;
 			UIContext();
@@ -23,9 +28,6 @@ namespace qkui
 
 			// Legacy support
 			inline void init(SDL_GLContext context, SDL_Window* window);
-
-			// Quakaster compatability layer
-			inline void init(qkg::GraphicsPipeline& pipeline, qkg::Window& window);
 
 			// Begins an ImGui frame. Might be worth moving this into draw()
 			inline void begin();

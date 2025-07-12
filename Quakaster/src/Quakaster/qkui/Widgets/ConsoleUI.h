@@ -1,5 +1,7 @@
 #pragma once
 #include "../UIWidget.h"
+#include "../../Core.h"
+#include <string>
 
 #define QK_CONSOLE_INPUT_SIZE 256
 

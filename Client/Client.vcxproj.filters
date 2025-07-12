@@ -18,12 +18,6 @@
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GUILayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Quakaster\thirdparty\enet-master\callbacks.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -72,6 +66,9 @@
     <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="help.txt" />
@@ -80,13 +77,10 @@
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameLayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="vertex_attribute_setup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GUILayer.h">
+    <ClInclude Include="GameLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -44,8 +44,9 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)</OutDir>
@@ -55,9 +56,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WINSOCK_DEPRECATED_NO_WARNINGS;HAS_INET_PTON;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WINSOCK_DEPRECATED_NO_WARNINGS;HAS_INET_PTON;GLEW_STATIC;QK_GRAPHICS_BACKEND=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quakaster\src;$(SolutionDir)Quakaster\thirdparty\glm;%(AdditionalIncludeDirectories);$(SolutionDir)Quakaster\thirdparty\SDL2\include;$(SolutionDir)Quakaster\thirdparty\entt\entt\single_include;$(SolutionDir)Quakaster\thirdparty\glew-2.2.0\include;$(SolutionDir)Quakaster\thirdparty\imgui\imgui;$(SolutionDir)Quakaster\thirdparty\enet-master\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quakaster\src;$(SolutionDir)Quakaster\thirdparty\glm;%(AdditionalIncludeDirectories);$(SolutionDir)Quakaster\thirdparty\SDL2\include;$(SolutionDir)Quakaster\thirdparty\entt\entt\single_include;$(SolutionDir)Quakaster\thirdparty\glew-2.2.0\include;$(SolutionDir)Quakaster\thirdparty\imgui\imgui;$(SolutionDir)Quakaster\thirdparty\enet-master\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\pfr\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -111,7 +112,6 @@
     <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\imgui_widgets.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="GameLayer.cpp" />
-    <ClCompile Include="GUILayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="help.txt" />
@@ -119,7 +119,6 @@
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="GameLayer.h" />
-    <ClInclude Include="GUILayer.h" />
     <ClInclude Include="vertex_attribute_setup.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
