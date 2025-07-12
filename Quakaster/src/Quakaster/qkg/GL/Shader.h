@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Core.h"
-#include "import.h"
+#include "../../logging.h"
+#include <GL/glew.h>
 #include <string>
 #include <unordered_map>
 
