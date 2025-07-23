@@ -13,6 +13,8 @@
   <ItemGroup>
     <ClInclude Include="src\Quakaster.h" />
     <ClInclude Include="src\Quakaster\qkg\defaults.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\Mesh.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\MeshConfiguration.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\EBO.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\gl_utils.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\GraphicsPipeline.h" />
@@ -52,6 +54,7 @@
     <ClCompile Include="src\Quakaster\qkg\GL\graphics_init.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\Shader.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\ShaderInstance.cpp" />
+    <ClCompile Include="src\Quakaster\qkg\GL\MeshConfiguration.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\VBO.cpp" />
     <ClCompile Include="src\Quakaster\logging.cpp" />
