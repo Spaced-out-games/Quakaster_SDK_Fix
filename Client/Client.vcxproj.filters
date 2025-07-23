@@ -77,9 +77,6 @@
     <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vertex_attribute_setup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
