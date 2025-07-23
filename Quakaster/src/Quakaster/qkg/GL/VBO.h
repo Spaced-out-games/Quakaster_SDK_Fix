@@ -57,12 +57,6 @@ namespace qkg
 
     };
 
-    void QK_API add_int_pointer(GLuint& index, GLsizei stride, const void* offset);
-    void QK_API add_float_pointer(GLuint& index, GLsizei stride, const void* offset);
-    void QK_API add_vec2_pointer(GLuint& index, GLsizei stride, const void* offset);
-    void QK_API add_vec3_pointer(GLuint& index, GLsizei stride, const void* offset);
-    void QK_API add_vec4_pointer(GLuint& index, GLsizei stride, const void* offset);
-    void QK_API add_mat4_pointer(GLuint& index, GLsizei stride, const void* offset);
 
 }
 void QK_API print_glGenBuffersPointer();

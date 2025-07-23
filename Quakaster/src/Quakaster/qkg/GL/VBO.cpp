@@ -45,57 +45,6 @@ namespace qkg
 
 
 
-    void add_vec3_pointer(GLuint& index, GLsizei stride, const void* offset) {
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 3, GL_FLOAT, GL_FALSE, stride, offset);
-        index++;
-    }
-
-    void add_vec2_pointer(GLuint& index, GLsizei stride, const void* offset) {
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 2, GL_FLOAT, GL_FALSE, stride, offset);
-    }
-
-    void add_vec4_pointer(GLuint& index, GLsizei stride, const void* offset) {
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride, offset);
-        index++;
-    }
-
-    void add_float_pointer(GLuint& index, GLsizei stride, const void* offset) {
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 1, GL_FLOAT, GL_FALSE, stride, offset);
-        index++;
-
-    }
-
-    void add_int_pointer(GLuint& index, GLsizei stride, const void* offset) {
-        glEnableVertexAttribArray(index);
-        glVertexAttribIPointer(index, 1, GL_INT, stride, offset);
-        index++;
-
-    }
-
-    void add_mat4_pointer(GLuint& index, GLsizei stride, const void* offset) {
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride, offset);
-        index++;
-
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride,
-            static_cast<const void*>(static_cast<const char*>(offset) + sizeof(vec4)));
-        index++;
-
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride,
-            static_cast<const void*>(static_cast<const char*>(offset) + 2 * sizeof(vec4)));
-        index++;
-
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride,
-            static_cast<const void*>(static_cast<const char*>(offset) + 3 * sizeof(vec4)));
-        index++;
-    }
 
 
 
