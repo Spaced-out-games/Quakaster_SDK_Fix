@@ -8,8 +8,10 @@
 		#include "GL/ShaderInstance.h"
 		#include "GL/Shader.h"
 		#include "GL/GraphicsPipeline.h"
-		//#include "GL/Window.h"
 		#include "GL/graphics_init.h"
+		#include <Quakaster/qkg/GL/MeshConfiguration.h>w
+		#include "Quakaster/qkg/GL/Mesh.h"
+		//#include "GL/Window.h"
 	#else // other backends
 
 	#endif
