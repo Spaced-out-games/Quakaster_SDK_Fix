@@ -4,7 +4,7 @@
 //#include <Quakaster/qk/default/QKBaseLayer.h>
 #include <Quakaster/qkg/qkg.h>
 #include <Quakaster/qkg/defaults.h>
-#include<Quakaster/qkui/Widgets/ConsoleUI.h>
+#include <Quakaster/qkui/Widgets/ConsoleUI.h>
 namespace cl
 {
 	float fov_desired = 70.0f;
