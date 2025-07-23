@@ -47,4 +47,9 @@ namespace qkg
         return *this;
     }
 
+    void VAO::set_ID(GLuint new_vao)
+    {
+        m_VAO = new_vao;
+    }
+
 }

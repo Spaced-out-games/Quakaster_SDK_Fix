@@ -1,8 +1,14 @@
 #pragma once
 #include "../../Core.h"
 #include <GL/glew.h>
+
+
+
 namespace qkg
 {
+    template<typename T>
+    class MeshConfiguration;
+
     class QK_API VAO {
     public:
 
@@ -28,8 +34,11 @@ namespace qkg
 
         static void unbind();
 
-
+        void set_ID(GLuint new_vao);
     private:
+        template<class vertex_t>
+        friend class MeshConfiguration;
+
         GLuint m_VAO = 0;
 
 
