@@ -1,5 +1,4 @@
 #include "game.h"
-#include "vertex_attribute_setup.h"
 #include <cmath> // for sin, cos
 #include "boost/pfr.hpp"
 
