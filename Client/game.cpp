@@ -19,14 +19,30 @@ qk::Application* create_application(int argc, char** argv) { return new Game(arg
 struct Vertex
 {
 	vec3 p;
-	vec3 n;
 };
+
+template <class vertex_t>
+void foo(
+	qkg::MeshConfiguration<vertex_t>& configuration,
+	const qkg::Mesh<vertex_t>& mesh,
+	qkg::VAO& vao,
+	qkg::VBO& vbo,
+	qkg::EBO& ebo
+) {
+	vao.init();
+	vao.bind();
+
+	vbo.init(*mesh.m_Vertices);
+	vbo.bind();
+	configuration.configure();
+
+	ebo.init(*mesh.m_Indices);
+	ebo.bind();
+}
+
 
 
 void Game::init() {
-	Vertex v = { {0,0,0}, {1,1,1} };
-	auto field_count = boost::pfr::get<0>(v);
-	std::cout << field_count.x;
 
 	qk::SDL_init_backend(3, 3);
 
@@ -59,27 +75,18 @@ void Game::init() {
 	#include "test_vertices.h" // just a lil' cleaner
 
 
-	vao.init();
-	vao.bind();
+	qkg::MeshConfiguration<Vertex> cfg;
 
+	qkg::Mesh<Vertex> mesh;
+	mesh.upload_vertices(std::move(vertices));
+	mesh.upload_indices(std::move(indices));
+	foo(cfg, mesh, vao, vbo, ebo);
 
-	vbo.init(vertices);
-	vbo.bind();
-	setup_vertex_attributes<vec3>::setup();
-
-	ebo.init(indices);
-	ebo.bind();
 
 	qkg::Shader shader;
 	shader.attach_shader(GL_FRAGMENT_SHADER, default_frag);
 	shader.attach_shader(GL_VERTEX_SHADER, default_vert);
 	shader_instance.set_program(qkg::compile_shader(shader));
-
-
-	//camera.set_aspect(16.0f / 9.0f);
-	//camera.set_fov(100.0f);
-	//camera.set_near(0.001f);
-	//camera.set_far(1000.0f);
 	projection = camera.projection();
 
 }
