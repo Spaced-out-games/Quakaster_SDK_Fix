@@ -20,9 +20,10 @@ namespace qkg
     template <class vertex_t>
     class MeshConfiguration
     {
-        func_ptr_t<void, void> m_Generator;
 
         public:
+            func_ptr_t<void, void> m_VertexAttributePointerLambda;
+
             MeshConfiguration();
             ~MeshConfiguration();
             void configure();
@@ -37,7 +38,7 @@ namespace qkg
         
         // set the lambda
 
-        m_Generator = [](void) -> void {
+        m_VertexAttributePointerLambda = [](void) -> void {
 
             vertex_t dummy{};
             GLuint attribute_index = 0;
@@ -68,7 +69,7 @@ namespace qkg
     template <class vertex_t>
     void MeshConfiguration<vertex_t>::configure()
     {
-        if (m_Generator) m_Generator();
+        if (m_VertexAttributePointerLambda) m_VertexAttributePointerLambda();
         else
         {
             __debugbreak();
