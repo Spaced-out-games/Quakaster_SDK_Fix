@@ -76,6 +76,9 @@ void Game::init() {
 
 	qkg::MeshConfiguration<Vertex> cfg;
 
+	qkg::MeshRegistry reg;
+	reg.register_configuration(cfg);
+
 	qkg::Mesh<Vertex> mesh;
 	mesh.upload_vertices(std::move(vertices));
 	mesh.upload_indices(std::move(indices));
