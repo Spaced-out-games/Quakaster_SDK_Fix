@@ -26,7 +26,7 @@ namespace qkg
 
             MeshConfiguration();
             ~MeshConfiguration();
-            void configure();
+            void setup();
     };
 
 
@@ -37,7 +37,7 @@ namespace qkg
     MeshConfiguration<vertex_t>::MeshConfiguration() {
         
         // set the lambda
-
+        
         m_VertexAttributePointerLambda = [](void) -> void {
 
             vertex_t dummy{};
@@ -56,7 +56,7 @@ namespace qkg
 
 
         };
-
+        
     }
 
     template <class vertex_t>
@@ -67,7 +67,7 @@ namespace qkg
     
 
     template <class vertex_t>
-    void MeshConfiguration<vertex_t>::configure()
+    void MeshConfiguration<vertex_t>::setup()
     {
         if (m_VertexAttributePointerLambda) m_VertexAttributePointerLambda();
         else
