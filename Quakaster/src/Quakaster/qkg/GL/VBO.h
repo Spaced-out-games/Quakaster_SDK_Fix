@@ -7,56 +7,29 @@
 #include <vector>
 #include <cassert>
 
-namespace qkg
+using VBO = GLuint;
+
+namespace qkg::vbo
 {
-    class QK_API VBO {
+    VBO QK_API create();
 
-        
+    void QK_API bind(VBO vbo);
 
-    public:
+    inline void unbind();
 
-        VBO();
-        ~VBO();
+    void QK_API destroy(VBO& vbo);
 
-        void init_impl(const void* vertices, const size_t num_vertices, const size_t vertex_size);
+    void QK_API upload_vertices_impl(VBO vbo, const void* vertices, const size_t num_vertices, const size_t vertex_size, GLenum usage = GL_STATIC_DRAW);
 
-        
-
-        void bind() const;
-
-        static void unbind();
-
-        GLsizei size() const;
-
-
-        template <typename vertex_t = default_vertex_t>
-        VBO(const std::vector<vertex_t>& vertices) {
-            init<vertex_t>(vertices);
-        }
-
-        
-
-        // Helper function to respect DLL boundaries. The problem was that it couldn't export symbols to the client, since
-        // templates at the end of the day are inlined code. Solution? Make a generic type-erased function, template-wrap.
-        template <typename vertex_t>
-
-        void init(const std::vector<vertex_t>& vertices) {
-            init_impl(vertices.data(), vertices.size(), sizeof(vertex_t));
-        }
-
-
-
-
-
-
-
-    private:
-        GLsizei m_Size = 0;
-        GLuint vboID = 0x0; // The ID of the VBO
-
-
-    };
-
+    template <class vertex_t>
+    void upload_vertices(VBO vbo, const std::vector<vertex_t>& vertices, GLenum usage = GL_STATIC_DRAW)
+    {
+        upload_vertices_impl(vbo, vertices.data(), vertices.size(), sizeof(vertex_t), usage);
+    }
 
 }
+
+
+
+
 void QK_API print_glGenBuffersPointer();

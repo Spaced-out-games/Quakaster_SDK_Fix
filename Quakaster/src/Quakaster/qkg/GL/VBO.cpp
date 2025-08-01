@@ -1,56 +1,47 @@
 #include "VBO.h"
 
 
-namespace qkg
+namespace qkg::vbo
 {
-
-    VBO::VBO() {
-        //check_gl_error("qkg::VBO()");
-
-    }
-
-    VBO::~VBO() {
-        if (vboID != 0) {
-            glDeleteBuffers(1, &vboID); // Cleanup
-
-        }
-        check_gl_error("qkg::~VBO()");
-
-    }
-
-    void VBO::bind() const {
-        glBindBuffer(GL_ARRAY_BUFFER, vboID); // Bind the VBO
-        check_gl_error("qkg::VBO::bind()");
-    }
-
-    void VBO::unbind() {
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        check_gl_error("qkg::VBO::unbind()");
-
-    }
-
-    GLsizei VBO::size() const { return m_Size; }
-
-    
-    void VBO::init_impl(const void* vertices, const size_t num_vertices, const size_t vertex_size)
+    VBO create()
     {
-        m_Size = (GLsizei)num_vertices;
+        VBO result = 0;
         check_gl_error("qkg::VBO::init<T>() begin");
-        glGenBuffers(1, &vboID);
-        check_gl_error("qkg::VBO::init<T>()");
-        bind();
-        glBufferData(GL_ARRAY_BUFFER, num_vertices * vertex_size, vertices, GL_STATIC_DRAW);
-
+        glGenBuffers(1, &result);
+        check_gl_error("qkg::VBO::init<T>() end");
+        return result;
     }
 
+    void bind(VBO vbo)
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        check_gl_error("qkg::vbo::bind()");
+    }
 
+    void unbind()
+    {
+        bind(0);
+    }
 
+    void destroy(VBO& vbo)
+    {
+        if (vbo != 0)
+        {
+            glDeleteBuffers(1, &vbo);
+            vbo = 0; // mark deleted
+        }
+        check_gl_error("qkg::vbo::destroy()");
+    }
 
+    void upload_vertices_impl(VBO vbo, const void* vertices, const size_t num_vertices, const size_t vertex_size, GLenum usage)
+    {
+        bind(vbo);
+        glBufferData(GL_ARRAY_BUFFER, num_vertices * vertex_size, vertices, usage);
 
-
-
-
+    }
 }
+
+
 void print_glGenBuffersPointer()
 {
     std::cout << "[CLIENT]: " << "glGenBuffers pointer: " << (void*)glGenBuffers << '\n';

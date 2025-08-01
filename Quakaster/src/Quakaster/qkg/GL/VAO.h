@@ -4,44 +4,14 @@
 
 
 
-namespace qkg
+namespace qkg::vao
 {
-    template<typename T>
-    class MeshConfiguration;
+    GLuint QK_API create();
 
-    class QK_API VAO {
-    public:
+    void QK_API bind(GLuint vao);
 
-        // Doesn't call init();
-        VAO();
+    inline void unbind();
 
-        // Destructor to clean up VAO
-        ~VAO();
-
-        // Move constructor
-        VAO(VAO&& other) noexcept;
-
-        // Move assignment
-        VAO& operator=(VAO&& other) noexcept;
-
-        // Delete copy constructor and copy assignment to avoid double deletes
-        VAO(const VAO&) = delete;
-        VAO& operator=(const VAO&) = delete;
-
-        void init();
-
-        void bind() const;
-
-        static void unbind();
-
-        void set_ID(GLuint new_vao);
-    private:
-        template<class vertex_t>
-        friend class MeshConfiguration;
-
-        GLuint m_VAO = 0;
-
-
-    };
+    void QK_API destroy(GLuint& vao);
 
 }
