@@ -24,16 +24,19 @@ template <class vertex_t>
 void foo(
 	qkg::MeshConfiguration<vertex_t>& configuration,
 	const qkg::Mesh<vertex_t>& mesh,
-	qkg::VAO& vao,
-	qkg::VBO& vbo,
+	GLuint& vao,
+	GLuint& vbo,
 	qkg::EBO& ebo
 ) {
-	vao.init();
-	vao.bind();
 
-	vbo.init(*mesh.m_Vertices);
-	vbo.bind();
-	configuration.configure();
+	vao = qkg::vao::create();
+	qkg::vao::bind(vao);
+
+	vbo = qkg::vbo::create();
+	qkg::vbo::bind(vbo);
+	qkg::vbo::upload_vertices(vbo, *mesh.m_Vertices, GL_STATIC_DRAW);
+
+	configuration.setup();
 
 	ebo.init(*mesh.m_Indices);
 	ebo.bind();

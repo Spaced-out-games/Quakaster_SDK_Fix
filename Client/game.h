@@ -22,8 +22,9 @@ struct Game : public qk::Application {
 		qkui::UIContext UIcontext;
 		uint8_t console_widget = 0;
 		mat4 projection = mat4{ 1.0f };
-		qkg::VAO vao;
-		qkg::VBO vbo;
+		//qkg::VAO vao;
+		GLuint vao;
+		GLuint vbo;
 		qkg::EBO ebo;
 		qkg::ShaderInstance shader_instance;
 		qk::Camera camera;
