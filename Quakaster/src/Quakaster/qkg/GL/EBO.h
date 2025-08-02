@@ -5,6 +5,26 @@
 #include <iostream>
 #include <cassert>
 
+using EBO = GLuint;
+
+namespace qkg::ebo
+{
+
+
+    EBO QK_API create();
+
+    void QK_API bind(EBO ebo);
+
+    inline void unbind();
+
+    void QK_API destroy(EBO& ebo);
+
+    void QK_API upload_indices(const std::vector<uint32_t>& indices, GLenum usage = GL_STATIC_DRAW);
+    
+
+}
+
+/*
 namespace qkg
 {
 
@@ -32,3 +52,4 @@ namespace qkg
     };
 
 }
+*/

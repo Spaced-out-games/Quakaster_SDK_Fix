@@ -25,7 +25,7 @@ struct Game : public qk::Application {
 		//qkg::VAO vao;
 		GLuint vao;
 		GLuint vbo;
-		qkg::EBO ebo;
+		GLuint ebo;
 		qkg::ShaderInstance shader_instance;
 		qk::Camera camera;
 	public:

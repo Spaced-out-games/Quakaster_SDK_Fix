@@ -26,7 +26,7 @@ void foo(
 	const qkg::Mesh<vertex_t>& mesh,
 	GLuint& vao,
 	GLuint& vbo,
-	qkg::EBO& ebo
+	GLuint& ebo
 ) {
 
 	vao = qkg::vao::create();
@@ -37,9 +37,12 @@ void foo(
 	qkg::vbo::upload_vertices(vbo, *mesh.m_Vertices, GL_STATIC_DRAW);
 
 	configuration.setup();
+	ebo = qkg::ebo::create();
+	qkg::ebo::bind(ebo);
+	qkg::ebo::upload_indices(*mesh.m_Indices);
 
-	ebo.init(*mesh.m_Indices);
-	ebo.bind();
+	//ebo.init(*mesh.m_Indices);
+	//ebo.bind();
 }
 
 
@@ -138,7 +141,7 @@ int Game::run()
 
 		layers.render();
 		layers.propagate_events();
-		glDrawElements(GL_TRIANGLES, (GLsizei)ebo.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 		//UIcontext.end();
 		window.swap();
