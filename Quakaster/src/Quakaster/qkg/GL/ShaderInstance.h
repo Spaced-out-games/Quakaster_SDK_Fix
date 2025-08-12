@@ -35,10 +35,16 @@ namespace qkg
 		SAMPLER_2D_ARRAY
 	};
 
+	// Defines 8 one-byte selectors for an ubershader
+	using shader_selector_t = uint64_t;
+
 	class Shader;
 
+
+	//TODO: utilize shader_selector_t
 	class QK_API ShaderInstance
 	{
+		
 		GLuint m_Program = 0;
 		public:
 			ShaderInstance();
