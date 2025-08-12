@@ -2,7 +2,7 @@
 #include "../../Core.h"
 #include "GL/glew.h"
 
-alignas(32) class QK_API MeshInstance
+alignas(32) class QK_API CMeshInstance
 {
 	public:
 
