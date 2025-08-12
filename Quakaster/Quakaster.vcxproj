@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Quakaster.h" />
+    <ClInclude Include="src\Quakaster\qkecs\Scene.h" />
     <ClInclude Include="src\Quakaster\qkg\defaults.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\Mesh.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\MeshConfiguration.h" />
@@ -72,6 +73,8 @@
     <ClCompile Include="src\Quakaster\qk\default\GUILayer.cpp" />
     <ClCompile Include="src\Quakaster\qk\Layer.cpp" />
     <ClCompile Include="src\Quakaster\qk\QKTL.cpp" />
+    <ClCompile Include="src\Quakaster\triggers\CThink.cpp" />
+    <ClCompile Include="src\Quakaster\triggers\CThink.h" />
     <ClCompile Include="thirdparty\enet-master\callbacks.c" />
     <ClCompile Include="thirdparty\enet-master\compress.c" />
     <ClCompile Include="thirdparty\enet-master\host.c" />
