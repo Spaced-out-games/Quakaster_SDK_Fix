@@ -12,6 +12,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Quakaster.h" />
+    <ClInclude Include="src\Quakaster\qkecs\AActor.h" />
+    <ClInclude Include="src\Quakaster\qkecs\Entity.h" />
     <ClInclude Include="src\Quakaster\qkecs\Scene.h" />
     <ClInclude Include="src\Quakaster\qkg\defaults.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\Mesh.h" />
@@ -22,13 +24,19 @@
     <ClInclude Include="src\Quakaster\qkg\GL\graphics_init.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\MeshInstance.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\MeshRegistry.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\Shader.h" />
+    <ClInclude Include="src\Quakaster\qkg\GL\ShaderSources.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\ShaderInstance.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\VAO.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\VBO.h" />
     <ClInclude Include="src\Quakaster\qkg\qkg.h" />
     <ClInclude Include="src\Quakaster\logging.h" />
-    <ClInclude Include="src\Quakaster\qkmath\Camera.h" />
+    <ClInclude Include="src\Quakaster\qkg\UberShaderGenerator.h" />
+    <ClInclude Include="src\Quakaster\qkmath\CCamera.h" />
+    <ClInclude Include="src\Quakaster\qkmath\mat4.h" />
+    <ClInclude Include="src\Quakaster\qkmath\quaternion.h" />
+    <ClInclude Include="src\Quakaster\qkmath\vec2.h" />
+    <ClInclude Include="src\Quakaster\qkmath\vec3.h" />
+    <ClInclude Include="src\Quakaster\qkmath\vec4.h" />
     <ClInclude Include="src\Quakaster\qknet\Client.h" />
     <ClInclude Include="src\Quakaster\qknet\Convar.h" />
     <ClInclude Include="src\Quakaster\qkui\defaults.h" />
@@ -52,16 +60,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quakaster\Core.cpp" />
+    <ClCompile Include="src\Quakaster\qkecs\AActor.cpp" />
+    <ClCompile Include="src\Quakaster\qkecs\Entity.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\EBO.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\GraphicsPipeline.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\graphics_init.cpp" />
-    <ClCompile Include="src\Quakaster\qkg\GL\Shader.cpp" />
+    <ClCompile Include="src\Quakaster\qkg\GL\ShaderSources.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\ShaderInstance.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\MeshConfiguration.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\VBO.cpp" />
     <ClCompile Include="src\Quakaster\logging.cpp" />
-    <ClCompile Include="src\Quakaster\qkmath\Camera.cpp" />
+    <ClCompile Include="src\Quakaster\qkmath\CCamera.cpp" />
     <ClCompile Include="src\Quakaster\qknet\Convar.cpp" />
     <ClCompile Include="src\Quakaster\qkui\Widgets\ConsoleUI.cpp" />
     <ClCompile Include="src\Quakaster\qkui\UIContext.cpp" />
