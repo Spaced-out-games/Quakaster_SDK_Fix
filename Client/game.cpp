@@ -17,7 +17,7 @@ qk::Application* create_application(int argc, char** argv) { return new Game(arg
 
 struct Vertex
 {
-	vec3 p;
+	qk::vec3 p;
 };
 
 template <class vertex_t>
@@ -91,7 +91,7 @@ void Game::init() {
 	foo(cfg, mesh, vao, vbo, ebo);
 
 
-	qkg::Shader shader;
+	qkg::ShaderSources shader;
 	shader.attach_shader(GL_FRAGMENT_SHADER, default_frag);
 	shader.attach_shader(GL_VERTEX_SHADER, default_vert);
 	shader_instance.set_program(qkg::compile_shader(shader));
@@ -106,11 +106,11 @@ int Game::run()
 {
 	//todo: get a basic sine and cosine going
 	
-	vec3 eye = { 0.0, 1.0, 1.0f }; // camera position
-	vec3 target = { 0.0f, 0.0f, 0.0f };              // look-at point
-	vec3 up = { 0.0f, 0.0f, 1.0f };              // z-up
+	qk::vec3 eye = { 0.0, 1.0, 1.0f }; // camera position
+	qk::vec3 target = { 0.0f, 0.0f, 0.0f };              // look-at point
+	qk::vec3 up = { 0.0f, 0.0f, 1.0f };              // z-up
 
-	glm::mat4 view = glm::lookAt(eye, target, up);
+	qk::mat4 view = glm::lookAt(eye, target, up);
 
 	shader_instance.bind();
 	GLuint proj_location = shader_instance.get_uniform_location("u_Proj");
@@ -134,7 +134,7 @@ int Game::run()
 	// main loop. Runs until there's an error code.
 	while (!qk::status)
 	{
-		vec3 eye = { sin(t), cos(t), 1.0f }; // camera position
+		qk::vec3 eye = { sin(t), cos(t), 1.0f }; // camera position
 		view = glm::lookAt(eye, target, up);
 		t += 0.001f;
 		shader_instance.set_uniform(view_location, &view, qkg::gl_primitive_type::MAT4);

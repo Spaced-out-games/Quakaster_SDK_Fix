@@ -5,9 +5,12 @@
 #include <Quakaster/qkg/defaults.h>
 #include <Quakaster/qkg/GL/MeshRegistry.h>
 #include <Quakaster/qkui/Widgets/ConsoleUI.h>
+#include <Quakaster/qkmath/CCamera.h>
+#include "Quakaster/qk/QKTL.h"
+
 namespace cl
 {
-	float fov_desired = 70.0f;
+	float fov_desired = 130.0f;
 	float r_near = 0.0001f;
 	float r_far = 1000.0f;
 	float r_aspect_ratio = 16.0f / 9.0f;
@@ -21,13 +24,13 @@ struct Game : public qk::Application {
 		qk::LayerStack layers;
 		qkui::UIContext UIcontext;
 		uint8_t console_widget = 0;
-		mat4 projection = mat4{ 1.0f };
+		qk::mat4 projection = qk::mat4{ 1.0f };
 		//qkg::VAO vao;
 		GLuint vao;
 		GLuint vbo;
 		GLuint ebo;
 		qkg::ShaderInstance shader_instance;
-		qk::Camera camera;
+		qk::CCamera camera;
 	public:
 		Game(int argc, char** argv) : Application(argc, argv), camera(&cl::fov_desired, &cl::r_aspect_ratio,&cl::r_near, &cl::r_far) {}
 		~Game() {}
