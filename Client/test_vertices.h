@@ -38,7 +38,15 @@ const char* default_frag =
 "#version 330 core\n"
 "out vec4 FragColor;\n"
 "void main() {\n"
-"    FragColor = vec4(1.0, 0.0, 1.0, 1.0); // Purple for maximum visibility\n"
+"    FragColor = vec4(1.0, 0.0, 1.0, 1.0);\n"
+"}";
+
+
+const char* default_frag_ideal =
+// defines that we'll need to tell the UberShader to add "out vec4 FragColor;" to the header
+"#require out vec4 FragColor"
+"void main() {\n"
+"    FragColor = vec4(1.0, 0.0, 1.0, 1.0);\n"
 "}";
 
 
