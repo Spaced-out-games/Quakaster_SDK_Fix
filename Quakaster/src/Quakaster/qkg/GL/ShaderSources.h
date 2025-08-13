@@ -17,24 +17,24 @@ namespace qkg
 	// Links a vertex shader and fragment shader, returning a shader program.
 	GLuint QK_API link_sources(const std::vector<GLuint>& shaders);
 
-	class Shader;
+	class ShaderSources;
 
 	// Loads shader sources from disk.
-	Shader QK_API load_shader(const std::string& path, const GLenum type);
+	ShaderSources QK_API load_shader(const std::string& path, const GLenum type);
 
-	GLuint QK_API compile_shader(Shader& shader);
+	GLuint QK_API compile_shader(ShaderSources& shader);
 
 
 	// Holds sources and GLSL shader type information. Pass into qkg::GraphicsPipeline to register the shader.
-	class QK_API Shader {
+	class QK_API ShaderSources {
 
-		friend GLuint qkg::compile_shader(Shader& shader);
+		friend GLuint qkg::compile_shader(ShaderSources& shader);
 		friend class GraphicsPipeline;
 
 		std::unordered_map<GLenum, std::string> m_Sources;
 
 		public:
-			Shader();
+			ShaderSources();
 			inline void attach_shader(GLenum type, const std::string& source);
 
 

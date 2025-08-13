@@ -6,7 +6,7 @@
 		#include "GL/VBO.h"
 		#include "GL/EBO.h"
 		#include "GL/ShaderInstance.h"
-		#include "GL/Shader.h"
+		#include "GL/ShaderSources.h"
 		#include "GL/GraphicsPipeline.h"
 		#include "GL/graphics_init.h"
 		#include <Quakaster/qkg/GL/MeshConfiguration.h>w
