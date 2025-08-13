@@ -10,7 +10,7 @@
 
 namespace qk
 {
-	class QK_API Camera
+	class QK_API CCamera
 	{
 		FloatPtrUnion m_Fov;
 		FloatPtrUnion m_Near;
@@ -20,17 +20,17 @@ namespace qk
 		public:
 		
 		// Creates a camera with its state stored internally.
-		Camera(float FOV, float Aspect, float Near, float Far);
+		CCamera(float FOV, float Aspect, float Near, float Far);
 
 		// Creates a camera with its state bound
-		Camera(float* FOV_ptr, float* Aspect_ptr, float* Near_ptr, float* Far_ptr);
+		CCamera(float* FOV_ptr, float* Aspect_ptr, float* Near_ptr, float* Far_ptr);
 
 
 
 
 
 		// Default camera binds to convars
-		Camera();
+		CCamera();
 
 		// Gets the projection matrix
 		mat4 projection();
