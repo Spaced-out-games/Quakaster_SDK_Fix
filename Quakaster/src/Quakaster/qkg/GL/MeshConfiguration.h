@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Core.h"
 #include "../../qkmath/qkmath.h"
+#include "../../qk/QKTL.h"
 #include "gl_utils.h" // for debugging OpenGL calls
 #include "VAO.h"
 #include <boost/pfr.hpp>
@@ -99,28 +100,28 @@ namespace qkg
     }
 
     template <>
-    void add_vertex_attribute<vec2>(GLuint& index, GLsizei stride, size_t offset)
+    void add_vertex_attribute<qk::vec2>(GLuint& index, GLsizei stride, size_t offset)
     {
         add_vec2_pointer(index, stride, offset);
 
     }
 
     template <>
-    void add_vertex_attribute<vec3>(GLuint& index, GLsizei stride, size_t offset)
+    void add_vertex_attribute<qk::vec3>(GLuint& index, GLsizei stride, size_t offset)
     {
         add_vec3_pointer(index, stride, offset);
 
     }
 
     template <>
-    void add_vertex_attribute<vec4>(GLuint& index, GLsizei stride, size_t offset)
+    void add_vertex_attribute<qk::vec4>(GLuint& index, GLsizei stride, size_t offset)
     {
         add_vec4_pointer(index, stride, offset);
 
     }
 
     template <>
-    void add_vertex_attribute<quat>(GLuint& index, GLsizei stride, size_t offset)
+    void add_vertex_attribute<qk::quat>(GLuint& index, GLsizei stride, size_t offset)
     {
         add_quat_pointer(index, stride, offset);
 
@@ -141,7 +142,7 @@ namespace qkg
     }
 
     template <>
-    void add_vertex_attribute<mat4>(GLuint& index, GLsizei stride, size_t offset)
+    void add_vertex_attribute<qk::mat4>(GLuint& index, GLsizei stride, size_t offset)
     {
         add_mat4_pointer(index, stride, offset);
     }
