@@ -10,7 +10,12 @@ namespace qk {
 	/// </summary>
 	class QK_API Scene
 	{
+
+		friend class Entity;
+		friend class AActor;
+
 		entt::registry m_Registry;
+
 		
 	};
 }
