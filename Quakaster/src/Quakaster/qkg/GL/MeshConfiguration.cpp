@@ -61,15 +61,15 @@ namespace qkg {
         index++;
 
         glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride, (const void*)(offset + sizeof(vec4)));
+        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride, (const void*)(offset + sizeof(qk::vec4)));
         index++;
 
         glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride, (const void*)(offset + 2 * sizeof(vec4)));
+        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride, (const void*)(offset + 2 * sizeof(qk::vec4)));
         index++;
 
         glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride, (const void*)(offset + 3 * sizeof(vec4)));
+        glVertexAttribPointer(index, 4, GL_FLOAT, GL_FALSE, stride, (const void*)(offset + 3 * sizeof(qk::vec4)));
         index++;
     }
 
