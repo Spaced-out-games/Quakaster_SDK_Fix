@@ -36,7 +36,7 @@ namespace qk
 			return scene.m_Registry.emplace<component_t>(m_ID, std::forward<arg_Ts>(args)...);
 		}
 
-		void destroy(Scene& scene);
+		inline void destroy(Scene& scene);
 
 
 

@@ -7,6 +7,9 @@
 #include <Quakaster/qkui/Widgets/ConsoleUI.h>
 #include <Quakaster/qkmath/CCamera.h>
 #include "Quakaster/qk/QKTL.h"
+#include <Quakaster/qkecs/Scene.h>
+#include <Quakaster/qkecs/Entity.h>
+#include <Quakaster/qkmath/CTransform.h>
 
 namespace cl
 {
@@ -20,19 +23,20 @@ struct Game : public qk::Application {
 
 	//private: keep it public while im debugging
 		qkg::Window window;
+		qk::Scene scene;
 		qkg::GraphicsPipeline pipeline;
 		qk::LayerStack layers;
 		qkui::UIContext UIcontext;
 		uint8_t console_widget = 0;
-		qk::mat4 projection = qk::mat4{ 1.0f };
+		//qk::mat4 projection = qk::mat4{ 1.0f };
 		//qkg::VAO vao;
 		GLuint vao;
 		GLuint vbo;
 		GLuint ebo;
 		qkg::ShaderInstance shader_instance;
-		qk::CCamera camera;
+		//qk::CCamera camera;
 	public:
-		Game(int argc, char** argv) : Application(argc, argv), camera(&cl::fov_desired, &cl::r_aspect_ratio,&cl::r_near, &cl::r_far) {}
+		Game(int argc, char** argv) : Application(argc, argv) {}
 		~Game() {}
 
 		void init() override;

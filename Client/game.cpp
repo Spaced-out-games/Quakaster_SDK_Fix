@@ -41,8 +41,7 @@ void foo(
 	qkg::ebo::bind(ebo);
 	qkg::ebo::upload_indices(*mesh.m_Indices);
 
-	//ebo.init(*mesh.m_Indices);
-	//ebo.bind();
+
 }
 
 
@@ -75,7 +74,7 @@ void Game::init() {
 
 	
 	layers.insert(new qk::GUILayer(&UIcontext));
-	layers.insert(new qk::QKBaseLayer());
+	//layers.insert(new qk::QKBaseLayer());
 
 	#include "test_vertices.h" // just a lil' cleaner
 
@@ -95,22 +94,29 @@ void Game::init() {
 	shader.attach_shader(GL_FRAGMENT_SHADER, default_frag);
 	shader.attach_shader(GL_VERTEX_SHADER, default_vert);
 	shader_instance.set_program(qkg::compile_shader(shader));
-	projection = camera.projection();
+	
 
 }
-
-
 
 
 int Game::run()
 {
 	//todo: get a basic sine and cosine going
 	
+	qk::Entity ent_camera(scene);
+	ent_camera.add<qk::CTransform>(scene);
+	ent_camera.add<qk::mat4>(scene);
+	ent_camera.add<qk::CCamera>(scene, &cl::fov_desired, &cl::r_aspect_ratio, &cl::r_near, &cl::r_far);
+
 	qk::vec3 eye = { 0.0, 1.0, 1.0f }; // camera position
 	qk::vec3 target = { 0.0f, 0.0f, 0.0f };              // look-at point
 	qk::vec3 up = { 0.0f, 0.0f, 1.0f };              // z-up
 
-	qk::mat4 view = glm::lookAt(eye, target, up);
+
+	//qk::mat4 view = glm::lookAt(eye, target, up);
+
+	ent_camera.get<qk::mat4>(scene) = glm::lookAt(eye, target, up);
+
 
 	shader_instance.bind();
 	GLuint proj_location = shader_instance.get_uniform_location("u_Proj");
@@ -128,6 +134,7 @@ int Game::run()
 	t = 1.0;
 	std::cout << fpu.get();
 
+	qk::mat4 projection = ent_camera.get<qk::CCamera>(scene).projection();
 
 	shader_instance.set_uniform(proj_location, &projection, qkg::gl_primitive_type::MAT4);
 
@@ -135,9 +142,9 @@ int Game::run()
 	while (!qk::status)
 	{
 		qk::vec3 eye = { sin(t), cos(t), 1.0f }; // camera position
-		view = glm::lookAt(eye, target, up);
+		ent_camera.get<qk::mat4>(scene) = glm::lookAt(eye, target, up);
 		t += 0.001f;
-		shader_instance.set_uniform(view_location, &view, qkg::gl_primitive_type::MAT4);
+		shader_instance.set_uniform(view_location, &ent_camera.get<qk::mat4>(scene), qkg::gl_primitive_type::MAT4);
 
 		layers.render();
 		layers.propagate_events();
@@ -154,5 +161,3 @@ void Game::destroy()
 {
 	// do nothing. 
 }
-
-// Tell the entry point to use a Game
