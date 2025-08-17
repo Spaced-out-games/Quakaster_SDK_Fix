@@ -14,8 +14,10 @@ namespace qk {
 		friend class Entity;
 		friend class AActor;
 
+
 		entt::registry m_Registry;
 
-		
+		entt::registry& registry();
+
 	};
 }

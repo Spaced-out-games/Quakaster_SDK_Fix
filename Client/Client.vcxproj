@@ -111,14 +111,12 @@
     <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\imgui_widgets.cpp" />
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="GameLayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="help.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
-    <ClInclude Include="GameLayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

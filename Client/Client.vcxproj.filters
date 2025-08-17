@@ -66,18 +66,12 @@
     <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="help.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
