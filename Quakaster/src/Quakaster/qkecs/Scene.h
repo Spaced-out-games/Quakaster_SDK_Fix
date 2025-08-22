@@ -8,16 +8,17 @@ namespace qk {
 	/// <summary>
 	/// Represents an ECS context
 	/// </summary>
-	class QK_API Scene
-	{
+    class QK_API Scene
+    {
+        friend class Entity;
+        friend class AActor;
 
-		friend class Entity;
-		friend class AActor;
+        entt::registry m_Registry;
 
+    public:
 
-		entt::registry m_Registry;
-
-		entt::registry& registry();
-
-	};
+        // Implicit cast to entt::registry&
+        operator entt::registry& ();
+        operator const entt::registry& () const;
+    };
 }

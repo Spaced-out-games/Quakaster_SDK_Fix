@@ -1,54 +1,79 @@
 #include "AActor.h"
 
-
 namespace qk
 {
-	AActor::AActor(): m_Root(), m_Children() {}
 
-	AActor::AActor(Scene& scene): m_Root(scene)
-	{}
 
-	void AActor::destroy_children(Scene& scene)
+	/// <summary>
+	/// Stores a table of children, with O(1) insertions, deletions, stable handles,
+	/// and accessing children by name (free for constexpr names)
+	/// </summary>
+	CActorTable::CActorTable(entt::registry& registry): m_Registry(registry), m_Root(m_Registry.create())
 	{
-		for (auto& child: m_Children)
-		{
-			child.second.destroy(scene);
+	}
+
+	Entity CActorTable::add_child(key_t key)
+	{
+
+		auto [iter, inserted] = m_Children.try_emplace(key, entt::null);
+		if (inserted) {
+			iter->second = m_Registry.create();
 		}
-		m_Children.clear();
-	}
-	void AActor::destroy(Scene& scene)
-	{
-		m_Root.destroy(scene);
+		return Entity(m_Registry, iter->second);
 
-		destroy_children(scene);
+
+		
 
 	}
 
-	Entity& AActor::root() { return m_Root; }
-	Entity& AActor::child(child_handle_t handle) { return m_Children.at(handle); }
-
-	child_handle_t AActor::add_child(Scene& scene)
+	Entity CActorTable::operator[](key_t key)
 	{
-		for (;;)
+		entt::entity target = entt::null;
+
+		if (m_Children.find(key) != m_Children.end())
 		{
 
-			// Here, we'd do overflow protection for m_NextChildIndex, but we'd just be setting it to zero, which no-oping does anyways
+			return Entity(m_Registry, m_Children.at(key));
 
-
-			if (m_Children.find(m_NextChildIndex) == m_Children.end())
-			{
-				m_Children[m_NextChildIndex] = Entity(scene);
-				return m_NextChildIndex++;
-			}
-
-			m_NextChildIndex++;
 		}
+		__debugbreak();
+		return Entity(m_Registry, entt::null);
+
 	}
 
-	void AActor::delete_child(Scene& scene, child_handle_t handle)
+	bool CActorTable::has_child(key_t key)
 	{
-		m_Children.at(handle).destroy(scene);
-		m_Children.erase(handle);
+		return m_Children.find(key) != m_Children.end();
 	}
+
+
+	// AACTOR
+
+
+	AActor::AActor(entt::registry& registry) : Entity(registry)
+	{
+		// inserted, per its definition
+		emplace<CActorTable>(registry);
+	}
+
+	bool AActor::has_child(CActorTable::key_t key)
+	{
+		return get<CActorTable>().has_child(key);
+	}
+
+	Entity AActor::operator[](CActorTable::key_t key)
+	{
+		return get<CActorTable>()[key];
+	}
+	Entity AActor::add_child(CActorTable::key_t key)
+	{
+		return get<CActorTable>().add_child(key);
+	}
+
+	bool isAActor(const Entity& target)
+	{
+		return target.all_of<CActorTable>();
+	}
+
 
 }
