@@ -18,14 +18,9 @@ namespace qk
 		FloatPtrUnion m_AspectRatio;
 
 		public:
-		
-		// Creates a camera with its state stored internally.
-		CCamera(float FOV, float Aspect, float Near, float Far);
-
-		// Creates a camera with its state bound
-		CCamera(float* FOV_ptr, float* Aspect_ptr, float* Near_ptr, float* Far_ptr);
 
 
+		CCamera(FloatPtrUnion FOV, FloatPtrUnion aspect, FloatPtrUnion near, FloatPtrUnion far);
 
 
 

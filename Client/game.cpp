@@ -3,6 +3,13 @@
 #include "boost/pfr.hpp"
 
 
+
+//temporary includes
+#include <Quakaster/qkecs/AActor.h>
+#include <entt/core/hashed_string.hpp>
+using namespace entt::literals;
+
+
 qk::Application* create_application(int argc, char** argv) { return new Game(argc, argv); }
 
 
@@ -98,15 +105,29 @@ void Game::init() {
 
 }
 
+template <typename ...arg_Ts>
+inline void add_camera(qk::Entity& target, arg_Ts... args)
+{
+	target.get_or_emplace<qk::CTransform>();
+	target.get_or_emplace<qk::mat4>();
+	target.get_or_emplace<qk::CCamera>(std::forward<arg_Ts>(args)...);
+
+}
+
+
+
 
 int Game::run()
 {
+
+
+
+
 	//todo: get a basic sine and cosine going
 	
-	qk::Entity ent_camera(scene);
-	ent_camera.add<qk::CTransform>(scene);
-	ent_camera.add<qk::mat4>(scene);
-	ent_camera.add<qk::CCamera>(scene, &cl::fov_desired, &cl::r_aspect_ratio, &cl::r_near, &cl::r_far);
+	qk::Entity camera(scene);
+	add_camera(camera, &cl::fov_desired, &cl::r_aspect_ratio, &cl::r_near, &cl::r_far);
+
 
 	qk::vec3 eye = { 0.0, 1.0, 1.0f }; // camera position
 	qk::vec3 target = { 0.0f, 0.0f, 0.0f };              // look-at point
@@ -115,7 +136,7 @@ int Game::run()
 
 	//qk::mat4 view = glm::lookAt(eye, target, up);
 
-	ent_camera.get<qk::mat4>(scene) = glm::lookAt(eye, target, up);
+	camera.get<qk::mat4>() = glm::lookAt(eye, target, up);
 
 
 	shader_instance.bind();
@@ -128,13 +149,9 @@ int Game::run()
 
 	float t = 0;
 
-	FloatPtrUnion fpu(&t);
 
-	std::cout << fpu.get();
-	t = 1.0;
-	std::cout << fpu.get();
 
-	qk::mat4 projection = ent_camera.get<qk::CCamera>(scene).projection();
+	qk::mat4 projection = camera.get<qk::CCamera>().projection();
 
 	shader_instance.set_uniform(proj_location, &projection, qkg::gl_primitive_type::MAT4);
 
@@ -142,9 +159,9 @@ int Game::run()
 	while (!qk::status)
 	{
 		qk::vec3 eye = { sin(t), cos(t), 1.0f }; // camera position
-		ent_camera.get<qk::mat4>(scene) = glm::lookAt(eye, target, up);
+		camera.get<qk::mat4>() = glm::lookAt(eye, target, up);
 		t += 0.001f;
-		shader_instance.set_uniform(view_location, &ent_camera.get<qk::mat4>(scene), qkg::gl_primitive_type::MAT4);
+		shader_instance.set_uniform(view_location, &camera.get<qk::mat4>(), qkg::gl_primitive_type::MAT4);
 
 		layers.render();
 		layers.propagate_events();
@@ -152,6 +169,8 @@ int Game::run()
 
 		//UIcontext.end();
 		window.swap();
+
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}
 	return qk::status;
 

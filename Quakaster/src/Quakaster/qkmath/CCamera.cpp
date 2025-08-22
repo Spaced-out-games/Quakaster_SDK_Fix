@@ -3,22 +3,13 @@
 
 
 namespace qk {
-	CCamera::CCamera(float FOV, float Aspect, float Near, float Far) :
-		m_Fov(FOV),
-		m_AspectRatio(Aspect),
-		m_Near(Near),
-		m_Far(Far)
+
+
+	CCamera::CCamera(FloatPtrUnion FOV, FloatPtrUnion aspect, FloatPtrUnion near, FloatPtrUnion far):m_Fov(FOV), m_AspectRatio(aspect), m_Near(near), m_Far(far)
 	{
 
 	}
-	CCamera::CCamera(float* FOV_ptr, float* Aspect_ptr, float* Near_ptr, float* Far_ptr) :
-		m_Fov(FOV_ptr),
-		m_AspectRatio(Aspect_ptr),
-		m_Near(Near_ptr),
-		m_Far(Far_ptr)
-	{
 
-	}
 
 
 	CCamera::CCamera(): m_Fov(120.0f), m_AspectRatio(16.0f/9.0f), m_Near(0.0001f), m_Far(1000.0f)

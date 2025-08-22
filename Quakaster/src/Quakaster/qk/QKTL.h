@@ -41,6 +41,7 @@ class FloatPtrUnion
 	inline FloatPtrUnion& operator=(float value);
 	inline operator float() const;
 
+
 };
 
 FloatPtrUnion::FloatPtrUnion()

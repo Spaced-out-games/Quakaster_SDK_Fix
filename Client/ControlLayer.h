@@ -3,24 +3,31 @@
 #include <Quakaster/qk/Layer.h>
 #include <Quakaster/qkui/UIContext.h>
 #include <Quakaster/qkecs/Scene.h>
-#include <Quakaster/qkecs/components/CController.h>
-#include <Quakaster/qkecs/components/CGameEventQueue.h>
-#include <Quakaster/qkecs/components/CGameEventFactory.h>
+
+#include <Quakaster/qkio/TController.h>
+
+
 
 namespace qk
 {
-	struct GameLayer : qk::Layer
+
+	
+	struct InputLayer : qk::Layer
 	{
-		qk::Scene& m_Scene;
+		using game_event_t = qk::TGameEvent<EGameEvent_FPS>;
+		using controller_t = TController<game_event_t>;
+		using emitter_t = TGameEvent_Emitter<SDL_Event, game_event_t>;
 
-		GameLayer(qk::Scene& scene);
+		entt::registry& m_Registry;
+		
+		public:
 
-		bool on_event(const SDL_Event& evt) override;
-		void on_attach() override;
-		void on_detach() override;
-		void render() override;
+			InputLayer(entt::registry& registry);
+			bool on_event(const SDL_Event& evt) override;
+			void on_attach() override;
+			void on_detach() override;
+			void render() override;
 	};
 
-	void SFlushGameEventQueue(Scene& scene);
 }
 

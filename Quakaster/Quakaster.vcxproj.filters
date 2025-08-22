@@ -135,9 +135,6 @@
     <ClInclude Include="src\Quakaster\qkecs\Entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkecs\AActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Quakaster\qkmath\mat4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -156,10 +153,22 @@
     <ClInclude Include="src\Quakaster\qkmath\CTransform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkecs\components\CController.h">
+    <ClInclude Include="src\Quakaster\qk\default\GameLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qk\default\GameLayer.h">
+    <ClInclude Include="src\Quakaster\qkecs\AActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\TController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\qkio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\GameEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\InputEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -287,16 +296,13 @@
     <ClCompile Include="src\Quakaster\qkecs\Entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkecs\AActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quakaster\qkecs\components\CController.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Quakaster\qkecs\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qk\default\GameLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkecs\AActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

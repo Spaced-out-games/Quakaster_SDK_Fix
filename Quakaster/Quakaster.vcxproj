@@ -31,6 +31,10 @@
     <ClInclude Include="src\Quakaster\qkg\qkg.h" />
     <ClInclude Include="src\Quakaster\logging.h" />
     <ClInclude Include="src\Quakaster\qkg\UberShaderGenerator.h" />
+    <ClInclude Include="src\Quakaster\qkio\GameEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\InputEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\qkio.h" />
+    <ClInclude Include="src\Quakaster\qkio\TController.h" />
     <ClInclude Include="src\Quakaster\qkmath\CCamera.h" />
     <ClInclude Include="src\Quakaster\qkmath\mat4.h" />
     <ClInclude Include="src\Quakaster\qkmath\quaternion.h" />
@@ -51,7 +55,6 @@
     <ClInclude Include="src\Quakaster\EntryPoint.h" />
     <ClInclude Include="src\Quakaster\qkmath\qkmath.h" />
     <ClInclude Include="src\Quakaster\qkg\Window.h" />
-    <ClInclude Include="src\Quakaster\qkecs\components\CController.h" />
     <ClInclude Include="src\Quakaster\qk\defaults.h" />
     <ClInclude Include="src\Quakaster\qk\default\GameLayer.h" />
     <ClInclude Include="src\Quakaster\qk\default\QKBaseLayer.h" />
@@ -64,7 +67,6 @@
   <ItemGroup>
     <ClCompile Include="src\Quakaster\Core.cpp" />
     <ClCompile Include="src\Quakaster\qkecs\AActor.cpp" />
-    <ClCompile Include="src\Quakaster\qkecs\components\CController.cpp" />
     <ClCompile Include="src\Quakaster\qkecs\Entity.cpp" />
     <ClCompile Include="src\Quakaster\qkecs\Scene.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\EBO.cpp" />
