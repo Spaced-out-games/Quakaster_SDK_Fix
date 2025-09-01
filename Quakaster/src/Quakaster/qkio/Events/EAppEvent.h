@@ -1,0 +1,20 @@
+#pragma once
+#include <stdint.h>
+
+
+namespace qk::io
+{
+	enum class EAppEvent : uint8_t
+	{
+		APP_BEGIN,
+		APP_TICK,
+		APP_END,
+		APP_TERMINATING,
+		APP_LOW_MEMORY,
+		APP_OUT_OF_MEMORY,
+		APP_BEFORE_ENTER_BACKGROUND,
+		APP_AFTER_ENTER_BACKGROUND,
+		APP_BEFORE_ENTER_FOREGROUND,
+		APP_AFTER_ENTER_FOREGROUND,
+	};
+}

@@ -31,10 +31,16 @@
     <ClInclude Include="src\Quakaster\qkg\qkg.h" />
     <ClInclude Include="src\Quakaster\logging.h" />
     <ClInclude Include="src\Quakaster\qkg\UberShaderGenerator.h" />
-    <ClInclude Include="src\Quakaster\qkio\GameEvent.h" />
-    <ClInclude Include="src\Quakaster\qkio\InputEvent.h" />
-    <ClInclude Include="src\Quakaster\qkio\qkio.h" />
-    <ClInclude Include="src\Quakaster\qkio\TController.h" />
+    <ClInclude Include="src\Quakaster\qkio\Events\EAppEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\Events\EClientEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\Events\EGameAction.h" />
+    <ClInclude Include="src\Quakaster\qkio\Events\EKeyEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\Events\EMouseEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\Events\EMouseMoveEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\qkioEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\Events\EServerEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\Events\EWindowEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\qkioEvent_SDL2_impl.h" />
     <ClInclude Include="src\Quakaster\qkmath\CCamera.h" />
     <ClInclude Include="src\Quakaster\qkmath\mat4.h" />
     <ClInclude Include="src\Quakaster\qkmath\quaternion.h" />
@@ -78,6 +84,8 @@
     <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\VBO.cpp" />
     <ClCompile Include="src\Quakaster\logging.cpp" />
+    <ClCompile Include="src\Quakaster\qkio\qkioEvent.cpp" />
+    <ClCompile Include="src\Quakaster\qkio\qkioEvent_SDL2_impl.cpp" />
     <ClCompile Include="src\Quakaster\qkmath\CCamera.cpp" />
     <ClCompile Include="src\Quakaster\qknet\Convar.cpp" />
     <ClCompile Include="src\Quakaster\qkui\Widgets\ConsoleUI.cpp" />
@@ -112,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="copypasta.txt" />
+    <Text Include="src\Quakaster\qkio\Events\README.txt" />
     <Text Include="todo.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

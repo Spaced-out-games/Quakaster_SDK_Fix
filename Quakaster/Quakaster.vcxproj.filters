@@ -159,16 +159,34 @@
     <ClInclude Include="src\Quakaster\qkecs\AActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\TController.h">
+    <ClInclude Include="src\Quakaster\qkio\qkioEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\qkio.h">
+    <ClInclude Include="src\Quakaster\qkio\qkioEvent_SDL2_impl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\GameEvent.h">
+    <ClInclude Include="src\Quakaster\qkio\Events\EMouseMoveEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\InputEvent.h">
+    <ClInclude Include="src\Quakaster\qkio\Events\EMouseEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\Events\EKeyEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\Events\EClientEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\Events\EServerEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\Events\EAppEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\Events\EWindowEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\Events\EGameAction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -305,9 +323,16 @@
     <ClCompile Include="src\Quakaster\qkecs\AActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Quakaster\qkio\qkioEvent_SDL2_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkio\qkioEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="copypasta.txt" />
     <Text Include="todo.txt" />
+    <Text Include="src\Quakaster\qkio\Events\README.txt" />
   </ItemGroup>
 </Project>

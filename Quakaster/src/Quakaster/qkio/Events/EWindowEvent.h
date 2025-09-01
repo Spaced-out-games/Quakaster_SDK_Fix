@@ -1,0 +1,25 @@
+#pragma once
+#include <stdint.h>
+
+
+namespace qk::io
+{
+	enum class EWindowEvent : uint8_t
+	{
+		WIN_SHOW,
+		WIN_HIDE,
+		WIN_EXPOSED,
+		WIN_MOVED,
+		WIN_BEFORE_RESIZE,
+		WIN_AFTER_RESIZE,
+		WIN_MINIMIZED,
+		WIN_MAXIMIZED,
+		WIN_RESTORED,
+		WIN_MOUSE_ENTER,
+		WIN_MOUSE_EXIT,
+		WIN_KEYBOARD_FOCUS_GAINED,
+		WIN_KEYBOARS_FOCUS_LOST,
+		WIN_OPEN,
+		WIN_CLOSED,
+	};
+}
