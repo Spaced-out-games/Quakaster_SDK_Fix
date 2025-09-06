@@ -2,7 +2,6 @@
 #include "../Core.h"
 #include <vector>
 #include <SDL.h>
-//#include"../qkg/GL/import.h"
 
 
 //typedef union SDL_Event;
