@@ -1,28 +1,11 @@
 # Quakaster SDK
-I originally started this project out as a very small side project, but eventually, it got to the point
-where good ol' fashioned move fast and break shit approach no longer became sustainable. Plus, a lot of it was
-written by ChatGPT (I'm a college kid with what I think is a neat approach to rendering that I want to test out ASAP).
-From now on, I plan to actually write the code for real this time. Yes, big ask, I know.
+An easy-to-use game engine meant to be inspired by the most impactful engines of the past, such as the Quake and Unreal engines, and by extension, their derivatives. It will have generic built-in support for game recordings in a much more compressed manner than text-based versions.
 
-
-## Easy-to-use modular game engine
-Quakaster, as the name implies, is meant to be heavily inspired by the Quake engine. Obviously, the Quake engine was not built with modern design patterns like Entity-Component systems, which
-of course limited the performance of the engine.
-
-It also has the added benefit that it uses a module system (not really but kind of) that allows developers to
-include certain feature sets into their own DLLs. The way I'll go about this is by compiling each module into
-LLVM, and whomever uses the SDK can define some macros in their build system to build their own instance of
-the Quakaster DLL.
+Just for notice, this engine was also heavily inspired, design-wise from the Hazel engine, made by The Cherno on Youtube.
 
 ## Efficiency, Efficiency, Efficiency, and Efficiency.
+Being a huge performance addict, I design this engine with performance, modularity, and extensibility in mind, and we do this via entt's beautiful ECS framework, offering high-perf data-oriented design
 
-The engine is being built on top of Vulkan and EnTT, which are both among some of the most performant in
-their respective categories. Game worlds are usually the most expensive part of the scene, so I have a novel
-approach to upping the ante when it comes to high-performance code. It's a novel idea without a patent, so
-I won't get too in-depth, but I will tell you the benefits you shuold expect from the engine:
+## An opportunity for growth
 
-- Less memory usage
-- Built-in occlusion and frustum culling.
-- Built from the ground up with newer technologies (such as an ECS)
-
-
+I'm just a joe schmoe college kid interested in building a portfolio that I'll actually remember fondly. Not a big fan of "oh look, a todo app in JS." I've been programming for literally the majority of my life, and although I've got tons to learn, I'm hoping that this project will offer me the experience to be competitive in the industry. So far I've had to handle DLL boundary issues, compilation and linking issues, code organization strategies...I've had to tinker with software engineering principles through learning it by hand instead of a taxtbook. Theory only gets you so far when you're going for cutting edge. Not trying to sound all high and mighty, but this is meant to be my magnum opus, and frankly, a hail-mary in light of the modern tech industry and the feeble career outlook it brings. I might be wasting infinite money going to college for a degree that noone wants, after spending the last 11 years of my life tinkering and being told it's worth my time. I might be getting scammed here, but this - from what I can tell - is my only hope. I'm not going for a senior role, or a junior role, but I am going for getting my foot in the door. If I succeed, that alone gets me a hair closer to escaping intergenerational poverty, and if I don't, I'm stuck with ungodly debt, working a minimum wage job. If this doesn't work, I don't know what will. It's a multi-disciplinary endeavor by a twenty-something lunatic, working with a low-level language, hoping it's enough to earn the bottom step of the industrial ladder. I don't know every framework, every design paradigm, I just want my special rock to do the special rock things I tell it to.
