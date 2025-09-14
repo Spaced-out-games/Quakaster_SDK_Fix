@@ -29,7 +29,10 @@ namespace qk
 
     bool GUILayer::on_event(const SDL_Event& evt)
     {
-        ImGui_ImplSDL2_ProcessEvent(&evt); // always feed ImGui
+        //ImGui_ImplSDL2_ProcessEvent(&evt); // always feed ImGui
+
+        ImGui_ImplSDL2_ProcessEvent(&evt);
+        //ImGui_ImplSDL2_ProcessEvent(qk::io::make_event<SDL_Event>(evt));
 
         ImGuiIO& io = ImGui::GetIO();
 

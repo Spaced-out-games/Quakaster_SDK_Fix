@@ -159,34 +159,25 @@
     <ClInclude Include="src\Quakaster\qkecs\AActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\qkioEvent.h">
+    <ClInclude Include="thirdparty\imgui\imgui\backends\imgui_impl_qkio-sdl2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\qkioEvent_SDL2_impl.h">
+    <ClInclude Include="src\Quakaster\qkio\EEventCategory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\Events\EMouseMoveEvent.h">
+    <ClInclude Include="src\Quakaster\qkio\Event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\Events\EMouseEvent.h">
+    <ClInclude Include="src\Quakaster\qkio\EventHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\Events\EKeyEvent.h">
+    <ClInclude Include="src\Quakaster\qkio\Events\KeyEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\Events\EClientEvent.h">
+    <ClInclude Include="src\Quakaster\qkio\Events\Platform\SDL2_Event_impl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\Events\EServerEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\Events\EAppEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\Events\EWindowEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkio\Events\EGameAction.h">
+    <ClInclude Include="src\Quakaster\qkio\Events\QuitEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -290,9 +281,6 @@
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_sdl2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Quakaster\qk\default\GUILayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -323,16 +311,21 @@
     <ClCompile Include="src\Quakaster\qkecs\AActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkio\qkioEvent_SDL2_impl.cpp">
+    <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_qkio-sdl2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkio\qkioEvent.cpp">
+    <ClCompile Include="src\Quakaster\qkio\Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkio\Events\KeyEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkio\Events\Platform\SDL2_Event_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="copypasta.txt" />
     <Text Include="todo.txt" />
-    <Text Include="src\Quakaster\qkio\Events\README.txt" />
   </ItemGroup>
 </Project>

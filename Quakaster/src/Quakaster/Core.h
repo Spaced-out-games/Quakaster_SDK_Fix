@@ -35,7 +35,7 @@ namespace qk
 	};
 }
 
-
+#define BIT(x) (1 << x)
 
 namespace qk {
 	extern QK_API int status;

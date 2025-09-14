@@ -2,12 +2,15 @@
 #include "../Core.h"
 #include <vector>
 #include <SDL.h>
-
+//#include "../qkio/Event.h"
 
 //typedef union SDL_Event;
 
 
 namespace qk {
+
+
+
 
 	struct QK_API Layer
 	{
@@ -26,6 +29,8 @@ namespace qk {
 		/// <param name="evt">The SDLEvent we get from polling</param>
 		/// <returns>true if the event is consumed by this layer</returns>
 		virtual bool on_event(const SDL_Event& evt) = 0;
+
+		//virtual bool on_event(const qk::io::Event evt) = 0;
 
 		/// <summary>
 		/// What to do when the layer attaches to the LayerStack

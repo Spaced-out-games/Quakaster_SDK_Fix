@@ -3,11 +3,15 @@
 #include "boost/pfr.hpp"
 
 
-
+#include <Quakaster/qkio/Event.h>
+#include <Quakaster/qkio/Events/KeyEvent.h>
 //temporary includes
 #include <Quakaster/qkecs/AActor.h>
 #include <entt/core/hashed_string.hpp>
+#include <Quakaster/qkio/Events/Platform/SDL2_Event_impl.h>
 using namespace entt::literals;
+
+using namespace qk::io;
 
 
 qk::Application* create_application(int argc, char** argv) { return new Game(argc, argv); }
@@ -71,7 +75,14 @@ void Game::init() {
 	glClearColor(0, 200, 255, 255);
 	glViewport(0, 0, 1920, 1080);
 
+
 	
+	//std::cout << evt.as<KeyPressEvent>().to_string();
+	
+	//std::cout << evt.to_string();
+	//evt.keycode() = 4;
+	//std::cout << evt.to_string();
+
 
 	UIcontext.init((SDL_GLContext)pipeline, (SDL_Window*)window);
 	
@@ -154,7 +165,8 @@ int Game::run()
 	qk::mat4 projection = camera.get<qk::CCamera>().projection();
 
 	shader_instance.set_uniform(proj_location, &projection, qkg::gl_primitive_type::MAT4);
-
+	SDL_Event evt;
+	Event e;
 	// main loop. Runs until there's an error code.
 	while (!qk::status)
 	{
@@ -164,7 +176,12 @@ int Game::run()
 		shader_instance.set_uniform(view_location, &camera.get<qk::mat4>(), qkg::gl_primitive_type::MAT4);
 
 		layers.render();
-		layers.propagate_events();
+		//layers.propagate_events();
+		while (SDL_PollEvent(&evt))
+		{
+			e = qk::io::from_SDL_Event(evt);
+			std::cout << e.to_string<KeyPressEvent>();
+		}
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
 		//UIcontext.end();
