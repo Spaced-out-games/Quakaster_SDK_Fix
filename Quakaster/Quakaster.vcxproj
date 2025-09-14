@@ -176,7 +176,7 @@
     <Link>
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Quakaster\thirdparty\SDL2\lib\x64;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Quakaster\thirdparty\SDL2\lib\x64;$(SolutionDir)Quakaster\thirdparty\glew-2.2.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;SDL2.lib;opengl32.lib;Ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
