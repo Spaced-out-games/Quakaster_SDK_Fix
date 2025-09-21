@@ -16,6 +16,12 @@ namespace qk::io
 				KeyPressEvent kp{ (uint16_t)evt.key.keysym.scancode, evt.key.keysym.sym, 1 };
 				return (Event)kp;
 			}
+			case SDL_MOUSEMOTION:
+			{	
+				MouseMoveEvent mv(evt.motion.xrel, evt.motion.yrel);
+				return (Event)mv;
+			}
+			
 
 		
 			default:
