@@ -180,6 +180,9 @@
     <ClInclude Include="src\Quakaster\qkio\Events\QuitEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quakaster\qkio\Events\MouseMoveEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quakaster\qk\Application.cpp">
@@ -321,6 +324,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qkio\Events\Platform\SDL2_Event_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkio\Events\QuitEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkio\Events\MouseMoveEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

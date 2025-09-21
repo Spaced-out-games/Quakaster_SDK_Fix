@@ -35,6 +35,7 @@
     <ClInclude Include="src\Quakaster\qkio\Event.h" />
     <ClInclude Include="src\Quakaster\qkio\EventHeader.h" />
     <ClInclude Include="src\Quakaster\qkio\Events\KeyEvent.h" />
+    <ClInclude Include="src\Quakaster\qkio\Events\MouseMoveEvent.h" />
     <ClInclude Include="src\Quakaster\qkio\Events\QuitEvent.h" />
     <ClInclude Include="src\Quakaster\qkio\Events\Platform\SDL2_Event_impl.h" />
     <ClInclude Include="src\Quakaster\qkmath\CCamera.h" />
@@ -83,7 +84,9 @@
     <ClCompile Include="src\Quakaster\logging.cpp" />
     <ClCompile Include="src\Quakaster\qkio\Event.cpp" />
     <ClCompile Include="src\Quakaster\qkio\Events\KeyEvent.cpp" />
+    <ClCompile Include="src\Quakaster\qkio\Events\MouseMoveEvent.cpp" />
     <ClCompile Include="src\Quakaster\qkio\Events\Platform\SDL2_Event_impl.cpp" />
+    <ClCompile Include="src\Quakaster\qkio\Events\QuitEvent.cpp" />
     <ClCompile Include="src\Quakaster\qkmath\CCamera.cpp" />
     <ClCompile Include="src\Quakaster\qknet\Convar.cpp" />
     <ClCompile Include="src\Quakaster\qkui\Widgets\ConsoleUI.cpp" />
