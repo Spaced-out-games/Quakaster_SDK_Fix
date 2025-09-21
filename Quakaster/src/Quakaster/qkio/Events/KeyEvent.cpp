@@ -5,20 +5,7 @@
 namespace qk::io
 {
 	
-	std::string KeyPressEvent::to_string_impl(Event& evt)
-	{
-		char buf[64]; // stack buffer
-		KeyPressEvent& kv = *(KeyPressEvent*)&evt;
 
-		std::snprintf(
-			buf,
-			sizeof(buf),
-			"KeyPressEvent{ key: %d, scancode: %u }",
-			kv.keycode(),
-			kv.scancode()
-		);
-		return std::string(buf);
-	}
 	int& KeyPressEvent::keycode() { return from_payload<int, 0>(); }
 	int& KeyPressEvent::modifiers() { return from_payload<int, sizeof(int)>(); }
 
@@ -39,23 +26,38 @@ namespace qk::io
 
 	}
 
-	bool KeyPressEvent::is_impl(const Event& evt)
+	
+	bool KeyPressEvent::is_same_category(Event& evt)
 	{
-		bool control;
-		control = evt.category() == (EEventCategory::KEYBOARD_EVENT | EEventCategory::BUTTON_EVENT);
-		return control;
+		return evt.category() & (EEventCategory::KEYBOARD_EVENT | EEventCategory::BUTTON_EVENT);
 	}
-
-
-	KeyPressEvent* KeyPressEvent::try_cast_impl(Event& evt)
+	bool KeyPressEvent::is_same_type(Event& evt)
 	{
-		if (is_impl(evt))
+		return evt.type_code() <= 1;
+	}
+	KeyPressEvent* KeyPressEvent::event_cast(Event& evt)
+	{
+		if (KeyPressEvent::is_same_category(evt) && KeyPressEvent::is_same_type(evt))
 		{
-			return (KeyPressEvent*) &evt;
+			return reinterpret_cast<KeyPressEvent*>(&evt);
 		}
 		return nullptr;
 	}
+
+
 	
+	std::string KeyPressEvent::to_string(Event& evt)
+	{
+		KeyPressEvent* kpevt = event_cast(evt);
+		if (kpevt)
+		{
+			return "KeyPressEvent {" + std::to_string(kpevt->keycode()) + "}";
+		}
+		else
+		{
+			return "<invalid cast to KeyPressEvent>";
+		}
+	}
 
 
 
