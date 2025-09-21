@@ -180,7 +180,21 @@ int Game::run()
 		while (SDL_PollEvent(&evt))
 		{
 			e = qk::io::from_SDL_Event(evt);
-			std::cout << e.to_string<KeyPressEvent>();
+			if (auto kp = qk::io::event_cast<KeyPressEvent>(e))
+			{
+				
+				std::cout << qk::io::to_string<KeyPressEvent>(e) << '\n';
+			}
+			
+			if (auto mv = qk::io::event_cast<MouseMoveEvent>(e))
+			{
+				std::cout << qk::io::to_string<MouseMoveEvent>(e) << '\n';
+			}
+
+			else
+			{
+				std::cout << qk::io::to_string<Event>(e) << '\n';
+			}
 		}
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
