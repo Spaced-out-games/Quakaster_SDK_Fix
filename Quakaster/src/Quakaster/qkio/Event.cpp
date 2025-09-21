@@ -3,22 +3,47 @@
 
 namespace qk::io
 {
-	const EEventCategory Event::category() const { return m_Header.category; }
-	const uint8_t Event::type() { return m_Header.type; }
-	Event* Event::try_cast_impl(Event& evt)
+	uint16_t& Event::variant_code()
+	{
+		return m_Header.variant;
+	}
+	EEventCategory& Event::category()
+	{
+		return m_Header.category;
+	}
+	uint8_t& Event::type_code()
+	{
+		return m_Header.type;
+	}
+
+	//---------------------------------------------------------- contracts ----------------------------------------------------------//
+	
+	
+	std::string Event::to_string(Event& evt)
+	{
+		return "Event{}";
+	}
+	bool Event::is_same_category(Event& evt)
+	{
+		// all events are events
+		return true;
+	}
+	bool Event::is_same_type(Event& evt)
+	{
+		// all events are events
+		return true;
+	}
+	Event* Event::event_cast(Event& evt)
 	{
 		return &evt;
 	}
-
-	// all events are events.
-	bool Event::is_impl(Event& evt)
+	Event::operator Event& ()
 	{
-		return 1;
+		return *this;
 	}
 
-	std::string Event::to_string_impl(Event& evt)
-	{
 
-		return "Event{???}";
-	}
+	//------------------------------------------------------------------------------------------------------------------------------//
+
+
 }
