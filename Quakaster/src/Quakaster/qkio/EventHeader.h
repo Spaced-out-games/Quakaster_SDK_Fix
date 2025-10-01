@@ -1,14 +1,15 @@
 #pragma once
-#include "../Core.h"
+#include "EEventType.h"
 #include "EEventCategory.h"
-
 
 namespace qk::io
 {
 	struct EventHeader
 	{
-		EEventCategory category;
-		uint8_t type;
-		uint16_t variant;
+		const EEventCategory	category;
+		const EEventType		type;
+		uint32_t				variant;
+		uint64_t				hash();
+		EventHeader(EEventCategory category, EEventType type, uint32_t variant);
 	};
 }

@@ -4,7 +4,7 @@
 
 namespace qk::io
 {
-	enum class EEventCategory : uint8_t
+	enum class EEventCategory : uint16_t
 	{
 		NULL_EVENT		= 0,
 		// events relating to the app, window, system, engine...
@@ -27,9 +27,6 @@ namespace qk::io
 
 		// events relating to the game
 		GAME_EVENT		= BIT(6),
-
-		// Context-specific event category
-		WILDCARD_EVENT	= BIT(7),
 		
 	};
 
