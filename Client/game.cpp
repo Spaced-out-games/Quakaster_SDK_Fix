@@ -1,7 +1,7 @@
 #include "game.h"
 #include <cmath> // for sin, cos
 #include "boost/pfr.hpp"
-
+#include <fstream>
 
 #include <Quakaster/qkio/Event.h>
 #include <Quakaster/qkio/Events/KeyEvent.h>
@@ -9,9 +9,11 @@
 #include <Quakaster/qkecs/AActor.h>
 #include <entt/core/hashed_string.hpp>
 #include <Quakaster/qkio/Events/Platform/SDL2_Event_impl.h>
+
 using namespace entt::literals;
 
 using namespace qk::io;
+using namespace qk::kernel;
 
 
 qk::Application* create_application(int argc, char** argv) { return new Game(argc, argv); }
@@ -59,61 +61,6 @@ void foo(
 
 void Game::init() {
 
-	qk::SDL_init_backend(3, 3);
-
-	qkg::make_window(window, 1920, 1080, "Test");
-
-
-	pipeline.init((SDL_Window*)window);
-
-
-	// Initializes GLEW
-	qk::SDL_init_backend_symbol_loader();
-
-	
-	glDisable(GL_CULL_FACE);
-	glClearColor(0, 200, 255, 255);
-	glViewport(0, 0, 1920, 1080);
-
-
-	
-	//std::cout << evt.as<KeyPressEvent>().to_string();
-	
-	//std::cout << evt.to_string();
-	//evt.keycode() = 4;
-	//std::cout << evt.to_string();
-
-
-	UIcontext.init((SDL_GLContext)pipeline, (SDL_Window*)window);
-	
-	console_widget = UIcontext.add_widget(new ConsoleUI());
-	
-
-
-	
-	layers.insert(new qk::GUILayer(&UIcontext));
-	//layers.insert(new qk::QKBaseLayer());
-
-	#include "test_vertices.h" // just a lil' cleaner
-
-
-	qkg::MeshConfiguration<Vertex> cfg;
-
-	qkg::MeshRegistry reg;
-	reg.register_configuration(cfg);
-
-	qkg::Mesh<Vertex> mesh;
-	mesh.upload_vertices(std::move(vertices));
-	mesh.upload_indices(std::move(indices));
-	foo(cfg, mesh, vao, vbo, ebo);
-
-
-	qkg::ShaderSources shader;
-	shader.attach_shader(GL_FRAGMENT_SHADER, default_frag);
-	shader.attach_shader(GL_VERTEX_SHADER, default_vert);
-	shader_instance.set_program(qkg::compile_shader(shader));
-	
-
 }
 
 template <typename ...arg_Ts>
@@ -126,8 +73,21 @@ inline void add_camera(qk::Entity& target, arg_Ts... args)
 }
 
 
+int Game::run()
+{
+
+	Program p;
+	p.emplace_back("echo", "test.txt" );
+	p.emplace_back("|", "");
+	p.emplace_back("cat", "");
+
+	kernel.execute_program(&p, ERestrictionFlags::RESTRICT_NONE);
+	//__debugbreak();
+	return 0;
+}
 
 
+/* old
 int Game::run()
 {
 
@@ -170,42 +130,23 @@ int Game::run()
 	// main loop. Runs until there's an error code.
 	while (!qk::status)
 	{
-		qk::vec3 eye = { sin(t), cos(t), 1.0f }; // camera position
+	begin:
+		goto end;
+		qk::vec3 eye = { sin(t), cos(t), 1.0f };
 		camera.get<qk::mat4>() = glm::lookAt(eye, target, up);
 		t += 0.001f;
 		shader_instance.set_uniform(view_location, &camera.get<qk::mat4>(), qkg::gl_primitive_type::MAT4);
 
 		layers.render();
-		//layers.propagate_events();
-		while (SDL_PollEvent(&evt))
-		{
-			e = qk::io::from_SDL_Event(evt);
-			if (auto kp = qk::io::event_cast<KeyPressEvent>(e))
-			{
-				
-				std::cout << qk::io::to_string<KeyPressEvent>(e) << '\n';
-			}
-			
-			if (auto mv = qk::io::event_cast<MouseMoveEvent>(e))
-			{
-				std::cout << qk::io::to_string<MouseMoveEvent>(e) << '\n';
-			}
-
-			else
-			{
-				std::cout << qk::io::to_string<Event>(e) << '\n';
-			}
-		}
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
-		//UIcontext.end();
 		window.swap();
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	}
 	return qk::status;
 
 }
+*/
 
 void Game::destroy()
 {

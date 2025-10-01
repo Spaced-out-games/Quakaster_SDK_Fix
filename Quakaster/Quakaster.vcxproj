@@ -38,6 +38,11 @@
     <ClInclude Include="src\Quakaster\qkio\Events\MouseMoveEvent.h" />
     <ClInclude Include="src\Quakaster\qkio\Events\QuitEvent.h" />
     <ClInclude Include="src\Quakaster\qkio\Events\Platform\SDL2_Event_impl.h" />
+    <ClInclude Include="src\Quakaster\qkkernel\cat.h" />
+    <ClInclude Include="src\Quakaster\qkkernel\kernel.h" />
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_command.h" />
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_instruction.h" />
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_program.h" />
     <ClInclude Include="src\Quakaster\qkmath\CCamera.h" />
     <ClInclude Include="src\Quakaster\qkmath\mat4.h" />
     <ClInclude Include="src\Quakaster\qkmath\quaternion.h" />
@@ -87,6 +92,9 @@
     <ClCompile Include="src\Quakaster\qkio\Events\MouseMoveEvent.cpp" />
     <ClCompile Include="src\Quakaster\qkio\Events\Platform\SDL2_Event_impl.cpp" />
     <ClCompile Include="src\Quakaster\qkio\Events\QuitEvent.cpp" />
+    <ClCompile Include="src\Quakaster\qkkernel\kernel.cpp" />
+    <ClCompile Include="src\Quakaster\qkkernel\kernel_command.cpp" />
+    <ClCompile Include="src\Quakaster\qkkernel\kernel_instruction.cpp" />
     <ClCompile Include="src\Quakaster\qkmath\CCamera.cpp" />
     <ClCompile Include="src\Quakaster\qknet\Convar.cpp" />
     <ClCompile Include="src\Quakaster\qkui\Widgets\ConsoleUI.cpp" />

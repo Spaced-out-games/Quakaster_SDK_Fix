@@ -1,4 +1,5 @@
 #include "kernel_command.h"
+#include "kernel.h"
 
 namespace qk::kernel
 {
@@ -18,5 +19,28 @@ namespace qk::kernel
 	entt::id_type Command::hash()
 	{
 		return m_Name.value();
+	}
+
+	void Command::call(Kernel& kernel, std::string args, ERestrictionFlags permissions)
+	{
+		if (m_Func)
+		{
+			if ((permissions & m_Flags) == m_Flags)
+			{
+				m_Func(kernel, args);
+			}
+			else
+			{
+				kernel.m_FD_err += "'";
+				kernel.m_FD_err += m_Name.data();
+				kernel.m_FD_err += "' failed: Permission denied.\n";
+			}
+
+		}
+		else
+		{
+			kernel.m_FD_err += "Invalid command\n";
+		}
+
 	}
 }

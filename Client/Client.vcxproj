@@ -119,6 +119,7 @@
   <ItemGroup>
     <ClInclude Include="ControlLayer.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="test_vertices.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
