@@ -32,12 +32,9 @@
     <ClInclude Include="src\Quakaster\logging.h" />
     <ClInclude Include="src\Quakaster\qkg\UberShaderGenerator.h" />
     <ClInclude Include="src\Quakaster\qkio\EEventCategory.h" />
-    <ClInclude Include="src\Quakaster\qkio\Event.h" />
+    <ClInclude Include="src\Quakaster\qkio\EEventType.h" />
     <ClInclude Include="src\Quakaster\qkio\EventHeader.h" />
-    <ClInclude Include="src\Quakaster\qkio\Events\KeyEvent.h" />
-    <ClInclude Include="src\Quakaster\qkio\Events\MouseMoveEvent.h" />
-    <ClInclude Include="src\Quakaster\qkio\Events\QuitEvent.h" />
-    <ClInclude Include="src\Quakaster\qkio\Events\Platform\SDL2_Event_impl.h" />
+    <ClInclude Include="src\Quakaster\qkio\IEvent.h" />
     <ClInclude Include="src\Quakaster\qkkernel\cat.h" />
     <ClInclude Include="src\Quakaster\qkkernel\kernel.h" />
     <ClInclude Include="src\Quakaster\qkkernel\kernel_command.h" />
@@ -87,11 +84,6 @@
     <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\VBO.cpp" />
     <ClCompile Include="src\Quakaster\logging.cpp" />
-    <ClCompile Include="src\Quakaster\qkio\Event.cpp" />
-    <ClCompile Include="src\Quakaster\qkio\Events\KeyEvent.cpp" />
-    <ClCompile Include="src\Quakaster\qkio\Events\MouseMoveEvent.cpp" />
-    <ClCompile Include="src\Quakaster\qkio\Events\Platform\SDL2_Event_impl.cpp" />
-    <ClCompile Include="src\Quakaster\qkio\Events\QuitEvent.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\kernel.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\kernel_command.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\kernel_instruction.cpp" />
