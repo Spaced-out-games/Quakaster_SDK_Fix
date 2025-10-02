@@ -49,6 +49,7 @@
     <ClInclude Include="src\Quakaster\qkmath\vec4.h" />
     <ClInclude Include="src\Quakaster\qknet\Client.h" />
     <ClInclude Include="src\Quakaster\qknet\Convar.h" />
+    <ClInclude Include="src\Quakaster\qkshell\tokenizer.h" />
     <ClInclude Include="src\Quakaster\qkui\defaults.h" />
     <ClInclude Include="src\Quakaster\qkui\qkui.h" />
     <ClInclude Include="src\Quakaster\qkui\Widgets\ConsoleUI.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="src\Quakaster\qkkernel\kernel_instruction.cpp" />
     <ClCompile Include="src\Quakaster\qkmath\CCamera.cpp" />
     <ClCompile Include="src\Quakaster\qknet\Convar.cpp" />
+    <ClCompile Include="src\Quakaster\qkshell\tokenizer.cpp" />
     <ClCompile Include="src\Quakaster\qkui\Widgets\ConsoleUI.cpp" />
     <ClCompile Include="src\Quakaster\qkui\UIContext.cpp" />
     <ClCompile Include="src\Quakaster\qkui\UIWidget.cpp" />
@@ -158,8 +160,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
+    <OutDir>$(SolutionDir)Quakaster\out\$(Configuration)-$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)Quakaster\intermediate\$(Configuration)-$(Platform)\</IntDir>
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -183,8 +185,9 @@
       <AdditionalDependencies>glew32s.lib;SDL2.lib;opengl32.lib;Ws2_32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>move /Y "$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\$(Configuration)-$(Platform)\Client\"
-copy /Y "$(SolutionDir)Quakaster\thirdparty\SDL2\lib\x64\SDL2.dll" "$(SolutionDir)bin\$(Configuration)-$(Platform)\Client\"</Command>
+      <Command>
+move /Y "$(SolutionDir)Quakaster\out\$(Configuration)-$(Platform)\$(ProjectName).dll" "$(SolutionDir)Client\out\$(Configuration)-$(Platform)\"
+copy /Y "$(SolutionDir)Quakaster\thirdparty\SDL2\lib\x64\SDL2.dll"  "$(SolutionDir)Client\out\$(Configuration)-$(Platform)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

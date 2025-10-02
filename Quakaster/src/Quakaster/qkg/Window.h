@@ -29,7 +29,7 @@ namespace qkg
 			void vertical_sync(int);
 			void swap();
 
-			explicit operator SDL_Window* () const;
+			operator SDL_Window* () const;
 	};
 
 	// This just forces the user to construct and initialize it, and prevents trying to initialize it before SDL is ready

@@ -2,17 +2,17 @@
 #include <cmath> // for sin, cos
 #include "boost/pfr.hpp"
 #include <fstream>
+#include <filesystem>
+#include <sstream>
+#include <cstdint>
 
-#include <Quakaster/qkio/Event.h>
-#include <Quakaster/qkio/Events/KeyEvent.h>
 //temporary includes
 #include <Quakaster/qkecs/AActor.h>
 #include <entt/core/hashed_string.hpp>
-#include <Quakaster/qkio/Events/Platform/SDL2_Event_impl.h>
+#include <Quakaster/qkshell/tokenizer.h>
 
 using namespace entt::literals;
 
-using namespace qk::io;
 using namespace qk::kernel;
 
 
@@ -60,7 +60,8 @@ void foo(
 
 
 void Game::init() {
-
+	window.init();
+	pipeline.init(window);
 }
 
 template <typename ...arg_Ts>
@@ -75,13 +76,19 @@ inline void add_camera(qk::Entity& target, arg_Ts... args)
 
 int Game::run()
 {
+	qk::shell::Tokenizer tokenizer;
+	
+	std::string test_string = "    \t  \"hello \\\" world\"TTT";
+	tokenizer.set_source(test_string);
+	tokenizer.skip_whitespace();
+	tokenizer.read_double_quotes();
 
-	Program p;
-	p.emplace_back("echo", "test.txt" );
-	p.emplace_back("|", "");
-	p.emplace_back("cat", "");
+	std::string_view view(tokenizer.m_Front, tokenizer.m_Back);
 
-	kernel.execute_program(&p, ERestrictionFlags::RESTRICT_NONE);
+	std::cout << view;
+
+
+
 	//__debugbreak();
 	return 0;
 }

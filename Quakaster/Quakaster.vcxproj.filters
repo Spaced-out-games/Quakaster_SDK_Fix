@@ -189,6 +189,9 @@
     <ClInclude Include="src\Quakaster\qkio\EventHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quakaster\qkshell\tokenizer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quakaster\qk\Application.cpp">
@@ -330,6 +333,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qkkernel\kernel_instruction.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkshell\tokenizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

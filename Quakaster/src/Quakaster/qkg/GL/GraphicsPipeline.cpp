@@ -24,7 +24,6 @@ namespace qkg {
 		}
 		else
 		{
-			throw std::runtime_error("SDL failed to initialize: " + std::string(SDL_GetError()));
 
 		}
 	}
