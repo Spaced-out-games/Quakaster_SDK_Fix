@@ -5,6 +5,7 @@
 #include <iostream>
 #include <type_traits>
 #include <cassert>
+#include <entt/core/hashed_string.hpp>
 
 
 // generic C-style function pointer in C++ syntax
@@ -110,4 +111,10 @@ inline FloatPtrUnion& FloatPtrUnion::operator=(float value) {
 
 inline FloatPtrUnion::operator float() const {
 	return get();
+}
+
+namespace qk
+{
+	entt::id_type QK_API hash(const std::string& string);
+	entt::id_type QK_API hash(const std::string_view& view);
 }

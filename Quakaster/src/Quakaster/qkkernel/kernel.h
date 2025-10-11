@@ -1,41 +1,46 @@
 #pragma once
-#include <entt/entity/entity.hpp>
 #include "../Core.h"
+#include "../qk/QKTL.h"
+#include "ETokenType.h"
+#include "Token.h"
+#include "TokenList.h"
+#include "TokenView.h"
+#include "Tokenizer.h"
+#include "Compile.h"
 #include <unordered_map>
-#include "kernel_program.h"
-#include "kernel_command.h"
-using namespace entt::literals;
+#include <entt/core/hashed_string.hpp>
+
 
 
 namespace qk::kernel
 {
-	struct Command;
-	struct Instruction;
+	struct Kernel;
+
+	using Kernel_pfn = func_ptr_t<int, Kernel&, const TokenView&>;
+
 
 	struct QK_API Kernel
 	{
-		std::unordered_map<instruction_id_t, Command>	m_Operator_table;
-		std::unordered_map<instruction_id_t, Command>	m_Command_table;
-		std::vector<entt::entity>						m_FD_select;
-		entt::registry*									m_Registry;
-		Program*										m_Program;
-		std::string										m_FD_out;
-		std::string										m_FD_err;
-		bool											m_KeepFD;
-		uint64_t										m_ip;
+		int m_Status = 0;
+
+		//TODO: Make it secure, add hidden environment variables, etc
+		std::unordered_map<entt::id_type, std::string> m_Env;
+		std::unordered_map<entt::id_type, Kernel_pfn> m_KernelFunctable;
+		std::string m_Cwd = "~/";
+		std::string m_stdin = "";
+		std::string m_stdout = "";
 		Kernel();
-		inline void clear();
+		void ready();
+		void register_fn(std::string name, Kernel_pfn kernel_fn);
 
-		inline void flush();
+		int run(const TokenView& command);
 
-		inline void register_command(entt::hashed_string name, ERestrictionFlags flags, Command_pfn func);
+		int run(Program* program);
 
-		inline void execute_program(Program* program, ERestrictionFlags permissions);
-
-		inline void print_everything();
-
-		inline void assign_registry(entt::registry* registry);
-		
+		std::string getenv(std::string name);
+		void setenv(std::string name, std::string contents);
 
 	};
+
+	
 }

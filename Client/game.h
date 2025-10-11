@@ -10,7 +10,6 @@
 #include <Quakaster/qkecs/Scene.h>
 #include <Quakaster/qkecs/Entity.h>
 #include <Quakaster/qkmath/CTransform.h>
-#include <Quakaster/qkkernel/kernel.h>
 
 namespace cl
 {
@@ -23,7 +22,7 @@ namespace cl
 struct Game : public qk::Application {
 
 	//private: keep it public while im debugging
-		qk::kernel::Kernel kernel;
+		//qk::kernel::Kernel kernel;
 		qkg::Window window;
 		qk::Scene scene;
 		qkg::GraphicsPipeline pipeline;

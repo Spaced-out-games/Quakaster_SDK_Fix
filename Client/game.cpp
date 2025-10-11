@@ -9,7 +9,9 @@
 //temporary includes
 #include <Quakaster/qkecs/AActor.h>
 #include <entt/core/hashed_string.hpp>
-#include <Quakaster/qkshell/tokenizer.h>
+#include <Quakaster/qkkernel/Kernel.h>
+#include <Quakaster/qkkernel/commands/core.h>
+
 
 using namespace entt::literals;
 
@@ -74,23 +76,33 @@ inline void add_camera(qk::Entity& target, arg_Ts... args)
 }
 
 
+
+
+
 int Game::run()
 {
-	qk::shell::Tokenizer tokenizer;
-	
-	std::string test_string = "    \t  \"hello \\\" world\"TTT";
-	tokenizer.set_source(test_string);
-	tokenizer.skip_whitespace();
-	tokenizer.read_double_quotes();
-
-	std::string_view view(tokenizer.m_Front, tokenizer.m_Back);
-
-	std::cout << view;
+	std::string source = "";
+	Kernel* kernel = new Kernel();
+	std::unique_ptr<Program> program;
+	kernel->register_fn("echo", &qk::kernel::echo);
+	kernel->register_fn("cd", &qk::kernel::cd);
+	kernel->register_fn("pwd", &qk::kernel::pwd);
+	kernel->register_fn("clear", &qk::kernel::clear);
+	kernel->register_fn("wc", &qk::kernel::wc);
 
 
 
-	//__debugbreak();
-	return 0;
+
+	while (!kernel->m_Status)
+	{
+		std::getline(std::cin, source);
+
+		program = compile(std::move(source));
+
+		kernel->run(program.get());
+	}
+
+	return kernel->m_Status;
 }
 
 

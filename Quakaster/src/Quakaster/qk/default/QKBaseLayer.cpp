@@ -24,14 +24,14 @@ namespace qk
 		switch (evt.type)
 		{
 		case SDL_QUIT:
-			qk::status = 1;
+			//qk::status = 1;
 			return true;
 
 		case SDL_KEYDOWN:
 			if (evt.key.keysym.sym == SDLK_ESCAPE)
 			{
 				// Here, we'd invoke the console, but for now, just quit
-				qk::status = 1;
+				//qk::status = 1;
 				return true;
 			}
 			break;

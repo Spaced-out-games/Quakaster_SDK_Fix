@@ -37,7 +37,7 @@ void ConsoleUI::draw(qkui::UIContext& owner)
 	ImVec2 windowSize = ImGui::GetWindowSize();
 	ImGui::SetCursorPosX(windowSize.x - buttonSize.x - 10);
 	if (ImGui::Button("Exit Application")) {
-		qk::status = 1;
+		//qk::status = 1;
 	}
 
 	// history / output

@@ -1,5 +1,7 @@
-bin/
-bin-int/
+Client/intermediate/
+Client/out
+Quakaster/intermediate
+Quakaster/out
 .vs
 .git
 !.gitignore
