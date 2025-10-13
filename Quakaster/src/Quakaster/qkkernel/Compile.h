@@ -8,5 +8,7 @@
 
 namespace qk::kernel
 {
+	QK_API std::unique_ptr<Program> compile(std::string& source);
 	QK_API std::unique_ptr<Program> compile(std::string&& source);
+
 }

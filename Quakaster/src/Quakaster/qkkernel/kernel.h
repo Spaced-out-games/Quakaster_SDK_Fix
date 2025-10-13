@@ -16,7 +16,7 @@ namespace qk::kernel
 {
 	struct Kernel;
 
-	using Kernel_pfn = func_ptr_t<int, Kernel&, const TokenView&>;
+	using Kernel_pfn = int (*)(Kernel& k, const TokenView& args);
 
 
 	struct QK_API Kernel
@@ -32,6 +32,18 @@ namespace qk::kernel
 		Kernel();
 		void ready();
 		void register_fn(std::string name, Kernel_pfn kernel_fn);
+		template <class T>
+		void print(const T& item)
+		{
+			m_stdout += item;
+		}
+
+		template <>
+		void print<int>(const int& item)
+		{
+			m_stdout += std::to_string(item);
+		}
+
 
 		int run(const TokenView& command);
 

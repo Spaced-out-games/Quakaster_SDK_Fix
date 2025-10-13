@@ -17,6 +17,7 @@ namespace qk::kernel
 		LONG_OPTION,
 		STRING_LITERAL_SQ,
 		STRING_LITERAL_DQ,
+		VARIABLE_REFERENCE
 		
 	};
 }

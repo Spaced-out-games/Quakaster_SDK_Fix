@@ -5,7 +5,13 @@ namespace qk::kernel
 {
     std::unique_ptr<Program> compile(std::string&& source)
     {
+
+
         auto pgm = std::make_unique<Program>();
+        if (source == "")
+        {
+            return pgm;
+        }
 
         // Take ownership of source
         pgm->tokens.source = std::move(source);
@@ -33,5 +39,11 @@ namespace qk::kernel
             pgm->token_views.emplace_back(start + last, start + pgm->tokens.tokens.size());
 
         return pgm;
+    }
+
+    std::unique_ptr<Program> compile(const std::string& source)
+    {
+
+        return compile(std::string(source));
     }
 }

@@ -23,23 +23,31 @@ namespace qk::kernel
 
     int Kernel::run(const TokenView& command)
     {
-        entt::id_type hash = qk::hash(*command.command());
+
+
+
+        
+        entt::id_type hash = qk::hash(std::get<std::string_view>(command.command()->m_Value));
 
         auto it = m_KernelFunctable.find(hash);
         if (it == m_KernelFunctable.end())
         {
             m_stdout += "Unknown command: ";
-            m_stdout += command.command()->m_View;
-            m_stdout +='\n';
+            //m_stdout += command.command()->m_View;
+            m_stdout += '\n';
             return -1;
         }
 
 
         return it->second(*this, command);
+        
+        return 0;
     }
+
 
     int Kernel::run(Program* program)
     {
+        
         int status = 0;
         for (const auto& view : program->token_views)
         {
@@ -53,7 +61,7 @@ namespace qk::kernel
             }
             if (m_stdout.size())
             {
-                std::cout << m_stdout;
+                std::cout << m_stdout << '\n';
                 m_stdout = "";
             }
 
@@ -61,13 +69,15 @@ namespace qk::kernel
 
             if (status)
             {
-                m_stdout += view.command()->m_View;
+                //m_stdout += view.command()->m_View;
                 m_stdout += " failed with code ";
-                m_stdout += status;
+                m_stdout += std::to_string(status);
                 return status;
             }
         }
         ready();
+        
+        return 0;
     }
 
     std::string Kernel::getenv(std::string name)

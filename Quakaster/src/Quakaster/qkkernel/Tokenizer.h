@@ -8,6 +8,7 @@
 #include <string>
 #include <string_view>
 #include <cassert>
+#include <optional>
 
 namespace qk::kernel
 {
@@ -26,16 +27,20 @@ namespace qk::kernel
 
 	QK_API std::string_view select_whitespace(const std::string& source, size_t& current_index);
 
-	QK_API std::string_view select_identifier(const std::string& source, size_t& current_index);
+	QK_API std::optional<Token> select_var(const std::string& source, size_t& current_index);
 
-	QK_API std::string_view select_number(const std::string& source, size_t& current_index);
+	QK_API std::optional<Token> select_identifier(const std::string& source, size_t& current_index);
 
-	QK_API std::string_view select_path(const std::string& source, size_t& current_index);
+	QK_API std::optional<Token> select_number(const std::string& source, size_t& current_index);
 
-	QK_API Token select_option(const std::string& source, size_t& current_index);
+	QK_API std::optional<Token> select_string(const std::string& source, size_t& current_index);
+
+	QK_API std::optional<Token> select_option(const std::string& source, size_t& current_index);
 
 	QK_API std::vector<Token> tokenize(const std::string& src);
 
 	QK_API std::vector<Token> normalize_tokens(const std::vector<Token>& tokens);
+
+	QK_API void replace_all(std::string& str, const std::string& from, const std::string& to);
 
 }

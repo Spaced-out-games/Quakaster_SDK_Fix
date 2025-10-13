@@ -36,7 +36,7 @@
     <ClInclude Include="src\Quakaster\qkio\EventHeader.h" />
     <ClInclude Include="src\Quakaster\qkio\IEvent.h" />
     <ClInclude Include="src\Quakaster\qkkernel\Compile.h" />
-    <ClInclude Include="src\Quakaster\qkkernel\commands\core.h" />
+    <ClInclude Include="src\Quakaster\qkkernel\commands\kernel_core.h" />
     <ClInclude Include="src\Quakaster\qkkernel\ETokenType.h" />
     <ClInclude Include="src\Quakaster\qkkernel\Kernel.h" />
     <ClInclude Include="src\Quakaster\qkkernel\Program.h" />
@@ -88,7 +88,7 @@
     <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\VBO.cpp" />
     <ClCompile Include="src\Quakaster\logging.cpp" />
-    <ClCompile Include="src\Quakaster\qkkernel\commands\core.cpp" />
+    <ClCompile Include="src\Quakaster\qkkernel\commands\kernel_core.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\Compile.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\Kernel.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\Token.cpp" />

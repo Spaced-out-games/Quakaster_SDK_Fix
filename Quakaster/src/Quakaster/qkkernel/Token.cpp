@@ -4,6 +4,36 @@
 
 namespace qk::kernel
 {
+    Token::Token():
+        m_Value("")
+    {
+
+    }
+
+    std::string_view Token::strip_quotes() const
+    {
+        assert(m_Type != ETokenType::NUMBER);
+
+        if (auto ptr = std::get_if<std::string_view>(&m_Value))
+        {
+            // remove first and last character (quotes)
+            return ptr->substr(1, ptr->size() - 2);
+        }
+
+        // optionally handle error if m_Value is not a string_view
+        return {}; // or throw std::runtime_error("Token is not a string");
+    }
+    const std::string_view Token::view() const
+    {
+        if (is<std::string_view>()) {
+            return as<std::string_view>();
+        }
+
+        return {};
+    }
+
+
+
     std::string Token::to_string() const
     {
         // Map token type to string
@@ -25,7 +55,7 @@ namespace qk::kernel
             }
         };
 
-        return std::string{ "\"" } + std::string{ m_View } + "\", " + type_to_string(m_Type);
+        return std::string{ "\"" } + std::string{ view() } + "\", " + type_to_string(m_Type);
     }
 }
 
@@ -34,6 +64,6 @@ namespace qk
     entt::id_type hash(const qk::kernel::Token& tk)
     {
         
-        return entt::hashed_string{ tk.m_View.data(), tk.m_View.size() }.value();
+        return 0;
     }
 }

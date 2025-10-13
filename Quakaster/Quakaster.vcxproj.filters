@@ -198,7 +198,7 @@
     <ClInclude Include="src\Quakaster\qkkernel\Kernel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel\commands\core.h">
+    <ClInclude Include="src\Quakaster\qkkernel\commands\kernel_core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -350,7 +350,7 @@
     <ClCompile Include="src\Quakaster\qkkernel\Kernel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel\commands\core.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\commands\kernel_core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
