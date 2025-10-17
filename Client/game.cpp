@@ -10,8 +10,7 @@
 #include <Quakaster/qkecs/AActor.h>
 #include <entt/core/hashed_string.hpp>
 #include <Quakaster/qkkernel/Kernel.h>
-#include <Quakaster/qkkernel/commands/kernel_core.h>
-#include <Quakaster/qkkernel/Token.h>
+#include <Quakaster/qkkernel/kernel_core_subsystem.h>
 
 
 using namespace entt::literals;
@@ -85,16 +84,8 @@ int Game::run()
 	std::string source = "";
 	Kernel* kernel = new Kernel();
 	std::unique_ptr<Program> program;
-	kernel->register_fn("echo", &qk::kernel::echo);
-	kernel->register_fn("cd", &qk::kernel::cd);
-	kernel->register_fn("pwd", &qk::kernel::pwd);
-	kernel->register_fn("clear", &qk::kernel::clear);
-	kernel->register_fn("wc", &qk::kernel::wc);
-	kernel->register_fn("exit", &qk::kernel::exit);
-	kernel->register_fn("wf", &qk::kernel::wf);
-	kernel->register_fn("cat", &qk::kernel::cat);
-	kernel->register_fn("set", &qk::kernel::set);
-	kernel->register_fn("run", &qk::kernel::run);
+
+	kernel->mount<qk::kernel::core::CoreSubsystem>("core");
 
 
 
