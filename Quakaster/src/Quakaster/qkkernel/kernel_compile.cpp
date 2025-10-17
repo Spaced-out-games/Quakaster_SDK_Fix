@@ -1,4 +1,4 @@
-#include "Compile.h"
+#include "kernel_compile.h"
 
 
 namespace qk::kernel

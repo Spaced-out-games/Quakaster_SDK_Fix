@@ -1,4 +1,4 @@
-#include "Tokenizer.h"
+#include "kernel_tokenizer.h"
 
 
 namespace qk::kernel
@@ -115,11 +115,21 @@ namespace qk::kernel
 				decimal = true;
 			offset++;
 		}
+		std::string str(source.data() + current_index, offset - current_index);
 
-		Token t{ std::string_view(source.data() + current_index, offset - current_index),
-				 ETokenType::NUMBER };
+
+
+
 		current_index = offset;
-		return t;
+
+		if (decimal)
+		{
+			return Token{ (float)atof(str.c_str()), ETokenType::FLOAT };
+		}
+		else
+		{
+			return Token{ atoi(str.c_str()), ETokenType::INT};
+		}
 	}
 
 
@@ -163,8 +173,13 @@ namespace qk::kernel
 
 		while (offset < source.size() && is_alphanumeric_(source[offset]))
 			++offset;
+		size_t ignored_chars = 0;
+		if (type == ETokenType::SHORT_OPTION)
+			ignored_chars = 1;
+		else if (type == ETokenType::LONG_OPTION)
+			ignored_chars = 2;
 
-		Token t{ std::string_view(source.data() + current_index, offset - current_index), type };
+		Token t{ std::string_view(source.data() + current_index + ignored_chars, offset - current_index), type };
 		current_index = offset;
 		return t;
 	}
@@ -182,7 +197,7 @@ namespace qk::kernel
 			if (is_whitespace(src[index]))
 				select_whitespace(src, index);
 			
-			else if (is_alphanumeric_(src[index]))
+			else if (is_alpha(src[index]))
 			{
 				if (auto t = select_identifier(src, index))
 					result.push_back(*t);

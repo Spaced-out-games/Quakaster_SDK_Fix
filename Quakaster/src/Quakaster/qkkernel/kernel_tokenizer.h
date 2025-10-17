@@ -1,9 +1,9 @@
 #pragma once
 #include "ETokenType.h"
-#include "Token.h"
-#include "TokenView.h"
-#include "TokenList.h"
-#include "Program.h"
+#include "kernel_token.h"
+#include "kernel_token_view.h"
+#include "kernel_token_list.h"
+#include "kernel_program.h"
 #include "../Core.h"
 #include <string>
 #include <string_view>

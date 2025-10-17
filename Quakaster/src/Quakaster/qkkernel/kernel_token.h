@@ -41,12 +41,12 @@ namespace qk::kernel
 		Token(T value, ETokenType type) : m_Value(value), m_Type(type)
 		{
 
-			bool is_in_variant = std::disjunction_v < std::is_same<T, float>, std::is_same<T, int>, std::is_same<T, std::string_view>, std::is_same<T, char> >;
+			constexpr bool is_in_variant = std::disjunction_v < std::is_same<T, float>, std::is_same<T, int>, std::is_same<T, std::string_view>, std::is_same<T, char> >;
 
 			if(!is_in_variant)
 				std::cout << typeid(T).name();
 
-			assert(is_in_variant);
+			static_assert(is_in_variant);
 
 		}
 

@@ -24,7 +24,11 @@ namespace qk::kernel
     int Kernel::run(const TokenView& command)
     {
 
-
+        if (command.size() == 1 && command[0].m_Type == ETokenType::VARIABLE_REFERENCE)
+        {
+            m_stdout = getenv(std::string{ command[0].as<std::string_view>() });
+            return 0;
+        }
 
         
         entt::id_type hash = qk::hash(std::get<std::string_view>(command.command()->m_Value));
@@ -51,13 +55,14 @@ namespace qk::kernel
         int status = 0;
         for (const auto& view : program->token_views)
         {
+
             status = run(view);
 
             if (view.terminator()->m_Type == ETokenType::PIPE)
             {
                 m_stdin = "";
                 std::swap(m_stdin, m_stdout);
-                
+
             }
             if (m_stdout.size())
             {
@@ -74,6 +79,7 @@ namespace qk::kernel
                 m_stdout += std::to_string(status);
                 return status;
             }
+
         }
         ready();
         

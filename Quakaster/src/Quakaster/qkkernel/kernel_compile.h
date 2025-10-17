@@ -1,7 +1,7 @@
 #pragma once
 #include "../Core.h"
-#include "Program.h"
-#include "Tokenizer.h"
+#include "kernel_program.h"
+#include "kernel_tokenizer.h"
 #include <memory>
 
 

@@ -1,4 +1,4 @@
-#include "Token.h"
+#include "kernel_token.h"
 
 
 
@@ -12,7 +12,7 @@ namespace qk::kernel
 
     std::string_view Token::strip_quotes() const
     {
-        assert(m_Type != ETokenType::NUMBER);
+        assert(m_Type != ETokenType::INT);
 
         if (auto ptr = std::get_if<std::string_view>(&m_Value))
         {
@@ -42,7 +42,8 @@ namespace qk::kernel
             case ETokenType::UNKNOWN:            return "UNKNOWN";
             case ETokenType::ERROR:              return "ERROR";
             case ETokenType::IDENTIFIER:         return "IDENTIFIER";
-            case ETokenType::NUMBER:             return "NUMBER";
+            case ETokenType::INT:                return "INT";
+            case ETokenType::FLOAT:              return "FLOAT";
             case ETokenType::REDIRECT:           return "REDIRECT";
             case ETokenType::PIPE:               return "PIPE";
             case ETokenType::EOL:                return "EOL";
