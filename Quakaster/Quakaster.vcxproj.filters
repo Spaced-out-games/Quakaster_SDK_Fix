@@ -177,28 +177,34 @@
     <ClInclude Include="src\Quakaster\qkkernel\ETokenType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel\Token.h">
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_token.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel\TokenList.h">
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_token_list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel\TokenView.h">
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_token_view.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel\Tokenizer.h">
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_tokenizer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel\Program.h">
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_program.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel\Compile.h">
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_compile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Quakaster\qkkernel\Kernel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel\commands\kernel_core.h">
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_subsystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkkernel\kernel_core_subsystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -335,22 +341,28 @@
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_qkio-sdl2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel\Tokenizer.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\kernel_tokenizer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel\Token.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\kernel_token.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel\Compile.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\kernel_compile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel\TokenView.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\kernel_token_view.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qkkernel\Kernel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel\commands\kernel_core.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\kernel_core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkkernel\kernel_subsystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkkernel\kernel_core_subsystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
