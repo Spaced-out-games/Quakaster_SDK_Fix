@@ -15,6 +15,11 @@ namespace qk::kernel
 		if (is<PipeToken>()) return "|";
 		if (is<TerminatorToken>()) return ";";
 		if (is<FlagToken>()) return ""; // invisible by design
+		else if (is<Program>())
+		{
+			uintptr_t ptr = (uintptr_t)(as<Program>().data());
+			return std::format("0x{:X}", ptr);
+		}
 		return "<?>"; // fallback for unexpected states
 	}
 	bool Token::empty() const

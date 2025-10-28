@@ -6,6 +6,7 @@
 #include <bitset>
 #include <ostream>
 #include <vector>
+#include <format>
 
 namespace qk::kernel
 {

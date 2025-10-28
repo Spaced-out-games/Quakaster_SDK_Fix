@@ -128,6 +128,7 @@ int typeof_cmd(Kernel& kernel, std::span<const Token> args)
 	//else if (input.is<ProgramToken>()) out = "<exec>";
 	else if (input.is<IdentifierToken>()) out = "<var>";
 	else if (input.is<NullToken>()) out = "<null>";
+	else if (input.is<Program>()) out = "<script>";
 	else out = "<?>";
 
 	kernel.m_stdout = StringToken{ out };
@@ -156,7 +157,11 @@ int compile_cmd(Kernel& kernel, std::span<const Token> args)
 	else if (args.size() == 1)
 	{
 		if (args[0].is<StringToken>())
-			kernel.m_stdout = qk::kernel::tokenize(args[0].as<StringToken>());
+		{
+			const StringToken& s = args[0].as<StringToken>();
+			// make a string_view; make 
+			kernel.m_stdout = qk::kernel::tokenize(s.substr(1, s.size() - 2));
+		}
 		else
 			kernel.m_stdout = StringToken{ "Expected a source string" };
 
@@ -194,6 +199,8 @@ int Game::run()
 	auto tokens = qk::kernel::tokenize(source);
 	
 	k.run_program(tokens);
+
+	k.run_program(k.get_env("T"_hs).as<Program>());
 
 	//bool success = k.get_env("T"_hs.value()).is<Program>();
 
