@@ -1,4 +1,5 @@
 #include "kernel.h"
+#include "ShellBase.h"
 
 
 namespace qk::kernel
@@ -79,7 +80,8 @@ namespace qk::kernel
                     }
                     else
                     {
-                    m_stdout = (it != m_Env.end()) ? it->second : NullToken{};
+                        m_stdout = (it != m_Env.end()) ? it->second : NullToken{};
+                    }
                 }
             }
             else if (anchor.is<Program>())
@@ -118,9 +120,9 @@ namespace qk::kernel
     void Kernel::print(const Token& token)
     {
         if (m_Shell)
-    {
+        {
             m_Shell->print(token.print_str());
-    }
+        }
     }
     void Kernel::print(const std::string& content)
     {
