@@ -83,7 +83,7 @@ namespace qk::kernel
 		current_index = offset;
 		std::string id_name(source.data() + old, offset - old);
 
-		return CommandToken(entt::hashed_string(id_name.c_str()));
+		return CommandToken( entt::hashed_string(id_name.c_str()) );
 	}
 
 	std::optional<Token> select_number(const std::string& source, size_t& current_index)
@@ -128,12 +128,12 @@ namespace qk::kernel
 
 		size_t offset = current_index + 1;
 		while (offset < source.size() && source[offset] != closing_char)
-			++offset;
+			offset++;
 
 		if (offset >= source.size())
 			return std::nullopt; // unterminated string
 
-		std::string string_src(source.data() + current_index, offset - current_index + 1);
+		std::string string_src(source.data() + current_index + 1, offset - current_index - 1);
 
 		// no need to copy
 		StringToken string(std::move(string_src));
@@ -189,6 +189,7 @@ namespace qk::kernel
 			{
 				if (auto t = select_identifier(src, index))
 					result.push_back(*t);
+
 			}
 			else if (src[index] == '$')
 			{
@@ -209,6 +210,11 @@ namespace qk::kernel
 			{
 				if (auto t = select_string(src, index))
 					result.push_back(*t);
+				else
+				{
+					// an error has occured, so throw an error token (not implemented) and advance
+					index++;
+				}
 			}
 			else if (src[index] == '\'')
 			{
