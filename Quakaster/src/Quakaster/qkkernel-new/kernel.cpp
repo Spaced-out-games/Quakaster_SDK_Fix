@@ -139,10 +139,7 @@ namespace qk::kernel
     }
 
 
-    Kernel::operator std::stringbuf* () const
-    {
-        return m_Console.rdbuf();
-    }
+    
     const Token& Kernel::get_env(entt::id_type id) const {
         static Token null = NullToken{};
         if (auto it = m_Env.find(id); it != m_Env.end())
