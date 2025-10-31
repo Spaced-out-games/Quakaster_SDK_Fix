@@ -219,7 +219,6 @@ int Game::run()
 	sh.flush(); //dbg
 
 
-	(*sh.m_Output) << "test succcess!";
 	while (true)
 	{
 		sh.tick();

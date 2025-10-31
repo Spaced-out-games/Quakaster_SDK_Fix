@@ -51,6 +51,8 @@ namespace qk::kernel
 
 	int ShellBase::tick()
 	{
+
+		print_path();
 		// first, get the string
 		get_line();
 
@@ -62,6 +64,14 @@ namespace qk::kernel
 
 		// return status
 		return status;
+	}
+
+	inline void ShellBase::print_path()
+	{
+		if (m_Kernel)
+		{
+			print(m_Kernel->m_Cd + "> ");
+		}
 	}
 
 	void bind(Kernel& kernel, ShellBase& shell, std::ostream& os)
@@ -76,5 +86,6 @@ namespace qk::kernel
 		shell.m_Output = &os;
 	}
 
+	
 
 }

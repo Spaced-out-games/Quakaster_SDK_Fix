@@ -31,6 +31,8 @@ namespace qk::kernel
 		// kernel status code
 		int m_Status = 0;
 
+		std::string m_Cd;
+
 		// whether or not the last consumed token was  pipe
 		bool last_anchor_was_pipe = false;
 

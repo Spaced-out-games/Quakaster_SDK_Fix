@@ -36,6 +36,8 @@ namespace qk::kernel
 
 		virtual void flush();
 
+		inline void print_path();
+
 		// Calls m_Command through the kernel
 		int execute();
 
