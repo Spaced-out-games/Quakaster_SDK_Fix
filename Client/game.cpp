@@ -134,43 +134,58 @@ int wc_cmd(Kernel& kernel, std::span<const Token> args)
 		if (arg.is<FlagToken>())
 		{
 			const FlagToken& ft = arg.as<FlagToken>();
-			print_cc = ft.has('c');
-			print_wc = ft.has('w');
-			print_lc = ft.has('l');
+			print_cc = ft.has('c') || print_cc;
+			print_wc = ft.has('w') || print_wc;
+			print_lc = ft.has('l') || print_lc;
 
 		}
 		else
 		{
-			// todo: make it print "..." if there's more tokens
-			std::string err = "Illegal argument: " + arg.type_str(); 
-			// illegal argument
+			std::string err = "Illegal argument: " + arg.type_str();
 			kernel.m_stdout = StringToken{ err };
 			return 0;
 		}
 	}
 
-
-
-
-	// do note this does copy StringTokens, et al...
 	std::string repr = kernel.m_stdin.print_str();
 	size_t char_count = repr.size();
+
+	// count words: simple whitespace-delimited approach
 	size_t word_count = 0;
+	bool in_word = false;
+	for (char c : repr) {
+		if (std::isspace(static_cast<unsigned char>(c))) {
+			if (in_word) {
+				in_word = false;
+			}
+		}
+		else {
+			if (!in_word) {
+				word_count++;
+				in_word = true;
+			}
+		}
+	}
+
+	// count lines: treat '\n' as line delimiter; count trailing line if not ending with newline
 	size_t line_count = 0;
+	if (!repr.empty()) {
+		for (char c : repr) if (c == '\n') ++line_count;
+		// If last char isn't newline, we still have a last line
+		if (repr.back() != '\n') ++line_count;
+	}
+
+	// if user didn't specify format flags, behave like POSIX wc: print lines, words, bytes
+	if (!print_cc && !print_wc && !print_lc) {
+		print_lc = print_wc = print_cc = true;
+	}
 
 	std::string out;
-
-	if (print_cc)
-		out += std::to_string(char_count) + " ";
-	if (print_wc)
-		out += std::to_string(word_count) + " ";
-	if (print_lc)
-		out += std::to_string(line_count) + " ";
-
-	// here we'd do the word and line count operations
+	if (print_lc) out += std::to_string(line_count) + " ";
+	if (print_wc) out += std::to_string(word_count) + " ";
+	if (print_cc) out += std::to_string(char_count) + " ";
 
 	kernel.m_stdout = StringToken{ out };
-	
 	return 0;
 }
 
@@ -199,9 +214,19 @@ int compile_cmd(Kernel& kernel, std::span<const Token> args)
 	}
 	return 0;
 }
+int cd_cmd(Kernel& kernel, std::span<const Token> args)
+{
+	if (args.size() == 1)
+	{
+		if (args[0].is<StringToken>()) kernel.m_Cd += args[0].as<StringToken>();
+		if (args[0].is<IdentifierToken>()) kernel.m_Cd += args[0].as<IdentifierToken>().data();
+
+	}
+	return 0;
+}
 
 
-
+// consider making run_program output a result string instead of printing, then do it at the terminator (with a newline as well?)
 // TODO: Fix old infrustructure to handle kernel* being nul
 int Game::run()
 {
@@ -213,6 +238,7 @@ int Game::run()
 	k.register_fn("wc"_hs, &wc_cmd);
 	k.register_fn("compile"_hs, &compile_cmd);
 	k.register_fn("clear"_hs, &clear_cmd);
+	k.register_fn("cd"_hs, &cd_cmd);
 
 	qk::kernel::bind(k, sh, std::cout);
 
