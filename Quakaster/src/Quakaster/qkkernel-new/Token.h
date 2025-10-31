@@ -33,7 +33,13 @@ namespace qk::kernel
 	struct StringToken : std::string {};
 
 	// stores bit flags as a bitset
-	struct FlagToken : std::string {};
+	struct FlagToken : std::string
+	{
+		inline bool has(char option) const {
+			return find(option) != std::string::npos;
+		}
+	
+	};
 
 
 	struct PipeToken { bool _; };
@@ -76,7 +82,14 @@ namespace qk::kernel
 			return std::get<T>(*this);
 		}
 
-		operator std::string() const;
+		// Gets the token represented, as evaluated
+		std::string eval_str(Kernel& kernel) const;
+
+		// Gets the printable representation of the Token
+		std::string print_str() const;
+
+		// Gets the type string
+		std::string type_str() const;
 
 		Token(char c);
 
@@ -86,13 +99,6 @@ namespace qk::kernel
 
 	};
 
-
-
-	inline std::ostream& operator<<(std::ostream& os, const Token& t)
-	{
-		os << static_cast<std::string>(t);
-		return os;
-	}
 
 	inline IdentifierToken operator"" _id(const char* str, size_t)
 	{
