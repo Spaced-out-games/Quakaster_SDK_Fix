@@ -115,12 +115,19 @@ namespace qk::kernel
             m_Shell->m_Kernel = nullptr;
         }
     }
+    void Kernel::print(const Token& token)
     {
-        m_Console << token;
+        if (m_Shell)
+    {
+            m_Shell->print(token.print_str());
+    }
     }
     void Kernel::print(const std::string& content)
     {
-        m_Console << content;
+        if (m_Shell)
+        {
+            m_Shell->print(content);
+        }
     }
     void Kernel::pipe()
     {
