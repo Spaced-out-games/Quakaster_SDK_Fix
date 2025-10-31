@@ -108,8 +108,13 @@ namespace qk::kernel
     {
         return run_program(std::span<const Token>(program));
     }
-
-    void Kernel::print(const Token & token)
+    Kernel::~Kernel()
+    {
+        if (m_Shell)
+        {
+            m_Shell->m_Kernel = nullptr;
+        }
+    }
     {
         m_Console << token;
     }
