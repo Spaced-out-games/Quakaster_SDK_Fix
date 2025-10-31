@@ -71,6 +71,14 @@ namespace qk::kernel
                 else
                 {
                     auto it = m_Env.find(hash);
+                    
+                    if (it->second.is<Program>())
+                    {
+
+                        run_program(it->second.as<Program>());
+                    }
+                    else
+                    {
                     m_stdout = (it != m_Env.end()) ? it->second : NullToken{};
                 }
             }
