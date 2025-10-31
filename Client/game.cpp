@@ -14,6 +14,8 @@
 #include <Quakaster/qkkernel-new/Token.h>
 #include <Quakaster/qkkernel-new/kernel.h>
 #include <Quakaster/qkkernel-new/Tokenizer.h>
+#include <Quakaster/qkkernel-new/ShellBase.h>
+#include <Quakaster/qkkernel-new/stdshell.h>
 
 
 using namespace entt::literals;
@@ -78,42 +80,21 @@ inline void add_camera(qk::Entity& target, arg_Ts... args)
 
 }
 
+int clear_cmd(Kernel& kernel, std::span<const Token> args)
+{
+	kernel.print("\033[2J\033[1;1H");
+	return 0;
+}
+
 
 int echo_cmd(Kernel& kernel, std::span<const Token> args)
 {
-	// try checking stdin, print that...
-	if (!kernel.m_stdin.empty())
+	for (auto& token : args)
 	{
-		kernel.m_Console << kernel.m_stdin;
-		kernel.m_stdin = NullToken{};
+		kernel.print(token.print_str());
 	}
-	// cout out the arguments
-	for (const Token& tk : args)
-	{
-		// if stdout is empty, anything can populate it
-		if (kernel.m_stdout.empty())
-		{
-			kernel.m_stdout = tk.resolve(kernel);
-		}
-		// if not empty, normalize it to string and append
-		else
-		{
-			// normalize
-			if (!kernel.m_stdout.is<StringToken>())
-			{
-				StringToken stk{ (std::string)kernel.m_stdout };
-				kernel.m_stdout = stk;
-			}
-			else
-			{
-				kernel.m_stdout.as<StringToken>() += (std::string)tk.resolve(kernel);
-			}
-		}
-
-	}
-	//kernel.m_Console << kernel.m_stdout;
-	//kernel.m_stdout = NullToken{};
-
+	kernel.print("\n");
+	
 	return 0;
 }
 
@@ -138,12 +119,57 @@ int typeof_cmd(Kernel& kernel, std::span<const Token> args)
 
 int wc_cmd(Kernel& kernel, std::span<const Token> args)
 {
+	// early exit
 	if (kernel.m_stdin.empty())
 	{
 		kernel.m_stdout = StringToken{ "0" };
+		return 0;
 	}
-	std::string repr = (std::string)kernel.m_stdin;
-	kernel.m_stdout = StringToken{ std::to_string(repr.size())};
+	bool print_cc = false;
+	bool print_wc = false;
+	bool print_lc = false;
+
+	for (auto& arg : args)
+	{
+		if (arg.is<FlagToken>())
+		{
+			const FlagToken& ft = arg.as<FlagToken>();
+			print_cc = ft.has('c');
+			print_wc = ft.has('w');
+			print_lc = ft.has('l');
+
+		}
+		else
+		{
+			// todo: make it print "..." if there's more tokens
+			std::string err = "Illegal argument: " + arg.type_str(); 
+			// illegal argument
+			kernel.m_stdout = StringToken{ err };
+			return 0;
+		}
+	}
+
+
+
+
+	// do note this does copy StringTokens, et al...
+	std::string repr = kernel.m_stdin.print_str();
+	size_t char_count = repr.size();
+	size_t word_count = 0;
+	size_t line_count = 0;
+
+	std::string out;
+
+	if (print_cc)
+		out += std::to_string(char_count) + " ";
+	if (print_wc)
+		out += std::to_string(word_count) + " ";
+	if (print_lc)
+		out += std::to_string(line_count) + " ";
+
+	// here we'd do the word and line count operations
+
+	kernel.m_stdout = StringToken{ out };
 	
 	return 0;
 }
@@ -158,9 +184,8 @@ int compile_cmd(Kernel& kernel, std::span<const Token> args)
 	{
 		if (args[0].is<StringToken>())
 		{
-			const StringToken& s = args[0].as<StringToken>();
-			// make a string_view; make 
-			kernel.m_stdout = qk::kernel::tokenize(s.substr(1, s.size() - 2));
+			// make a string_view; make tokenizer use a string_view
+			kernel.m_stdout = qk::kernel::tokenize(args[0].as<StringToken>());
 		}
 		else
 			kernel.m_stdout = StringToken{ "Expected a source string" };
@@ -177,41 +202,28 @@ int compile_cmd(Kernel& kernel, std::span<const Token> args)
 
 
 
-
+// TODO: Fix old infrustructure to handle kernel* being nul
 int Game::run()
 {
-
+	
 	Kernel k;
+	Shell sh;
 	k.register_fn("echo"_hs, &echo_cmd);
 	k.register_fn("typeof"_hs, &typeof_cmd);
 	k.register_fn("wc"_hs, &wc_cmd);
 	k.register_fn("compile"_hs, &compile_cmd);
+	k.register_fn("clear"_hs, &clear_cmd);
+
+	qk::kernel::bind(k, sh, std::cout);
+
+	sh.flush(); //dbg
 
 
-	//k.run
-	//(
-	//	32.0f, '|', "$HI"_id, ';',
-	//	"$HI"_id, '|', "wc"_cmd, ';'
-		//"echo"_cmd, "$HI"_id
-	//);
-
-	std::string source = "compile 'echo \"hi\"' | $T; $T";
-	auto tokens = qk::kernel::tokenize(source);
-	
-	k.run_program(tokens);
-
-	k.run_program(k.get_env("T"_hs).as<Program>());
-
-	//bool success = k.get_env("T"_hs.value()).is<Program>();
-
-	//std::cout << success;
-
-	std::cout << k;
-
-
-
-	//k.print(k.get_env("T"_hs.value()).is<Program>());
-
+	(*sh.m_Output) << "test succcess!";
+	while (true)
+	{
+		sh.tick();
+	}
 
 
 	return 0;// kernel->m_Status;
