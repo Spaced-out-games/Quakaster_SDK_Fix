@@ -4,9 +4,39 @@
 
 namespace qk::kernel
 {
-	void Kernel::register_fn(entt::hashed_string name, Kernel_pfn kernel_fn)
+    Kernel_fn::Kernel_fn(std::string name, Kernel_pfn func)
+    {
+        // assign the function pointer
+        m_Func = func;
+        // create a new string to store the name post-construction
+        m_Name = name;
+
+    }
+
+    Kernel_fn::Kernel_fn()
+    {
+        __debugbreak();
+    }
+
+    const std::string& Kernel_fn::name() const
+    {
+        return m_Name;
+    }
+
+
+    int Kernel_fn::operator()(Kernel& k, std::span<const Token> args)
+    {
+        if (m_Func) return m_Func(k, args);
+        return -1;
+    }
+
+
+
+	void Kernel::register_fn(std::string name, Kernel_pfn kernel_pfn)
 	{
-		m_FuncTable[name] = kernel_fn;
+        entt::id_type hash = entt::hashed_string{ name.c_str()}.value();
+        m_FuncTable.emplace(hash, Kernel_fn{ name, kernel_pfn });
+        print(std::string("[CORE] Registered function '") + name.data() + "'\n");
 	}
     
     int Kernel::run_program(std::span<const Token> program)

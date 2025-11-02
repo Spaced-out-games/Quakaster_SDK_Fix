@@ -15,6 +15,29 @@ namespace qk::kernel
 
 	using Kernel_pfn = int (*)(Kernel& k, std::span<const Token> args);
 
+	class QK_API Kernel_fn
+	{
+			// The pointer to the implementation
+			Kernel_pfn	m_Func = nullptr;
+
+			// The name of the function
+			std::string m_Name = "";
+
+		public:
+			// Constructor
+			Kernel_fn(std::string name, Kernel_pfn func);
+			Kernel_fn();
+
+			const std::string& name() const;
+
+
+			// helper function
+			int operator()(Kernel& k, std::span<const Token> args);
+
+
+
+	};
+
 
 	/// <summary>
 	/// Defines a kernel - like interface by which to manipulate the engine
@@ -46,14 +69,14 @@ namespace qk::kernel
 		std::unordered_map<entt::id_type, Token> m_Env;
 
 		// function table
-		std::unordered_map<entt::id_type, Kernel_pfn> m_FuncTable;
+		std::unordered_map<entt::id_type, Kernel_fn> m_FuncTable;
 
 
 		Kernel() = default;
 		~Kernel();
 
 		// register a function
-		void register_fn(entt::hashed_string name, Kernel_pfn kernel_fn);
+		void register_fn(std::string name, Kernel_pfn kernel_fn);
 
 		// Runs a program built from the commandline
 		int run_program(std::span<const Token> program);

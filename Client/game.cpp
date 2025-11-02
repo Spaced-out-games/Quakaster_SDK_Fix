@@ -208,7 +208,7 @@ int compile_cmd(Kernel& kernel, std::span<const Token> args)
 	}
 	else
 	{
-		kernel.m_stdout = StringToken{ "Expected a source string" };
+		kernel.m_stdout = StringToken{ "Too many arguments in command 'compile'" };
 
 
 	}
@@ -216,11 +216,16 @@ int compile_cmd(Kernel& kernel, std::span<const Token> args)
 }
 int cd_cmd(Kernel& kernel, std::span<const Token> args)
 {
+	if (args.size() == 0) return 0;
 	if (args.size() == 1)
 	{
 		if (args[0].is<StringToken>()) kernel.m_Cd += args[0].as<StringToken>();
 		if (args[0].is<IdentifierToken>()) kernel.m_Cd += args[0].as<IdentifierToken>().data();
 
+	}
+	else if (args.size() > 1)
+	{
+		kernel.m_stdout = StringToken{"Too many arguments in command 'echo'"};
 	}
 	return 0;
 }
@@ -233,16 +238,17 @@ int Game::run()
 	
 	Kernel k;
 	Shell sh;
-	k.register_fn("echo"_hs, &echo_cmd);
-	k.register_fn("typeof"_hs, &typeof_cmd);
-	k.register_fn("wc"_hs, &wc_cmd);
-	k.register_fn("compile"_hs, &compile_cmd);
-	k.register_fn("clear"_hs, &clear_cmd);
-	k.register_fn("cd"_hs, &cd_cmd);
+
 
 	qk::kernel::bind(k, sh, std::cout);
 
-	sh.flush(); //dbg
+	k.register_fn("echo", &echo_cmd);
+	k.register_fn("typeof", &typeof_cmd);
+	k.register_fn("wc", &wc_cmd);
+	k.register_fn("compile", &compile_cmd);
+	k.register_fn("clear", &clear_cmd);
+	k.register_fn("cd", &cd_cmd);
+
 
 
 	while (true)
