@@ -13,6 +13,7 @@
 //#include <Quakaster/qkkernel/kernel_core_subsystem.h>
 #include <Quakaster/qkkernel/kernel.h>
 #include <Quakaster/qkkernel/KShell.h>
+#include <Quakaster/qkkernel/KTerminalModule.h>
 
 
 using namespace entt::literals;
@@ -77,23 +78,6 @@ inline void add_camera(qk::Entity& target, arg_Ts... args)
 
 }
 
-int clear_cmd(Kernel& kernel, std::span<const Token> args)
-{
-	kernel.print("\033[2J\033[1;1H");
-	return 0;
-}
-
-
-int echo_cmd(Kernel& kernel, std::span<const Token> args)
-{
-	for (auto& token : args)
-	{
-		kernel.print(token.print_str());
-	}
-	kernel.print("\n");
-	
-	return 0;
-}
 
 int typeof_cmd(Kernel& kernel, std::span<const Token> args)
 {
@@ -122,67 +106,59 @@ int wc_cmd(Kernel& kernel, std::span<const Token> args)
 		kernel.m_stdout = StringToken{ "0" };
 		return 0;
 	}
+
+
 	bool print_cc = false;
 	bool print_wc = false;
 	bool print_lc = false;
-
 	for (auto& arg : args)
 	{
 		if (arg.is<FlagToken>())
 		{
-			const FlagToken& ft = arg.as<FlagToken>();
-			print_cc = ft.has('c') || print_cc;
-			print_wc = ft.has('w') || print_wc;
-			print_lc = ft.has('l') || print_lc;
-
-		}
-		else
-		{
-			std::string err = "Illegal argument: " + arg.type_str();
-			kernel.m_stdout = StringToken{ err };
-			return 0;
+			if (arg.as<FlagToken>().has('c')) print_cc = true;
+			if (arg.as<FlagToken>().has('w')) print_wc = true;
+			if (arg.as<FlagToken>().has('l')) print_lc = true;
 		}
 	}
+
+	// no mutation occured
+	if (!print_cc && !print_wc && !print_lc)
+	{
+		print_cc = 1;
+		print_wc = 1;
+		print_lc = 1;
+	}
+
 
 	std::string repr = kernel.m_stdin.print_str();
-	size_t char_count = repr.size();
 
-	// count words: simple whitespace-delimited approach
-	size_t word_count = 0;
+	size_t cc = repr.size();
+	size_t wc = 0;
+	size_t lc = 1;
 	bool in_word = false;
-	for (char c : repr) {
-		if (std::isspace(static_cast<unsigned char>(c))) {
-			if (in_word) {
-				in_word = false;
-			}
+
+	for (char c : repr)
+	{
+		if (c == '\n') lc++;
+		if (c == ' ' || c == '\t')
+			in_word = false;
+		else
+		{
+			if(!in_word)
+				wc++;
+			in_word = true;
 		}
-		else {
-			if (!in_word) {
-				word_count++;
-				in_word = true;
-			}
-		}
 	}
 
-	// count lines: treat '\n' as line delimiter; count trailing line if not ending with newline
-	size_t line_count = 0;
-	if (!repr.empty()) {
-		for (char c : repr) if (c == '\n') ++line_count;
-		// If last char isn't newline, we still have a last line
-		if (repr.back() != '\n') ++line_count;
-	}
+	StringToken out{ "" };
 
-	// if user didn't specify format flags, behave like POSIX wc: print lines, words, bytes
-	if (!print_cc && !print_wc && !print_lc) {
-		print_lc = print_wc = print_cc = true;
-	}
-
-	std::string out;
-	if (print_lc) out += std::to_string(line_count) + " ";
-	if (print_wc) out += std::to_string(word_count) + " ";
-	if (print_cc) out += std::to_string(char_count) + " ";
-
-	kernel.m_stdout = StringToken{ out };
+	if(print_cc)
+		out += std::to_string(cc) + " ";
+	if (print_wc)
+		out += std::to_string(wc) + " ";
+	if (print_lc)
+		out += std::to_string(lc) + " ";
+	kernel.m_stdout = out;
 	return 0;
 }
 
@@ -239,13 +215,11 @@ int Game::run()
 
 	qk::kernel::bind(k, sh, std::cout);
 
-	k.register_fn("echo", &echo_cmd);
+
+	k.register_fn("compile", &compile_cmd);
 	k.register_fn("typeof", &typeof_cmd);
 	k.register_fn("wc", &wc_cmd);
-	k.register_fn("compile", &compile_cmd);
-	k.register_fn("clear", &clear_cmd);
 	k.register_fn("cd", &cd_cmd);
-
 
 
 	while (true)

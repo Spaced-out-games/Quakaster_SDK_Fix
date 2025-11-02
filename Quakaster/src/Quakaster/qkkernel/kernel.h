@@ -9,9 +9,28 @@
 
 namespace qk::kernel
 {
-
+	struct KModuleBase;
 	struct KShellBase;
 	struct Kernel;
+
+	struct SSID {
+		uint32_t value = npos;  // default to invalid
+		static constexpr uint32_t npos = 0xFFFFFFFF;
+
+		// constructors
+		constexpr SSID() noexcept = default;
+		constexpr explicit SSID(uint32_t v) noexcept : value(v) {}
+
+		// equality / comparison
+		constexpr bool operator==(SSID other) const noexcept { return value == other.value; }
+		constexpr bool operator!=(SSID other) const noexcept { return value != other.value; }
+
+		// implicit conversion if really needed
+		constexpr explicit operator uint32_t() const noexcept { return value; }
+
+		// helper
+		constexpr bool is_valid() const noexcept { return value != npos; }
+	};
 
 	using Kernel_pfn = int (*)(Kernel& k, std::span<const Token> args);
 
@@ -22,6 +41,9 @@ namespace qk::kernel
 
 			// The name of the function
 			std::string m_Name = "";
+
+			// Which subsystem ID we are talking here
+			SSID m_Owner;
 
 		public:
 			// Constructor
@@ -71,6 +93,8 @@ namespace qk::kernel
 		// function table
 		std::unordered_map<entt::id_type, Kernel_fn> m_FuncTable;
 
+		std::unordered_map<entt::id_type, KModuleBase*> m_Modules;
+
 
 		Kernel() = default;
 		~Kernel();
@@ -102,6 +126,12 @@ namespace qk::kernel
 		// Gets an environment variable, safely.
 		const Token& get_env(entt::id_type hash_key) const;
 
+		template <class T, class... Args>
+		void mount(std::string name, Args... args)
+		{
+			entt::id_type hash = entt::hashed_string::value(name.c_str(), name.size());
+			m_Modules[hash] = new T(std::forward<Args>(args)...);
+		}
 
 	};
 }
