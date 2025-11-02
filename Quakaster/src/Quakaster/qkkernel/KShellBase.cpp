@@ -1,15 +1,15 @@
-#include "ShellBase.h"
+#include "KShellBase.h"
 #include "kernel.h"
 
 
 namespace qk::kernel
 {
 
-	ShellBase::ShellBase()
+	KShellBase::KShellBase()
 	{
 
 	}
-	ShellBase::~ShellBase()
+	KShellBase::~KShellBase()
 	{
 		if (m_Kernel)
 		{
@@ -17,7 +17,7 @@ namespace qk::kernel
 		}
 	}
 
-	int ShellBase::execute()
+	int KShellBase::execute()
 	{
 		
 		if (m_Kernel)
@@ -29,18 +29,18 @@ namespace qk::kernel
 	}
 
 	// Headless mode doesn't get a line, it has to be fed in manually
-	void ShellBase::get_line()
+	void KShellBase::get_line()
 	{
 
 	}
 
 	// Headless mode's got nothing to flush.
-	void ShellBase::flush()
+	void KShellBase::flush()
 	{
 
 	}
 
-	void ShellBase::print(const std::string& message)
+	void KShellBase::print(const std::string& message)
 	{
 		if (m_Output)
 		{
@@ -49,7 +49,7 @@ namespace qk::kernel
 	}
 
 
-	int ShellBase::tick()
+	int KShellBase::tick()
 	{
 
 		print_path();
@@ -66,7 +66,7 @@ namespace qk::kernel
 		return status;
 	}
 
-	inline void ShellBase::print_path()
+	inline void KShellBase::print_path()
 	{
 		if (m_Kernel)
 		{
@@ -74,7 +74,7 @@ namespace qk::kernel
 		}
 	}
 
-	void bind(Kernel& kernel, ShellBase& shell, std::ostream& os)
+	void bind(Kernel& kernel, KShellBase& shell, std::ostream& os)
 	{
 		// Tell the kernel where the shell is
 		kernel.m_Shell = &shell;

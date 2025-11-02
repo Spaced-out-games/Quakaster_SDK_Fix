@@ -11,11 +11,8 @@
 #include <entt/core/hashed_string.hpp>
 //#include <Quakaster/qkkernel/Kernel.h>
 //#include <Quakaster/qkkernel/kernel_core_subsystem.h>
-#include <Quakaster/qkkernel-new/Token.h>
-#include <Quakaster/qkkernel-new/kernel.h>
-#include <Quakaster/qkkernel-new/Tokenizer.h>
-#include <Quakaster/qkkernel-new/ShellBase.h>
-#include <Quakaster/qkkernel-new/stdshell.h>
+#include <Quakaster/qkkernel/kernel.h>
+#include <Quakaster/qkkernel/KShell.h>
 
 
 using namespace entt::literals;
@@ -237,7 +234,7 @@ int Game::run()
 {
 	
 	Kernel k;
-	Shell sh;
+	KShell sh;
 
 
 	qk::kernel::bind(k, sh, std::cout);

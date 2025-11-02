@@ -1,12 +1,12 @@
-#include "stdshell.h"
+#include "KShell.h"
 
 namespace qk::kernel
 {
-	void Shell::get_line()
+	void KShell::get_line()
 	{
 		std::getline(std::cin, m_Command);
 	}
-	void Shell::flush()
+	void KShell::flush()
 	{
 		if (m_Output)
 		{

@@ -174,19 +174,22 @@
     <ClInclude Include="src\Quakaster\qkio\EventHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel-new\Token.h">
+    <ClInclude Include="src\Quakaster\qkkernel\Token.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel-new\kernel.h">
+    <ClInclude Include="src\Quakaster\qkkernel\kernel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel-new\Tokenizer.h">
+    <ClInclude Include="src\Quakaster\qkkernel\Tokenize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel-new\ShellBase.h">
+    <ClInclude Include="src\Quakaster\qkkernel\KShellBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel-new\stdshell.h">
+    <ClInclude Include="src\Quakaster\qkkernel\KShell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkkernel\KModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -323,19 +326,19 @@
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_qkio-sdl2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel-new\kernel.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\kernel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel-new\Token.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\Token.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel-new\Tokenizer.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\Tokenize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel-new\ShellBase.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\KShellBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel-new\stdshell.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\KShell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

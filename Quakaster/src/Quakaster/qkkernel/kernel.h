@@ -10,7 +10,7 @@
 namespace qk::kernel
 {
 
-	struct ShellBase;
+	struct KShellBase;
 	struct Kernel;
 
 	using Kernel_pfn = int (*)(Kernel& k, std::span<const Token> args);
@@ -49,7 +49,7 @@ namespace qk::kernel
 		// console output buffer
 		//std::stringstream* m_Output = nullptr;
 		
-		ShellBase* m_Shell = nullptr;
+		KShellBase* m_Shell = nullptr;
 
 		// kernel status code
 		int m_Status = 0;

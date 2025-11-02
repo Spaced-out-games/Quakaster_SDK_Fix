@@ -1,6 +1,6 @@
 #pragma once
 #include "../Core.h"
-#include "Tokenizer.h"
+#include "Tokenize.h"
 #include <string>
 #include <ostream>
 
@@ -14,10 +14,10 @@ namespace qk::kernel
 	/// <summary>
 	/// Basic shell. Headless.
 	/// </summary>
-	struct QK_API ShellBase
+	struct QK_API KShellBase
 	{
-		ShellBase();
-		~ShellBase();
+		KShellBase();
+		~KShellBase();
 
 		// Don't forget to bind the kernel to this!!!
 		std::ostream* m_Output = nullptr;
@@ -48,6 +48,6 @@ namespace qk::kernel
 
 	};
 
-	QK_API void bind(Kernel& kernel, ShellBase& shell, std::ostream& os);
+	QK_API void bind(Kernel& kernel, KShellBase& shell, std::ostream& os);
 
 }
