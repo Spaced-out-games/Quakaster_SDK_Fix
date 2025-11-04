@@ -11,5 +11,6 @@ namespace qk::kernel
 	{
 		bool mount(Kernel& kernel) override;
 		bool unmount(Kernel& kernel) override;
+		KTerminalModule(std::string name, SSID id);
 	};
 }

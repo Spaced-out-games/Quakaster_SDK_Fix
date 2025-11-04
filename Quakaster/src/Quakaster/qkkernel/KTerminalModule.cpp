@@ -30,4 +30,5 @@ namespace qk::kernel
 	{
 		return true;
 	}
+	KTerminalModule::KTerminalModule(std::string name, SSID id): KModuleBase(std::move(name), id) {}
 }
