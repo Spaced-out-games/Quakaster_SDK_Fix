@@ -143,34 +143,25 @@ namespace qk::kernel
 
 	std::optional<Token> select_option(const std::string& source, size_t& current_index)
 	{
+		bool flag = true;
 		if (!is_option_char(source[current_index]))
 			return std::nullopt;
-
-		size_t offset = current_index;
-		char first = source[offset];
-		bool flag = true;
-		offset++;
-
-		if (offset < source.size() && source[offset] == first)
+		current_index++;
+		if (is_option_char(source[current_index]))
 		{
 			flag = false;
-			offset++;
+			current_index++;
 		}
+		size_t offset = current_index;
+		
+		while (is_alpha(source[current_index])) current_index++;
 
-		while (offset < source.size() && is_alphanumeric_(source[offset]))
-			++offset;
-		size_t ignored_chars = flag ? 2 : 1;
-		std::string selected(source.data() + current_index + ignored_chars, offset - current_index);
-
-		current_index = offset;
-
+		std::string selected(source.data() + offset, current_index - offset);
 		
 		if (flag)
 			return FlagToken( std::move(selected) );
 		else
 			return OptionToken( std::move(selected) );
-
-
 	}
 
 	Program tokenize(const std::string& src)
