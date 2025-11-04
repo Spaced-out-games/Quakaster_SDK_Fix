@@ -93,7 +93,7 @@ namespace qk::kernel
 		// function table
 		std::unordered_map<entt::id_type, Kernel_fn> m_FuncTable;
 
-		std::unordered_map<entt::id_type, KModuleBase*> m_Modules;
+		std::unordered_map<size_t, KModuleBase*> m_Modules;
 
 
 		Kernel() = default;
@@ -126,11 +126,14 @@ namespace qk::kernel
 		// Gets an environment variable, safely.
 		const Token& get_env(entt::id_type hash_key) const;
 
-		template <class T, class... Args>
-		void mount(std::string name, Args... args)
+		template <class T = KModuleBase, class... Args>
+		void mount(Args... args)
 		{
-			entt::id_type hash = entt::hashed_string::value(name.c_str(), name.size());
-			m_Modules[hash] = new T(std::forward<Args>(args)...);
+			T* mod = new T(std::forward<Args>(args)...);
+
+			mod->mount(*this);
+			m_Modules[typeid(T).hash_code()] = mod;
+
 		}
 
 	};
