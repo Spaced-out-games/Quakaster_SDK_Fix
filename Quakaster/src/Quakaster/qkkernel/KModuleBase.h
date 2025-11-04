@@ -3,7 +3,7 @@
 #include <chrono>
 #include <string>
 #include "kernel.h"
-
+using namespace std::chrono;
 namespace qk::kernel
 {
 	
@@ -14,8 +14,8 @@ namespace qk::kernel
 	struct QK_API KModuleBase
 	{
 		std::string m_Name;
-		std::chrono::time_point<std::chrono::steady_clock>		m_StartTime;
-		SSID													m_ProcessID;
+		time_point<steady_clock>		m_StartTime;
+		SSID							m_ProcessID;
 
 		// gets the uptime of this module
 		std::chrono::milliseconds uptime() const;
