@@ -115,9 +115,12 @@ int wc_cmd(Kernel& kernel, std::span<const Token> args)
 	{
 		if (arg.is<FlagToken>())
 		{
-			if (arg.as<FlagToken>().has('c')) print_cc = true;
-			if (arg.as<FlagToken>().has('w')) print_wc = true;
-			if (arg.as<FlagToken>().has('l')) print_lc = true;
+			if (arg.as<FlagToken>().has('c'))
+				print_cc = true;
+			if (arg.as<FlagToken>().has('w'))
+				print_wc = true;
+			if (arg.as<FlagToken>().has('l'))
+				print_lc = true;
 		}
 	}
 
@@ -220,7 +223,7 @@ int Game::run()
 	k.register_fn("typeof", &typeof_cmd);
 	k.register_fn("wc", &wc_cmd);
 	k.register_fn("cd", &cd_cmd);
-
+	k.mount<KTerminalModule>("Core", SSID{0});
 
 	while (true)
 	{
