@@ -82,7 +82,12 @@ namespace qk::kernel
             else if (anchor.is<TerminatorToken>())
             {
                 if (!std::holds_alternative<NullToken>(m_stdout))
-                    print(m_stdout);
+                {
+                    std::string out = m_stdout.print_str();
+                    if (out.size() > 0 && out.at(out.size() - 1) != '\n') out += '\n';
+                    print(out);
+
+                }
                 m_stdin = NullToken{};
                 m_stdout = NullToken{};
                 last_anchor_was_pipe = false;

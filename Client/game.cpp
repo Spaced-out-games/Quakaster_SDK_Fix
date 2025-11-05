@@ -14,6 +14,7 @@
 #include <Quakaster/qkkernel/kernel.h>
 #include <Quakaster/qkkernel/KShell.h>
 #include <Quakaster/qkkernel/KTerminalModule.h>
+#include <Quakaster/qkkernel/KernelIdentifierTable.h>
 
 
 using namespace entt::literals;
@@ -88,7 +89,7 @@ int typeof_cmd(Kernel& kernel, std::span<const Token> args)
 	else if (input.is<FloatToken>()) out = "<float>";
 	else if (input.is<StringToken>()) out = "<string>";
 	//else if (input.is<ProgramToken>()) out = "<exec>";
-	else if (input.is<IdentifierToken>()) out = "<var>";
+	else if (input.is<IdentifierToken>()) out = input.resolve(kernel).type_str();
 	else if (input.is<NullToken>()) out = "<null>";
 	else if (input.is<Program>()) out = "<script>";
 	else out = "<?>";
@@ -97,7 +98,20 @@ int typeof_cmd(Kernel& kernel, std::span<const Token> args)
 	kernel.m_stdin = NullToken{};  // clear stdin after use
 	return 0;
 }
-
+int printenv_cmd(Kernel& kernel, std::span<const Token> args)
+{
+	StringToken result;
+	for (auto& hash_name: id::lut())
+	{
+		result += '$';
+		result += hash_name.second;
+		result += ": ";
+		result += kernel.m_Env[hash_name.first].print_str();
+		result += '\n';
+	}
+	kernel.m_stdout = result;
+	return 0;
+}
 int wc_cmd(Kernel& kernel, std::span<const Token> args)
 {
 	// early exit
@@ -223,6 +237,8 @@ int Game::run()
 	k.register_fn("typeof", &typeof_cmd);
 	k.register_fn("wc", &wc_cmd);
 	k.register_fn("cd", &cd_cmd);
+	k.register_fn("printenv", &printenv_cmd);
+
 	k.mount<KTerminalModule>("Core", SSID{0});
 
 	while (true)

@@ -35,6 +35,7 @@
     <ClInclude Include="src\Quakaster\qkio\EEventType.h" />
     <ClInclude Include="src\Quakaster\qkio\EventHeader.h" />
     <ClInclude Include="src\Quakaster\qkio\IEvent.h" />
+    <ClInclude Include="src\Quakaster\qkkernel\KernelIdentifierTable.h" />
     <ClInclude Include="src\Quakaster\qkkernel\kernel.h" />
     <ClInclude Include="src\Quakaster\qkkernel\KModuleBase.h" />
     <ClInclude Include="src\Quakaster\qkkernel\KShellBase.h" />
@@ -87,6 +88,7 @@
     <ClCompile Include="src\Quakaster\qkg\GL\VBO.cpp" />
     <ClCompile Include="src\Quakaster\logging.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\kernel.cpp" />
+    <ClCompile Include="src\Quakaster\qkkernel\KernelIdentifierTable.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\KModuleBase.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\KShellBase.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\KShell.cpp" />

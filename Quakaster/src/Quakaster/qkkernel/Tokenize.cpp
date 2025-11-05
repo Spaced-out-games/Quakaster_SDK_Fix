@@ -67,7 +67,7 @@ namespace qk::kernel
 
 		if (start == current_index)
 			return std::nullopt; // no valid identifier
-
+		id::add(var_name);
 		return IdentifierToken(entt::hashed_string(var_name.c_str()));
 	}
 

@@ -4,7 +4,7 @@
 #include <string>
 #include <cassert>
 #include "Token.h"
-
+#include "KernelIdentifierTable.h"
 
 namespace qk::kernel
 {
@@ -35,5 +35,4 @@ namespace qk::kernel
 
 	QK_API Program tokenize(const std::string& src);
 
-	QK_API void replace_all(std::string& str, const std::string& from, const std::string& to);
 }

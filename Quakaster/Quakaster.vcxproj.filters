@@ -195,6 +195,9 @@
     <ClInclude Include="src\Quakaster\qkkernel\KTerminalModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quakaster\qkkernel\KernelIdentifierTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quakaster\qk\Application.cpp">
@@ -348,6 +351,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qkkernel\KTerminalModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkkernel\KernelIdentifierTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
