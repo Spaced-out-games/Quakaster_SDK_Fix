@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <span>
 #include <sstream>
+#include <format>
 
 
 namespace qk::kernel
@@ -100,7 +101,7 @@ namespace qk::kernel
 		~Kernel();
 
 		// register a function
-		void register_fn(std::string name, Kernel_pfn kernel_fn);
+		void register_fn(std::string name, Kernel_pfn kernel_fn, std::string mod = "Core");
 
 		// Runs a program built from the commandline
 		int run_program(std::span<const Token> program);

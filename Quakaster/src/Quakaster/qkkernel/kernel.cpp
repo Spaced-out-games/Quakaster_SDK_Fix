@@ -32,11 +32,11 @@ namespace qk::kernel
 
 
 
-	void Kernel::register_fn(std::string name, Kernel_pfn kernel_pfn)
+	void Kernel::register_fn(std::string name, Kernel_pfn kernel_pfn, std::string mod)
 	{
         entt::id_type hash = entt::hashed_string{ name.c_str()}.value();
         m_FuncTable.emplace(hash, Kernel_fn{ name, kernel_pfn });
-        print(std::string("[CORE] Registered function '") + name.data() + "'\n");
+        print(std::format("[{}] registered function '{}'\n", mod, name));
 	}
     
     int Kernel::run_program(std::span<const Token> program)
