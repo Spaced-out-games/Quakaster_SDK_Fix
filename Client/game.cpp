@@ -13,7 +13,7 @@
 //#include <Quakaster/qkkernel/kernel_core_subsystem.h>
 #include <Quakaster/qkkernel/kernel.h>
 #include <Quakaster/qkkernel/KShell.h>
-#include <Quakaster/qkkernel/KTerminalModule.h>
+#include <Quakaster/qkkernel/KBuiltinModule.h>
 
 
 using namespace entt::literals;
@@ -107,6 +107,10 @@ int wc_cmd(Kernel& kernel, std::span<const Token> args)
 		return 0;
 	}
 
+	Kernel k;
+	KShell sh;
+	qk::kernel::bind(k, sh, std::cout);
+	//k.mount<KBuiltinModule>("Core", SSID{0});
 
 	bool print_cc = false;
 	bool print_wc = false;
