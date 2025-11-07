@@ -14,6 +14,10 @@
 #include <Quakaster/qkkernel/kernel.h>
 #include <Quakaster/qkkernel/KShell.h>
 #include <Quakaster/qkkernel/KBuiltinModule.h>
+#include <Quakaster/qkgfx/gfx-init.h>
+#include <Quakaster/qkgfx/gfx-window.h>
+#include <Quakaster/qkgfx/gfx-api.h>
+
 
 
 using namespace entt::literals;
@@ -79,136 +83,7 @@ inline void add_camera(qk::Entity& target, arg_Ts... args)
 }
 
 
-int typeof_cmd(Kernel& kernel, std::span<const Token> args)
-{
-	const Token& input = !kernel.m_stdin.empty() ? kernel.m_stdin : (args.empty() ? NullToken{} : args[0]);
-	std::string out;
 
-	if (input.is<IntToken>()) out = "<int>";
-	else if (input.is<FloatToken>()) out = "<float>";
-	else if (input.is<StringToken>()) out = "<string>";
-	//else if (input.is<ProgramToken>()) out = "<exec>";
-	else if (input.is<IdentifierToken>()) out = input.resolve(kernel).type_str();
-	else if (input.is<NullToken>()) out = "<null>";
-	else if (input.is<Program>()) out = "<script>";
-	else out = "<?>";
-
-	kernel.m_stdout = StringToken{ out };
-	kernel.m_stdin = NullToken{};  // clear stdin after use
-	return 0;
-}
-
-int wc_cmd(Kernel& kernel, std::span<const Token> args)
-{
-	// early exit
-	if (kernel.m_stdin.empty())
-	{
-		kernel.m_stdout = StringToken{ "0" };
-		return 0;
-	}
-
-	Kernel k;
-	KShell sh;
-	qk::kernel::bind(k, sh, std::cout);
-	//k.mount<KBuiltinModule>("Core", SSID{0});
-
-	bool print_cc = false;
-	bool print_wc = false;
-	bool print_lc = false;
-	for (auto& arg : args)
-	{
-		if (arg.is<FlagToken>())
-		{
-			if (arg.as<FlagToken>().has('c'))
-				print_cc = true;
-			if (arg.as<FlagToken>().has('w'))
-				print_wc = true;
-			if (arg.as<FlagToken>().has('l'))
-				print_lc = true;
-		}
-	}
-
-	// no mutation occured
-	if (!print_cc && !print_wc && !print_lc)
-	{
-		print_cc = 1;
-		print_wc = 1;
-		print_lc = 1;
-	}
-
-
-	std::string repr = kernel.m_stdin.print_str();
-
-	size_t cc = repr.size();
-	size_t wc = 0;
-	size_t lc = 1;
-	bool in_word = false;
-
-	for (char c : repr)
-	{
-		if (c == '\n') lc++;
-		if (c == ' ' || c == '\t')
-			in_word = false;
-		else
-		{
-			if(!in_word)
-				wc++;
-			in_word = true;
-		}
-	}
-
-	StringToken out{ "" };
-
-	if(print_cc)
-		out += std::to_string(cc) + " ";
-	if (print_wc)
-		out += std::to_string(wc) + " ";
-	if (print_lc)
-		out += std::to_string(lc) + " ";
-	kernel.m_stdout = out;
-	return 0;
-}
-
-int compile_cmd(Kernel& kernel, std::span<const Token> args)
-{
-	if (args.size() == 0)
-	{
-		kernel.m_stdout = StringToken{ "No arguments provided!" };
-	}
-	else if (args.size() == 1)
-	{
-		if (args[0].is<StringToken>())
-		{
-			// make a string_view; make tokenizer use a string_view
-			kernel.m_stdout = qk::kernel::tokenize(args[0].as<StringToken>());
-		}
-		else
-			kernel.m_stdout = StringToken{ "Expected a source string" };
-
-	}
-	else
-	{
-		kernel.m_stdout = StringToken{ "Too many arguments in command 'compile'" };
-
-
-	}
-	return 0;
-}
-int cd_cmd(Kernel& kernel, std::span<const Token> args)
-{
-	if (args.size() == 0) return 0;
-	if (args.size() == 1)
-	{
-		if (args[0].is<StringToken>()) kernel.m_Cd += args[0].as<StringToken>();
-		if (args[0].is<IdentifierToken>()) kernel.m_Cd += args[0].as<IdentifierToken>().data();
-
-	}
-	else if (args.size() > 1)
-	{
-		kernel.m_stdout = StringToken{"Too many arguments in command 'echo'"};
-	}
-	return 0;
-}
 
 
 // consider making run_program output a result string instead of printing, then do it at the terminator (with a newline as well?)
@@ -218,26 +93,56 @@ int Game::run()
 	
 	Kernel k;
 	KShell sh;
-
-
 	qk::kernel::bind(k, sh, std::cout);
+	//k.mount<KBuiltinModule>("Core", SSID{0});
+	
+	
+	qk::gfx::platform::Window window;
+	qk::gfx::Context context;
+
+	if (qk::gfx::platform::init())
+	{
+		k.print("SDL2 failed to initialize");
+		exit(1);
+	}
+	
 
 
-	k.register_fn("compile", &compile_cmd);
-	k.register_fn("typeof", &typeof_cmd);
-	k.register_fn("wc", &wc_cmd);
-	k.register_fn("cd", &cd_cmd);
+	if (window.init("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 720, 720, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN))
+	{
+		k.print("Window failed to initialize");
+		exit(2);
+	}
+	if (context.init(window))
+	{
+		k.print("gfx failed to initialize");
+		exit(3);
+	}
+	if (qk::gfx::loader::load())
+	{
+		k.print("glew failed to initialize");
+		exit(3);
+	}
 
-	k.mount<KTerminalModule>("Core", SSID{0});
 
 	while (true)
 	{
-		sh.tick();
+		
+		context.clear(0.0, 1.0, 0.0, 1.0);
+		window.swap();
+		// sh.tick();
 	}
 
 
 	return 0;// kernel->m_Status;
+
+	
 }
+
+/*
+	Current problem: Window isn't clearing the right color. Perhaps types are wrong, or there's DLL fuckery
+
+*/
 
 
 /* old

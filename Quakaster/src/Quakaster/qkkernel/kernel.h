@@ -101,7 +101,7 @@ namespace qk::kernel
 		~Kernel();
 
 		// register a function
-		void register_fn(std::string name, Kernel_pfn kernel_fn, std::string mod = "Core");
+		void register_fn(std::string name, Kernel_pfn kernel_fn, std::string mod = "builtin");
 
 		// Runs a program built from the commandline
 		int run_program(std::span<const Token> program);

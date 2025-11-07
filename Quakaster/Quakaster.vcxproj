@@ -15,6 +15,10 @@
     <ClInclude Include="src\Quakaster\qkecs\AActor.h" />
     <ClInclude Include="src\Quakaster\qkecs\Entity.h" />
     <ClInclude Include="src\Quakaster\qkecs\Scene.h" />
+    <ClInclude Include="src\Quakaster\qkgfx\gfx-init.h" />
+    <ClInclude Include="src\Quakaster\qkgfx\gfx-core.h" />
+    <ClInclude Include="src\Quakaster\qkgfx\gfx-window.h" />
+    <ClInclude Include="src\Quakaster\qkgfx\gfx-api.h" />
     <ClInclude Include="src\Quakaster\qkg\defaults.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\Mesh.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\MeshConfiguration.h" />
@@ -40,7 +44,7 @@
     <ClInclude Include="src\Quakaster\qkkernel\KModuleBase.h" />
     <ClInclude Include="src\Quakaster\qkkernel\KShellBase.h" />
     <ClInclude Include="src\Quakaster\qkkernel\KShell.h" />
-    <ClInclude Include="src\Quakaster\qkkernel\KTerminalModule.h" />
+    <ClInclude Include="src\Quakaster\qkkernel\KBuiltinModule.h" />
     <ClInclude Include="src\Quakaster\qkkernel\Token.h" />
     <ClInclude Include="src\Quakaster\qkkernel\Tokenize.h" />
     <ClInclude Include="src\Quakaster\qkmath\CCamera.h" />
@@ -78,6 +82,10 @@
     <ClCompile Include="src\Quakaster\qkecs\AActor.cpp" />
     <ClCompile Include="src\Quakaster\qkecs\Entity.cpp" />
     <ClCompile Include="src\Quakaster\qkecs\Scene.cpp" />
+    <ClCompile Include="src\Quakaster\qkgfx\api\GL\GL_gfx-api-impl.cpp" />
+    <ClCompile Include="src\Quakaster\qkgfx\loader\GLEW_gfx-init-impl.cpp" />
+    <ClCompile Include="src\Quakaster\qkgfx\Platform\SDL2\SDL2_gfx-init-impl.cpp" />
+    <ClCompile Include="src\Quakaster\qkgfx\Platform\SDL2\SDL2_gfx-window-impl.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\EBO.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\GraphicsPipeline.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\graphics_init.cpp" />
@@ -92,7 +100,7 @@
     <ClCompile Include="src\Quakaster\qkkernel\KModuleBase.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\KShellBase.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\KShell.cpp" />
-    <ClCompile Include="src\Quakaster\qkkernel\KTerminalModule.cpp" />
+    <ClCompile Include="src\Quakaster\qkkernel\KBuiltinModule.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\Token.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\Tokenize.cpp" />
     <ClCompile Include="src\Quakaster\qkmath\CCamera.cpp" />

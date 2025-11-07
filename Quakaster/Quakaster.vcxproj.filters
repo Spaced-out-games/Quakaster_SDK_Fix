@@ -192,10 +192,22 @@
     <ClInclude Include="src\Quakaster\qkkernel\KModuleBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkkernel\KTerminalModule.h">
+    <ClInclude Include="src\Quakaster\qkkernel\KBuiltinModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Quakaster\qkkernel\KernelIdentifierTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkgfx\gfx-init.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkgfx\gfx-core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkgfx\gfx-window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkgfx\gfx-api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -350,10 +362,22 @@
     <ClCompile Include="src\Quakaster\qkkernel\KModuleBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkkernel\KTerminalModule.cpp">
+    <ClCompile Include="src\Quakaster\qkkernel\KBuiltinModule.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qkkernel\KernelIdentifierTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkgfx\Platform\SDL2\SDL2_gfx-init-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkgfx\Platform\SDL2\SDL2_gfx-window-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkgfx\loader\GLEW_gfx-init-impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkgfx\api\GL\GL_gfx-api-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
