@@ -19,6 +19,7 @@
 	#define QK_DEFINE_CONVAR(name, id, T_ref) qk::Convar name(id, T_ref)
 #endif
 
+/*
 namespace qk
 {
 	// Quakaster error codes. Might remove.
@@ -33,7 +34,7 @@ namespace qk
 
 
 	};
-}
+}*/
 
 #define BIT(x) (1 << x)
 
