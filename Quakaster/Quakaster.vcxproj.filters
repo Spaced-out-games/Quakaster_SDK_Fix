@@ -198,16 +198,16 @@
     <ClInclude Include="src\Quakaster\qkkernel\KernelIdentifierTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkgfx\gfx-init.h">
+    <ClInclude Include="src\Quakaster\qkgfx-old\gfx-init.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkgfx\gfx-core.h">
+    <ClInclude Include="src\Quakaster\qkgfx-old\gfx-core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkgfx\gfx-window.h">
+    <ClInclude Include="src\Quakaster\qkgfx-old\gfx-window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkgfx\gfx-api.h">
+    <ClInclude Include="src\Quakaster\qkgfx-old\gfx-api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -368,16 +368,16 @@
     <ClCompile Include="src\Quakaster\qkkernel\KernelIdentifierTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkgfx\Platform\SDL2\SDL2_gfx-init-impl.cpp">
+    <ClCompile Include="src\Quakaster\qkgfx-old\Platform\SDL2\SDL2_gfx-init-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkgfx\Platform\SDL2\SDL2_gfx-window-impl.cpp">
+    <ClCompile Include="src\Quakaster\qkgfx-old\Platform\SDL2\SDL2_gfx-window-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkgfx\loader\GLEW_gfx-init-impl.cpp">
+    <ClCompile Include="src\Quakaster\qkgfx-old\loader\GLEW_gfx-init-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkgfx\api\GL\GL_gfx-api-impl.cpp">
+    <ClCompile Include="src\Quakaster\qkgfx-old\api\GL\GL_gfx-api-impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
