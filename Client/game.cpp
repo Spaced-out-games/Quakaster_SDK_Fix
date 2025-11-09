@@ -94,7 +94,7 @@ int Game::run()
 	Kernel k;
 	KShell sh;
 	qk::kernel::bind(k, sh, std::cout);
-	//k.mount<KBuiltinModule>("Core", SSID{0});
+	k.mount<KBuiltinModule>("Core", SSID{0});
 	
 	
 	/*
