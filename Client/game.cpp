@@ -14,6 +14,9 @@
 #include <Quakaster/qkkernel/kernel.h>
 #include <Quakaster/qkkernel/KShell.h>
 #include <Quakaster/qkkernel/KBuiltinModule.h>
+
+
+#include <Quakaster/qk/handle.h>
 //#include <Quakaster/qkgfx/gfx-init.h>
 //#include <Quakaster/qkgfx/gfx-window.h>
 //#include <Quakaster/qkgfx/gfx-api.h>
@@ -23,6 +26,8 @@
 using namespace entt::literals;
 
 using namespace qk::kernel;
+
+using namespace qk;
 
 
 qk::Application* create_application(int argc, char** argv) { return new Game(argc, argv); }
@@ -125,6 +130,8 @@ int Game::run()
 		exit(3);
 	}
 	*/
+
+
 
 	while (true)
 	{

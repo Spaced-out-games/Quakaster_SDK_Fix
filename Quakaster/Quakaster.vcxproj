@@ -71,6 +71,7 @@
     <ClInclude Include="src\Quakaster\qk\default\GameLayer.h" />
     <ClInclude Include="src\Quakaster\qk\default\QKBaseLayer.h" />
     <ClInclude Include="src\Quakaster\qk\default\GUILayer.h" />
+    <ClInclude Include="src\Quakaster\qk\handle.h" />
     <ClInclude Include="src\Quakaster\qk\Layer.h" />
     <ClInclude Include="src\Quakaster\qk\QKTL.h" />
     <ClInclude Include="thirdparty\imgui\imgui\backends\imgui_impl_qkio-sdl2.h" />

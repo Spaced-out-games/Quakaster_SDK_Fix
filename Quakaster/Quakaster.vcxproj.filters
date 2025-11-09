@@ -210,6 +210,9 @@
     <ClInclude Include="src\Quakaster\qkgfx-old\gfx-api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Quakaster\qk\handle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Quakaster\qk\Application.cpp">
