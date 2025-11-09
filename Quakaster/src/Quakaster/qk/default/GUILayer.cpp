@@ -4,7 +4,7 @@
 namespace qk
 {
 
-    GUILayer::GUILayer(qkui::UIContext* UIContext) : m_UIContext(UIContext)
+    GUILayer::GUILayer(qk::ui::UIContext* UIContext) : m_UIContext(UIContext)
     {
         if (!UIContext)
         {

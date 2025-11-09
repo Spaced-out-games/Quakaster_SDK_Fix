@@ -3,6 +3,7 @@
 #include "Tokenize.h"
 #include <string>
 #include <ostream>
+#include <functional>
 
 
 
@@ -35,6 +36,13 @@ namespace qk::kernel
 		virtual void print(const std::string& content);
 
 		virtual void flush();
+
+		void clear();
+		
+		// Can be overridden by the console.
+		std::function<void(void)> clear_impl = [&]() {
+			(*m_Output) << "\033[2J\033[H";
+		};
 
 		inline void print_path();
 

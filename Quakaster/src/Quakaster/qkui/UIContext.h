@@ -10,7 +10,7 @@
 
 
 
-namespace qkui
+namespace qk::ui
 {
 	class UIWidget;
 
@@ -27,7 +27,7 @@ namespace qkui
 			ImGuiIO& IO();
 
 			// Legacy support
-			inline void init(SDL_GLContext context, SDL_Window* window);
+			inline void init(ImGuiContext* im_context, SDL_GLContext context, SDL_Window* window);
 
 			// Begins an ImGui frame. Might be worth moving this into draw()
 			inline void begin();

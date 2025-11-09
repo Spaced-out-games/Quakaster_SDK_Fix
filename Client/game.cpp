@@ -9,17 +9,19 @@
 //temporary includes
 #include <Quakaster/qkecs/AActor.h>
 #include <entt/core/hashed_string.hpp>
-//#include <Quakaster/qkkernel/Kernel.h>
-//#include <Quakaster/qkkernel/kernel_core_subsystem.h>
-#include <Quakaster/qkkernel/kernel.h>
-#include <Quakaster/qkkernel/KShell.h>
-#include <Quakaster/qkkernel/KBuiltinModule.h>
 
+ImGuiContext* make_imgui_context()
+{
+	IMGUI_CHECKVERSION();
+	ImGuiContext* result = ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
 
-#include <Quakaster/qk/handle.h>
-//#include <Quakaster/qkgfx/gfx-init.h>
-//#include <Quakaster/qkgfx/gfx-window.h>
-//#include <Quakaster/qkgfx/gfx-api.h>
+	// Optional: configure flags
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;  // Enable Keyboard Controls
+	//io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;      // Enable Docking
+	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;    // Enable Multi-Viewport / Platform Windows
+	return result;
+}
 
 
 
@@ -40,7 +42,6 @@ qk::Application* create_application(int argc, char** argv) { return new Game(arg
 	GUILayer
 	QKBaseLayer
 
-*/
 
 struct Vertex
 {
@@ -71,13 +72,55 @@ void foo(
 
 }
 
-
+*/
 
 void Game::init() {
-	window.init();
-	pipeline.init(window);
-}
 
+	// Initialize SDL, GLEW, make a window
+	if (qk::gfx::init_SDL())
+	{
+		kernel.print("SDL2 failed to initialize");
+		exit(1);
+	}
+	if (m_Window.init("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 720, 720, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN))
+	{
+		kernel.print("Window failed to initialize");
+		exit(2);
+	}
+	if (m_Context.init(m_Window))
+	{
+		kernel.print("gfx failed to initialize");
+		exit(3);
+	}
+	if (qk::gfx::init_GLEW())
+	{
+		kernel.print("glew failed to initialize");
+		exit(3);
+	}
+
+	// set up ImGui
+	UIContext.init(make_imgui_context(), m_Context, m_Window);
+	auto console = new qk::ui::ConsoleUI();
+	console->bind_shell(&shell);
+	UIContext.add_widget(console);
+
+	// Create an ImGui context.
+
+
+	// bind it to the window and OpenGL
+	//if (!ImGui_ImplSDL2_InitForOpenGL(m_Window, m_Context)) {
+		// Handle error: SDL backend init failed
+	//}
+
+
+
+	// Set up the kernel and shell
+	qk::kernel::bind(kernel, shell, console->oss);
+	kernel.mount<KBuiltinModule>("Core", SSID{ 0 });
+
+
+}
+/*
 template <typename ...arg_Ts>
 inline void add_camera(qk::Entity& target, arg_Ts... args)
 {
@@ -85,7 +128,7 @@ inline void add_camera(qk::Entity& target, arg_Ts... args)
 	target.get_or_emplace<qk::mat4>();
 	target.get_or_emplace<qk::CCamera>(std::forward<arg_Ts>(args)...);
 
-}
+}*/
 
 
 
@@ -96,49 +139,30 @@ inline void add_camera(qk::Entity& target, arg_Ts... args)
 int Game::run()
 {
 	
-	Kernel k;
-	KShell sh;
-	qk::kernel::bind(k, sh, std::cout);
-	k.mount<KBuiltinModule>("Core", SSID{0});
 	
+	SDL_Event event;
+
+
 	
-	/*
-	qk::gfx::platform::Window window;
-	qk::gfx::Context context;
-
-	if (qk::gfx::platform::init())
-	{
-		k.print("SDL2 failed to initialize");
-		exit(1);
-	}
-	
-
-
-	if (window.init("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 720, 720, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN))
-	{
-		k.print("Window failed to initialize");
-		exit(2);
-	}
-	if (context.init(window))
-	{
-		k.print("gfx failed to initialize");
-		exit(3);
-	}
-	if (qk::gfx::loader::load())
-	{
-		k.print("glew failed to initialize");
-		exit(3);
-	}
-	*/
-
-
 
 	while (true)
 	{
 		
-		//context.clear(0.0, 1.0, 0.0, 1.0);
-		//window.swap();
-		sh.tick();
+		while (SDL_PollEvent(&event))
+		{
+			ImGui_ImplSDL2_ProcessEvent(&event); // <--- this is key
+			if (event.type == SDL_QUIT)
+				exit(0);
+		}
+
+		m_Context.clear(0.0, 1.0, 0.0, 1.0);
+
+		UIContext.begin();
+		UIContext.draw();
+		UIContext.end();
+		//shell.tick();
+		m_Window.swap();
+
 	}
 
 

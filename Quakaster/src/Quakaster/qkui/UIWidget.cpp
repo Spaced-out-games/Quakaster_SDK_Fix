@@ -3,7 +3,7 @@
 
 
 
-namespace qkui
+namespace qk::ui
 {
 
 	UIWidget::UIWidget() {}

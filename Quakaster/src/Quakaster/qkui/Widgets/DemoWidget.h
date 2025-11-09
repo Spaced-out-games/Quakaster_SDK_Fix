@@ -1,8 +1,8 @@
 #pragma once
 #include "../UIWidget.h"
 
-struct QK_API DemoWidget : qkui::UIWidget
+struct QK_API DemoWidget : qk::ui::UIWidget
 {
-	void draw(qkui::UIContext& owner) override;
+	void draw(qk::ui::UIContext& owner) override;
 	~DemoWidget() override;
 };

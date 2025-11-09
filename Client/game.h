@@ -11,6 +11,15 @@
 #include <Quakaster/qkecs/Entity.h>
 #include <Quakaster/qkmath/CTransform.h>
 
+#include <Quakaster/qkgfx/gfx.h>
+#include <Quakaster/qkgfx/Window.h>
+#include <Quakaster/qkgfx/gfx-Context.h>
+#include <Quakaster/qkkernel/kernel.h>
+#include <Quakaster/qkkernel/KShell.h>
+#include <Quakaster/qkkernel/KBuiltinModule.h>
+#include <Quakaster/qkui/UIContext.h>
+#include <Quakaster/qkui/Widgets/ConsoleUI.h>
+
 namespace cl
 {
 	float fov_desired = 130.0f;
@@ -22,20 +31,12 @@ namespace cl
 struct Game : public qk::Application {
 
 	//private: keep it public while im debugging
-		//qk::kernel::Kernel kernel;
-		qkg::Window window;
-		qk::Scene scene;
-		qkg::GraphicsPipeline pipeline;
-		qk::LayerStack layers;
-		qkui::UIContext UIcontext;
-		uint8_t console_widget = 0;
-		//qk::mat4 projection = qk::mat4{ 1.0f };
-		//qkg::VAO vao;
-		GLuint vao;
-		GLuint vbo;
-		GLuint ebo;
-		qkg::ShaderInstance shader_instance;
-		//qk::CCamera camera;
+	qk::gfx::Window m_Window;
+	qk::gfx::Context m_Context;
+	qk::kernel::Kernel kernel;
+	qk::kernel::KShell shell;
+	qk::ui::UIContext  UIContext;
+	
 	public:
 		Game(int argc, char** argv) : Application(argc, argv) {}
 		~Game() {}

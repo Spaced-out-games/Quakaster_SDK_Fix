@@ -1,10 +1,10 @@
 #include "KBuiltinModule.h"
 #include "KernelIdentifierTable.h"
+#include "KShellBase.h"
 #include "Tokenize.h"
 
 namespace qk::kernel
 {
-
 
 	bool KBuiltinModule::mount(Kernel& kernel)
 	{
@@ -30,7 +30,7 @@ namespace qk::kernel
 
 	int clear_cmd(Kernel& kernel, std::span<const Token> args)
 	{
-		kernel.print("\033[2J\033[1;1H");
+		kernel.m_Shell->clear();
 		return 0;
 	}
 

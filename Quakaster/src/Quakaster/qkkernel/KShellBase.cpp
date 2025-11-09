@@ -40,6 +40,11 @@ namespace qk::kernel
 
 	}
 
+	void KShellBase::clear()
+	{
+		if (clear_impl) clear_impl();
+	}
+
 	void KShellBase::print(const std::string& message)
 	{
 		if (m_Output)

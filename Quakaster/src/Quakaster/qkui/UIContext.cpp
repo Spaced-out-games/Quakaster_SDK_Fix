@@ -1,7 +1,7 @@
 #include "UIContext.h"
 
 
-namespace qkui
+namespace qk::ui
 {
 
 	UIContext::UIContext()
@@ -9,13 +9,11 @@ namespace qkui
 		m_Target = nullptr;
 		m_Context = nullptr;
 	}
-	void UIContext::init(SDL_GLContext context, SDL_Window* window)
+	void UIContext::init(ImGuiContext* im_context, SDL_GLContext context, SDL_Window* window)
 	{
 		m_Target = window;
-		IMGUI_CHECKVERSION();
-		m_Context = ImGui::CreateContext();
-		ImGuiIO& io = ImGui::GetIO(); (void)io;
-
+		m_Context = im_context;
+		ImGui::SetCurrentContext(im_context);
 		ImGui_ImplSDL2_InitForOpenGL(m_Target, context);
 		ImGui_ImplOpenGL3_Init("#version 330");
 	}

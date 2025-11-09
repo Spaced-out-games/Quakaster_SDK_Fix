@@ -1,6 +1,6 @@
 #include "DemoWidget.h"
 
-void DemoWidget::draw(qkui::UIContext& owner)
+void DemoWidget::draw(qk::ui::UIContext& owner)
 {
 	ImGui::Begin("Example Window");
 	ImGui::Text("Hello, world!");

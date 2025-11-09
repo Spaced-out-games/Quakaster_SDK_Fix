@@ -1,20 +1,18 @@
 #pragma once
 #include "../Core.h"
-#include "gfx-core.h"
-
+#include "Error.h"
+#include <SDL.h>
 
 // Declares a platform-agnostic API for creating a window
-namespace qk::gfx::platform
+namespace qk::gfx
 {
 	// consider making it a class
-	struct Window_handle_t;
 
 	class QK_API Window
 	{
 		
 		
-		Window_handle_t* m_Handle;
-
+		SDL_Window* m_Handle = nullptr;
 		const char* m_Title = nullptr;
 		int m_X = 0;
 		int m_Y = 0;
@@ -34,7 +32,7 @@ namespace qk::gfx::platform
 		int width() const;
 		int height() const;
 		const char* title() const;
-		void* handle();
+		operator SDL_Window* () { return m_Handle; }
 	};
 
 
