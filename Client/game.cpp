@@ -14,9 +14,9 @@
 #include <Quakaster/qkkernel/kernel.h>
 #include <Quakaster/qkkernel/KShell.h>
 #include <Quakaster/qkkernel/KBuiltinModule.h>
-#include <Quakaster/qkgfx/gfx-init.h>
-#include <Quakaster/qkgfx/gfx-window.h>
-#include <Quakaster/qkgfx/gfx-api.h>
+//#include <Quakaster/qkgfx/gfx-init.h>
+//#include <Quakaster/qkgfx/gfx-window.h>
+//#include <Quakaster/qkgfx/gfx-api.h>
 
 
 
@@ -97,6 +97,7 @@ int Game::run()
 	//k.mount<KBuiltinModule>("Core", SSID{0});
 	
 	
+	/*
 	qk::gfx::platform::Window window;
 	qk::gfx::Context context;
 
@@ -123,14 +124,14 @@ int Game::run()
 		k.print("glew failed to initialize");
 		exit(3);
 	}
-
+	*/
 
 	while (true)
 	{
 		
-		context.clear(0.0, 1.0, 0.0, 1.0);
-		window.swap();
-		// sh.tick();
+		//context.clear(0.0, 1.0, 0.0, 1.0);
+		//window.swap();
+		sh.tick();
 	}
 
 
