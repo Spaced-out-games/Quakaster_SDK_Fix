@@ -21,19 +21,25 @@ namespace qk::ui
 
 
 
-	struct QK_API ConsoleUI : qk::ui::UIWidget
+	struct QK_API ConsoleUI : qk::ui::UIWidget, qk::kernel::KShellBase
 	{
 		std::ostringstream oss;
-		qk::kernel::KShellBase* m_Shell = nullptr;
+		//qk::kernel::KShellBase* m_Shell = nullptr;
 		char m_InputBuffer[QK_CONSOLE_INPUT_SIZE]{};
 		bool m_JustOpened = true;
 		void draw(qk::ui::UIContext& owner) override;
+		ConsoleUI();
 		~ConsoleUI() override;
 		//std::vector<ConsoleMessage> m_Messages;
-		inline void clear();
-		void bind_shell(qk::kernel::KShellBase* shell);
+		inline void run();
 
-		inline void run(const std::string& command);
+		// Awaits a command, assigns m_Command
+		void get_line() override;
+
+		void flush() override;
+
+		// Can be overridden by the console.
+		void clear() override;
 	};
 
 }

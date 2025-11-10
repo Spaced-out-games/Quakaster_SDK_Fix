@@ -41,7 +41,8 @@ namespace qk::ui
 		ImVec2 windowSize = ImGui::GetWindowSize();
 		ImGui::SetCursorPosX(windowSize.x - buttonSize.x - 10);
 		if (ImGui::Button("Exit Application")) {
-			//qk::status = 1;
+			m_Command = "exit";
+			run();
 		}
 
 		// history / output
@@ -69,16 +70,11 @@ namespace qk::ui
 
 		if (ImGui::InputText("Input", m_InputBuffer, QK_CONSOLE_INPUT_SIZE, ImGuiInputTextFlags_EnterReturnsTrue))
 		{
-			// convert to std::string for convenience
-			std::string input_string(m_InputBuffer);
 
-			// this will copy input_string but it's actually fine since it's no more than 256 bytes.
-			// Plus, we want to preserve these strings even as they go out of scope
-			//m_Messages.push_back(ConsoleMessage{ input_string, 0xff0000ff });
-			//oss <<
-			// run the command
-			run(input_string);
-			// clear the buffer
+			m_Command = std::string(m_InputBuffer);
+			print(m_Command);
+			print("\n");
+			run();
 			memset(m_InputBuffer, 0, QK_CONSOLE_INPUT_SIZE);
 
 
@@ -86,6 +82,11 @@ namespace qk::ui
 
 		ImGui::End();
 
+
+	}
+
+	ConsoleUI::ConsoleUI()
+	{
 
 	}
 
@@ -99,28 +100,32 @@ namespace qk::ui
 		oss.str("");
 	}
 
-	void ConsoleUI::bind_shell(qk::kernel::KShellBase* shell)
+
+
+
+	void ConsoleUI::flush()
 	{
-		m_Shell = shell;
-		shell->clear_impl = [&]() {
-			this->clear();
-		};
+
 	}
 
-
-	void ConsoleUI::run(const std::string& command)
+	void ConsoleUI::run()
 	{
-		if (m_Shell)
-		{
-			m_Shell->print_path();
+
+
+		print_path();
 			
-			m_Shell->m_Command = command;
 
-			// execute it
-			int status = m_Shell->execute();
-			m_Shell->m_Command = "";
-			// show it
-			m_Shell->flush();
-		}
+		// execute it
+		int status = execute();
+		m_Command = "";
+		// show it
+		flush();
+		// clear the buffer
 	}
+
+	void ConsoleUI::get_line()
+	{
+
+	}
+
 }

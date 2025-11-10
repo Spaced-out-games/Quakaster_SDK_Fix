@@ -12,6 +12,8 @@ namespace qk::kernel
 	int compile_cmd(Kernel& kernel, std::span<const Token> args);
 	int cd_cmd(Kernel& kernel, std::span<const Token> args);
 	int exit_cmd(Kernel& kernel, std::span<const Token> args);
+	int repeat_cmd(Kernel& kernel, std::span<const Token> args);
+	int lt_cmd(Kernel& kernel, std::span<const Token> args);
 
 	struct QK_API KBuiltinModule: KModuleBase
 	{

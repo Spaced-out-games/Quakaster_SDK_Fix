@@ -35,6 +35,11 @@ using namespace qk;
 qk::Application* create_application(int argc, char** argv) { return new Game(argc, argv); }
 
 
+struct Vertex
+{
+	qk::vec3 p;
+};
+
 /* TODO: set up proper error systems for:
 	Window
 	GraphicsPipeline
@@ -43,10 +48,7 @@ qk::Application* create_application(int argc, char** argv) { return new Game(arg
 	QKBaseLayer
 
 
-struct Vertex
-{
-	qk::vec3 p;
-};
+
 
 template <class vertex_t>
 void foo(
@@ -82,7 +84,7 @@ void Game::init() {
 		kernel.print("SDL2 failed to initialize");
 		exit(1);
 	}
-	if (m_Window.init("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 720, 720, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN))
+	if (m_Window.init("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1080, 1080, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN))
 	{
 		kernel.print("Window failed to initialize");
 		exit(2);
@@ -101,7 +103,7 @@ void Game::init() {
 	// set up ImGui
 	UIContext.init(make_imgui_context(), m_Context, m_Window);
 	auto console = new qk::ui::ConsoleUI();
-	console->bind_shell(&shell);
+	//console->bind_shell(&shell);
 	UIContext.add_widget(console);
 
 	// Create an ImGui context.
@@ -115,7 +117,7 @@ void Game::init() {
 
 
 	// Set up the kernel and shell
-	qk::kernel::bind(kernel, shell, console->oss);
+	qk::kernel::bind(kernel, *console, console->oss);
 	kernel.mount<KBuiltinModule>("Core", SSID{ 0 });
 
 
@@ -138,8 +140,28 @@ inline void add_camera(qk::Entity& target, arg_Ts... args)
 // TODO: Fix old infrustructure to handle kernel* being nul
 int Game::run()
 {
+	qk::gfx::VAO_policy vertex_policy = qk::gfx::make_VAO_policy<Vertex>();
+
+
+	qk::gfx::VAO vao;
+	vao.init();
+	vao.bind();
+
+	vertex_policy();
+
+
+	qk::gfx::VBO vbo;
 	
+	#include "test_vertices.h"
+
+	vbo.init();
+	vbo.upload_vertices(vertices, GL_STATIC_DRAW);
+	vbo.bind();
+
 	
+
+
+
 	SDL_Event event;
 
 
@@ -170,11 +192,6 @@ int Game::run()
 
 	
 }
-
-/*
-	Current problem: Window isn't clearing the right color. Perhaps types are wrong, or there's DLL fuckery
-
-*/
 
 
 /* old

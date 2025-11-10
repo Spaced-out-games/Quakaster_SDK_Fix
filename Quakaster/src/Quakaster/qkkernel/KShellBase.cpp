@@ -40,10 +40,9 @@ namespace qk::kernel
 
 	}
 
-	void KShellBase::clear()
-	{
-		if (clear_impl) clear_impl();
-	}
+	void KShellBase::clear() {
+		(*m_Output) << "\033[2J\033[H";
+	};
 
 	void KShellBase::print(const std::string& message)
 	{

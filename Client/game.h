@@ -19,6 +19,10 @@
 #include <Quakaster/qkkernel/KBuiltinModule.h>
 #include <Quakaster/qkui/UIContext.h>
 #include <Quakaster/qkui/Widgets/ConsoleUI.h>
+#include <Quakaster/qkgfx/VAO-policy.h>
+#include <Quakaster/qkgfx/VAO.h>
+#include <Quakaster/qkgfx/VBO.h>
+#include <Quakaster/qkgfx/EBO.h>
 
 namespace cl
 {

@@ -16,6 +16,8 @@ namespace qk::kernel
 		kernel.register_fn("wc", &wc_cmd);
 		kernel.register_fn("cd", &cd_cmd);
 		kernel.register_fn("exit", &exit_cmd);
+		kernel.register_fn("repeat", &repeat_cmd, "Control");
+		kernel.register_fn("lt", &lt_cmd, "Control");
 
 		return true;
 	}
@@ -188,6 +190,116 @@ namespace qk::kernel
 	int exit_cmd(Kernel& kernel, std::span<const Token> args)
 	{
 		exit(1);
+	}
+	int repeat_cmd(Kernel& kernel, std::span<const Token> args)
+	{
+		Program target;
+		int state = 0;
+		int repeats = 1;
+		bool done = false;
+		for (auto& arg: args)
+		{
+
+			if (done) break;
+
+
+			switch (state)
+			{
+				case 0: // driver
+					if (arg.is<FlagToken>() && arg.as<FlagToken>().has('s')) {
+						state = 1;
+						break;
+					}
+					else if (arg.is<FlagToken>() && arg.as<FlagToken>().has('r')) {
+						state = 2;
+						break;
+					}
+					else if (arg.is<IdentifierToken>() && kernel.get_env(arg.as<IdentifierToken>().value()).is<Program>())
+					{
+						// We can't defer this step since the token will be in the past
+						target = kernel.get_env( arg.as<IdentifierToken>().value() ).as<Program>();
+						break;
+					}
+
+				case 1: // receive source flag
+					// if we see -s "source", compile it and set the token to target
+					if (arg.is<StringToken>())
+					{
+						target = qk::kernel::tokenize(arg.as<StringToken>());
+						state = 0;
+					}
+					else // fail if not source string
+					{
+						kernel.m_stdout = StringToken{ "Expected a source string but received " + arg.type_str() };
+						return 0;
+					}
+
+					break;
+				case 2: // receive repeat count
+					if (arg.is<IntToken>())
+					{
+						repeats = arg.as<IntToken>();
+					}
+					else
+					{
+
+					}
+					break;
+				case 3:
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		if (target.empty())
+			return 0;
+		else
+		{
+			for (size_t i = 0; i < repeats; i++)
+			{
+				kernel.run_program(target);
+			}
+		}
+
+	}
+	int lt_cmd(Kernel& kernel, std::span<const Token> args)
+	{
+		//kernel.pipe();
+
+		if (args.size() != 1)
+		{
+			kernel.m_stdout = StringToken{ "Insufficient args for 'lt'" };
+			return 0;
+		}
+
+		// Resolve left and right before comparison, so that we are working with literals directly
+		const Token& lhs = kernel.m_stdout.resolve(kernel);
+		const Token& rhs = args[0].resolve(kernel);
+		bool result = 0;
+
+		if (lhs.is<IntToken>() && rhs.is<IntToken>())
+		{
+			result = lhs.as<IntToken>() < rhs.as<IntToken>();
+		}
+		else if (lhs.is<FloatToken>() && rhs.is<IntToken>())
+		{
+			result = (lhs.as<FloatToken>() < (float)rhs.as<IntToken>());
+		}
+		else if (lhs.is<IntToken>() && rhs.is<FloatToken>())
+		{
+			result = ((float)lhs.as<FloatToken>() < rhs.as<IntToken>());
+		}
+
+		else if (lhs.is<StringToken>() && rhs.is<StringToken>())
+		{
+			result = (lhs.as<StringToken>() < rhs.as<StringToken>());
+		}
+
+		kernel.m_stdout = IntToken{ result };
+
+		return 0;
 	}
 
 	

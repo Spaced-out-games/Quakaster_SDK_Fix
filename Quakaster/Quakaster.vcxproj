@@ -16,9 +16,13 @@
     <ClInclude Include="src\Quakaster\qkecs\Entity.h" />
     <ClInclude Include="src\Quakaster\qkecs\Scene.h" />
     <ClInclude Include="src\Quakaster\logging.h" />
+    <ClInclude Include="src\Quakaster\qkgfx\EBO.h" />
     <ClInclude Include="src\Quakaster\qkgfx\Error.h" />
     <ClInclude Include="src\Quakaster\qkgfx\gfx-Context.h" />
     <ClInclude Include="src\Quakaster\qkgfx\gfx.h" />
+    <ClInclude Include="src\Quakaster\qkgfx\VAO-policy.h" />
+    <ClInclude Include="src\Quakaster\qkgfx\VAO.h" />
+    <ClInclude Include="src\Quakaster\qkgfx\VBO.h" />
     <ClInclude Include="src\Quakaster\qkgfx\Window.h" />
     <ClInclude Include="src\Quakaster\qkg\defaults.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\EBO.h" />
@@ -84,8 +88,12 @@
     <ClCompile Include="src\Quakaster\qkecs\Entity.cpp" />
     <ClCompile Include="src\Quakaster\qkecs\Scene.cpp" />
     <ClCompile Include="src\Quakaster\logging.cpp" />
+    <ClCompile Include="src\Quakaster\qkgfx\EBO.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\gfx-Context.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\gfx.cpp" />
+    <ClCompile Include="src\Quakaster\qkgfx\VAO-policy.cpp" />
+    <ClCompile Include="src\Quakaster\qkgfx\VAO.cpp" />
+    <ClCompile Include="src\Quakaster\qkgfx\VBO.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\Window.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\EBO.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\GraphicsPipeline.cpp" />
