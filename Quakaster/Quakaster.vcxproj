@@ -20,6 +20,7 @@
     <ClInclude Include="src\Quakaster\qkgfx\Error.h" />
     <ClInclude Include="src\Quakaster\qkgfx\gfx-Context.h" />
     <ClInclude Include="src\Quakaster\qkgfx\gfx.h" />
+    <ClInclude Include="src\Quakaster\qkgfx\ShaderSource.h" />
     <ClInclude Include="src\Quakaster\qkgfx\VAO-policy.h" />
     <ClInclude Include="src\Quakaster\qkgfx\VAO.h" />
     <ClInclude Include="src\Quakaster\qkgfx\VBO.h" />
@@ -91,6 +92,7 @@
     <ClCompile Include="src\Quakaster\qkgfx\EBO.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\gfx-Context.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\gfx.cpp" />
+    <ClCompile Include="src\Quakaster\qkgfx\ShaderSource.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\VAO-policy.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\VAO.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\VBO.cpp" />

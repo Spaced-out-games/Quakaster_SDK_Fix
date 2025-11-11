@@ -30,5 +30,6 @@ namespace qk::gfx
 	void EBO::upload(uint32_t* indices, size_t size, GLenum usage)
 	{
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, size * sizeof(uint32_t), indices, usage);
+		m_IndexCount = size;
 	}
 }

@@ -225,7 +225,7 @@
     <ClInclude Include="src\Quakaster\qkgfx\VAO-policy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkgfx\ShaderInstance.h">
+    <ClInclude Include="src\Quakaster\qkgfx\ShaderSource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -404,7 +404,7 @@
     <ClCompile Include="src\Quakaster\qkgfx\VAO-policy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkgfx\ShaderInstance.cpp">
+    <ClCompile Include="src\Quakaster\qkgfx\ShaderSource.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

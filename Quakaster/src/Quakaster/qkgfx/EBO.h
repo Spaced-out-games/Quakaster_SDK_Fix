@@ -7,6 +7,7 @@ namespace qk::gfx
 	struct QK_API EBO
 	{
 		GLuint m_ebo = 0;
+		uint32_t m_IndexCount = 0;
 		EBO();
 		EBO(GLuint ebo);
 		void init();

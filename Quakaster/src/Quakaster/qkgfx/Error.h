@@ -10,6 +10,7 @@ namespace qk::gfx
 		PLATFORM_WINDOW_CREATE_ERROR,
 		GFX_API_LOADER_FAILURE,
 		GFX_API_INIT_FAILURE,
+		GFX_SHADER_COMPILE_ERROR
 	};
 
 	// Helper function to convert Error_t to string

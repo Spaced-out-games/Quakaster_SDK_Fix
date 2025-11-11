@@ -9,6 +9,7 @@
 //temporary includes
 #include <Quakaster/qkecs/AActor.h>
 #include <entt/core/hashed_string.hpp>
+#include <Quakaster/qkgfx/ShaderSource.h>
 
 ImGuiContext* make_imgui_context()
 {
@@ -142,27 +143,52 @@ int Game::run()
 {
 	qk::gfx::VAO_policy vertex_policy = qk::gfx::make_VAO_policy<Vertex>();
 
+	qk::gfx::Error err;
 
 	qk::gfx::VAO vao;
 	vao.init();
 	vao.bind();
 
-	vertex_policy();
 
 
-	qk::gfx::VBO vbo;
 	
 	#include "test_vertices.h"
 
+	qk::gfx::VBO vbo;
 	vbo.init();
-	vbo.upload_vertices(vertices, GL_STATIC_DRAW);
 	vbo.bind();
+	vbo.upload_vertices(vertices, GL_STATIC_DRAW);
+
+	vertex_policy();
+
+
+	qk::gfx::EBO ebo;
+	ebo.init();
+	ebo.bind();
+	ebo.upload(indices.data(), indices.size(), GL_STATIC_DRAW);
+
+
+
+	std::vector<GLuint> programs;
+	
+	programs.push_back(qk::gfx::compile_source(default_frag, GL_FRAGMENT_SHADER, &err));
+	std::cout << err;
+	programs.push_back(qk::gfx::compile_source(default_vert, GL_VERTEX_SHADER, &err));
+	std::cout << err;
+
+	GLuint shader = qk::gfx::link_sources(programs, &err);
+	std::cout << err;
+
+	qk::gfx::use_shader(shader);
+
+
 
 	
 
 
 
 	SDL_Event event;
+
 
 
 	
@@ -176,12 +202,16 @@ int Game::run()
 			if (event.type == SDL_QUIT)
 				exit(0);
 		}
-
 		m_Context.clear(0.0, 1.0, 0.0, 1.0);
+
+
+		qk::gfx::lazy_draw(shader, ebo.m_IndexCount);
 
 		UIContext.begin();
 		UIContext.draw();
 		UIContext.end();
+
+
 		//shell.tick();
 		m_Window.swap();
 
