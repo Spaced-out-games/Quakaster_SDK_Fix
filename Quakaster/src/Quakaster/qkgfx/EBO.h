@@ -1,6 +1,7 @@
 #pragma once
 #include "../Core.h"
 #include <GL/glew.h>
+#include "Error.h"
 
 namespace qk::gfx
 {
@@ -10,7 +11,7 @@ namespace qk::gfx
 		uint32_t m_IndexCount = 0;
 		EBO();
 		EBO(GLuint ebo);
-		void init();
+		Result init();
 		void bind();
 		void destroy();
 		static void unbind();

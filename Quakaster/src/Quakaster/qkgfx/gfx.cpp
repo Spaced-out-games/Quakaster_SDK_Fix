@@ -5,11 +5,11 @@
 
 namespace qk::gfx
 {
-	Error init_SDL()
+	Result init_SDL()
 	{
 		if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		{
-			return Error{ Error_t::PLATFORM_INIT_ERROR, SDL_GetError() };
+			return Error(Error_t::PLATFORM_INIT_ERROR, SDL_GetError());
 		}
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3); // OpenGL 4.x
 		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3); // for OpenGL 4.6
@@ -19,11 +19,11 @@ namespace qk::gfx
 		return Error{ Error_t::NONE, nullptr };
 	}
 
-	Error init_GLEW()
+	Result init_GLEW()
 	{
 		GLenum err = glewInit();
-		if (err != GLEW_OK) return { Error_t::GFX_API_LOADER_FAILURE, (const char*)glewGetErrorString(err) };
-		return { Error_t::NONE, nullptr };
+		if (err != GLEW_OK) return Error{ Error_t::GFX_API_LOADER_FAILURE, (const char*)glewGetErrorString(err) };
+		return Error{ Error_t::NONE, nullptr };
 
 	}
 }

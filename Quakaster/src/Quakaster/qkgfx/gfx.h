@@ -6,6 +6,6 @@
 namespace qk::gfx
 {
 	// Initializes SDL
-	Error QK_API init_SDL();
-	Error QK_API init_GLEW();
+	qk::gfx::Result QK_API init_SDL();
+	qk::gfx::Result QK_API init_GLEW();
 }

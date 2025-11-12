@@ -11,9 +11,16 @@ namespace qk::gfx
 	{
 		m_ebo = ebo;
 	}
-	void EBO::init()
+	Result EBO::init()
 	{
 		glGenBuffers(1, &m_ebo);
+		GLenum err = glGetError(); // query OpenGL for error
+		if (err != GL_NO_ERROR)
+		{
+			return Error{ Error_t::GFX_VERTEX_BUFFER_INIT_ERROR, (const char*)glewGetErrorString(err) };
+		}
+		return Error{ Error_t::NONE, nullptr };
+
 	}
 	void EBO::bind()
 	{

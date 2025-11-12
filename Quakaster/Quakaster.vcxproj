@@ -25,22 +25,7 @@
     <ClInclude Include="src\Quakaster\qkgfx\VAO.h" />
     <ClInclude Include="src\Quakaster\qkgfx\VBO.h" />
     <ClInclude Include="src\Quakaster\qkgfx\Window.h" />
-    <ClInclude Include="src\Quakaster\qkg\defaults.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\EBO.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\gl_utils.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\GraphicsPipeline.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\graphics_init.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\Mesh.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\MeshConfiguration.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\MeshInstance.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\MeshRegistry.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\ShaderInstance.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\ShaderSources.h" />
     <ClInclude Include="src\Quakaster\qkgfx\Uniform.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\VAO.h" />
-    <ClInclude Include="src\Quakaster\qkg\import.h" />
-    <ClInclude Include="src\Quakaster\qkg\qkg.h" />
-    <ClInclude Include="src\Quakaster\qkg\UberShaderGenerator.h" />
     <ClInclude Include="src\Quakaster\qkio\EEventCategory.h" />
     <ClInclude Include="src\Quakaster\qkio\EEventType.h" />
     <ClInclude Include="src\Quakaster\qkio\EventHeader.h" />
@@ -97,14 +82,7 @@
     <ClCompile Include="src\Quakaster\qkgfx\VAO.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\VBO.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\Window.cpp" />
-    <ClCompile Include="src\Quakaster\qkg\GL\EBO.cpp" />
-    <ClCompile Include="src\Quakaster\qkg\GL\GraphicsPipeline.cpp" />
-    <ClCompile Include="src\Quakaster\qkg\GL\graphics_init.cpp" />
-    <ClCompile Include="src\Quakaster\qkg\GL\MeshConfiguration.cpp" />
-    <ClCompile Include="src\Quakaster\qkg\GL\ShaderInstance.cpp" />
-    <ClCompile Include="src\Quakaster\qkg\GL\ShaderSources.cpp" />
     <ClCompile Include="src\Quakaster\qkgfx\Uniform.cpp" />
-    <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\kernel.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\KernelIdentifierTable.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\KModuleBase.cpp" />
@@ -147,9 +125,6 @@
   <ItemGroup>
     <Text Include="copypasta.txt" />
     <Text Include="todo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\Quakaster\qkg\GL\MeshRegistry.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

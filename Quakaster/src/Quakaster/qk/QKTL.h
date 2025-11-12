@@ -6,6 +6,9 @@
 #include <type_traits>
 #include <cassert>
 #include <entt/core/hashed_string.hpp>
+#include <utility>
+#include <variant>
+
 
 
 // generic C-style function pointer in C++ syntax
@@ -117,4 +120,44 @@ namespace qk
 {
 	entt::id_type QK_API hash(const std::string& string);
 	entt::id_type QK_API hash(const std::string_view& view);
+
+	template <class R, class E>
+	class Result
+	{
+		std::variant<R, E> m_Data;
+
+	public:
+		Result(const R& value) : m_Data(value) {}
+		Result(R&& value) : m_Data(std::move(value)) {}
+		
+		Result(const E& error) : m_Data(error) {}
+		Result(E&& error) : m_Data(std::move(error)) {}
+
+		template<typename U = E>
+		Result(U&& error) : m_Data(std::forward<U>(error)) {}
+
+
+		template <class T>
+		bool is() const {
+			return std::holds_alternative<T>(m_Data);
+		}
+
+		template <class T>
+		T& as() {
+			assert(is<T>());
+			return std::get<T>(m_Data);
+		}
+
+		template <class T>
+		const T& as() const {
+			assert(is<T>());
+			return std::get<T>(m_Data);
+		}
+
+		operator bool() const {
+			return is<R>();
+		}
+	};
+
 }
+

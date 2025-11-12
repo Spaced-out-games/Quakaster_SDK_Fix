@@ -80,27 +80,42 @@ void foo(
 
 void Game::init() {
 
+	qk::gfx::Result err = qk::gfx::init_SDL();
+
+
+
+	
+
 	// Initialize SDL, GLEW, make a window
-	if (qk::gfx::init_SDL())
+	if (!err)
 	{
-		kernel.print("SDL2 failed to initialize");
+		std::cout << qk::gfx::to_string(err.as<qk::gfx::Error>());
+		std::cout << " SDL2 failed to initialize";
 		exit(1);
 	}
-	if (m_Window.init("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1080, 1080, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN))
+	err = m_Window.init("test", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1080, 1080, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
+	if (!err)
 	{
-		kernel.print("Window failed to initialize");
+		std::cout << qk::gfx::to_string(err.as<qk::gfx::Error>());
+		std::cout << " Window failed to initialize";
 		exit(2);
 	}
-	if (m_Context.init(m_Window))
+	err = m_Context.init(m_Window);
+	if (!err)
 	{
-		kernel.print("gfx failed to initialize");
+		std::cout << qk::gfx::to_string(err.as<qk::gfx::Error>());
+		std::cout << " gfx failed to initialize";
 		exit(3);
 	}
-	if (qk::gfx::init_GLEW())
+
+	err = qk::gfx::init_GLEW();
+	if (!err)
 	{
-		kernel.print("glew failed to initialize");
+		std::cout << qk::gfx::to_string(err.as<qk::gfx::Error>());
+		std::cout << " glew failed to initialize";
 		exit(3);
 	}
+	
 
 	// set up ImGui
 	UIContext.init(make_imgui_context(), m_Context, m_Window);

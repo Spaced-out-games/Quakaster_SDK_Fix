@@ -156,51 +156,6 @@
     <ClInclude Include="src\Quakaster\qkgfx\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\EBO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\gl_utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\graphics_init.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\GraphicsPipeline.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\MeshConfiguration.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\MeshInstance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\MeshRegistry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\ShaderInstance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\ShaderSources.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\VAO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\defaults.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\import.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\qkg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\UberShaderGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Quakaster\qkgfx\gfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -362,27 +317,6 @@
     <ClCompile Include="src\Quakaster\qkgfx\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkg\GL\EBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quakaster\qkg\GL\graphics_init.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quakaster\qkg\GL\GraphicsPipeline.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quakaster\qkg\GL\MeshConfiguration.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quakaster\qkg\GL\ShaderInstance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quakaster\qkg\GL\ShaderSources.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Quakaster\qkgfx\gfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -411,10 +345,5 @@
   <ItemGroup>
     <Text Include="copypasta.txt" />
     <Text Include="todo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\Quakaster\qkg\GL\MeshRegistry.inl">
-      <Filter>Header Files</Filter>
-    </None>
   </ItemGroup>
 </Project>
