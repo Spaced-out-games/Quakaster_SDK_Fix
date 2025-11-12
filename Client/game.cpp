@@ -10,6 +10,7 @@
 #include <Quakaster/qkecs/AActor.h>
 #include <entt/core/hashed_string.hpp>
 #include <Quakaster/qkgfx/ShaderSource.h>
+#include <Quakaster/qkgfx/Uniform.h>
 
 ImGuiContext* make_imgui_context()
 {
@@ -158,7 +159,7 @@ int Game::run()
 	vbo.init();
 	vbo.bind();
 	vbo.upload_vertices(vertices, GL_STATIC_DRAW);
-
+	
 	vertex_policy();
 
 
@@ -189,9 +190,16 @@ int Game::run()
 
 	SDL_Event event;
 
+	//glm::mat4 proj = glm::perspective(glm::radians(90.0f), 1.0f, 1.0f, 100.0f);
+	//glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, -3.0f));
 
+	//qk::gfx::Uniform<qk::mat4> view("u_View", shader);
+	glm::mat4 proj = glm::perspective(glm::radians(90.0f), 1.0f, 1.0f, 100.0f);
+	glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, -3.0f));
 
-	
+	qk::gfx::Uniform uView("u_View", shader, view);
+	qk::gfx::Uniform uProj("u_Proj", shader, proj);
+
 
 	while (true)
 	{
@@ -203,7 +211,8 @@ int Game::run()
 				exit(0);
 		}
 		m_Context.clear(0.0, 1.0, 0.0, 1.0);
-
+		uView.update();
+		uProj.update();
 
 		qk::gfx::lazy_draw(shader, ebo.m_IndexCount);
 

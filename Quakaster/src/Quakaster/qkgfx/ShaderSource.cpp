@@ -47,19 +47,8 @@ namespace qk::gfx
     }
     void lazy_draw(GLuint shader, GLsizei count)
     {
-        glDisable(GL_CULL_FACE);
-        glm::mat4 proj = glm::perspective(glm::radians(90.0f), 1.0f, 1.0f, 100.0f);
-        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 1.0f, -3.0f));
-
-
-
-        GLint loc = glGetUniformLocation(shader, "u_Proj");
-        glUseProgram(shader);
-        glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(proj));
-
-        loc = glGetUniformLocation(shader, "u_View");
-        glUseProgram(shader);
-        glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(view));
+        //glDisable(GL_CULL_FACE);
+        
 
         glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, 0);
 

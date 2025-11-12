@@ -3,7 +3,7 @@
 #if defined(QK_GRAPHICS_BACKEND)
 	#if(QK_GRAPHICS_BACKEND == 1)
 		#include "GL/VAO.h"
-		#include "GL/VBO.h"
+		//#include "GL/VBO.h"
 		#include "GL/EBO.h"
 		#include "GL/ShaderInstance.h"
 		#include "GL/ShaderSources.h"

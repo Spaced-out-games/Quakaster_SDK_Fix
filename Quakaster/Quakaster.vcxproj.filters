@@ -189,9 +189,6 @@
     <ClInclude Include="src\Quakaster\qkg\GL\VAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkg\GL\VBO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Quakaster\qkg\defaults.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -226,6 +223,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Quakaster\qkgfx\ShaderSource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Quakaster\qkgfx\Uniform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -383,9 +383,6 @@
     <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkg\GL\VBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Quakaster\qkgfx\gfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -395,9 +392,6 @@
     <ClCompile Include="src\Quakaster\qkgfx\VAO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Quakaster\qkgfx\VBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Quakaster\qkgfx\EBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -405,6 +399,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qkgfx\ShaderSource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkgfx\VBO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Quakaster\qkgfx\Uniform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

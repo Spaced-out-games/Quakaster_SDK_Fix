@@ -36,8 +36,8 @@
     <ClInclude Include="src\Quakaster\qkg\GL\MeshRegistry.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\ShaderInstance.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\ShaderSources.h" />
+    <ClInclude Include="src\Quakaster\qkgfx\Uniform.h" />
     <ClInclude Include="src\Quakaster\qkg\GL\VAO.h" />
-    <ClInclude Include="src\Quakaster\qkg\GL\VBO.h" />
     <ClInclude Include="src\Quakaster\qkg\import.h" />
     <ClInclude Include="src\Quakaster\qkg\qkg.h" />
     <ClInclude Include="src\Quakaster\qkg\UberShaderGenerator.h" />
@@ -103,8 +103,8 @@
     <ClCompile Include="src\Quakaster\qkg\GL\MeshConfiguration.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\ShaderInstance.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\ShaderSources.cpp" />
+    <ClCompile Include="src\Quakaster\qkgfx\Uniform.cpp" />
     <ClCompile Include="src\Quakaster\qkg\GL\VAO.cpp" />
-    <ClCompile Include="src\Quakaster\qkg\GL\VBO.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\kernel.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\KernelIdentifierTable.cpp" />
     <ClCompile Include="src\Quakaster\qkkernel\KModuleBase.cpp" />
