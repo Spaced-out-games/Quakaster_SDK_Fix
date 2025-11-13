@@ -45,7 +45,7 @@ namespace qk::gfx
     {
         glUseProgram(shader);
     }
-    void lazy_draw(GLuint shader, GLsizei count)
+    void lazy_draw(GLsizei count)
     {
         //glDisable(GL_CULL_FACE);
         

@@ -11,6 +11,7 @@
 #include <entt/core/hashed_string.hpp>
 #include <Quakaster/qkgfx/ShaderSource.h>
 #include <Quakaster/qkgfx/Uniform.h>
+#include <Quakaster/qkgfx/gfx-asm.h>
 
 ImGuiContext* make_imgui_context()
 {
@@ -77,6 +78,10 @@ void foo(
 }
 
 */
+
+using namespace qk::gfx;
+
+
 
 void Game::init() {
 
@@ -165,7 +170,7 @@ int Game::run()
 	vao.init();
 	vao.bind();
 
-
+	qk::gfx::VM vm;
 
 	
 	#include "test_vertices.h"
@@ -198,9 +203,14 @@ int Game::run()
 	qk::gfx::use_shader(shader);
 
 
-
+	qk::gfx::RenderPass rp;
+	rp.set_clear_color(0.0f, 1.0f, 0.0f, 1.0f)
+		.clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+		.bind_vertex_object(vao)
+		.draw_vertex_object(GL_TRIANGLES, ebo.m_IndexCount, GL_UNSIGNED_INT, 0);
+		//;
 	
-
+	kernel.print(rp.to_string());
 
 
 	SDL_Event event;
@@ -225,16 +235,19 @@ int Game::run()
 			if (event.type == SDL_QUIT)
 				exit(0);
 		}
-		m_Context.clear(0.0, 1.0, 0.0, 1.0);
+		//m_Context.clear(0.0, 1.0, 0.0, 1.0);
 		uView.update();
 		uProj.update();
 
-		qk::gfx::lazy_draw(shader, ebo.m_IndexCount);
+
+		vm.call(&rp);
 
 		UIContext.begin();
 		UIContext.draw();
 		UIContext.end();
 
+
+		
 
 		//shell.tick();
 		m_Window.swap();
