@@ -183,7 +183,7 @@
     <ClInclude Include="src\Quakaster\qkgfx\Uniform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Quakaster\qkgfx\gfx-asm.h">
+    <ClInclude Include="src\Quakaster\qkgfx\gfx-bytecode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -342,9 +342,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Quakaster\qkgfx\Uniform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Quakaster\qkgfx\gfx-asm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
