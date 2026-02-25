@@ -1,9 +1,20 @@
 #include <iostream>
-#include "../entrypoint.h"
+#include "entrypoint.h"
+#include "core/Window.h"
 struct MyApp : qk::Application {
-	void run() override {
-		std::cout << "hello world";
+	qk::Window window;
+
+	void init(int argc, char** argv) override {
+		qk::init();
+		window.init(480, 480, "Demo");
 	}
+
+	void run() override {
+
+	}
+
+
+
 };
 
 std::unique_ptr<qk::Application> qk::create_application(int argc, char** argv) {

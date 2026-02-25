@@ -15,19 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="thirdparty\stb_image.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="thirdparty\tiny_obj_loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="thirdparty\imgui\imgui\backends\imgui_impl_qkio-sdl2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="core\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entrypoint.h">
@@ -35,56 +29,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="thirdparty\enet-master\callbacks.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\enet-master\compress.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\enet-master\host.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\enet-master\list.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\enet-master\packet.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\enet-master\peer.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\enet-master\protocol.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\enet-master\unix.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\enet-master\win32.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\imgui\imgui\imgui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\imgui\imgui\imgui_demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\imgui\imgui\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\imgui\imgui\imgui_tables.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\imgui\imgui\imgui_widgets.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_opengl3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_qkio-sdl2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="core\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="core\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="thirdparty\glfw\src\CMakeLists.txt" />
   </ItemGroup>
 </Project>

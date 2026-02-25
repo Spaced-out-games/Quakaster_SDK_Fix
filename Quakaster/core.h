@@ -7,3 +7,7 @@
 #else
 	#define QK_API __declspec(dllimport)
 #endif
+
+namespace qk {
+	QK_API bool init();
+}
