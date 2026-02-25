@@ -94,32 +94,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Quakaster\thirdparty\enet-master\callbacks.c" />
-    <ClCompile Include="..\Quakaster\thirdparty\enet-master\compress.c" />
-    <ClCompile Include="..\Quakaster\thirdparty\enet-master\host.c" />
-    <ClCompile Include="..\Quakaster\thirdparty\enet-master\list.c" />
-    <ClCompile Include="..\Quakaster\thirdparty\enet-master\packet.c" />
-    <ClCompile Include="..\Quakaster\thirdparty\enet-master\peer.c" />
-    <ClCompile Include="..\Quakaster\thirdparty\enet-master\protocol.c" />
-    <ClCompile Include="..\Quakaster\thirdparty\enet-master\unix.c" />
-    <ClCompile Include="..\Quakaster\thirdparty\enet-master\win32.c" />
-    <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\backends\imgui_impl_qkio-sdl2.cpp" />
-    <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\imgui.cpp" />
-    <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\imgui_demo.cpp" />
-    <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\imgui_draw.cpp" />
-    <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\imgui_tables.cpp" />
-    <ClCompile Include="..\Quakaster\thirdparty\imgui\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="ControlLayer.cpp" />
-    <ClCompile Include="game.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="help.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ControlLayer.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="test_vertices.h" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

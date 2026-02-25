@@ -1,3 +1,0 @@
-TODO:
-	Implement MeshRegistry
-		MeshRegistry::register(MeshConfiguration<vertex_t>&)
