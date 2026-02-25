@@ -13,12 +13,18 @@
   <ItemGroup>
     <ClInclude Include="core.h" />
     <ClInclude Include="core\Application.h" />
+    <ClInclude Include="core\DefaultEvents.h" />
+    <ClInclude Include="core\EventQueue.h" />
+    <ClInclude Include="core\glfw_EventTranslator.h" />
+    <ClInclude Include="core\IEvent.h" />
     <ClInclude Include="core\Window.h" />
     <ClInclude Include="entrypoint.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core.cpp" />
     <ClCompile Include="core\Application.cpp" />
+    <ClCompile Include="core\EventQueue.cpp" />
+    <ClCompile Include="core\glfw_EventTranslator.cpp" />
     <ClCompile Include="core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -76,7 +82,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL;GLFW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerOutput>NoListing</AssemblerOutput>
     </ClCompile>
     <Link>
