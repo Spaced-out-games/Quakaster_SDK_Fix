@@ -58,7 +58,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WINSOCK_DEPRECATED_NO_WARNINGS;HAS_INET_PTON;GLEW_STATIC;QK_GRAPHICS_BACKEND=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
