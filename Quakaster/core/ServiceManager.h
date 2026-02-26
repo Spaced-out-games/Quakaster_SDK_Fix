@@ -1,42 +1,91 @@
-#pragma once
-#include "../thirdparty/entt/src/entt/entity/registry.hpp"
+﻿#pragma once
 #include <unordered_map>
 #include <string>
-#include <memory>
 #include "IService.h"
-#include "../core.h"
+#include "../thirdparty/entt/src/entt/entity/registry.hpp" // temp test
 
 namespace qk {
 
-	struct ServiceRef {
-		IService* svc = nullptr;
-		void (*dtor)(entt::registry*) = nullptr; // function pointer
-		ServiceRef(IService* service, void (*destructor)(entt::registry*))
-			: svc(service), dtor(destructor) {}
-		ServiceRef() = default;
-	};
+    struct ServiceEntry;
+    using ServiceMap = std::unordered_map<std::string, ServiceEntry>;
 
-	struct QK_API ServiceManager {
-		std::unordered_map<std::string, ServiceRef> m_Services;
-		entt::registry* registry = nullptr;
+    struct ServiceEntry {
+        IService* service = nullptr;
+        void (*dtor)(void* storage, ServiceMap&, const std::string&) = nullptr; // C-style function pointer
+    };
 
-		template<class Service_t, class... Args>
-		void add_service(const std::string& name, Args&&... args) {
-			if (!registry) return;
-			registry->ctx().emplace<Service_t>(std::forward<Args>(args)...);
+    // Type for ServiceManager bookkeeping
 
-			Service_t& svc = registry->ctx().get<Service_t>();
+    // ----------------------------------------
+    // Concept: runtime service storage
+    // ----------------------------------------
+    template <typename S>
+    concept ServiceStorageConcept = requires(S s, ServiceMap& map, const std::string & name) {
+        // emplace<T>(name, map, args...) -> returns IService*
+        { s.template emplace<int>(name, map) } -> std::same_as<IService*>;
 
-			m_Services[name] = ServiceRef{&svc, +[](entt::registry* registry) { registry->ctx().erase<Service_t>(); } // unary + converts to function ptr
-			};
+        // get(name, map) -> returns IService*
+        { s.get(name, map) } -> std::same_as<IService*>;
 
-		}
+        // erase(name, map) -> void
+        { s.erase(name, map) } -> std::same_as<void>;
+    };
 
-		IService* get_service(const std::string& name);
+    // ----------------------------------------
+    // ServiceManager wraps any storage
+    // ----------------------------------------
+    template <ServiceStorageConcept Storage>
+    struct ServiceManager {
+        Storage* storage;
+        ServiceMap map;
+
+        template <typename T, typename... Args>
+        T* emplace(const std::string& name, Args&&... args) {
+            return static_cast<T*>(storage->template emplace<T>(name, map, std::forward<Args>(args)...));
+        }
+
+        IService* get(const std::string& name) {
+            return storage->get(name, map);
+        }
+
+        
+        void erase(const std::string& name) {
+            storage->erase(name, map);
+        }
+    };
 
 
-		void remove_service(const std::string& name);
 
-	};
+    struct EnTTContextStorage {
+        entt::registry* reg;
+
+        template <typename T, typename... Args>
+        IService* emplace(const std::string& name, ServiceMap& map, Args&&... args) {
+            T& svc = reg->ctx().emplace<T>(std::forward<Args>(args)...);
+            map[name].service = &svc;
+            map[name].dtor = [](void* storage, ServiceMap&, const std::string&) {
+                entt::registry* registry = (entt::registry*)storage;
+                registry->ctx().erase<T>();
+            };
+
+            return &svc;
+        }
+
+        IService* get(const std::string& name, ServiceMap& map) {
+            auto it = map.find(name);
+            return it != map.end() ? it->second.service : nullptr;
+        }
+
+        
+        void erase(const std::string& name, ServiceMap& map) {
+            auto it = map.find(name);
+            if (it != map.end()) {
+                
+                it->second.dtor(reg, map, name);
+                map.erase(it);         // bookkeeping cleanup
+            }
+        }
+    };
+
 
 } // namespace qk

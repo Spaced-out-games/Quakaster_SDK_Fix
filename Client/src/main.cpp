@@ -18,26 +18,29 @@ struct MyApp : qk::Application {
 	std::shared_ptr<qk::EventQueue> queue;
 	qk::LayerStack stack;
 	size_t max = 0;
-	qk::ServiceManager mgr;
 	entt::registry registry;
+	qk::EnTTContextStorage storage{ &registry };
+	qk::ServiceManager<qk::EnTTContextStorage> mgr;
 
 	void init(int argc, char** argv) override {
 		qk::init();
+		mgr.storage = &storage;
+
 		queue = std::make_unique<qk::EventQueue>();
 		window.init(480, 480, "Demo");
 		window.set_event_queue(queue);
 		stack.attach_queue(queue);
 		stack.insert_layer(std::make_unique<TestLayer>());
 		stack.insert_layer(std::make_unique<GreetLayer>());
-		mgr.registry = &registry;
-		mgr.add_service<DummyService>("DummyService");
+		//mgr.registry = &registry;
+		mgr.emplace<DummyService>("DummyService");
 
-		DummyService* dummy = dynamic_cast<DummyService*>(mgr.get_service("DummyService"));
+		DummyService* dummy = dynamic_cast<DummyService*>(mgr.get("DummyService"));
 
 		if (dummy) std::cout << dummy->name;
 
 
-		mgr.remove_service("DummyService");
+		mgr.erase("DummyService");
 
 	}
 
