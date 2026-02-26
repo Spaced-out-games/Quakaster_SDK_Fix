@@ -81,7 +81,9 @@ namespace qk {
             auto it = map.find(name);
             if (it != map.end()) {
                 
-                it->second.dtor(reg, map, name);
+                auto dtor = it->second.dtor;
+                
+                if(dtor) dtor(reg, map, name);
                 map.erase(it);         // bookkeeping cleanup
             }
         }
