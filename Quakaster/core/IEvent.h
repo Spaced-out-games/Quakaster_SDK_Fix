@@ -28,10 +28,12 @@ namespace qk {
 		cat_output = cat_logger,
 		cat_foundational = cat_os | cat_file | cat_memory,
 		cat_media = cat_graphics | cat_sound,
-		cat_core = cat_engine | cat_application | cat_window
+		cat_core = cat_engine | cat_application | cat_window,
+
+		cat_all = 0xFFFFFFFF
 	};
 
-	/*
+	
 	inline EEventCategory operator|(EEventCategory a, EEventCategory b) {
 		return static_cast<EEventCategory>(static_cast<uint32_t>(a) | static_cast<uint32_t>(b));
 	}
@@ -51,10 +53,21 @@ namespace qk {
 		return cat == EEventCategory::cat_null;
 	}
 
-	inline operator bool(EEventCategory cat) {
-		return cat != EEventCategory::cat_null;
+	inline EEventCategory& operator|=(EEventCategory& a, EEventCategory b) {
+		a = a | b;
+		return a;
 	}
-	*/
+
+	inline EEventCategory& operator&=(EEventCategory& a, EEventCategory b) {
+		a = a & b;
+		return a;
+	}
+
+	inline EEventCategory operator~(EEventCategory a) {
+		return static_cast<EEventCategory>(~static_cast<uint32_t>(a));
+	}
+
+	
 	enum class EEventType : uint32_t {
 		KeyPress_evt,
 		KeyHold_evt,
