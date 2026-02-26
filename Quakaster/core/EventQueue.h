@@ -22,6 +22,8 @@ namespace qk {
             return m_Data.emplace_back(std::forward<Args>(args)...);
         }
 
+        const std::vector<IEvent>& events();
+
         void clear();
 
         size_t size() const;

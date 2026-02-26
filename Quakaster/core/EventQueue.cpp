@@ -14,6 +14,9 @@ namespace qk {
         m_Data.push_back(std::move(e));
     }
 
+    const std::vector<IEvent>& EventQueue::events() {
+        return m_Data;
+    }
 
 
     void EventQueue::clear() {
