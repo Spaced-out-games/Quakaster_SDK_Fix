@@ -17,6 +17,12 @@
     <ClInclude Include="core\EventQueue.h" />
     <ClInclude Include="core\glfw_EventTranslator.h" />
     <ClInclude Include="core\IEvent.h" />
+    <ClInclude Include="core\ILayer.h" />
+    <ClInclude Include="core\IService.h" />
+    <ClInclude Include="core\ISystem.h" />
+    <ClInclude Include="core\LayerStack.h" />
+    <ClInclude Include="core\ServiceManager.h" />
+    <ClInclude Include="core\Stopwatch.h" />
     <ClInclude Include="core\Window.h" />
     <ClInclude Include="entrypoint.h" />
   </ItemGroup>
@@ -25,12 +31,14 @@
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\EventQueue.cpp" />
     <ClCompile Include="core\glfw_EventTranslator.cpp" />
+    <ClCompile Include="core\ILayer.cpp" />
+    <ClCompile Include="core\LayerStack.cpp" />
+    <ClCompile Include="core\ServiceManager.cpp" />
+    <ClCompile Include="core\Stopwatch.cpp" />
     <ClCompile Include="core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="thirdparty\glfw\src\CMakeLists.txt" />
-  </ItemGroup>
-  <ItemGroup>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
