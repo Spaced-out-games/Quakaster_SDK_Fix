@@ -24,7 +24,118 @@
     <ClInclude Include="core\ServiceManager.h" />
     <ClInclude Include="core\Stopwatch.h" />
     <ClInclude Include="core\Window.h" />
+    <ClInclude Include="gfx\gfx.h" />
+    <ClInclude Include="gfx\GraphicsService.h" />
+    <ClInclude Include="gfx\VertexAttributeSetupRegistry.h" />
+    <ClInclude Include="gfx\VertexBufferGenerator.h" />
+    <ClInclude Include="gui\GUIService.h" />
+    <ClInclude Include="integrations\entt_service_storage.h" />
     <ClInclude Include="entrypoint.h" />
+    <ClInclude Include="thirdparty\imgui\imgui\imgui.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\async.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\async_logger-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\async_logger.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\cfg\argv.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\cfg\env.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\cfg\helpers-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\cfg\helpers.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\common-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\common.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\backtracer-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\backtracer.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\circular_q.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\console_globals.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\file_helper-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\file_helper.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\fmt_helper.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\log_msg-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\log_msg.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\log_msg_buffer-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\log_msg_buffer.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\mpmc_blocking_q.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\null_mutex.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\os-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\os.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\periodic_worker-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\periodic_worker.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\registry-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\registry.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\synchronous_factory.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\tcp_client-windows.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\tcp_client.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\thread_pool-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\thread_pool.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\udp_client-windows.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\udp_client.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\details\windows_include.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bin_to_hex.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\args.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\base.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\chrono.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\color.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\compile.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\core.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\format-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\format.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\os.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\ostream.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\printf.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\ranges.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\std.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\bundled\xchar.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\chrono.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\compile.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\fmt.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\ostr.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\ranges.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\std.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fmt\xchar.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\formatter.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\fwd.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\logger-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\logger.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\mdc.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\pattern_formatter-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\pattern_formatter.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\android_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\ansicolor_sink-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\ansicolor_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\base_sink-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\base_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\basic_file_sink-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\basic_file_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\callback_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\daily_file_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\dist_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\dup_filter_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\hourly_file_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\kafka_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\mongo_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\msvc_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\null_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\ostream_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\qt_sinks.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\ringbuffer_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\rotating_file_sink-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\rotating_file_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\sink-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\stdout_color_sinks-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\stdout_color_sinks.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\stdout_sinks-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\stdout_sinks.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\syslog_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\systemd_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\tcp_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\udp_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\wincolor_sink-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\wincolor_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\sinks\win_eventlog_sink.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\spdlog-inl.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\spdlog.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\stopwatch.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\tweakme.h" />
+    <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\version.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core.cpp" />
@@ -32,10 +143,24 @@
     <ClCompile Include="core\EventQueue.cpp" />
     <ClCompile Include="core\glfw_EventTranslator.cpp" />
     <ClCompile Include="core\ILayer.cpp" />
+    <ClCompile Include="core\IService.cpp" />
     <ClCompile Include="core\LayerStack.cpp" />
     <ClCompile Include="core\ServiceManager.cpp" />
     <ClCompile Include="core\Stopwatch.cpp" />
     <ClCompile Include="core\Window.cpp" />
+    <ClCompile Include="entity\CHeirarchy.cpp" />
+    <ClCompile Include="entity\CHeirarchy.h" />
+    <ClCompile Include="gfx\gfx.cpp" />
+    <ClCompile Include="gfx\GraphicsService.cpp" />
+    <ClCompile Include="gfx\VertexAttributeSetupRegistry.cpp" />
+    <ClCompile Include="gui\GUIService.cpp" />
+    <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="thirdparty\imgui\imgui\imgui.cpp" />
+    <ClCompile Include="thirdparty\imgui\imgui\imgui_demo.cpp" />
+    <ClCompile Include="thirdparty\imgui\imgui\imgui_draw.cpp" />
+    <ClCompile Include="thirdparty\imgui\imgui\imgui_tables.cpp" />
+    <ClCompile Include="thirdparty\imgui\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="thirdparty\glfw\src\CMakeLists.txt" />
@@ -77,30 +202,32 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Quakaster\out\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)Quakaster\intermediate\$(Configuration)-$(Platform)\</IntDir>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL;GLFW_STATIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL;GLFW_STATIC;GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\spdlog-1.x\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\imgui;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\pfr\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\entt\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerOutput>NoListing</AssemblerOutput>
+      <ShowIncludes>true</ShowIncludes>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\lib-vc2022;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>move /Y "$(SolutionDir)Quakaster\out\$(Configuration)-$(Platform)\$(ProjectName).dll" "$(SolutionDir)Client\out\$(Configuration)-$(Platform)\"</Command>
+      <Command>xcopy /Y /D "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Client\out\$(Configuration)-$(Platform)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -109,21 +236,23 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL;GLFW_STATIC</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL;GLFW_STATIC GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\spdlog-1.x\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ShowIncludes>true</ShowIncludes>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\lib-vc2022;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>move /Y "$(SolutionDir)Quakaster\out\$(Configuration)-$(Platform)\$(ProjectName).dll" "$(SolutionDir)Client\out\$(Configuration)-$(Platform)\"</Command>
+      <Command>xcopy /Y /D "$(OutDir)$(ProjectName).dll" "$(SolutionDir)Client\out\$(Configuration)-$(Platform)\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
