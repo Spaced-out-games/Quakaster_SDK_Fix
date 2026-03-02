@@ -9,11 +9,11 @@
 namespace qk {
     class QK_API LayerStack {
         std::vector<std::unique_ptr<ILayer>> m_Layers;
-        std::shared_ptr<EventQueue> m_Queue = nullptr;
+        EventQueue* m_Queue = nullptr;
 
     public:
 
-        void attach_queue(std::shared_ptr<EventQueue> queue);
+        void attach_queue(EventQueue* queue);
 
         void insert_layer(std::unique_ptr<ILayer>&& layer);
 

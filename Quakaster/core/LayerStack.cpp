@@ -7,7 +7,7 @@ namespace qk {
 		m_Layers.push_back(std::move(layer));
 	}
 
-	void LayerStack::attach_queue(std::shared_ptr<EventQueue> queue) {
+	void LayerStack::attach_queue(EventQueue* queue) {
 		m_Queue = queue;
 	}
 

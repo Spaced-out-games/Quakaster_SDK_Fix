@@ -9,13 +9,13 @@ namespace qk {
 		glfwSetKeyCallback(m_Window, callback);
 	}
 
-	void Window::set_event_queue(std::shared_ptr<EventQueue> queue) {
+	void Window::set_event_queue(EventQueue* queue) {
 		m_Queue = queue;
 	}
 
 
 	EventQueue* Window::queue() {
-		return m_Queue.get();
+		return m_Queue;
 	}
 
 	void Window::make_context_current() {

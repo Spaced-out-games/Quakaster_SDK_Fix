@@ -19,7 +19,7 @@ namespace qk {
 
 	class QK_API Window {
 		GLFWwindow* m_Window = nullptr;
-		std::shared_ptr<EventQueue> m_Queue = nullptr;
+		EventQueue* m_Queue = nullptr;
 
 		
 		public:
@@ -35,7 +35,7 @@ namespace qk {
 
 			void make_context_current();
 			void set_key_callback(GLFWkeyfun callback);
-			void set_event_queue(std::shared_ptr<EventQueue> queue);
+			void set_event_queue(EventQueue* queue);
 			EventQueue* queue();
 			Window::Position get_position();
 			void set_position(Window::Position new_position);
