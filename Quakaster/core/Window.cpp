@@ -1,7 +1,8 @@
 #include "Window.h"
 #include <GLFW/glfw3.h>
 #include "glfw_EventTranslator.h"
-
+#include "spdlog/spdlog.h"
+#include <stdexcept>
 namespace qk {
 
 	void Window::set_key_callback(GLFWkeyfun callback) {
@@ -17,14 +18,20 @@ namespace qk {
 		return m_Queue.get();
 	}
 
+	void Window::make_context_current() {
+		if (!m_Window) {
+			throw std::runtime_error("Window not initialized!");
+		}
+		glfwMakeContextCurrent(m_Window);  // <-- this is the key
+	}
 
-	glm::ivec2 Window::get_position() {
-		glm::ivec2 result;
+	Window::Position Window::get_position() {
+		Position result;
 		glfwGetWindowPos(m_Window, &(result.x), &(result.y));
 		return result;
 	}
 
-	void Window::set_position(glm::ivec2 new_position) {
+	void Window::set_position(Window::Position new_position) {
 		
 		glfwSetWindowPos(m_Window, new_position.x, new_position.y);
 	}
@@ -37,10 +44,26 @@ namespace qk {
 		glfwPollEvents();
 	}
 
+	int Window::should_close() {
+		return glfwWindowShouldClose(m_Window);
+	}
+
+	void Window::swap_buffers() {
+		glfwSwapBuffers(m_Window);
+	}
+	void Window::resize(Window::Size new_size) {
+		glfwSetWindowSize(m_Window, new_size.w, new_size.h);
+	}
+	void* Window::handle() {
+		return m_Window;
+	}
 
 
-	void Window::init(int width, int height, const std::string& title, Monitor monitor, Window* shared) {
-		m_Window = glfwCreateWindow(width, height, title.c_str(),
+
+	void Window::init(Window::Size initial_size, const std::string& title, Monitor monitor, Window* shared) {
+		spdlog::info("Window initialized at {:#x}", (uintptr_t)this);
+
+		m_Window = glfwCreateWindow(initial_size.w, initial_size.h, title.c_str(),
 			(GLFWmonitor*)monitor,
 			shared ? shared->m_Window : nullptr);
 
@@ -58,8 +81,17 @@ namespace qk {
 
 	}
 
+	void Window::destroy() {
+		spdlog::info("Window destroyed at {:#x}", (uintptr_t)this);
+		if (m_Window) {
+			glfwDestroyWindow(m_Window);
+			m_Window = nullptr;
+		}
+	}
+
+
 	Window::~Window() {
-		glfwDestroyWindow(m_Window);
+		destroy();
 	}
 
 }

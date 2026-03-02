@@ -3,7 +3,6 @@
 #define GLFW_INCLUDE_NONE
 #include <string>
 #include <memory>
-#include <glm/vec2.hpp>
 #include "EventQueue.h"
 
 
@@ -16,21 +15,39 @@ namespace qk {
 	using Monitor = GLFWmonitor*;
 
 
+	
+
 	class QK_API Window {
 		GLFWwindow* m_Window = nullptr;
 		std::shared_ptr<EventQueue> m_Queue = nullptr;
 
 		
 		public:
+
+			struct Position {
+				int x = 0;
+				int y = 0;
+			};
+			struct Size {
+				int w = 0;
+				int h = 0;
+			};
+
+			void make_context_current();
 			void set_key_callback(GLFWkeyfun callback);
 			void set_event_queue(std::shared_ptr<EventQueue> queue);
 			EventQueue* queue();
-			glm::ivec2 get_position();
-			void set_position(glm::ivec2 new_position);
+			Window::Position get_position();
+			void set_position(Window::Position new_position);
 
 			std::string get_title();
 
-			void init(int initial_width, int initial_height, const std::string& title, Monitor monitor = nullptr, Window* shared = nullptr);
+			int should_close();
+			void init(Window::Size initial_size, const std::string& title, Monitor monitor = nullptr, Window* shared = nullptr);
+			void swap_buffers();
+			void resize(Window::Size new_size);
+			void* handle();
+			void destroy();
 			Window();
 			~Window();
 
