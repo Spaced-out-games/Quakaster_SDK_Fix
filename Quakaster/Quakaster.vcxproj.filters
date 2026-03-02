@@ -390,6 +390,9 @@
     <ClInclude Include="gfx\VertexBufferGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gfx\GraphicsService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Application.cpp">

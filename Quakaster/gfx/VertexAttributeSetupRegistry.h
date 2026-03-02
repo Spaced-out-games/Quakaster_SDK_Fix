@@ -53,13 +53,13 @@ namespace gfx {
 
 			// Allows you to manually define a lambda to set up your vertex_t (and primitives!)
 			template <class vertex_t>
-			void autoregister_vertex_attribute_setup_override(setup_lambda_t lambda) {
+			void autogen_attribute_setup_override(setup_lambda_t lambda) {
 				m_SetupRegistry[typeid(vertex_t)] = lambda;
 			}
 
 			// Generates a lambda to set up your vertex_t
 			template <class vertex_t>
-			void autoregister_vertex_attribute_setup() {
+			void autogen_attribute_setup() {
 
 				static_assert(std::is_aggregate_v<vertex_t>(), "Must be aggregate type");
 

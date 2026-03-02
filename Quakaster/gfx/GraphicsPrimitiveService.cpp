@@ -4,30 +4,41 @@
 
 namespace gfx {
 
-	unsigned int make_vertexBuffer_impl() {
+	unsigned int GraphicsPrimitiveService::VBO_ctor_impl() {
 		unsigned int vbo;
 		glGenBuffers(1, &vbo);
 		return vbo;
 	}
 
-	void bind_vertexBuffer_impl(unsigned int target) {
+    void GraphicsPrimitiveService::VBO_dtor_impl(unsigned int target) {
+        glDeleteBuffers(1, &target);
+    }
+
+
+	void GraphicsPrimitiveService::VBO_bind_impl(unsigned int target) {
 		glBindBuffer(GL_ARRAY_BUFFER, target);
 	}
 
-	void upload_vertexBuffer_impl(const void* data, ptrdiff_t size, GLenum usage) {
+	void GraphicsPrimitiveService::VBO_upload_impl(const void* data, ptrdiff_t size, GLenum usage) {
 		glBufferData(GL_ARRAY_BUFFER, size, data, usage);
 	}
 
-    unsigned int generate_vao() {
+    unsigned int GraphicsPrimitiveService::VAO_ctor_impl() {
 		unsigned int vao;
 		glGenVertexArrays(1, &vao);
 		return vao;
 	}
-    void bind_vao(unsigned int vao) {
+
+    void GraphicsPrimitiveService::VAO_dtor_impl(unsigned int target) {
+        glDeleteVertexArrays(1, &target);
+    }
+
+
+    void GraphicsPrimitiveService::VAO_bind_impl(unsigned int vao) {
         glBindVertexArray(vao);
     }
 
-    unsigned int compile_shader(unsigned int type, const char* src) {
+    unsigned int GraphicsPrimitiveService::shader_compile_impl(unsigned int type, const char* src) {
         GLuint shader = glCreateShader(type);
         glShaderSource(shader, 1, &src, nullptr);
         glCompileShader(shader);
@@ -45,9 +56,9 @@ namespace gfx {
         return shader;
     }
 
-    unsigned int create_shader_program(const char* vertSrc, const char* fragSrc) {
-        GLuint vert = compile_shader(GL_VERTEX_SHADER, vertSrc);
-        GLuint frag = compile_shader(GL_FRAGMENT_SHADER, fragSrc);
+    unsigned int GraphicsPrimitiveService::shader_program_ctor_impl(const char* vertSrc, const char* fragSrc) {
+        GLuint vert = shader_compile_impl(GL_VERTEX_SHADER, vertSrc);
+        GLuint frag = shader_compile_impl(GL_FRAGMENT_SHADER, fragSrc);
 
         GLuint program = glCreateProgram();
         glAttachShader(program, vert);
@@ -69,11 +80,11 @@ namespace gfx {
         return program;
     }
 
-    void bind_shader_program(unsigned int program) {
+    void GraphicsPrimitiveService::shader_program_bind_impl(unsigned int program) {
         glUseProgram(program);
 
     }
-    void drawArrays(unsigned int mode, int first, int count) {
+    void GraphicsPrimitiveService::drawArrays(unsigned int mode, int first, int count) {
         glDrawArrays(mode, first, (GLsizei)count);
 
     }

@@ -26,6 +26,7 @@
     <ClInclude Include="core\Window.h" />
     <ClInclude Include="gfx\gfx.h" />
     <ClInclude Include="gfx\GraphicsPrimitiveService.h" />
+    <ClInclude Include="gfx\GraphicsService.h" />
     <ClInclude Include="gfx\VertexAttributeSetupRegistry.h" />
     <ClInclude Include="gfx\VertexBufferGenerator.h" />
     <ClInclude Include="gui\GUIService.h" />
