@@ -25,7 +25,7 @@
     <ClInclude Include="core\Stopwatch.h" />
     <ClInclude Include="core\Window.h" />
     <ClInclude Include="gfx\gfx.h" />
-    <ClInclude Include="gfx\GraphicsService.h" />
+    <ClInclude Include="gfx\GraphicsPrimitiveService.h" />
     <ClInclude Include="gfx\VertexAttributeSetupRegistry.h" />
     <ClInclude Include="gfx\VertexBufferGenerator.h" />
     <ClInclude Include="gui\GUIService.h" />
@@ -151,7 +151,7 @@
     <ClCompile Include="entity\CHeirarchy.cpp" />
     <ClCompile Include="entity\CHeirarchy.h" />
     <ClCompile Include="gfx\gfx.cpp" />
-    <ClCompile Include="gfx\GraphicsService.cpp" />
+    <ClCompile Include="gfx\GraphicsPrimitiveService.cpp" />
     <ClCompile Include="gfx\VertexAttributeSetupRegistry.cpp" />
     <ClCompile Include="gui\GUIService.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_glfw.cpp" />

@@ -384,7 +384,7 @@
     <ClInclude Include="gfx\gfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gfx\GraphicsService.h">
+    <ClInclude Include="gfx\GraphicsPrimitiveService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gfx\VertexBufferGenerator.h">
@@ -458,7 +458,7 @@
     <ClCompile Include="gfx\gfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gfx\GraphicsService.cpp">
+    <ClCompile Include="gfx\GraphicsPrimitiveService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
