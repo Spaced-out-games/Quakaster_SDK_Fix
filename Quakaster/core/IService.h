@@ -1,15 +1,21 @@
 #pragma once
-#include "Stopwatch.h"
 #include "../core.h"
 #include <stdint.h>
-
+#include "../core.h"
 namespace qk {
-	struct IService: Stopwatch {
+	struct QK_API IService {
+
+		protected:
+			size_t m_Uptime_ns = 0;
 
 
-		virtual ~IService() = default;
-		virtual void init() = 0;
-		virtual void shutdown() = 0;
+		public:
+			size_t* uptime_ptr();
+			size_t uptime_ns();
+
+			virtual ~IService() = default;
+			virtual void init();
+			virtual void shutdown();
 
 
 	};
