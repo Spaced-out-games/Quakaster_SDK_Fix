@@ -24,23 +24,22 @@ namespace qk {
 	};
 
     struct QK_API ScopeTimer {
-        Stopwatch& target;
+        uint64_t* m_Target = nullptr;
+        uint64_t m_StartTime = 0;
 
-        explicit ScopeTimer(Stopwatch& svc) : target(svc) {
-            target.start();
+        explicit ScopeTimer(uint64_t* target_out) {
+            m_Target = target_out;
+            m_StartTime = now();
         }
 
-        ~ScopeTimer() {
-            target.stop();
-        }
+        ~ScopeTimer();
 
         // non-copyable
         ScopeTimer(const ScopeTimer&) = delete;
         ScopeTimer& operator=(const ScopeTimer&) = delete;
 
-        // movable if you need
-        ScopeTimer(ScopeTimer&& other) noexcept : target(other.target) {}
-        ScopeTimer& operator=(ScopeTimer&& other) noexcept { return *this; }
+        ScopeTimer(ScopeTimer&& other) noexcept : m_Target(other.m_Target), m_StartTime(other.m_StartTime) { other.m_Target = nullptr; }
+        ScopeTimer& operator=(ScopeTimer&& other) noexcept;
     };
 
 }
