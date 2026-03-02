@@ -12,6 +12,7 @@ namespace qk {
 		virtual void run() = 0;
 		virtual void close();
 		int status();
+		void set_status(int new_status);
 	};
 }
 
