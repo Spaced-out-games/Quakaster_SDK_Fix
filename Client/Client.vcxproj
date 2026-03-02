@@ -49,8 +49,8 @@
     <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)</OutDir>
-    <IntDir>$(SolutionDir)bin-int\$(Configuration)-$(Platform)\$(ProjectName)</IntDir>
+    <OutDir>$(SolutionDir)Client\out\$(Configuration)-$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)Client\intermediate\$(Configuration)-$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -58,8 +58,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_WINSOCK_DEPRECATED_NO_WARNINGS;HAS_INET_PTON;GLEW_STATIC;QK_GRAPHICS_BACKEND=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\spdlog-1.x\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\pfr\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\entt\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -78,8 +79,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\spdlog-1.x\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -99,11 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\DummyService.h" />
-    <ClInclude Include="src\GreetLayer.h" />
-    <ClInclude Include="src\TestLayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
