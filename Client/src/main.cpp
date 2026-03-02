@@ -7,6 +7,7 @@
 #include "core/DefaultEvents.h"
 #include "core/LayerStack.h"
 #include "core/ServiceManager.h"
+#include "core/ISystem.h"
 #include "integrations/entt_service_storage.h"
 
 #include "gfx/VertexAttributeSetupRegistry.h"
@@ -47,54 +48,62 @@ void main() {
 
 
 struct MyApp : qk::Application {
+
+	// window
 	qk::Window window;
+	// queue, stack, registry, and systems
 	std::shared_ptr<qk::EventQueue> queue;
 	qk::LayerStack stack;
 	entt::registry registry;
+	qk::SystemStack systems;
 
-
+	// Test OpenGL state
 	unsigned int vao = 0;
 	unsigned int vbo = 0;
 	unsigned int shader = 0;
 
 	void init(int argc, char** argv) override {
+
+		// Set up the application
 		Application::init(argc, argv);
 		qk::init();
 
 
+		// Set up queues, services, stacks, and systems
 		auto& SvcMgr = registry.ctx().emplace<qk::ServiceManager<qk::integrations::entt_service_storage>>();
 		auto& SvcStg = registry.ctx().emplace<qk::integrations::entt_service_storage>(&registry);
 		SvcMgr.storage = &SvcStg;
+		auto& evt_queue = registry.ctx().emplace<qk::EventQueue>();
+		stack.attach_queue(&evt_queue);
 
-		queue = std::make_unique<qk::EventQueue>();
+		// Window initialization
 		window.init(qk::Window::Size{ 480, 480 }, "Demo");
 		window.make_context_current();
-		gfx::init();
-		gui::init(window.handle());
+		window.set_event_queue(&evt_queue);
 
-		window.set_event_queue(queue);
-		stack.attach_queue(queue);
-		gfx::GraphicsPrimitiveService* gsvc = SvcMgr.emplace<gfx::GraphicsPrimitiveService>("GraphicsSvc");
+		// initialize gui and gfx
+		gui::init(window.handle());
+		gfx::init();
+
+
+		auto* gsvc = SvcMgr.emplace<gfx::GraphicsPrimitiveService>("GraphicsSvc");
 		
-		//auto& reg = gsvc->m_AttributeSetupRegistry;
 
 		gsvc->autogen_attribute_setup_override<glm::vec2>([](unsigned int& location, bool normalize, uintptr_t offset) {
 			gfx::add_vertex_attribute_pointer_impl(location, 2, GL_FLOAT, normalize, sizeof(glm::vec2), offset);
 			location++;
 		});
 
+		// attribute pointer setup generation
 		gsvc->add_generator<glm::vec2>("vert2D");
 
 
-
+		// set up OpenGL stuff
 		vao = gsvc->VAO_ctor_impl(); // 1
 		gsvc->VAO_bind_impl(vao);
 		
 		vbo = gsvc->generate_vbo("vert2D", points, GL_STATIC_DRAW); // 1
 		gsvc->VBO_bind_impl(vbo);
-
-
-
 
 		shader = gsvc->shader_program_ctor_impl(vertexShaderSrc, fragShaderSrc);
 		gsvc->shader_program_bind_impl(shader); // 3
@@ -106,9 +115,10 @@ struct MyApp : qk::Application {
 
 
 	void run() override {
-		auto& SvcMgr = registry.ctx().emplace<qk::ServiceManager<qk::integrations::entt_service_storage>>();
+		auto& SvcMgr = registry.ctx().get<qk::ServiceManager<qk::integrations::entt_service_storage>>();
 		auto* gsvc = (gfx::GraphicsPrimitiveService*)SvcMgr.get("GraphicsSvc");
 
+		//gui::demo();
 		gsvc->shader_program_bind_impl(shader);
 		gsvc->VAO_bind_impl(vao);
 		gsvc->drawArrays(GL_TRIANGLES, 0, points.size());
