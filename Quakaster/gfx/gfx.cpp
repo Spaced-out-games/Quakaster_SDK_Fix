@@ -1,0 +1,28 @@
+#include "gfx.h"
+#include <stdexcept>
+#include "spdlog/spdlog.h"
+#include "GL/glew.h"
+
+
+namespace gfx {
+	void init() {
+		glewExperimental = GL_TRUE;
+		if (glewInit() != GLEW_OK) {
+			throw std::runtime_error("Failed to initialize GLEW");
+		}
+		spdlog::info("gfx initialized successfully!...");
+	}
+
+	void close() {
+		// There is no GlewTerminate() 
+		// or similiar but for consistency...
+		spdlog::info("gfx shutting down...");
+
+	}
+
+
+	void test() {
+		glClearColor(0.1f, 0.6f, 0.1f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	}
+}
