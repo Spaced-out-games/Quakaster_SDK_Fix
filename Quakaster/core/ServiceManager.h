@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include <string>
 #include "IService.h"
-#include "../thirdparty/entt/src/entt/entity/registry.hpp" // temp test
+#include "spdlog/spdlog.h"
 
 namespace qk {
 
@@ -41,53 +41,25 @@ namespace qk {
 
         template <typename T, typename... Args>
         T* emplace(const std::string& name, Args&&... args) {
+            spdlog::info("Added service {} to ServiceManager", name);
             return static_cast<T*>(storage->template emplace<T>(name, map, std::forward<Args>(args)...));
         }
 
         IService* get(const std::string& name) {
+            
             return storage->get(name, map);
         }
 
         
         void erase(const std::string& name) {
+            spdlog::info("Removed service {} from ServiceManager", name);
             storage->erase(name, map);
         }
     };
 
 
 
-    struct EnTTContextStorage {
-        entt::registry* reg;
-
-        template <typename T, typename... Args>
-        IService* emplace(const std::string& name, ServiceMap& map, Args&&... args) {
-            T& svc = reg->ctx().emplace<T>(std::forward<Args>(args)...);
-            map[name].service = &svc;
-            map[name].dtor = [](void* storage, ServiceMap&, const std::string&) {
-                entt::registry* registry = (entt::registry*)storage;
-                registry->ctx().erase<T>();
-            };
-
-            return &svc;
-        }
-
-        IService* get(const std::string& name, ServiceMap& map) {
-            auto it = map.find(name);
-            return it != map.end() ? it->second.service : nullptr;
-        }
-
-        
-        void erase(const std::string& name, ServiceMap& map) {
-            auto it = map.find(name);
-            if (it != map.end()) {
-                
-                auto dtor = it->second.dtor;
-                
-                if(dtor) dtor(reg, map, name);
-                map.erase(it);         // bookkeeping cleanup
-            }
-        }
-    };
+    
 
 
 } // namespace qk
