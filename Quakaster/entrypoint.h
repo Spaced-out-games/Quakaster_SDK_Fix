@@ -8,11 +8,12 @@ namespace qk {
 
 
 int main(int argc, char** argv) {
-	std::unique_ptr<qk::Application> app = qk::create_application(argc, argv);
-	app->init(argc, argv);
-	while (app->status() == 0) app->run();
-	int code = app->status();
-	app->close();
-	return code;
+    auto app = qk::create_application(argc, argv);
 
+    app->init(argc, argv);
+
+    while (app->status() == 0)
+        app->run();
+
+    return app->status();
 }
