@@ -51,8 +51,7 @@ struct MyApp : qk::Application {
 	std::shared_ptr<qk::EventQueue> queue;
 	qk::LayerStack stack;
 	entt::registry registry;
-	qk::integrations::entt_service_storage storage{ &registry };
-	qk::ServiceManager<qk::integrations::entt_service_storage> mgr;
+
 
 	unsigned int vao = 0;
 	unsigned int vbo = 0;
@@ -61,7 +60,12 @@ struct MyApp : qk::Application {
 	void init(int argc, char** argv) override {
 		Application::init(argc, argv);
 		qk::init();
-		mgr.storage = &storage;
+
+
+		auto& SvcMgr = registry.ctx().emplace<qk::ServiceManager<qk::integrations::entt_service_storage>>();
+		auto& SvcStg = registry.ctx().emplace<qk::integrations::entt_service_storage>(&registry);
+		SvcMgr.storage = &SvcStg;
+
 		queue = std::make_unique<qk::EventQueue>();
 		window.init(qk::Window::Size{ 480, 480 }, "Demo");
 		window.make_context_current();
@@ -70,11 +74,11 @@ struct MyApp : qk::Application {
 
 		window.set_event_queue(queue);
 		stack.attach_queue(queue);
-		gfx::GraphicsPrimitiveService* gsvc = mgr.emplace<gfx::GraphicsPrimitiveService>("GraphicsSvc");
+		gfx::GraphicsPrimitiveService* gsvc = SvcMgr.emplace<gfx::GraphicsPrimitiveService>("GraphicsSvc");
 		
 		//auto& reg = gsvc->m_AttributeSetupRegistry;
 
-		gsvc->autoregister_vertex_attribute_setup_override<glm::vec2>([](unsigned int& location, bool normalize, uintptr_t offset) {
+		gsvc->autogen_attribute_setup_override<glm::vec2>([](unsigned int& location, bool normalize, uintptr_t offset) {
 			gfx::add_vertex_attribute_pointer_impl(location, 2, GL_FLOAT, normalize, sizeof(glm::vec2), offset);
 			location++;
 		});
@@ -83,17 +87,17 @@ struct MyApp : qk::Application {
 
 
 
-		vao = gfx::generate_vao(); // 1
-		gfx::bind_vao(vao);
+		vao = gsvc->VAO_ctor_impl(); // 1
+		gsvc->VAO_bind_impl(vao);
 		
 		vbo = gsvc->generate_vbo("vert2D", points, GL_STATIC_DRAW); // 1
-		gfx::bind_vertexBuffer_impl(vbo);
+		gsvc->VBO_bind_impl(vbo);
 
 
 
 
-		shader = gfx::create_shader_program(vertexShaderSrc, fragShaderSrc);
-		gfx::bind_shader_program(shader); // 3
+		shader = gsvc->shader_program_ctor_impl(vertexShaderSrc, fragShaderSrc);
+		gsvc->shader_program_bind_impl(shader); // 3
 
 
 
@@ -102,31 +106,16 @@ struct MyApp : qk::Application {
 
 
 	void run() override {
+		auto& SvcMgr = registry.ctx().emplace<qk::ServiceManager<qk::integrations::entt_service_storage>>();
+		auto* gsvc = (gfx::GraphicsPrimitiveService*)SvcMgr.get("GraphicsSvc");
 
-		//gfx::test();
-
-		gfx::bind_shader_program(shader);
-		gfx::bind_vao(vao);
-		gfx::drawArrays(GL_TRIANGLES, 0, points.size());
+		gsvc->shader_program_bind_impl(shader);
+		gsvc->VAO_bind_impl(vao);
+		gsvc->drawArrays(GL_TRIANGLES, 0, points.size());
 		window.swap_buffers();
 		window.pollEvents();
 		stack.propagate_events();
 		set_status(window.should_close());
-
-		//window.queue()->clear();
-		//std::this_thread::sleep_for(std::chrono::milliseconds(17));
-		//window.pollEvents();
-		//stack.propagate_events();
-		//gfx::test();
-
-		//gfx::drawArrays(GL_TRIANGLES, 0, points.size());
-		//gui::demo();
-
-		//window.swap_buffers();
-
-
-		//set_status(window.should_close());
-
 
 	}
 
