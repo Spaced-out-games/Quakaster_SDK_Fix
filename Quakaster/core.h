@@ -10,4 +10,6 @@
 
 namespace qk {
 	QK_API bool init();
+	QK_API void close();
+
 }
