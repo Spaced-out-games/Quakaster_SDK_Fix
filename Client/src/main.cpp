@@ -9,13 +9,11 @@
 #include "core/ServiceManager.h"
 #include "integrations/entt_service_storage.h"
 
-#include "TestLayer.h"
-#include "GreetLayer.h"
 #include "gfx/VertexAttributeSetupRegistry.h"
 #include "gfx/gfx.h"
 #include "GL/glew.h"
 #include "gui/GUIService.h"
-#include "gfx/GraphicsService.h"
+#include "gfx/GraphicsPrimitiveService.h"
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
@@ -72,8 +70,6 @@ struct MyApp : qk::Application {
 
 		window.set_event_queue(queue);
 		stack.attach_queue(queue);
-		stack.insert_layer(std::make_unique<TestLayer>());
-		stack.insert_layer(std::make_unique<GreetLayer>());
 		gfx::GraphicsPrimitiveService* gsvc = mgr.emplace<gfx::GraphicsPrimitiveService>("GraphicsSvc");
 		
 		//auto& reg = gsvc->m_AttributeSetupRegistry;
