@@ -19,7 +19,12 @@
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 #include "glm/mat4x4.hpp"
-
+#include "gfx/MeshConfig.h"
+#include "gfx/Shader.h"
+#include "gfx/ShaderProgram.h"
+#include "gfx/VAO.h"
+#include "gfx/VBO.h"
+#include "entity/CHeirarchy.h"
 
 
 const std::vector<glm::vec2> points = {
@@ -30,7 +35,7 @@ const std::vector<glm::vec2> points = {
 
 const char* vertexShaderSrc = R"(
 #version 330 core
-layout(location = 0) in vec2 aPos;
+in vec2 aPos;
 
 void main() {
     gl_Position = vec4(aPos, 0.0, 1.0);
@@ -42,10 +47,11 @@ const char* fragShaderSrc = R"frag(
 out vec4 FragColor;
 
 void main() {
-    FragColor = vec4(1.0);
+    FragColor = vec4(0.5);
 }
 )frag";
-
+#include <vector>
+#include "entt/entity/view.hpp"
 
 struct MyApp : qk::Application {
 
@@ -56,18 +62,67 @@ struct MyApp : qk::Application {
 	qk::LayerStack stack;
 	entt::registry registry;
 	qk::SystemStack systems;
+	gfx::MeshGroup mesh;
+	gfx::ShaderProgram program;
 
 	// Test OpenGL state
-	unsigned int vao = 0;
-	unsigned int vbo = 0;
+	gfx::VBO vao;
+	gfx::VBO vbo;
 	unsigned int shader = 0;
+
+
+
+	void get_dirty_entities(std::vector<entt::entity>& out) {
+
+		auto view = registry.view<qk::entity::CHeirarchy::DirtyFlag>();
+
+		for (auto entity : view) {
+			out.push_back(entity);
+		}
+
+	}
+
+
 
 	void init(int argc, char** argv) override {
 
+		qk::entity::CHeirarchyService svc(registry);
+
+		entt::entity root = svc.new_root();
+
+		auto a = svc.add_child(root);
+		auto b = svc.add_child(root);
+		auto c = svc.add_child(root);
+		auto d = svc.add_child(root);
+		svc.add_child(b);
+		svc.add_child(b);
+		svc.add_child(b);
+
+		svc.print_tree(root);
+
+		spdlog::info("------------------------------------------------------------------------------");
+
+		svc.detach_child(root, b);
+		svc.print_tree(root);
+		spdlog::info("------------------------------------------------------------------------------");
+		svc.print_tree(b);
+
+		std::vector<entt::entity> dirty;
+		get_dirty_entities(dirty);
+
+		spdlog::info("------------------------------------------------------------------------------");
+
+		std::cout << "Dirty:";
+		for (auto e : dirty) {
+			std::cout << (uint32_t)e << " ";
+		}
+
+
+		
+
 		// Set up the application
 		Application::init(argc, argv);
-		qk::init();
-
+		qk::init(3,3);
 
 		// Set up queues, services, stacks, and systems
 		auto& SvcMgr = registry.ctx().emplace<qk::ServiceManager<qk::integrations::entt_service_storage>>();
@@ -86,28 +141,29 @@ struct MyApp : qk::Application {
 		gfx::init();
 
 
-		auto* gsvc = SvcMgr.emplace<gfx::GraphicsPrimitiveService>("GraphicsSvc");
 		
-
-		gsvc->autogen_attribute_setup_override<glm::vec2>([](unsigned int& location, bool normalize, uintptr_t offset) {
+		
+		mesh.ctor();
+		mesh.bind();
+		mesh.m_Config.m_VertexType = typeid(glm::vec2);
+		mesh.m_Config.setup = [](unsigned int& location, bool normalize, uintptr_t offset) {
 			gfx::add_vertex_attribute_pointer_impl(location, 2, GL_FLOAT, normalize, sizeof(glm::vec2), offset);
 			location++;
-		});
+		};
 
-		// attribute pointer setup generation
-		gsvc->add_generator<glm::vec2>("vert2D");
+		vbo = mesh.generate_vbo(points.data(), points.size(), GL_STATIC_DRAW);
 
 
-		// set up OpenGL stuff
-		vao = gsvc->VAO_ctor_impl(); // 1
-		gsvc->VAO_bind_impl(vao);
+
+		gfx::Shader vert(vertexShaderSrc, GL_VERTEX_SHADER);
 		
-		vbo = gsvc->generate_vbo("vert2D", points, GL_STATIC_DRAW); // 1
-		gsvc->VBO_bind_impl(vbo);
+		gfx::Shader frag(fragShaderSrc, GL_FRAGMENT_SHADER);
 
-		shader = gsvc->shader_program_ctor_impl(vertexShaderSrc, fragShaderSrc);
-		gsvc->shader_program_bind_impl(shader); // 3
+		program.init(frag, vert);
 
+
+
+		
 
 
 	}
@@ -115,18 +171,20 @@ struct MyApp : qk::Application {
 
 
 	void run() override {
+		
 		auto& SvcMgr = registry.ctx().get<qk::ServiceManager<qk::integrations::entt_service_storage>>();
-		auto* gsvc = (gfx::GraphicsPrimitiveService*)SvcMgr.get("GraphicsSvc");
 
 		//gui::demo();
-		gsvc->shader_program_bind_impl(shader);
-		gsvc->VAO_bind_impl(vao);
-		gsvc->drawArrays(GL_TRIANGLES, 0, points.size());
+
+		program.bind();
+
+		mesh.bind();
+		gfx::drawArrays(GL_TRIANGLES, 0, points.size());
 		window.swap_buffers();
 		window.pollEvents();
 		stack.propagate_events();
 		set_status(window.should_close());
-
+		
 	}
 
 	~MyApp() override {
