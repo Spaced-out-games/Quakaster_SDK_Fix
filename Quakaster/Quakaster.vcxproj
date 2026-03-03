@@ -11,6 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="console\Convar.h" />
+    <ClInclude Include="console\ConvarRegistry.h" />
+    <ClInclude Include="console\ConvarService.h" />
     <ClInclude Include="core.h" />
     <ClInclude Include="core\Application.h" />
     <ClInclude Include="core\DefaultEvents.h" />
@@ -26,7 +29,10 @@
     <ClInclude Include="core\Window.h" />
     <ClInclude Include="gfx\gfx.h" />
     <ClInclude Include="gfx\GraphicsPrimitiveService.h" />
-    <ClInclude Include="gfx\GraphicsService.h" />
+    <ClInclude Include="gfx\MeshConfig.h" />
+    <ClInclude Include="gfx\Shader.h" />
+    <ClInclude Include="gfx\ShaderProgram.h" />
+    <ClInclude Include="gfx\VBO.h" />
     <ClInclude Include="gfx\VertexAttributeSetupRegistry.h" />
     <ClInclude Include="gfx\VertexBufferGenerator.h" />
     <ClInclude Include="gui\GUIService.h" />
@@ -137,8 +143,12 @@
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\stopwatch.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\tweakme.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\version.h" />
+    <ClInclude Include="gfx\VAO.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="console\Convar.cpp" />
+    <ClCompile Include="console\ConvarRegistry.cpp" />
+    <ClCompile Include="console\ConvarService.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="core\Application.cpp" />
     <ClCompile Include="core\EventQueue.cpp" />
@@ -153,6 +163,10 @@
     <ClCompile Include="entity\CHeirarchy.h" />
     <ClCompile Include="gfx\gfx.cpp" />
     <ClCompile Include="gfx\GraphicsPrimitiveService.cpp" />
+    <ClCompile Include="gfx\MeshConfig.cpp" />
+    <ClCompile Include="gfx\Shader.cpp" />
+    <ClCompile Include="gfx\ShaderProgram.cpp" />
+    <ClCompile Include="gfx\VBO.cpp" />
     <ClCompile Include="gfx\VertexAttributeSetupRegistry.cpp" />
     <ClCompile Include="gui\GUIService.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_glfw.cpp" />
@@ -162,6 +176,7 @@
     <ClCompile Include="thirdparty\imgui\imgui\imgui_draw.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui_tables.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="gfx\VAO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="thirdparty\glfw\src\CMakeLists.txt" />

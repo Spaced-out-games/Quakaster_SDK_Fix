@@ -384,13 +384,34 @@
     <ClInclude Include="gfx\gfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gfx\GraphicsPrimitiveService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gfx\VertexBufferGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gfx\GraphicsService.h">
+    <ClInclude Include="gfx\MeshConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\VAO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\VBO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\ShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="console\Convar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="console\ConvarRegistry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="console\ConvarService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\GraphicsPrimitiveService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -459,6 +480,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gfx\gfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\MeshConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\VAO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\VBO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="console\Convar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="console\ConvarRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="console\ConvarService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gfx\GraphicsPrimitiveService.cpp">
