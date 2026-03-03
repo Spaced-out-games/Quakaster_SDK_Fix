@@ -1,17 +1,20 @@
-#pragma once
+﻿#pragma once
 
 #include "entt/entity/entity.hpp"
 #include "entt/entity/registry.hpp"
+#include "entt/entity/view.hpp"
 #include "../core.h"
 #include "../core/IService.h"
+//#include "spdlog/spdlog.h"
 
 namespace qk::entity {
 	// Used to define an entity heirarchy
 	struct QK_API CHeirarchy {
 		entt::entity parent = entt::null;
-		entt::entity child	= entt::null;
 		entt::entity prev	= entt::null;
 		entt::entity next	= entt::null;
+		entt::entity first = entt::null;
+		entt::entity last = entt::null;
 
 		struct DirtyFlag {
 			entt::entity old_parent = entt::null;
@@ -31,26 +34,112 @@ namespace qk::entity {
 
 		CHeirarchyService(entt::registry& target);
 
+		CHeirarchy& heirarchy(entt::entity target);
 
-		// might template these with flag types
-		entt::entity find_lowest_dirty_ancestor(entt::entity target);
-		entt::entity find_highest_dirty_ancestor(entt::entity target);
+		bool has_heirarchy(entt::entity target);
 
-		entt::entity find_lowest_common_ancestor(entt::entity t1, entt::entity t2);
-
-
-		entt::entity first(entt::entity target);
-		entt::entity last(entt::entity target);
+		// helper functions
+		entt::entity parent(entt::entity target);
+		entt::entity first_child(entt::entity target);
+		entt::entity last_child(entt::entity target);
+		entt::entity first_sibling(entt::entity e);
+		entt::entity last_sibling(entt::entity e);
+		entt::entity prev_sibling(entt::entity target);
+		entt::entity next_sibling(entt::entity target);
+		entt::entity add_child(entt::entity parent);
 		entt::entity root(entt::entity target);
-		bool is_descendant(entt::entity parent, entt::entity child);
+
+		entt::entity new_root();
+		size_t depth(entt::entity e);
+		bool has_children(entt::entity e);
+		size_t num_descendants(entt::entity e);
+		bool is_leaf(entt::entity e);
+
+		void reparent(entt::entity child, entt::entity new_parent);
+
+		template <class flag_t>
+		void clear_descendant_flags(entt::entity target) {
+			if (target == entt::null || first_child(target) == entt::null) return;
+
+			entt::entity current = first_child(target);
+			while (current != entt::null) {
+				// Erase the flag if it exists
+				if (registry.all_of<flag_t>(current))
+					registry.erase<flag_t>(current);
+
+				// Recurse into this child's subtree
+				clear_descendant_flags<flag_t>(current);
+
+				// Move to next sibling
+				current = next_sibling(current);
+			}
+		}
+
+		template <class flag_t>
+		void invalidate(entt::entity target) {
+
+			if (target == entt::null) return;
+
+			// no ancestors: 
+			if (parent(target) == entt::null) {
+				registry.emplace<flag_t>(target, entt::null);
+				// clear descendants
+				clear_descendant_flags<flag_t>(target);
+				return;
+			}
+
+			entt::entity marked_ancestor = target;
+			entt::entity current = target;
+			while (current != entt::null) {
+				if (registry.all_of<flag_t>(current)) marked_ancestor = current;
+				current = parent(current);
+			}
+
+			if (marked_ancestor == target) registry.emplace<flag_t>(target);
+
+			clear_descendant_flags<flag_t>(target);
+
+		}
+
+		template <class flag_t>
+		void clear() {
+			auto view = registry.view<flag_t>();
+			registry.erase<flag_t>(view.begin(), view.end()); // <-- semicolon
+		}
 
 
 
-		entt::entity add_sister(entt::entity target);
-		entt::entity add_child(entt::entity target);
-		void detach(entt::entity target);
+		template <typename Func>
+		void for_each_descendant(entt::entity e, Func&& func) {
+			for (entt::entity child = first_child(e); child != entt::null; child = next_sibling(child)) {
+				func(child);
+				for_each_descendant(child, func);
+			}
+		}
 
+		template <typename Func>
+		void for_each_sibling(entt::entity e, Func&& func) {
+			entt::entity first = first_sibling(e);
+			for (entt::entity sibling = first; sibling != entt::null; sibling = next_sibling(sibling)) {
+				func(sibling);
+			}
+		}
+
+		bool remove_child(entt::entity target, entt::entity child);
+
+		void detach_child(entt::entity target, entt::entity child);
+
+		void attach_child(entt::entity target, entt::entity new_child);
+
+		void print_subtree(entt::entity target,
+			const std::string& prefix = "", bool is_last = true);
+
+		void print_tree(entt::entity root);
 	};
 
 
+
+
+
 }
+
