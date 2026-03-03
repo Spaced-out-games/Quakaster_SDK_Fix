@@ -27,7 +27,7 @@
     <ClInclude Include="entrypoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\IEvent.h">
+    <ClInclude Include="core\Event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\DefaultEvents.h">
@@ -414,6 +414,15 @@
     <ClInclude Include="gfx\GraphicsPrimitiveService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="math\CTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\CMatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="math\CCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\Application.cpp">
@@ -507,6 +516,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gfx\GraphicsPrimitiveService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\CCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

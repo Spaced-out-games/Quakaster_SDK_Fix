@@ -19,7 +19,7 @@
     <ClInclude Include="core\DefaultEvents.h" />
     <ClInclude Include="core\EventQueue.h" />
     <ClInclude Include="core\glfw_EventTranslator.h" />
-    <ClInclude Include="core\IEvent.h" />
+    <ClInclude Include="core\Event.h" />
     <ClInclude Include="core\ILayer.h" />
     <ClInclude Include="core\IService.h" />
     <ClInclude Include="core\ISystem.h" />
@@ -38,6 +38,9 @@
     <ClInclude Include="gui\GUIService.h" />
     <ClInclude Include="integrations\entt_service_storage.h" />
     <ClInclude Include="entrypoint.h" />
+    <ClInclude Include="math\CCamera.h" />
+    <ClInclude Include="math\CMatrix.h" />
+    <ClInclude Include="math\CTransform.h" />
     <ClInclude Include="thirdparty\imgui\imgui\imgui.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\async.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\async_logger-inl.h" />
@@ -169,6 +172,7 @@
     <ClCompile Include="gfx\VBO.cpp" />
     <ClCompile Include="gfx\VertexAttributeSetupRegistry.cpp" />
     <ClCompile Include="gui\GUIService.cpp" />
+    <ClCompile Include="math\CCamera.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui.cpp" />
