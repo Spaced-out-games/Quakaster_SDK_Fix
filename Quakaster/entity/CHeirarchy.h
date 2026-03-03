@@ -58,72 +58,21 @@ namespace qk::entity {
 		void reparent(entt::entity child, entt::entity new_parent);
 
 		template <class flag_t>
-		void clear_descendant_flags(entt::entity target) {
-			if (target == entt::null || first_child(target) == entt::null) return;
-
-			entt::entity current = first_child(target);
-			while (current != entt::null) {
-				// Erase the flag if it exists
-				if (registry.all_of<flag_t>(current))
-					registry.erase<flag_t>(current);
-
-				// Recurse into this child's subtree
-				clear_descendant_flags<flag_t>(current);
-
-				// Move to next sibling
-				current = next_sibling(current);
-			}
-		}
+		void clear_descendant_flags(entt::entity target);
 
 		template <class flag_t>
-		void invalidate(entt::entity target) {
-
-			if (target == entt::null) return;
-
-			// no ancestors: 
-			if (parent(target) == entt::null) {
-				registry.emplace<flag_t>(target, entt::null);
-				// clear descendants
-				clear_descendant_flags<flag_t>(target);
-				return;
-			}
-
-			entt::entity marked_ancestor = target;
-			entt::entity current = target;
-			while (current != entt::null) {
-				if (registry.all_of<flag_t>(current)) marked_ancestor = current;
-				current = parent(current);
-			}
-
-			if (marked_ancestor == target) registry.emplace<flag_t>(target);
-
-			clear_descendant_flags<flag_t>(target);
-
-		}
+		void invalidate(entt::entity target);
 
 		template <class flag_t>
-		void clear() {
-			auto view = registry.view<flag_t>();
-			registry.erase<flag_t>(view.begin(), view.end()); // <-- semicolon
-		}
+		void clear();
 
 
 
 		template <typename Func>
-		void for_each_descendant(entt::entity e, Func&& func) {
-			for (entt::entity child = first_child(e); child != entt::null; child = next_sibling(child)) {
-				func(child);
-				for_each_descendant(child, func);
-			}
-		}
+		void for_each_descendant(entt::entity e, Func&& func);
 
 		template <typename Func>
-		void for_each_sibling(entt::entity e, Func&& func) {
-			entt::entity first = first_sibling(e);
-			for (entt::entity sibling = first; sibling != entt::null; sibling = next_sibling(sibling)) {
-				func(sibling);
-			}
-		}
+		void for_each_sibling(entt::entity e, Func&& func);
 
 		bool remove_child(entt::entity target, entt::entity child);
 
@@ -138,6 +87,74 @@ namespace qk::entity {
 	};
 
 
+	/* -------------------------------- template implementations -------------------------------- */	
+
+
+	template <class flag_t>
+	void CHeirarchyService::clear_descendant_flags(entt::entity target) {
+		if (target == entt::null || first_child(target) == entt::null) return;
+
+		entt::entity current = first_child(target);
+		while (current != entt::null) {
+			// Erase the flag if it exists
+			if (registry.all_of<flag_t>(current))
+				registry.erase<flag_t>(current);
+
+			// Recurse into this child's subtree
+			clear_descendant_flags<flag_t>(current);
+
+			// Move to next sibling
+			current = next_sibling(current);
+		}
+	}
+
+	template <class flag_t>
+	void CHeirarchyService::invalidate(entt::entity target) {
+
+		if (target == entt::null) return;
+
+		// no ancestors: 
+		if (parent(target) == entt::null) {
+			registry.emplace<flag_t>(target, entt::null);
+			// clear descendants
+			clear_descendant_flags<flag_t>(target);
+			return;
+		}
+
+		entt::entity marked_ancestor = target;
+		entt::entity current = target;
+		while (current != entt::null) {
+			if (registry.all_of<flag_t>(current)) marked_ancestor = current;
+			current = parent(current);
+		}
+
+		if (marked_ancestor == target) registry.emplace<flag_t>(target);
+
+		clear_descendant_flags<flag_t>(target);
+
+	}
+
+	template <class flag_t>
+	void CHeirarchyService::clear() {
+		auto view = registry.view<flag_t>();
+		registry.erase<flag_t>(view.begin(), view.end()); // <-- semicolon
+	}
+
+	template <typename Func>
+	void CHeirarchyService::for_each_descendant(entt::entity e, Func&& func) {
+		for (entt::entity child = first_child(e); child != entt::null; child = next_sibling(child)) {
+			func(child);
+			for_each_descendant(child, func);
+		}
+	}
+
+	template <typename Func>
+	void CHeirarchyService::for_each_sibling(entt::entity e, Func&& func) {
+		entt::entity first = first_sibling(e);
+		for (entt::entity sibling = first; sibling != entt::null; sibling = next_sibling(sibling)) {
+			func(sibling);
+		}
+	}
 
 
 
