@@ -1,5 +1,5 @@
 #pragma once
-#include "IEvent.h"
+#include "Event.h"
 #include "../core.h"
 
 
@@ -16,7 +16,7 @@ namespace qk {
 
 
 		virtual ~ILayer() = default;
-		[[nodiscard]] virtual EBlock on_event(const IEvent& evt) = 0;
+		[[nodiscard]] virtual EBlock on_event(const Event& evt) = 0;
 		virtual void on_render() = 0;
 		void subscribe(EEventCategory category);
 		void unsubscribe(EEventCategory category);

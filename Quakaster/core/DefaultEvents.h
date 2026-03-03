@@ -1,8 +1,8 @@
 #pragma once
-#include "IEvent.h"
+#include "Event.h"
 
 namespace qk {
-	struct KeyEvent : IEvent {
+	struct KeyEvent : Event {
 		inline int& key() {
 			return *((int*)m_Payload);
 		}
@@ -15,14 +15,14 @@ namespace qk {
 		}
 	};
 
-	struct MouseEvent : IEvent {
+	struct MouseEvent : Event {
 		inline int& button() { return *reinterpret_cast<int*>(&m_Payload[0]); }
 		inline int& action() { return *reinterpret_cast<int*>(&m_Payload[4]); }
 		inline int& mods() { return *reinterpret_cast<int*>(&m_Payload[8]); }
 		// last 4 bytes unused, can be reserved for future or padding
 	};
 
-	struct MouseMoveEvent : IEvent {
+	struct MouseMoveEvent : Event {
 		inline float& x() { return *reinterpret_cast<float*>(&m_Payload[0]); }
 		inline float& y() { return *reinterpret_cast<float*>(&m_Payload[4]); }
 		// optional: delta_x and delta_y in next 8 bytes if you want

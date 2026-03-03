@@ -77,7 +77,7 @@ namespace qk {
 
 	
 
-	struct IEvent {
+	struct Event {
 		// Denotes the type ID that begins the first custom event
 		// If you create your own custom events and an enum on top
 		static constexpr uint32_t custom_begin = 1u << 31;

@@ -6,15 +6,15 @@ namespace qk {
         m_Data.reserve(256);
     }
 
-    void EventQueue::push_back(const IEvent& e) {
+    void EventQueue::push_back(const Event& e) {
         m_Data.push_back(e);
     }
 
-    void EventQueue::push_back(IEvent&& e) {
+    void EventQueue::push_back(Event&& e) {
         m_Data.push_back(std::move(e));
     }
 
-    const std::vector<IEvent>& EventQueue::events() {
+    const std::vector<Event>& EventQueue::events() {
         return m_Data;
     }
 
@@ -31,8 +31,8 @@ namespace qk {
     }
 
 
-    IEvent* EventQueue::data() { return m_Data.data(); }
-    const IEvent* EventQueue::data() const { return m_Data.data(); }
+    Event* EventQueue::data() { return m_Data.data(); }
+    const Event* EventQueue::data() const { return m_Data.data(); }
 
     auto EventQueue::begin() { return m_Data.begin(); }
     auto EventQueue::end() { return m_Data.end(); }

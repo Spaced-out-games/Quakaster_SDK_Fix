@@ -20,7 +20,7 @@ namespace qk {
 		ILayer::EBlock BlockResult = {};
 
 
-		for (const IEvent& evt: m_Queue->events())
+		for (const Event& evt: m_Queue->events())
 		{
 			for (auto& layerPtr : m_Layers) {
 				if ((evt.m_Category & layerPtr->filter) != layerPtr->filter) continue;
