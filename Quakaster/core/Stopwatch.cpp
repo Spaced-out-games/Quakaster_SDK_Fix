@@ -27,7 +27,7 @@ namespace qk {
 	double Stopwatch::total_time_s() const { return m_TotalTime / 1e9; }
 
 	ScopeTimer::~ScopeTimer() {
-		if (m_Target) (*m_Target += (now() - m_StartTime));
+		if (m_Target) (*m_Target += now() - m_StartTime);
 	}
 
 	ScopeTimer& ScopeTimer::operator=(ScopeTimer&& other) noexcept {
