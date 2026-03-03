@@ -2,6 +2,7 @@
 #include "../core.h"
 #include <stdint.h>
 #include <chrono>
+#include "spdlog/spdlog.h"
 
 namespace qk {
 
@@ -28,6 +29,9 @@ namespace qk {
         uint64_t m_StartTime = 0;
 
         explicit ScopeTimer(uint64_t* target_out) {
+
+            if (!target_out) spdlog::error("Passed `nullptr` into ScopeTimer at {:#x}", (uintptr_t)this);
+
             m_Target = target_out;
             m_StartTime = now();
         }
