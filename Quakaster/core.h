@@ -9,7 +9,7 @@
 #endif
 
 namespace qk {
-	QK_API bool init();
+	QK_API bool init(int major = 3, int minor = 3);
 	QK_API void close();
 
 }
