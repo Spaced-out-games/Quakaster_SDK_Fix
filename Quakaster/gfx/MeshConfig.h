@@ -1,5 +1,5 @@
 #pragma once
-#include "VertexBufferGenerator.h"
+#include <typeindex>
 #include "spdlog/spdlog.h"
 #include "VAO.h"
 #include "VBO.h"
@@ -8,7 +8,7 @@ namespace gfx {
 
     using attribute_setup_pfn = void(*)(unsigned int&, bool, uintptr_t);
 
-
+    void QK_API add_vertex_attribute_pointer_impl(unsigned int& location, int num_components, unsigned int component_type, bool normalized, int stride, uintptr_t offset_bytes);
 
 
 	struct QK_API MeshConfig {
