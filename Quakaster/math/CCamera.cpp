@@ -1,5 +1,5 @@
 #include "CCamera.h"
-#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>   // perspective
 
 
 namespace qk::math {
@@ -8,10 +8,10 @@ namespace qk::math {
 		return glm::perspective(m_FovRadians, m_AspectRatio, m_Near, m_Far);
 	}
 	CCamera::CCamera(float fov_degrees, float near, float far, float aspect_ratio) {
-		m_FovRadians = glm::radians(fov_degrees);
-		m_Near = near;
-		m_Far = far;
-		m_AspectRatio = aspect_ratio;
+		set_fov(fov_degrees);
+		set_near(near);
+		set_far(far);
+		set_aspect(aspect_ratio);
 	}
 
 	void CCamera::set_fov(float fov_degrees) {
@@ -23,15 +23,16 @@ namespace qk::math {
 	}
 
 	void CCamera::set_near(float near) {
-		m_Near = near;
+		m_Near = std::max(m_Near, 0.0001f);
+
 	}
 
 	float CCamera::near() const {
-		m_Near = std::max(near, 0.0001f);
+		return m_Near;
 	}
 
 	void CCamera::set_far(float far) {
-		m_Far = std::max(far, m_Near + 0.0001f);
+		m_Far = std::max(m_Far, m_Near + 0.0001f);
 	}
 	float CCamera::far() const {
 		return m_Far;

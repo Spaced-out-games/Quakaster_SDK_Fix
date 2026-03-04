@@ -1,15 +1,14 @@
 #pragma once
 #include "../core.h"
-#include "glm/mat4x4.hpp"
-
+#include <glm/matrix.hpp>                 // mat4 type
 
 namespace qk::math {
 
 	class QK_API CCamera {
-		float m_FovRadians = glm::radians(90.0f);
-		float m_Near = 0.001f;
-		float m_Far = 1000.0f;
-		float m_AspectRatio = 16.0f / 9.0f;
+		float m_FovRadians;
+		float m_Near;
+		float m_Far;
+		float m_AspectRatio;
 
 		public:
 		glm::mat4 projection() const;
