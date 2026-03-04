@@ -13,16 +13,16 @@
 #include "gfx/gfx.h"
 #include "GL/glew.h"
 #include "gui/GUIService.h"
-#include "gfx/GraphicsPrimitiveService.h"
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 #include "glm/mat4x4.hpp"
-#include "gfx/MeshConfig.h"
+#include "gfx/MeshGroup.h"
 #include "gfx/Shader.h"
 #include "gfx/ShaderProgram.h"
 #include "gfx/VAO.h"
 #include "gfx/VBO.h"
+#include "gfx/MeshService.h"
 #include "entity/CHeirarchy.h"
 
 
@@ -144,8 +144,8 @@ struct MyApp : qk::Application {
 		
 		mesh.ctor();
 		mesh.bind();
-		mesh.m_Config.m_VertexType = typeid(glm::vec2);
-		mesh.m_Config.setup = [](unsigned int& location, bool normalize, uintptr_t offset) {
+		mesh.m_VertexType = typeid(glm::vec2);
+		mesh.m_Setup_pfn = [](unsigned int& location, bool normalize, uintptr_t offset) {
 			gfx::add_vertex_attribute_pointer_impl(location, 2, GL_FLOAT, normalize, sizeof(glm::vec2), offset);
 			location++;
 		};
