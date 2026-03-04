@@ -1,7 +1,12 @@
-#include "MeshConfig.h"
+#include "MeshGroup.h"
 #include "GL/glew.h"
 
 namespace gfx {
+
+    void drawArrays(unsigned int mode, int first, int count) {
+        glDrawArrays(mode, first, (GLsizei)count);
+
+    }
 
 
     void add_vertex_attribute_pointer_impl(unsigned int& location, int num_components, unsigned int component_type, bool normalized, int stride, uintptr_t offset_bytes) {
@@ -12,12 +17,12 @@ namespace gfx {
     }
 
 
-    VBO MeshConfig::vbo(const void* data, ptrdiff_t size, unsigned int usage) {
+    VBO MeshGroup::vbo(const void* data, ptrdiff_t size, unsigned int usage) {
 
 
         VBO result;
 
-        if (!setup) {
+        if (!m_Setup_pfn) {
             spdlog::error("MeshConfig setup is null");
             return result;
         }
@@ -27,7 +32,8 @@ namespace gfx {
         result.upload(data, size, usage);
 
         unsigned int location = 0;
-        setup(location, false, 0);   // call your attribute setup lambda
+        // false and zero are fine here since it should be relative to an aggregate
+        m_Setup_pfn(location, false, 0);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         return result;
@@ -43,6 +49,11 @@ namespace gfx {
     }
     void MeshGroup::bind() {
         vao.bind();
+    }
+
+    MeshGroup::MeshGroup(attribute_setup_pfn setup, std::type_index type) :
+        m_VertexType(type), m_Setup_pfn(setup) {
+        vao.init();
     }
 
 
