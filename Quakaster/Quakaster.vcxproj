@@ -28,8 +28,8 @@
     <ClInclude Include="core\Stopwatch.h" />
     <ClInclude Include="core\Window.h" />
     <ClInclude Include="gfx\gfx.h" />
-    <ClInclude Include="gfx\GraphicsPrimitiveService.h" />
-    <ClInclude Include="gfx\MeshConfig.h" />
+    <ClInclude Include="gfx\MeshGroup.h" />
+    <ClInclude Include="gfx\MeshService.h" />
     <ClInclude Include="gfx\Shader.h" />
     <ClInclude Include="gfx\ShaderProgram.h" />
     <ClInclude Include="gfx\VBO.h" />
@@ -163,8 +163,7 @@
     <ClCompile Include="entity\CHeirarchy.cpp" />
     <ClCompile Include="entity\CHeirarchy.h" />
     <ClCompile Include="gfx\gfx.cpp" />
-    <ClCompile Include="gfx\GraphicsPrimitiveService.cpp" />
-    <ClCompile Include="gfx\MeshConfig.cpp" />
+    <ClCompile Include="gfx\MeshGroup.cpp" />
     <ClCompile Include="gfx\Shader.cpp" />
     <ClCompile Include="gfx\ShaderProgram.cpp" />
     <ClCompile Include="gfx\VBO.cpp" />
