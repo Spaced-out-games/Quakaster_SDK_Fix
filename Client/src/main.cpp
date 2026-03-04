@@ -10,7 +10,6 @@
 #include "core/ISystem.h"
 #include "integrations/entt_service_storage.h"
 
-#include "gfx/VertexAttributeSetupRegistry.h"
 #include "gfx/gfx.h"
 #include "GL/glew.h"
 #include "gui/GUIService.h"
