@@ -33,8 +33,6 @@
     <ClInclude Include="gfx\Shader.h" />
     <ClInclude Include="gfx\ShaderProgram.h" />
     <ClInclude Include="gfx\VBO.h" />
-    <ClInclude Include="gfx\VertexAttributeSetupRegistry.h" />
-    <ClInclude Include="gfx\VertexBufferGenerator.h" />
     <ClInclude Include="gui\GUIService.h" />
     <ClInclude Include="integrations\entt_service_storage.h" />
     <ClInclude Include="entrypoint.h" />
@@ -170,7 +168,6 @@
     <ClCompile Include="gfx\Shader.cpp" />
     <ClCompile Include="gfx\ShaderProgram.cpp" />
     <ClCompile Include="gfx\VBO.cpp" />
-    <ClCompile Include="gfx\VertexAttributeSetupRegistry.cpp" />
     <ClCompile Include="gui\GUIService.cpp" />
     <ClCompile Include="math\CCamera.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_glfw.cpp" />

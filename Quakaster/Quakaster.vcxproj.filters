@@ -372,9 +372,6 @@
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gfx\VertexAttributeSetupRegistry.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gui\GUIService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -382,9 +379,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gfx\gfx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gfx\VertexBufferGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gfx\MeshConfig.h">
@@ -460,9 +454,6 @@
     </ClCompile>
     <ClCompile Include="entity\CHeirarchy.h">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gfx\VertexAttributeSetupRegistry.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\GUIService.cpp">
       <Filter>Source Files</Filter>
