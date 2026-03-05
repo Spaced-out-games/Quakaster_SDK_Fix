@@ -16,7 +16,7 @@ namespace qk {
 			virtual ~IService() = default;
 			virtual void init();
 			virtual void shutdown();
-
+			void clear_timer();
 
 	};
 }

@@ -16,4 +16,9 @@ namespace qk {
 
 	}
 
+	void IService::clear_timer() {
+		m_Uptime_ns = 0;
+	}
+
+
 }
