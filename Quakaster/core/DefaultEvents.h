@@ -16,16 +16,17 @@ namespace qk {
 	};
 
 	struct MouseEvent : Event {
-		inline int& button() { return *reinterpret_cast<int*>(&m_Payload[0]); }
-		inline int& action() { return *reinterpret_cast<int*>(&m_Payload[4]); }
-		inline int& mods() { return *reinterpret_cast<int*>(&m_Payload[8]); }
+		inline int& button() { return *((int*)m_Payload); }
+		inline int& action() { return *((int*)m_Payload + 1);; }
+		inline int& mods() { return *((int*)m_Payload + 2); }
 		// last 4 bytes unused, can be reserved for future or padding
 	};
 
 	struct MouseMoveEvent : Event {
-		inline float& x() { return *reinterpret_cast<float*>(&m_Payload[0]); }
-		inline float& y() { return *reinterpret_cast<float*>(&m_Payload[4]); }
+		inline float& x() { return *((float*)m_Payload); }
+		inline float& y() { return *((float*)m_Payload + 1); }
 		// optional: delta_x and delta_y in next 8 bytes if you want
 	};
+
 
 }
