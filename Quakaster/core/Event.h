@@ -7,7 +7,7 @@ namespace qk {
 
 
 
-	// Bitfeild
+	// To-do: translate to C-style bitfeild with union with uint32_t for masks.
 	enum class EEventCategory : uint32_t {
 		cat_null		= 0 << 0,
 		cat_os			= 1 << 0,
