@@ -1,9 +1,10 @@
 #include <iostream>
 #include "entrypoint.h"
-#include "core/Window.h"
-#include "core/EventQueue.h"
+
 #include <thread>
 #include <stdint.h>
+#include "core/Window.h"
+#include "core/EventQueue.h"
 #include "core/DefaultEvents.h"
 #include "core/LayerStack.h"
 #include "core/ServiceManager.h"
@@ -13,17 +14,16 @@
 #include "gfx/gfx.h"
 #include "GL/glew.h"
 #include "gui/GUIService.h"
+
+
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 #include "glm/mat4x4.hpp"
-#include "gfx/MeshGroup.h"
-#include "gfx/Shader.h"
-#include "gfx/ShaderProgram.h"
-#include "gfx/VAO.h"
-#include "gfx/VBO.h"
-#include "gfx/MeshService.h"
+
 #include "entity/CHeirarchy.h"
+#include "gfx/VertexBuffer.h"
+#include "gfx/VertexBufferLayout.h"
 
 
 const std::vector<glm::vec2> points = {
@@ -61,12 +61,8 @@ struct MyApp : qk::Application {
 	qk::LayerStack stack;
 	entt::registry registry;
 	qk::SystemStack systems;
-	gfx::MeshGroup mesh;
-	gfx::ShaderProgram program;
 
-	// Test OpenGL state
-	gfx::VBO vao;
-	gfx::VBO vbo;
+
 	unsigned int shader = 0;
 
 
@@ -140,26 +136,6 @@ struct MyApp : qk::Application {
 		gfx::init();
 
 
-		
-		
-		mesh.ctor();
-		mesh.bind();
-		mesh.m_VertexType = typeid(glm::vec2);
-		mesh.m_Setup_pfn = [](unsigned int& location, bool normalize, uintptr_t offset) {
-			gfx::add_vertex_attribute_pointer_impl(location, 2, GL_FLOAT, normalize, sizeof(glm::vec2), offset);
-			location++;
-		};
-
-		vbo = mesh.generate_vbo(points.data(), points.size(), GL_STATIC_DRAW);
-
-
-
-		gfx::Shader vert(vertexShaderSrc, GL_VERTEX_SHADER);
-		
-		gfx::Shader frag(fragShaderSrc, GL_FRAGMENT_SHADER);
-
-		program.init(frag, vert);
-
 
 
 		
@@ -173,18 +149,16 @@ struct MyApp : qk::Application {
 		
 		auto& SvcMgr = registry.ctx().get<qk::ServiceManager<qk::integrations::entt_service_storage>>();
 
-		//gui::demo();
 
-		program.bind();
 
-		mesh.bind();
-		gfx::drawArrays(GL_TRIANGLES, 0, points.size());
 		window.swap_buffers();
 		window.pollEvents();
 		stack.propagate_events();
 		set_status(window.should_close());
 		
 	}
+
+	MyApp() = default;
 
 	~MyApp() override {
 		window.destroy();
