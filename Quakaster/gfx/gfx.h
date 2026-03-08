@@ -1,8 +1,9 @@
 ﻿#pragma once
 #include "../core.h"
+#include "types.h"
+
 
 namespace gfx {
-
 
 	// Initializes GLEW  ¯\_(ツ)_/¯
 	void QK_API init();
