@@ -39,6 +39,12 @@ namespace gfx {
         return result;
     }
 
+    MeshGroup::MeshGroup(MeshGroup&& other) noexcept
+    : m_VertexType(other.m_VertexType),
+      m_Setup_pfn(std::move(other.m_Setup_pfn)),
+      vao(std::move(other.vao))
+{}
+
 
     void MeshGroup::ctor() {
         vao.init();

@@ -23,7 +23,7 @@ namespace gfx {
         //MeshConfig m_Config;
         std::type_index         m_VertexType = typeid(void);
         attribute_setup_pfn     m_Setup_pfn = nullptr;
-        VAO vao;
+        //VAO vao;
 
         MeshGroup(attribute_setup_pfn setup, std::type_index type);
 
@@ -37,6 +37,13 @@ namespace gfx {
             }
             return vbo(data, count * sizeof(vertex_t), usage);  // make sure size is in bytes
         }
+
+        MeshGroup(const MeshGroup&) = default;
+        MeshGroup& operator=(const MeshGroup&) = default;
+
+        MeshGroup(MeshGroup&&) noexcept;
+        MeshGroup& operator=(MeshGroup&&) noexcept = default;
+
 
         void ctor();
         void dtor();

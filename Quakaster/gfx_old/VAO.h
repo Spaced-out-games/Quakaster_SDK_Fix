@@ -2,20 +2,19 @@
 #include "../core.h"
 
 namespace gfx {
-
-    class QK_API VBO {
+    class QK_API VAO {
         unsigned int m_Handle = 0;
+        VAO(VAO&& other) noexcept;
 
+        VAO& operator=(VAO&& other) noexcept;
     public:
-        VBO() = default;
-        ~VBO();
+        VAO() = default;
+        ~VAO();
 
-        VBO(const VBO&) = delete;
-        VBO& operator=(const VBO&) = delete;
+        VAO(const VAO&) = delete;
+        VAO& operator=(const VAO&) = delete;
 
-        VBO(VBO&& other) noexcept;
 
-        VBO& operator=(VBO&& other) noexcept;
 
         void init();
 
@@ -27,13 +26,9 @@ namespace gfx {
 
         unsigned int handle() const;
 
-        void upload(const void* data, size_t size, unsigned int usage);
-
-
         operator unsigned int() const noexcept;
 
         explicit operator bool() const noexcept;
-
-
     };
+
 }

@@ -17,12 +17,15 @@ namespace gfx {
 
 	class QK_API MeshService : public qk::IService {
 		std::unordered_map<std::type_index, attribute_setup_pfn> m_SetupFuncs;
-		std::unordered_map<entt::id_type, MeshGroup>			 m_Groups;
+		std::vector<MeshGroup>									 m_Groups;
+		std::unordered_map<entt::id_type, uint32_t>				m_GroupLUT;
+		
 
 		
 
 
 		public:
+
 			/// <summary>
 			/// Registers a function that handles registration for a sole primitive_t.
 			/// </summary>
@@ -51,7 +54,7 @@ namespace gfx {
 				static_assert(std::is_aggregate_v<aggregate_t>(), "intermediate_t ust be aggregate type");
 
 				// Don't override if already exists
-				if (m_Groups.contains(typeid(aggregate_t))) return;
+				if (m_GroupLUT.contains(typeid(aggregate_t))) return;
 
 
 
@@ -90,18 +93,16 @@ namespace gfx {
 			bool CreateMeshGroup(entt::hashed_string id) {
 				if (!m_SetupFuncs.contains(typeid(vertex_t))) return false;
 
-				m_Groups.emplace(
-					id.hash(),
-					MeshGroup{ m_SetupFuncs.at(typeid(vertex_t)), typeid(vertex_t) }
-				);
+				//m_GroupLUT[id.value()] = m_Groups.size();
+				//m_Groups.emplace(m_SetupFuncs.at(typeid(vertex_t)), typeid(vertex_t));
+
 
 				return true;
 			}
 
-			MeshGroup* GetMeshGroup(entt::hashed_string id) {
-				auto it = m_Groups.find(id.value());
-				return (it != m_Groups.end()) ? &it->second : nullptr;
-			}
+			MeshGroup* GetMeshGroup(entt::hashed_string id);
+			MeshService();
+			~MeshService();
 	};
 
 }
