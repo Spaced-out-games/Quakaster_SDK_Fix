@@ -14,4 +14,5 @@ namespace gfx {
 	// test glClear
 	void QK_API test();
 
+	void QK_API drawArrays(unsigned int mode, int first, int count);
 }

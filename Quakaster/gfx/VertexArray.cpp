@@ -1,0 +1,57 @@
+#include "VertexArray.h"
+
+namespace gfx {
+	VertexArray::VertexArray()
+	{
+	}
+	void VertexArray::init() {
+		if (m_Handle != NULL_HANDLE) {
+			__debugbreak();
+		}
+		glGenVertexArrays(1, &m_Handle);
+
+	}
+
+	VertexArray::~VertexArray() {
+		glDeleteVertexArrays(1, &m_Handle);
+	}
+	void VertexArray::bind() const {
+		glBindVertexArray(m_Handle);
+	}
+	void VertexArray::unbind() const {
+		glBindVertexArray(0);
+	}
+	Handle VertexArray::handle() const {
+		return m_Handle;
+	}
+	VertexArray::operator Handle() const noexcept {
+		return m_Handle;
+	}
+
+	Handle VertexArray::current_bound() const noexcept {
+		GLint h = 0;
+		glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &h);
+		return static_cast<Handle>(h);
+	}
+	void VertexArray::apply_impl(const VertexBufferLayout& layout) const {
+		unsigned int location = 0;
+		unsigned int offset = 0;
+
+		for (auto& elem : layout.m_Elements) {
+			glEnableVertexAttribArray(location);
+
+			glVertexAttribPointer(
+				location,
+				elem.count,
+				elem.type,
+				elem.normalized,
+				layout.m_Stride,
+				(void*)(uintptr_t)offset
+			);
+
+			offset += elem.count * get_attribute_size(elem.type);
+			location++;
+		}
+	}
+
+}

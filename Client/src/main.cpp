@@ -24,6 +24,10 @@
 #include "entity/CHeirarchy.h"
 #include "gfx/VertexBuffer.h"
 #include "gfx/VertexBufferLayout.h"
+#include "gfx/IndexBuffer.h"
+#include "gfx/VertexArray.h"
+#include "gfx/ShaderProgram.h"
+#include "gfx/Shader.h"
 
 
 const std::vector<glm::vec2> points = {
@@ -34,7 +38,7 @@ const std::vector<glm::vec2> points = {
 
 const char* vertexShaderSrc = R"(
 #version 330 core
-in vec2 aPos;
+layout(location = 0) in vec2 aPos;
 
 void main() {
     gl_Position = vec4(aPos, 0.0, 1.0);
@@ -62,8 +66,10 @@ struct MyApp : qk::Application {
 	entt::registry registry;
 	qk::SystemStack systems;
 
-
-	unsigned int shader = 0;
+	gfx::VertexArray arr;
+	gfx::VertexBuffer<glm::vec2> buffer;
+	gfx::VertexBufferLayout layout;
+	gfx::ShaderProgram program;
 
 
 
@@ -81,6 +87,12 @@ struct MyApp : qk::Application {
 
 	void init(int argc, char** argv) override {
 
+
+
+
+
+
+		/*
 		qk::entity::CHeirarchyService svc(registry);
 
 		entt::entity root = svc.new_root();
@@ -110,7 +122,7 @@ struct MyApp : qk::Application {
 		std::cout << "Dirty:";
 		for (auto e : dirty) {
 			std::cout << (uint32_t)e << " ";
-		}
+		}*/
 
 
 		
@@ -120,36 +132,54 @@ struct MyApp : qk::Application {
 		qk::init(3,3);
 
 		// Set up queues, services, stacks, and systems
-		auto& SvcMgr = registry.ctx().emplace<qk::ServiceManager<qk::integrations::entt_service_storage>>();
-		auto& SvcStg = registry.ctx().emplace<qk::integrations::entt_service_storage>(&registry);
-		SvcMgr.storage = &SvcStg;
-		auto& evt_queue = registry.ctx().emplace<qk::EventQueue>();
-		stack.attach_queue(&evt_queue);
+		//auto& SvcMgr = registry.ctx().emplace<qk::ServiceManager<qk::integrations::entt_service_storage>>();
+		//auto& SvcStg = registry.ctx().emplace<qk::integrations::entt_service_storage>(&registry);
+		//SvcMgr.storage = &SvcStg;
+		//auto& evt_queue = registry.ctx().emplace<qk::EventQueue>();
+		//stack.attach_queue(&evt_queue);
 
 		// Window initialization
 		window.init(qk::Window::Size{ 480, 480 }, "Demo");
 		window.make_context_current();
-		window.set_event_queue(&evt_queue);
+		//window.set_event_queue(&evt_queue);
 
 		// initialize gui and gfx
 		gui::init(window.handle());
 		gfx::init();
 
+		layout.push<float>(2, false);
 
 
+		arr.init();
+		arr.bind();
 
-		
+
+		buffer.init(points.data(), points.size(), GL_STATIC_DRAW);
+		buffer.bind();
+
+		arr.apply(buffer, layout);
 
 
+		gfx::Shader frag(fragShaderSrc, GL_FRAGMENT_SHADER);
+		gfx::Shader vert(vertexShaderSrc, GL_VERTEX_SHADER);
+
+
+		gfx::Handle hFrag = frag.compile();
+		gfx::Handle hVert = vert.compile();
+
+		program.init(hFrag, hVert);
+		program.bind();
 	}
 
 
 
 	void run() override {
 		
-		auto& SvcMgr = registry.ctx().get<qk::ServiceManager<qk::integrations::entt_service_storage>>();
+		//auto& SvcMgr = registry.ctx().get<qk::ServiceManager<qk::integrations::entt_service_storage>>();
 
-
+		arr.bind();
+		program.bind();
+		gfx::drawArrays(GL_TRIANGLES, 0, buffer.count()); // sz should be 3
 
 		window.swap_buffers();
 		window.pollEvents();

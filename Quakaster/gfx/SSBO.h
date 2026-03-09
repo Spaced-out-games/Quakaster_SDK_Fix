@@ -1,4 +1,5 @@
 #pragma once
+#include "gfx.h"
 #include "../core.h"
 #include <stdint.h>
 
@@ -18,13 +19,16 @@ namespace gfx {
 	};
 
 
+
+
 	class SSBO_impl {
 		protected:
 			size_t m_Size = 0;
 			size_t m_Capacity = 0;
 			void*  m_Data = nullptr;
-			unsigned int m_Handle = 0;
-			FSSBOAccessMode m_Mode = ESSBOAccessMode::None;
+			gfx::Handle m_Handle = gfx::NULL_HANDLE;
+			FSSBOAccessMode m_Mode = { 0 };
+			unsigned int m_Counter = 0;
 			
 			
 			void push_back_impl(size_t elem_size, const void* data);
@@ -35,15 +39,20 @@ namespace gfx {
 			bool bind_impl();
 
 			// |='s the mode, but respecting read and write locks. Returns true if actually changed
-			bool set_mode(FSSBOAccessMode mode);
+			bool set_readable(bool new_state);
+			bool set_writable(bool new_state);
 
 		public:
-			void size();
-			void capacity();
+			size_t size();
+			size_t capacity();
 			static void unbind();
 			void destroy();
-			void lock(ESSBOAccessMode mode);
-			void unlock(ESSBOAccessMode mode);
+
+			qk::ResourceLock<SSBO_impl> write_lock();
+			void write_unlock(qk::ResourceLock<SSBO_impl>&& lock);
+
+			qk::ResourceLock<SSBO_impl> read_lock();
+			void read_unlock(qk::ResourceLock<SSBO_impl>&& lock);
 
 	};
 

@@ -5,16 +5,13 @@
 
 namespace gfx {
 
-	bool ShaderProgram::init(const Shader& frag, const Shader& vert) {
+	bool ShaderProgram::init(const Handle frag, const Handle vert) {
 
         if(m_Handle) return false;
-        
-		unsigned int frag_shader = frag.compile();
-		unsigned int vert_shader = vert.compile();
 
         m_Handle = glCreateProgram();
-        glAttachShader(m_Handle, vert_shader);
-        glAttachShader(m_Handle, frag_shader);
+        glAttachShader(m_Handle, frag);
+        glAttachShader(m_Handle, vert);
         glLinkProgram(m_Handle);
 
         int success;
@@ -23,11 +20,11 @@ namespace gfx {
             char error[512];
             glGetProgramInfoLog(m_Handle, 512, nullptr, error);
             spdlog::error("Program link error: {}", error);
-
+            return false;
         }
 
-        glDeleteShader(vert_shader);
-        glDeleteShader(frag_shader);
+        glDeleteShader(vert);
+        glDeleteShader(frag);
 
         return true;
 

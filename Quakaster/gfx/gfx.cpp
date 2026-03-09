@@ -25,4 +25,9 @@ namespace gfx {
 		glClearColor(0.1f, 0.6f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
+
+	void drawArrays(unsigned int mode, int first, int count) {
+		glDrawArrays(mode, first, (GLsizei)count);
+
+	}
 }
