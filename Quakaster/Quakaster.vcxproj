@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\ResourceLock.h" />
+    <ClInclude Include="core\utility\ResourceLock.h" />
     <ClInclude Include="core\utility\ScopeTimer.h" />
     <ClInclude Include="core\utility\time.h" />
     <ClInclude Include="services\GraphNodeService.h" />

@@ -405,7 +405,7 @@
     <ClInclude Include="gfx\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\ResourceLock.h">
+    <ClInclude Include="core\utility\ResourceLock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gfx\VertexBuffer.h">

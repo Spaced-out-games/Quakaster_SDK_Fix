@@ -5,7 +5,9 @@
 #include "../ent/CGraphNode.h"
 #include "../core.h"
 
-namespace qk::ent {
+using namespace qk::ent;
+
+namespace qk::services {
 	/*
  Provides services for modifying
  entity heirarchies

@@ -6,7 +6,7 @@
 #include "../core/utility/ServiceManager.h"
 #include "../thirdparty/entt/src/entt/entity/registry.hpp" // temp test
 
-namespace qk::integrations {
+namespace qk::services {
     struct entt_service_storage {
         entt::registry* reg;
 

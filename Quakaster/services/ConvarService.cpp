@@ -1,7 +1,7 @@
 #include "ConvarService.h"
 
 
-namespace qk::console {
+namespace qk::services {
 	bool ConvarService::has(const std::string& id) {
 		ScopeTimer timer(uptime_ptr());
 		return m_Registry.has(id);

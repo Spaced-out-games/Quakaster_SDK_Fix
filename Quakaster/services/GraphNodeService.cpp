@@ -1,7 +1,7 @@
 ﻿#include "GraphNodeService.h"
 #include <string>
 #include <spdlog/spdlog.h>
-namespace qk::ent {
+namespace qk::services {
 
 	GraphNodeService::GraphNodeService(entt::registry& target) : registry(target) {}
 

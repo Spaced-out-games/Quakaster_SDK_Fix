@@ -4,10 +4,14 @@
 #include "../core/utility/ScopeTimer.h"
 #include "../core.h"
 
+using namespace qk::console;
 
-namespace qk::console {
+
+namespace qk::services {
 
 	class QK_API ConvarService: IService {
+
+
 		ConvarRegistry m_Registry;
 
 		public:
