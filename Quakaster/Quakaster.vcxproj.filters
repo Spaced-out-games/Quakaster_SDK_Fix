@@ -15,49 +15,49 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="core\Application.h">
+    <ClInclude Include="core\core\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\Window.h">
+    <ClInclude Include="core\core\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="entrypoint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\Event.h">
+    <ClInclude Include="core\io\Event.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\DefaultEvents.h">
+    <ClInclude Include="core\io\DefaultEvents.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\glfw_EventTranslator.h">
+    <ClInclude Include="core\platform\glfw_EventTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\EventQueue.h">
+    <ClInclude Include="core\io\EventQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\ILayer.h">
+    <ClInclude Include="core\io\ILayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\LayerStack.h">
+    <ClInclude Include="core\io\LayerStack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\IService.h">
+    <ClInclude Include="core\utility\Service.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\Stopwatch.h">
+    <ClInclude Include="core\utility\Stopwatch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\ISystem.h">
+    <ClInclude Include="ent\System.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\ServiceManager.h">
+    <ClInclude Include="core\utility\ServiceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="integrations\entt_service_storage.h">
+    <ClInclude Include="services\entt_service_storage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\cfg\argv.h">
@@ -381,28 +381,13 @@
     <ClInclude Include="gfx\gfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gfx\MeshGroup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gfx\VAO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gfx\VBO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gfx\Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gfx\ShaderProgram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="console\Convar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="console\ConvarRegistry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="console\ConvarService.h">
+    <ClInclude Include="services\ConvarService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="math\CTransform.h">
@@ -414,45 +399,87 @@
     <ClInclude Include="math\CCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gfx\MeshService.h">
+    <ClInclude Include="gfx\CMeshInstance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\ResourceLock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\VertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\VertexBufferLayout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\IndexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\VertexArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\Shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\ShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\res\Image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\stb_image\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\utility\time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\utility\ScopeTimer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="services\GraphNodeService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="core\Application.cpp">
+    <ClCompile Include="core\core\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\Window.cpp">
+    <ClCompile Include="core\core\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\EventQueue.cpp">
+    <ClCompile Include="core\io\EventQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\glfw_EventTranslator.cpp">
+    <ClCompile Include="core\platform\glfw_EventTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\LayerStack.cpp">
+    <ClCompile Include="core\io\LayerStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\ILayer.cpp">
+    <ClCompile Include="core\io\ILayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\Stopwatch.cpp">
+    <ClCompile Include="core\utility\Stopwatch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\ServiceManager.cpp">
+    <ClCompile Include="core\utility\ServiceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\IService.cpp">
+    <ClCompile Include="core\utility\Service.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="entity\CHeirarchy.cpp">
+    <ClCompile Include="services\GraphNodeService.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="entity\CHeirarchy.h">
+    <ClCompile Include="ent\CGraphNode.h">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\GUIService.cpp">
@@ -482,13 +509,28 @@
     <ClCompile Include="gfx\gfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gfx\MeshGroup.cpp">
+    <ClCompile Include="console\Convar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gfx\VAO.cpp">
+    <ClCompile Include="console\ConvarRegistry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gfx\VBO.cpp">
+    <ClCompile Include="services\ConvarService.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\CCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\io\Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\VertexBuffer_GL_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\IndexBuffer_GL_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\VertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gfx\Shader.cpp">
@@ -497,20 +539,28 @@
     <ClCompile Include="gfx\ShaderProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="console\Convar.cpp">
+    <ClCompile Include="thirdparty\stb_image\stb_image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="console\ConvarRegistry.cpp">
+    <ClCompile Include="core\res\Image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="console\ConvarService.cpp">
+    <ClCompile Include="ent\System.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\CCamera.cpp">
+    <ClCompile Include="core\utility\time.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\utility\ScopeTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="thirdparty\glfw\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gfx\types_GL.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

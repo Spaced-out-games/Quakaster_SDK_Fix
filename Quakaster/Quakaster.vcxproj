@@ -11,34 +11,43 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\ResourceLock.h" />
+    <ClInclude Include="core\utility\ScopeTimer.h" />
+    <ClInclude Include="core\utility\time.h" />
+    <ClInclude Include="services\GraphNodeService.h" />
+    <ClInclude Include="gfx\CMeshInstance.h" />
     <ClInclude Include="console\Convar.h" />
     <ClInclude Include="console\ConvarRegistry.h" />
-    <ClInclude Include="console\ConvarService.h" />
+    <ClInclude Include="services\ConvarService.h" />
     <ClInclude Include="core.h" />
-    <ClInclude Include="core\Application.h" />
-    <ClInclude Include="core\DefaultEvents.h" />
-    <ClInclude Include="core\EventQueue.h" />
-    <ClInclude Include="core\glfw_EventTranslator.h" />
-    <ClInclude Include="core\Event.h" />
-    <ClInclude Include="core\ILayer.h" />
-    <ClInclude Include="core\IService.h" />
-    <ClInclude Include="core\ISystem.h" />
-    <ClInclude Include="core\LayerStack.h" />
-    <ClInclude Include="core\ServiceManager.h" />
-    <ClInclude Include="core\Stopwatch.h" />
-    <ClInclude Include="core\Window.h" />
+    <ClInclude Include="core\core\Application.h" />
+    <ClInclude Include="core\io\DefaultEvents.h" />
+    <ClInclude Include="core\io\EventQueue.h" />
+    <ClInclude Include="core\platform\glfw_EventTranslator.h" />
+    <ClInclude Include="core\io\Event.h" />
+    <ClInclude Include="core\io\ILayer.h" />
+    <ClInclude Include="core\utility\Service.h" />
+    <ClInclude Include="ent\System.h" />
+    <ClInclude Include="core\io\LayerStack.h" />
+    <ClInclude Include="core\utility\ServiceManager.h" />
+    <ClInclude Include="core\utility\Stopwatch.h" />
+    <ClInclude Include="core\core\Window.h" />
     <ClInclude Include="gfx\gfx.h" />
-    <ClInclude Include="gfx\MeshGroup.h" />
-    <ClInclude Include="gfx\MeshService.h" />
+    <ClInclude Include="gfx\IndexBuffer.h" />
+    <ClInclude Include="gfx\Mesh.h" />
     <ClInclude Include="gfx\Shader.h" />
     <ClInclude Include="gfx\ShaderProgram.h" />
-    <ClInclude Include="gfx\VBO.h" />
+    <ClInclude Include="gfx\types.h" />
+    <ClInclude Include="gfx\VertexArray.h" />
+    <ClInclude Include="gfx\VertexBuffer.h" />
+    <ClInclude Include="gfx\VertexBufferLayout.h" />
     <ClInclude Include="gui\GUIService.h" />
-    <ClInclude Include="integrations\entt_service_storage.h" />
+    <ClInclude Include="services\entt_service_storage.h" />
     <ClInclude Include="entrypoint.h" />
     <ClInclude Include="math\CCamera.h" />
     <ClInclude Include="math\CMatrix.h" />
     <ClInclude Include="math\CTransform.h" />
+    <ClInclude Include="core\res\Image.h" />
     <ClInclude Include="thirdparty\imgui\imgui\imgui.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\async.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\async_logger-inl.h" />
@@ -144,31 +153,37 @@
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\stopwatch.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\tweakme.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\version.h" />
-    <ClInclude Include="gfx\VAO.h" />
+    <ClInclude Include="thirdparty\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console\Convar.cpp" />
     <ClCompile Include="console\ConvarRegistry.cpp" />
-    <ClCompile Include="console\ConvarService.cpp" />
+    <ClCompile Include="services\ConvarService.cpp" />
     <ClCompile Include="core.cpp" />
-    <ClCompile Include="core\Application.cpp" />
-    <ClCompile Include="core\EventQueue.cpp" />
-    <ClCompile Include="core\glfw_EventTranslator.cpp" />
-    <ClCompile Include="core\ILayer.cpp" />
-    <ClCompile Include="core\IService.cpp" />
-    <ClCompile Include="core\LayerStack.cpp" />
-    <ClCompile Include="core\ServiceManager.cpp" />
-    <ClCompile Include="core\Stopwatch.cpp" />
-    <ClCompile Include="core\Window.cpp" />
-    <ClCompile Include="entity\CHeirarchy.cpp" />
-    <ClCompile Include="entity\CHeirarchy.h" />
+    <ClCompile Include="core\core\Application.cpp" />
+    <ClCompile Include="core\io\Event.cpp" />
+    <ClCompile Include="core\io\EventQueue.cpp" />
+    <ClCompile Include="core\platform\glfw_EventTranslator.cpp" />
+    <ClCompile Include="core\io\ILayer.cpp" />
+    <ClCompile Include="core\utility\Service.cpp" />
+    <ClCompile Include="core\io\LayerStack.cpp" />
+    <ClCompile Include="core\utility\ServiceManager.cpp" />
+    <ClCompile Include="core\utility\ScopeTimer.cpp" />
+    <ClCompile Include="core\utility\Stopwatch.cpp" />
+    <ClCompile Include="core\utility\time.cpp" />
+    <ClCompile Include="core\core\Window.cpp" />
+    <ClCompile Include="services\GraphNodeService.cpp" />
+    <ClCompile Include="ent\CGraphNode.h" />
+    <ClCompile Include="ent\System.cpp" />
     <ClCompile Include="gfx\gfx.cpp" />
-    <ClCompile Include="gfx\MeshGroup.cpp" />
+    <ClCompile Include="gfx\IndexBuffer_GL_impl.cpp" />
     <ClCompile Include="gfx\Shader.cpp" />
     <ClCompile Include="gfx\ShaderProgram.cpp" />
-    <ClCompile Include="gfx\VBO.cpp" />
+    <ClCompile Include="gfx\VertexArray.cpp" />
+    <ClCompile Include="gfx\VertexBuffer_GL_impl.cpp" />
     <ClCompile Include="gui\GUIService.cpp" />
     <ClCompile Include="math\CCamera.cpp" />
+    <ClCompile Include="core\res\Image.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui.cpp" />
@@ -176,10 +191,13 @@
     <ClCompile Include="thirdparty\imgui\imgui\imgui_draw.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui_tables.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="gfx\VAO.cpp" />
+    <ClCompile Include="thirdparty\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="thirdparty\glfw\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="gfx\types_GL.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -231,7 +249,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);QK_BUILD_DLL;GLFW_STATIC;GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\spdlog-1.x\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\imgui;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\pfr\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\entt\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\spdlog-1.x\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\imgui;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\pfr\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\entt\src;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerOutput>NoListing</AssemblerOutput>
       <ShowIncludes>true</ShowIncludes>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
