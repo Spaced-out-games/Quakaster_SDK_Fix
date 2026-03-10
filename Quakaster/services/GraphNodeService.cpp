@@ -1,20 +1,20 @@
-﻿#include "CHeirarchy.h"
-#include "../core/Stopwatch.h"
+﻿#include "GraphNodeService.h"
+#include <string>
+#include <spdlog/spdlog.h>
+namespace qk::ent {
 
-namespace qk::entity {
-
-	CHeirarchyService::CHeirarchyService(entt::registry& target) : registry(target) {}
+	GraphNodeService::GraphNodeService(entt::registry& target) : registry(target) {}
 
 
-	CHeirarchy& CHeirarchyService::heirarchy(entt::entity target) {
-		return registry.get<CHeirarchy>(target);
+	CGraphNode& GraphNodeService::heirarchy(entt::entity target) {
+		return registry.get<CGraphNode>(target);
 	}
-	bool CHeirarchyService::has_heirarchy(entt::entity target) {
-		return registry.all_of<CHeirarchy>(target);
+	bool GraphNodeService::has_heirarchy(entt::entity target) {
+		return registry.all_of<CGraphNode>(target);
 
 	}
 
-	entt::entity CHeirarchyService::root(entt::entity target) {
+	entt::entity GraphNodeService::root(entt::entity target) {
 		if (target == entt::null || !has_heirarchy(target)) return entt::null;
 
 		entt::entity current = target;
@@ -25,21 +25,21 @@ namespace qk::entity {
 		return current;
 	}
 
-	entt::entity CHeirarchyService::new_root() {
+	entt::entity GraphNodeService::new_root() {
 		entt::entity result = registry.create();
-		registry.emplace<CHeirarchy>(result);
+		registry.emplace<CGraphNode>(result);
 		return result;
 	}
 
-	bool CHeirarchyService::has_children(entt::entity e) {
+	bool GraphNodeService::has_children(entt::entity e) {
 		return first_child(e) != entt::null;
 	}
 
-	bool CHeirarchyService::is_leaf(entt::entity e) {
+	bool GraphNodeService::is_leaf(entt::entity e) {
 		return !has_children(e);
 	}
 
-	size_t CHeirarchyService::depth(entt::entity e) {
+	size_t GraphNodeService::depth(entt::entity e) {
 		size_t d = 0;
 		while (parent(e) != entt::null) {
 			e = parent(e);
@@ -48,70 +48,70 @@ namespace qk::entity {
 		return d;
 	}
 
-	void CHeirarchyService::reparent(entt::entity child, entt::entity new_parent) {
+	void GraphNodeService::reparent(entt::entity child, entt::entity new_parent) {
 		detach_child(parent(child), child);
 		attach_child(new_parent, child);
 	}
 
-	size_t CHeirarchyService::num_descendants(entt::entity e) {
+	size_t GraphNodeService::num_descendants(entt::entity e) {
 		size_t count = 1;
 		for_each_descendant(e, [&](entt::entity) { ++count; });
 		return count;
 	}
 
-	entt::entity CHeirarchyService::parent(entt::entity target) {
+	entt::entity GraphNodeService::parent(entt::entity target) {
 		if (target == entt::null || !has_heirarchy(target)) return entt::null;
 		
 		return heirarchy(target).parent;
 	}
 
-	entt::entity CHeirarchyService::first_child(entt::entity target) {
+	entt::entity GraphNodeService::first_child(entt::entity target) {
 		if (target == entt::null || !has_heirarchy(target)) return entt::null;
 
 		return heirarchy(target).first;
 	}
 
-	entt::entity CHeirarchyService::last_child(entt::entity target) {
+	entt::entity GraphNodeService::last_child(entt::entity target) {
 		if (target == entt::null || !has_heirarchy(target)) return entt::null;
 
 		return heirarchy(target).last;
 	}
 
-	entt::entity CHeirarchyService::first_sibling(entt::entity e) {
+	entt::entity GraphNodeService::first_sibling(entt::entity e) {
 		if (e == entt::null || !has_heirarchy(e)) return entt::null;
 		auto parent = heirarchy(e).parent;
 		if (parent == entt::null || !has_heirarchy(parent)) return e;
 		return heirarchy(parent).first;
 	}
 
-	entt::entity CHeirarchyService::last_sibling(entt::entity e) {
+	entt::entity GraphNodeService::last_sibling(entt::entity e) {
 		if (e == entt::null || !has_heirarchy(e)) return entt::null;
 		auto parent = heirarchy(e).parent;
 		if (parent == entt::null || !has_heirarchy(parent)) return e;
 		return heirarchy(parent).last;
 	}
 
-	entt::entity CHeirarchyService::prev_sibling(entt::entity e) {
+	entt::entity GraphNodeService::prev_sibling(entt::entity e) {
 		if (e == entt::null || !has_heirarchy(e)) return entt::null;
 		return heirarchy(e).prev;
 	}
 
-	entt::entity CHeirarchyService::next_sibling(entt::entity e) {
+	entt::entity GraphNodeService::next_sibling(entt::entity e) {
 		if (e == entt::null || !has_heirarchy(e)) return entt::null;
 		return heirarchy(e).next;
 	}
 
 
-	entt::entity CHeirarchyService::add_child(entt::entity parent) {
+	entt::entity GraphNodeService::add_child(entt::entity parent) {
 		// Let's not insert into empty nodes
 		if (parent == entt::null) return entt::null;
 
-		// Let's also not allocate a CHeirarchy for the parent
+		// Let's also not allocate a CGraphNode for the parent
 		if (!has_heirarchy(parent)) return entt::null;
 
 		// we have implicit permission to do this.
 		entt::entity child = registry.create();
-		registry.emplace<CHeirarchy>(child);
+		registry.emplace<CGraphNode>(child);
 
 		// first insertion check
 		if (first_child(parent) == entt::null) {
@@ -134,7 +134,7 @@ namespace qk::entity {
 
 	}
 
-	bool CHeirarchyService::remove_child(entt::entity target, entt::entity child) {
+	bool GraphNodeService::remove_child(entt::entity target, entt::entity child) {
 		if (target == entt::null || child == entt::null) return true;
 		if (parent(child) != target) return false;
 
@@ -155,7 +155,7 @@ namespace qk::entity {
 		return true;
 
 	}
-	void CHeirarchyService::detach_child(entt::entity target, entt::entity child) {
+	void GraphNodeService::detach_child(entt::entity target, entt::entity child) {
 		if (target == entt::null || child == entt::null) return;
 
 		if (!has_heirarchy(target) || !has_heirarchy(child)) return;
@@ -174,12 +174,12 @@ namespace qk::entity {
 		heirarchy(child).parent = entt::null;
 
 		// also mark it dirty
-		invalidate<CHeirarchy::DirtyFlag>(child);
+		invalidate<CGraphNode::DirtyFlag>(child);
 
 
 	}
 
-	void CHeirarchyService::attach_child(entt::entity target, entt::entity new_child) {
+	void GraphNodeService::attach_child(entt::entity target, entt::entity new_child) {
 		if (target == entt::null || new_child == entt::null) return;
 
 		// Prevent cycles: can't attach a parent under its own descendant
@@ -208,11 +208,11 @@ namespace qk::entity {
 			parentComp.first = new_child;
 
 		// Optionally propagate dirty flag
-		invalidate<CHeirarchy::DirtyFlag>(new_child);
+		invalidate<CGraphNode::DirtyFlag>(new_child);
 	}
 	
-	void CHeirarchyService::print_subtree(entt::entity target, const std::string& prefix, bool is_last) {
-		if (target == entt::null || !registry.all_of<CHeirarchy>(target)) return;
+	void GraphNodeService::print_subtree(entt::entity target, const std::string& prefix, bool is_last) {
+		if (target == entt::null || !registry.all_of<CGraphNode>(target)) return;
 
 		// Build the line
 		std::string line = prefix + (is_last ? "\\ " : "T ") + std::to_string(int(target));
@@ -220,7 +220,7 @@ namespace qk::entity {
 		// Log the line via spdlog raw logger (no timestamp/level)
 		spdlog::default_logger_raw()->info(line);
 
-		auto& node = registry.get<CHeirarchy>(target);
+		auto& node = registry.get<CGraphNode>(target);
 
 		// Gather children right-to-left
 		std::vector<entt::entity> children;
@@ -235,7 +235,7 @@ namespace qk::entity {
 		}
 	}
 
-	void CHeirarchyService::print_tree(entt::entity root) {
+	void GraphNodeService::print_tree(entt::entity root) {
 		print_subtree(root);
 	}
 	

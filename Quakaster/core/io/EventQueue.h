@@ -1,7 +1,7 @@
 #pragma once
 #include "Event.h"
 #include <vector>
-#include "../core.h"
+#include "../../core.h"
 
 
 namespace qk {

@@ -3,13 +3,12 @@
 
 #include <thread>
 #include <stdint.h>
-#include "core/Window.h"
-#include "core/EventQueue.h"
-#include "core/DefaultEvents.h"
-#include "core/LayerStack.h"
-#include "core/ServiceManager.h"
-#include "core/ISystem.h"
-#include "integrations/entt_service_storage.h"
+#include "core/core/Window.h"
+#include "core/io/EventQueue.h"
+#include "core/io/DefaultEvents.h"
+#include "core/io/LayerStack.h"
+#include "core/utility/ServiceManager.h"
+#include "services/entt_service_storage.h"
 
 #include "gfx/gfx.h"
 #include "GL/glew.h"
@@ -21,7 +20,7 @@
 #include "glm/vec4.hpp"
 #include "glm/mat4x4.hpp"
 
-#include "entity/CHeirarchy.h"
+#include "ent/CGraphNode.h"
 #include "gfx/VertexBuffer.h"
 #include "gfx/VertexBufferLayout.h"
 #include "gfx/IndexBuffer.h"
@@ -33,7 +32,8 @@
 const std::vector<glm::vec2> points = {
 	glm::vec2{0.0, 0.0},
 	glm::vec2{0.0, 1.0},
-	glm::vec2{1.0, 0.0}
+	glm::vec2{1.0, 0.0},
+	glm::vec2{1.0, 1.0}
 };
 
 const char* vertexShaderSrc = R"(
@@ -55,6 +55,7 @@ void main() {
 )frag";
 #include <vector>
 #include "entt/entity/view.hpp"
+#include "ent/System.h"
 
 struct MyApp : qk::Application {
 
@@ -64,7 +65,7 @@ struct MyApp : qk::Application {
 	std::shared_ptr<qk::EventQueue> queue;
 	qk::LayerStack stack;
 	entt::registry registry;
-	qk::SystemStack systems;
+	qk::ent::SystemStack systems;
 
 	gfx::VertexArray arr;
 	gfx::VertexBuffer<glm::vec2> buffer;
@@ -73,15 +74,7 @@ struct MyApp : qk::Application {
 
 
 
-	void get_dirty_entities(std::vector<entt::entity>& out) {
 
-		auto view = registry.view<qk::entity::CHeirarchy::DirtyFlag>();
-
-		for (auto entity : view) {
-			out.push_back(entity);
-		}
-
-	}
 
 
 
@@ -93,7 +86,7 @@ struct MyApp : qk::Application {
 
 
 		/*
-		qk::entity::CHeirarchyService svc(registry);
+		qk::ent::GraphNodeService svc(registry);
 
 		entt::entity root = svc.new_root();
 
@@ -141,7 +134,6 @@ struct MyApp : qk::Application {
 		// Window initialization
 		window.init(qk::Window::Size{ 480, 480 }, "Demo");
 		window.make_context_current();
-		//window.set_event_queue(&evt_queue);
 
 		// initialize gui and gfx
 		gui::init(window.handle());
@@ -179,7 +171,7 @@ struct MyApp : qk::Application {
 
 		arr.bind();
 		program.bind();
-		gfx::drawArrays(GL_TRIANGLES, 0, buffer.count()); // sz should be 3
+		gfx::drawArrays(GL_TRIANGLE_STRIP, 0, buffer.count());
 
 		window.swap_buffers();
 		window.pollEvents();

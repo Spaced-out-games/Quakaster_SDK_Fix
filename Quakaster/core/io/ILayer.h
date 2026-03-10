@@ -1,6 +1,6 @@
 #pragma once
 #include "Event.h"
-#include "../core.h"
+#include "../../core.h"
 
 
 namespace qk {

@@ -1,9 +1,9 @@
 #pragma once
-#include "../core.h"
+#include "../../core.h"
 #define GLFW_INCLUDE_NONE
 #include <string>
 #include <memory>
-#include "EventQueue.h"
+#include "../io/EventQueue.h"
 
 
 struct GLFWwindow;

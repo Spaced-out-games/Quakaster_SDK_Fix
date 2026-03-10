@@ -1,5 +1,5 @@
 #pragma once
-#include "../core.h"
+#include "../../core.h"
 
 namespace qk {
 	class QK_API Application {

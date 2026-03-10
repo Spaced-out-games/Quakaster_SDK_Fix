@@ -1,40 +1,21 @@
-﻿#pragma once
-
+#pragma once
+#include "../core/utility/Service.h"
 #include "entt/entity/entity.hpp"
 #include "entt/entity/registry.hpp"
-#include "entt/entity/view.hpp"
+#include "../ent/CGraphNode.h"
 #include "../core.h"
-#include "../core/IService.h"
-//#include "spdlog/spdlog.h"
 
-namespace qk::entity {
-	// Used to define an entity heirarchy
-	struct QK_API CHeirarchy {
-		entt::entity parent = entt::null;
-		entt::entity prev	= entt::null;
-		entt::entity next	= entt::null;
-		entt::entity first = entt::null;
-		entt::entity last = entt::null;
-
-		struct DirtyFlag {
-			entt::entity old_parent = entt::null;
-		};
-
-	};
-
-	
-
-
+namespace qk::ent {
 	/*
-	 Provides services for modifying
-	 entity heirarchies
-	*/
-	struct QK_API CHeirarchyService : IService {
+ Provides services for modifying
+ entity heirarchies
+*/
+	struct QK_API GraphNodeService : IService {
 		entt::registry& registry;
 
-		CHeirarchyService(entt::registry& target);
+		GraphNodeService(entt::registry& target);
 
-		CHeirarchy& heirarchy(entt::entity target);
+		CGraphNode& heirarchy(entt::entity target);
 
 		bool has_heirarchy(entt::entity target);
 
@@ -87,11 +68,11 @@ namespace qk::entity {
 	};
 
 
-	/* -------------------------------- template implementations -------------------------------- */	
+	/* -------------------------------- template implementations -------------------------------- */
 
 
 	template <class flag_t>
-	void CHeirarchyService::clear_descendant_flags(entt::entity target) {
+	void GraphNodeService::clear_descendant_flags(entt::entity target) {
 		if (target == entt::null || first_child(target) == entt::null) return;
 
 		entt::entity current = first_child(target);
@@ -109,7 +90,7 @@ namespace qk::entity {
 	}
 
 	template <class flag_t>
-	void CHeirarchyService::invalidate(entt::entity target) {
+	void GraphNodeService::invalidate(entt::entity target) {
 
 		if (target == entt::null) return;
 
@@ -135,13 +116,13 @@ namespace qk::entity {
 	}
 
 	template <class flag_t>
-	void CHeirarchyService::clear() {
+	void GraphNodeService::clear() {
 		auto view = registry.view<flag_t>();
 		registry.erase<flag_t>(view.begin(), view.end()); // <-- semicolon
 	}
 
 	template <typename Func>
-	void CHeirarchyService::for_each_descendant(entt::entity e, Func&& func) {
+	void GraphNodeService::for_each_descendant(entt::entity e, Func&& func) {
 		for (entt::entity child = first_child(e); child != entt::null; child = next_sibling(child)) {
 			func(child);
 			for_each_descendant(child, func);
@@ -149,7 +130,7 @@ namespace qk::entity {
 	}
 
 	template <typename Func>
-	void CHeirarchyService::for_each_sibling(entt::entity e, Func&& func) {
+	void GraphNodeService::for_each_sibling(entt::entity e, Func&& func) {
 		entt::entity first = first_sibling(e);
 		for (entt::entity sibling = first; sibling != entt::null; sibling = next_sibling(sibling)) {
 			func(sibling);
@@ -157,6 +138,4 @@ namespace qk::entity {
 	}
 
 
-
 }
-

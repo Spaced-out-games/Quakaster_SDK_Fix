@@ -1,7 +1,7 @@
 #pragma once
-#include "ConvarRegistry.h"
-#include "../core/IService.h"
-#include "../core/Stopwatch.h"
+#include "../console/ConvarRegistry.h"
+#include "../core/utility/Service.h"
+#include "../core/utility/ScopeTimer.h"
 #include "../core.h"
 
 

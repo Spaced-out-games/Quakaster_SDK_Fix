@@ -1,6 +1,6 @@
 #include "Window.h"
 #include <GLFW/glfw3.h>
-#include "glfw_EventTranslator.h"
+#include "../platform/glfw_EventTranslator.h"
 #include "spdlog/spdlog.h"
 #include <stdexcept>
 namespace qk {

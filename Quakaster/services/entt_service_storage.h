@@ -2,8 +2,8 @@
 #include "../core.h"
 #include <string>
 #include <unordered_map>
-#include "../core/IService.h"
-#include "../core/ServiceManager.h"
+#include "../core/utility/Service.h"
+#include "../core/utility/ServiceManager.h"
 #include "../thirdparty/entt/src/entt/entity/registry.hpp" // temp test
 
 namespace qk::integrations {

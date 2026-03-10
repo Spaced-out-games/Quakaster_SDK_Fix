@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <unordered_map>
 #include <string>
-#include "IService.h"
+#include "Service.h"
 #include "spdlog/spdlog.h"
 
 namespace qk {

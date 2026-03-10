@@ -1,6 +1,6 @@
 #pragma once
 #include <GLFW/glfw3.h>
-#include "../core.h"
+#include "../../core.h"
 
 namespace qk::EventCallbacks {
 

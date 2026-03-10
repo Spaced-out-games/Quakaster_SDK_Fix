@@ -1,7 +1,6 @@
 #pragma once
-#include "../core.h"
 #include <stdint.h>
-#include "../core.h"
+#include "../../core.h"
 namespace qk {
 	struct QK_API IService {
 

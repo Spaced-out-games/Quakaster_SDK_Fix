@@ -1,7 +1,7 @@
 #include "glfw_EventTranslator.h"
-#include "DefaultEvents.h"
-#include "Event.h"
-#include "Window.h"
+#include "../io/DefaultEvents.h"
+#include "../io/Event.h"
+#include "../core/Window.h"
 
 
 namespace qk::EventCallbacks {
