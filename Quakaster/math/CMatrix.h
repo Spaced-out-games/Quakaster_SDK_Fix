@@ -3,5 +3,5 @@
 
 
 namespace qk::math {
-	using Matrix = glm::mat4;
+	using CMatrix = glm::mat4;
 }
