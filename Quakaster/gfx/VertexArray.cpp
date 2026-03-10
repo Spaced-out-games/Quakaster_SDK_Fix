@@ -28,7 +28,7 @@ namespace gfx {
 		return m_Handle;
 	}
 
-	Handle VertexArray::current_bound() const noexcept {
+	Handle VertexArray::current_bound() noexcept {
 		GLint h = 0;
 		glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &h);
 		return static_cast<Handle>(h);
