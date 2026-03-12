@@ -1,4 +1,4 @@
-#include "GUIService.h"
+#include "gui.h"
 #include "GLFW/glfw3.h"	
 
 #include "imgui/imgui.h"
@@ -13,7 +13,7 @@ namespace gui {
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		ImGui::StyleColorsDark();
 
-		ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)window, true);
+		ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)window, false);
 		ImGui_ImplOpenGL3_Init("#version 330");
 	}
 	void demo() {
