@@ -20,12 +20,9 @@ namespace qk::ent {
 
 
 			bool try_tick(entt::registry& registry);
-
-
 	};
 
 
 
-	using SystemStack = std::vector<System*>;
 
 }
