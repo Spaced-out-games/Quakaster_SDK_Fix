@@ -11,6 +11,9 @@ namespace gfx {
 			throw std::runtime_error("Failed to initialize GLEW");
 		}
 		spdlog::info("gfx initialized successfully!...");
+		spdlog::info("OpenGL Version: {}", (const char*)glGetString(GL_VERSION));
+		spdlog::info("Renderer: {}", (const char*)glGetString(GL_RENDERER));
+		spdlog::info("Vendor: {}", (const char*)glGetString(GL_VENDOR));
 	}
 
 	void close() {
