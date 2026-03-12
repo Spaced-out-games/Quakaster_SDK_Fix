@@ -5,14 +5,11 @@
 #include <stdexcept>
 namespace qk {
 
-	void Window::set_key_callback(GLFWkeyfun callback) {
-		glfwSetKeyCallback(m_Window, callback);
-	}
 
 	void Window::set_event_queue(EventQueue* queue) {
 		m_Queue = queue;
 	}
-
+	
 
 	EventQueue* Window::queue() {
 		return m_Queue;
@@ -22,7 +19,7 @@ namespace qk {
 		if (!m_Window) {
 			throw std::runtime_error("Window not initialized!");
 		}
-		glfwMakeContextCurrent(m_Window);  // <-- this is the key
+		glfwMakeContextCurrent(m_Window);
 	}
 
 	Window::Position Window::get_position() {
@@ -60,6 +57,7 @@ namespace qk {
 
 
 
+
 	void Window::init(Window::Size initial_size, const std::string& title, Monitor monitor, Window* shared) {
 		spdlog::info("Window initialized at {:#x}", (uintptr_t)this);
 
@@ -74,7 +72,32 @@ namespace qk {
 
 		// Now m_Window is valid — safe to set user pointer and callbacks
 		glfwSetWindowUserPointer(m_Window, this);
-		set_key_callback(qk::EventCallbacks::on_key);
+
+		// Window events
+		glfwSetWindowSizeCallback(m_Window, qk::io::on_window_resize);
+		glfwSetFramebufferSizeCallback(m_Window, qk::io::on_framebuffer_resize);
+		glfwSetWindowCloseCallback(m_Window, qk::io::on_window_close);
+		glfwSetWindowRefreshCallback(m_Window, qk::io::on_window_refresh);
+		glfwSetWindowFocusCallback(m_Window, qk::io::on_window_focus);
+		glfwSetWindowIconifyCallback(m_Window, qk::io::on_window_minimize);
+		glfwSetWindowMaximizeCallback(m_Window, qk::io::on_window_maximize);
+		glfwSetWindowContentScaleCallback(m_Window, qk::io::on_window_DPI_update);
+
+		// Input events
+		glfwSetKeyCallback(m_Window, qk::io::on_key);
+		glfwSetCharCallback(m_Window, qk::io::on_textinput);
+		glfwSetCharModsCallback(m_Window, qk::io::on_textinputEx);
+
+		glfwSetMouseButtonCallback(m_Window, qk::io::on_mouse_button);
+		glfwSetCursorPosCallback(m_Window, qk::io::on_mouse_move);
+		glfwSetCursorEnterCallback(m_Window, qk::io::on_mouse_enter);
+		glfwSetScrollCallback(m_Window, qk::io::on_mouse_scroll);
+
+		// Drag & drop
+		glfwSetDropCallback(m_Window, qk::io::on_drag_drop);
+
+		// Joystick connection
+		glfwSetJoystickCallback(qk::io::on_joystick_connect);
 	}
 
 	Window::Window() {
@@ -82,8 +105,8 @@ namespace qk {
 	}
 
 	void Window::destroy() {
-		spdlog::info("Window destroyed at {:#x}", (uintptr_t)this);
 		if (m_Window) {
+			spdlog::info("Window destroyed at {:#x}", (uintptr_t)this);
 			glfwDestroyWindow(m_Window);
 			m_Window = nullptr;
 		}
@@ -95,3 +118,15 @@ namespace qk {
 	}
 
 }
+#ifdef _WIN32
+
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <GLFW/glfw3native.h>
+
+namespace qk {
+	HWND Window::native() {
+		return glfwGetWin32Window(m_Window);
+	}
+}
+
+#endif

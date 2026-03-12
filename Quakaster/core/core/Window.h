@@ -5,6 +5,10 @@
 #include <memory>
 #include "../io/EventQueue.h"
 
+#ifdef _WIN32
+	struct HWND__;
+	using HWND = HWND__*;
+#endif
 
 struct GLFWwindow;
 struct GLFWmonitor;
@@ -34,12 +38,10 @@ namespace qk {
 			};
 
 			void make_context_current();
-			void set_key_callback(GLFWkeyfun callback);
 			void set_event_queue(EventQueue* queue);
 			EventQueue* queue();
 			Window::Position get_position();
 			void set_position(Window::Position new_position);
-
 			std::string get_title();
 
 			int should_close();
@@ -47,9 +49,14 @@ namespace qk {
 			void swap_buffers();
 			void resize(Window::Size new_size);
 			void* handle();
+			#ifdef _WIN32
+				HWND native();
+			#else
+			#endif
 			void destroy();
 			Window();
 			~Window();
+
 
 			
 			void pollEvents();
