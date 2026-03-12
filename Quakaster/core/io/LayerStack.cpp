@@ -23,7 +23,7 @@ namespace qk {
 		for (const Event& evt: m_Queue->events())
 		{
 			for (auto& layerPtr : m_Layers) {
-				if ((evt.m_Category & layerPtr->filter) != layerPtr->filter) continue;
+				if (!(layerPtr->filter & evt.m_Category)) continue;
 				BlockResult = layerPtr->on_event(evt);       // unique_ptr operator-> gives raw pointer
 				if (BlockResult == ILayer::EBlock::Block) break;
 			}

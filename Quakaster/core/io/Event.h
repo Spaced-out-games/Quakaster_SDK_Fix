@@ -1,7 +1,11 @@
 #pragma once
 #include <stdint.h>
 #include "../../../core.h"
-
+#include <cstddef>
+#include <type_traits>
+#include <cassert>
+#define QK_MAX_STRING_SIZE 256
+#define QK_MAX_PATHS 128
 namespace qk {
 
 
@@ -24,7 +28,8 @@ namespace qk {
 		cat_mouse		= 1 << 11,
 		cat_continuous  = 1 << 12,
 		cat_error		= 1 << 13,
-		cat_custom		= 1u << 31,
+		cat_text		= 1 << 14,
+		cat_custom		= 1 << 31,
 
 		cat_kbmouse = cat_mouse | cat_keyboard,
 
@@ -78,6 +83,8 @@ namespace qk {
 		KeyRelease_evt,
 
 		MousePress_evt,
+		MouseRelease_evt,
+		MouseHold_evt, 
 		MouseMove_evt,
 		MouseEnter_evt,
 		MouseExit_evt,
@@ -87,10 +94,12 @@ namespace qk {
 		WindowGainFocus_evt,
 		WindowLoseFocus_evt,
 		WindowOpen_evt,
-		WindowClose_evt,
+		WindowClose_evt, // needs print support.
 		WindowRefresh_evt,
 		WindowMinimize_evt,
+		WindowMinimizeRestored_evt,
 		WindowMaximize_evt,
+		WindowMaximizeRestored_evt,
 
 		FramebufferResize_evt,
 		WindowDPIUpdate_evt,
@@ -123,7 +132,7 @@ namespace qk {
 	struct Event {
 		// Denotes the type ID that begins the first custom event
 		// If you create your own custom events and an enum on top
-		static constexpr uint32_t custom_begin = 1u << 31;
+		//static constexpr uint32_t custom_begin = 1u << 31;
 		Event() = default;
 		~Event();
 
@@ -131,10 +140,39 @@ namespace qk {
 		EEventType m_Type = {};
 		uint64_t timestamp = 0;
 		// starts at 128 bit boundary
-		uint8_t m_Payload[16];
+		alignas(std::max_align_t) uint8_t m_Payload[16]{};
+
+		template<typename T>
+		inline T& view(size_t offset = 0)
+		{
+			static_assert(std::is_trivially_copyable_v<T>,
+				"Event::view<T>: T must be trivially copyable");
+
+			static_assert(std::is_standard_layout_v<T>,
+				"Event::view<T>: T must have standard layout");
+
+			constexpr size_t payload_size = sizeof(m_Payload);
+
+			// bounds check
+			assert(offset + sizeof(T) <= payload_size &&
+				"Event::view<T>: payload overflow");
+
+			// alignment check
+			uintptr_t addr = reinterpret_cast<uintptr_t>(m_Payload + offset);
+			assert(addr % alignof(T) == 0 &&
+				"Event::view<T>: misaligned access");
+
+			return *reinterpret_cast<T*>(m_Payload + offset);
+		}
 
 
 	};
+
+
+
+
+	
+
 
 	using EventEx_dtor_pfn_t = void(*)(Event&);
 
