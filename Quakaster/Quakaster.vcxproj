@@ -14,6 +14,9 @@
     <ClInclude Include="core\utility\ResourceLock.h" />
     <ClInclude Include="core\utility\ScopeTimer.h" />
     <ClInclude Include="core\utility\time.h" />
+    <ClInclude Include="gfx\Texture.h" />
+    <ClInclude Include="gui\gui.h" />
+    <ClInclude Include="gui\Widget.h" />
     <ClInclude Include="services\GraphNodeService.h" />
     <ClInclude Include="gfx\CMeshInstance.h" />
     <ClInclude Include="console\Convar.h" />
@@ -41,7 +44,6 @@
     <ClInclude Include="gfx\VertexArray.h" />
     <ClInclude Include="gfx\VertexBuffer.h" />
     <ClInclude Include="gfx\VertexBufferLayout.h" />
-    <ClInclude Include="gui\GUIService.h" />
     <ClInclude Include="services\entt_service_storage.h" />
     <ClInclude Include="entrypoint.h" />
     <ClInclude Include="math\CCamera.h" />
@@ -158,6 +160,8 @@
   <ItemGroup>
     <ClCompile Include="console\Convar.cpp" />
     <ClCompile Include="console\ConvarRegistry.cpp" />
+    <ClCompile Include="gfx\Texture.cpp" />
+    <ClCompile Include="gui\gui.cpp" />
     <ClCompile Include="services\ConvarService.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="core\core\Application.cpp" />
@@ -181,7 +185,6 @@
     <ClCompile Include="gfx\ShaderProgram.cpp" />
     <ClCompile Include="gfx\VertexArray.cpp" />
     <ClCompile Include="gfx\VertexBuffer_GL_impl.cpp" />
-    <ClCompile Include="gui\GUIService.cpp" />
     <ClCompile Include="math\CCamera.cpp" />
     <ClCompile Include="core\res\Image.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_glfw.cpp" />
