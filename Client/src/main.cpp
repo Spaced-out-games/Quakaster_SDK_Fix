@@ -198,7 +198,8 @@ struct MyApp : qk::Application {
 
 		arr.bind();
 		program.bind();
-		gfx::drawArrays(GL_TRIANGLE_STRIP, 0, buffer.count());
+		gui::demo();
+		//gfx::drawArrays(GL_TRIANGLE_STRIP, 0, buffer.count());
 
 		window.swap_buffers();
 		window.pollEvents();
