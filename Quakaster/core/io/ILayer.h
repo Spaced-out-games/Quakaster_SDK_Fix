@@ -18,6 +18,8 @@ namespace qk {
 		virtual ~ILayer() = default;
 		[[nodiscard]] virtual EBlock on_event(const Event& evt) = 0;
 		virtual void on_render() = 0;
+		// virtual void on_attach();
+		// virtual void on_detach();
 		void subscribe(EEventCategory category);
 		void unsubscribe(EEventCategory category);
 	};
