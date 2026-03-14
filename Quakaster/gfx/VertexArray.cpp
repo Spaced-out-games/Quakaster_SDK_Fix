@@ -1,14 +1,17 @@
 #include "VertexArray.h"
+#include "spdlog/spdlog.h"
 
 namespace gfx {
 	VertexArray::VertexArray()
 	{
 	}
 	void VertexArray::init() {
-		if (m_Handle != NULL_HANDLE) {
-			__debugbreak();
+		if (m_Handle == NULL_HANDLE) {
+			glGenVertexArrays(1, &m_Handle);
 		}
-		glGenVertexArrays(1, &m_Handle);
+		else {
+			spdlog::warn("Attempted to double-initialize a vertex array!");
+		}
 
 	}
 
