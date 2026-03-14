@@ -3,9 +3,14 @@
 namespace gfx {
 	IndexBuffer_impl::IndexBuffer_impl() {}
 
-	void IndexBuffer_impl::init_impl(const void* indices, uint32_t count, uint32_t elem_size) {
+	void IndexBuffer_impl::init_impl() {
+		if (!m_Handle) glGenBuffers(1, &m_Handle);
+		else __debugbreak();
+	}
+
+
+	void IndexBuffer_impl::upload_impl(const void* indices, uint32_t count, uint32_t elem_size) {
 		m_Count = count;
-		glGenBuffers(1, &m_Handle);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Handle);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, count * elem_size, indices, GL_STATIC_DRAW);
 	}

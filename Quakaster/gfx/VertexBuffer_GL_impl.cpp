@@ -10,12 +10,14 @@ namespace gfx {
 
 	}
 
-	void VertexBuffer_impl::init_impl(const void* data, size_t count, size_t elem_size, unsigned int usage) {
-		if (m_Handle != NULL_HANDLE) {
-			__debugbreak();
-		}
+	void VertexBuffer_impl::init_impl() {
+		if (!m_Handle) glGenBuffers(1, &m_Handle);
+		else __debugbreak();
+	}
+
+
+	void VertexBuffer_impl::upload_impl(const void* data, size_t count, size_t elem_size, unsigned int usage) {
 		m_Count = count;
-		glGenBuffers(1, &m_Handle);
 		glBindBuffer(GL_ARRAY_BUFFER, m_Handle);
 		glBufferData(GL_ARRAY_BUFFER, count * elem_size, data, usage);
 	}

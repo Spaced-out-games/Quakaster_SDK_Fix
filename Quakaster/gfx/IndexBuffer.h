@@ -15,7 +15,8 @@ namespace gfx {
 
         IndexBuffer_impl();
         ~IndexBuffer_impl();
-        void init_impl(const void* indices, uint32_t count, uint32_t elem_size);
+        void init_impl();
+        void upload_impl(const void* indices, uint32_t count, uint32_t elem_size);
         void bind_impl() const;
         void unbind_impl() const;
         uint32_t size_impl(uint32_t elem_size) const;
@@ -31,9 +32,13 @@ namespace gfx {
         IndexBuffer() = default;
 
 
-        void init(const index_t* data, uint32_t count) {
-            init_impl(data, count, sizeof(index_t));
+        void upload(const index_t* data, uint32_t count) {
+            upload_impl(data, count, sizeof(index_t));
         }
+        void init() {
+            init_impl();
+        }
+
         void bind() const { bind_impl(); }
         void unbind() const { unbind_impl(); }
 

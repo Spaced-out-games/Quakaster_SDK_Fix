@@ -11,7 +11,8 @@ namespace gfx {
 			unsigned int m_Count = 0;
 			VertexBuffer_impl();
 			~VertexBuffer_impl();
-			void init_impl(const void* data, size_t count, size_t elem_size, unsigned int usage);
+			void init_impl();
+			void upload_impl(const void* data, size_t count, size_t elem_size, unsigned int usage);
 			void bind_impl() const;
 			void unbind_impl() const;
 	};
@@ -32,8 +33,12 @@ namespace gfx {
 		}
 
 
-		void init(const vertex_t* data, size_t count, unsigned int usage) {
-			init_impl(data, count, sizeof(vertex_t), usage);
+		void init() {
+			init_impl();
+		}
+
+		void upload(const vertex_t* data, size_t count, unsigned int usage) {
+			upload_impl(data, count, sizeof(vertex_t), usage);
 		}
 
 		void bind() const { bind_impl(); }
