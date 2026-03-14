@@ -3,7 +3,8 @@
 
 
 namespace gfx {
-	// Consider making templated for type safety.
+	// TODO: Separate initialization from uploads
+
 	class QK_API VertexBuffer_impl {
 		protected:
 			Handle m_Handle = NULL_HANDLE;

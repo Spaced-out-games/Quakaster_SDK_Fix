@@ -5,6 +5,8 @@
 
 namespace gfx {
 
+    // TODO: Separate initialization from uploads
+
     class QK_API IndexBuffer_impl {
 
     protected:
