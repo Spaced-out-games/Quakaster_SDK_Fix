@@ -29,6 +29,24 @@ namespace qk {
         void propagate_events();
 
         void render();
+
+        ILayer* operator[](size_t index) {
+            if (index >= m_Layers.size()) return nullptr;
+            return m_Layers[index].get();
+        }
+
+        template<typename T, typename... Args>
+        T& emplace_layer(Args&&... args)
+        {
+            static_assert(std::is_base_of_v<ILayer, T>);
+
+            auto ptr = std::make_unique<T>(std::forward<Args>(args)...);
+            T& ref = *ptr;
+
+            insert_layer(std::move(ptr));
+            return ref;
+        }
+
     };
 }
 
