@@ -46,4 +46,9 @@ namespace gfx {
 	void Texture::bind() {
 		glBindTexture(m_Type, m_Handle);
 	}
+
+	Handle Texture::handle() const {
+		return m_Handle;
+	}
+
 }

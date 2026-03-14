@@ -13,5 +13,6 @@ namespace gfx {
 			Texture() = default;
 			void init(qk::Image& img, unsigned int type);
 			void bind();
+			Handle handle() const;
 	};
 }
