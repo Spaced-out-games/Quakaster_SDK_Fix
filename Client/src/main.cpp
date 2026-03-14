@@ -68,6 +68,7 @@ void main() {
 #include <vector>
 #include "entt/entity/view.hpp"
 #include "ent/System.h"
+#include "vgui/vgui.h"
 
 struct MyApp : qk::Application {
 
@@ -156,13 +157,14 @@ struct MyApp : qk::Application {
 		window.set_event_queue(queue.get());
 
 		// initialize gui and gfx
-		gui::init(window.handle());
-		gfx::init();
+		gui::mount(window.handle());
 
+		gfx::init();
+		
 		qk::Image img("C:/Users/devin/Desktop/morty.jpg");
 
 		texture.init(img, GL_TEXTURE_2D);
-
+		/*
 		layout.push<float>(2, false);
 		layout.push<float>(2, false);
 
@@ -170,8 +172,8 @@ struct MyApp : qk::Application {
 		arr.init();
 		arr.bind();
 
-
-		buffer.init(points.data(), points.size(), GL_STATIC_DRAW);
+		buffer.init();
+		buffer.upload(points.data(), points.size(), GL_STATIC_DRAW);
 		buffer.bind();
 
 		arr.apply(buffer, layout);
@@ -186,7 +188,20 @@ struct MyApp : qk::Application {
 
 		program.init(hFrag, hVert);
 		program.bind();
+		*/
+
+		vgui::Layer2D* raw = new vgui::Layer2D(65536);
+
+		std::unique_ptr<qk::ILayer> layer(raw);
+
+		stack.insert_layer(std::move(layer));
+
 		stack.attach_queue(queue.get());
+		auto& canvas = *((vgui::Layer2D*)stack[0]);
+		canvas.m_Persist = true;
+		vgui::draw_triangle(canvas, { 0.0, 0.0 }, { 1.0,0.0 }, { 1.0,1.0 }, { 0.0, 0.0, 1.0, 1.0 });
+
+
 
 	}
 
@@ -195,15 +210,26 @@ struct MyApp : qk::Application {
 	void run() override {
 		
 		//auto& SvcMgr = registry.ctx().get<qk::ServiceManager<qk::integrations::entt_service_storage>>();
-
+		/*
 		arr.bind();
 		program.bind();
-		gui::demo();
-		//gfx::drawArrays(GL_TRIANGLE_STRIP, 0, buffer.count());
+		gui::begin_frame();
 
+		gui::begin("hello");
+		gui::text("hello world");
+		gui::end();
+
+		gui::end_frame();
+
+
+		gfx::drawArrays(GL_TRIANGLE_STRIP, 0, buffer.count());
+		*/
 		window.swap_buffers();
 		window.pollEvents();
 		stack.propagate_events();
+
+
+		stack.render();
 		queue->clear();
 		set_status(window.should_close());
 		
