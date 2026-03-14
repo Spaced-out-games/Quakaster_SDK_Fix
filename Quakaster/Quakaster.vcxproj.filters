@@ -372,9 +372,6 @@
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gui\GUIService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="thirdparty\imgui\imgui\imgui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -450,6 +447,12 @@
     <ClInclude Include="gui\gui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gfx\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vgui\vgui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\core\Application.cpp">
@@ -487,9 +490,6 @@
     </ClCompile>
     <ClCompile Include="ent\CGraphNode.h">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="gui\GUIService.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="thirdparty\imgui\imgui\backends\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
@@ -561,6 +561,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gui\gui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vgui\vgui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\VertexBufferLayout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

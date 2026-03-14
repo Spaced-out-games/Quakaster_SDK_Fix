@@ -156,11 +156,13 @@
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\tweakme.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\version.h" />
     <ClInclude Include="thirdparty\stb_image\stb_image.h" />
+    <ClInclude Include="vgui\vgui.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console\Convar.cpp" />
     <ClCompile Include="console\ConvarRegistry.cpp" />
     <ClCompile Include="gfx\Texture.cpp" />
+    <ClCompile Include="gfx\VertexBufferLayout.cpp" />
     <ClCompile Include="gui\gui.cpp" />
     <ClCompile Include="services\ConvarService.cpp" />
     <ClCompile Include="core.cpp" />
@@ -195,6 +197,7 @@
     <ClCompile Include="thirdparty\imgui\imgui\imgui_tables.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui_widgets.cpp" />
     <ClCompile Include="thirdparty\stb_image\stb_image.cpp" />
+    <ClCompile Include="vgui\vgui.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="thirdparty\glfw\src\CMakeLists.txt" />
