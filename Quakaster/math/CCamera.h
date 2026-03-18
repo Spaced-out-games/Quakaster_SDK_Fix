@@ -1,3 +1,8 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// math/CCamera.h
+/// Purpose: Defines a minimal Camera definition. Represents a projection matrix and nothing more.
+/// **************************************************************************************************
+
 #pragma once
 #include "../core.h"
 #include <glm/matrix.hpp>                 // mat4 type

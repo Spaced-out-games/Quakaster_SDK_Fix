@@ -1,3 +1,8 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// math/CCamera.h
+/// Purpose: Stores the relative translation, rotation, scale of some object
+/// **************************************************************************************************
+
 #pragma once
 #include "glm/vec3.hpp"
 #include "glm/mat4x4.hpp"

@@ -1,10 +1,14 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// gui/gui.h
+/// Purpose: Defines wrapper functions for ImGui calls (for DLL boundary reasons) 
+/// **************************************************************************************************
 #pragma once
 #include "../core.h"
 #include "imgui/imgui.h"
 
 
 
-namespace gui {
+namespace qk::gui {
 
 	void QK_API mount(void* window);
 	void QK_API dismount();

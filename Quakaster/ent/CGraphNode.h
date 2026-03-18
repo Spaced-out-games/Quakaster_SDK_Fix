@@ -1,4 +1,8 @@
-﻿#pragma once
+﻿/// **************************************** QUAKASTER ENGINE **************************************** 
+/// ent/CGraphNode.h
+/// Purpose: Defines a scene graph node type, within the entt ecosystem
+/// **************************************************************************************************
+#pragma once
 
 #include "entt/entity/entity.hpp"
 #include "entt/entity/registry.hpp"

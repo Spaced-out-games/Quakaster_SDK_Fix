@@ -1,7 +1,12 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// gui/Widget.h
+/// Purpose: Defines an interface for defining ImGui prefabs.
+/// **************************************************************************************************
+
 #pragma once
 
 
-namespace gui {
+namespace qk::gui {
 
 	struct Widget {
 

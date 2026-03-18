@@ -5,7 +5,7 @@
 #include "imgui/backends/imgui_impl_glfw.h"
 #include "imgui/backends/imgui_impl_opengl3.h"
 
-namespace gui {
+namespace qk::gui {
 
     // In a real implementation, just use qk::Window&
     void mount(void* window)

@@ -16,7 +16,7 @@ namespace qk::ent {
 	}
 
 	bool System::ready() {
-		return qk::now() >= m_NextTick_ns;
+		return util::now() >= m_NextTick_ns;
 	}
 
 

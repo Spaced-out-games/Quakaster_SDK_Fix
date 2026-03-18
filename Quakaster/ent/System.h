@@ -1,3 +1,7 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// ent/System.h
+/// Purpose: Defines an interface fpr timed entt interactions.
+/// **************************************************************************************************
 #pragma once
 #include <entt/entity/registry.hpp>
 #include <vector>

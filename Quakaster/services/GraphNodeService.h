@@ -1,3 +1,9 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// services/GraphNodeService.h
+/// Purpose: Provides a service to add, remove, modify, and manage scene
+/// graphs with the entt ecosystem
+/// **************************************************************************************************
+
 #pragma once
 #include "../core/utility/Service.h"
 #include "entt/entity/entity.hpp"
@@ -7,12 +13,12 @@
 
 using namespace qk::ent;
 
-namespace qk::services {
+namespace qk::svc {
 	/*
  Provides services for modifying
  entity heirarchies
 */
-	struct QK_API GraphNodeService : IService {
+	struct QK_API GraphNodeService : util::IService {
 		entt::registry& registry;
 
 		GraphNodeService(entt::registry& target);
