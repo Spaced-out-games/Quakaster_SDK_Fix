@@ -1,7 +1,12 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/io/EventQueue.cpp
+/// Purpose: Implements and event queue
+/// ************************************************************************************************** 
+
 #include "EventQueue.h"
 
 
-namespace qk {
+namespace qk::io {
     EventQueue::EventQueue() {
         m_Data.reserve(256);
     }

@@ -1,10 +1,16 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/io/EventQueue.h
+/// Purpose: Defines a queue for storing Events
+/// ************************************************************************************************** 
+
+
 #pragma once
 #include "Event.h"
 #include <vector>
 #include "../../core.h"
 
 
-namespace qk {
+namespace qk::io {
     struct QK_API EventQueue {
     private:
         std::vector<Event> m_Data;
