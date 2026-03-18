@@ -1,9 +1,14 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// gfx/Shader.h
+/// Purpose: Represents shader source code, ready for compilation
+/// **************************************************************************************************
+
 #pragma once
 #include <string>
 #include "../core.h"
 #include "types.h"
 
-namespace gfx {
+namespace qk::gfx {
 
 	using ShaderType = unsigned int;
 

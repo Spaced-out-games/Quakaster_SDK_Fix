@@ -1,7 +1,7 @@
 #include "VertexBuffer.h"
 #include "GL/glew.h"
 
-namespace gfx {
+namespace qk::gfx {
 
 
 	VertexBuffer_impl::VertexBuffer_impl()

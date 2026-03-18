@@ -1,11 +1,13 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// gfx/IndexBuffer.h
+/// Purpose: Represents an Index Buffer stored on the GPU
+/// **************************************************************************************************
 #pragma once
 #include "../core.h"
 #include <stdint.h>
 #include "gfx.h"
 
-namespace gfx {
-
-    // TODO: Separate initialization from uploads
+namespace qk::gfx {
 
     class QK_API IndexBuffer_impl {
 

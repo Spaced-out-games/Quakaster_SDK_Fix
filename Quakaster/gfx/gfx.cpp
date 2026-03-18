@@ -4,7 +4,7 @@
 #include "GL/glew.h"
 
 
-namespace gfx {
+namespace qk::gfx {
 	void init() {
 		glewExperimental = GL_TRUE;
 		if (glewInit() != GLEW_OK) {

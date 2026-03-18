@@ -1,6 +1,6 @@
 #include "VertexBufferLayout.h"
 
-namespace gfx {
+namespace qk::gfx {
     unsigned int get_attribute_size(VertexAttribute attribute) {
         switch (attribute)
         {

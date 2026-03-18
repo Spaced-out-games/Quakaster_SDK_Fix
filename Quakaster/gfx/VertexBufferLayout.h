@@ -1,3 +1,8 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// gfx/VertexBuffer.h
+/// Purpose: Sets up vertex array attribute pointers
+/// **************************************************************************************************
+
 #pragma once
 #include "../core.h"
 #include "VertexBuffer.h"
@@ -6,7 +11,7 @@
 #include <cassert>
 #include "types.h"
 #include "GL/glew.h"
-namespace gfx
+namespace qk::gfx
 {
 
 

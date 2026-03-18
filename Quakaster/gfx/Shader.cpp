@@ -2,7 +2,7 @@
 #include "GL/glew.h"
 #include "spdlog/spdlog.h"
 
-namespace gfx {
+namespace qk::gfx {
 
 	Handle Shader::compile() const{
         GLuint shader = glCreateShader(m_Type);

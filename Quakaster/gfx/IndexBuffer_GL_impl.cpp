@@ -1,6 +1,6 @@
 #include "IndexBuffer.h"
 
-namespace gfx {
+namespace qk::gfx {
 	IndexBuffer_impl::IndexBuffer_impl() {}
 
 	void IndexBuffer_impl::init_impl() {

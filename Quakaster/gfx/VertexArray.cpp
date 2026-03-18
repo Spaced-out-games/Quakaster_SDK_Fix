@@ -1,7 +1,7 @@
 #include "VertexArray.h"
 #include "spdlog/spdlog.h"
 
-namespace gfx {
+namespace qk::gfx {
 	VertexArray::VertexArray()
 	{
 	}

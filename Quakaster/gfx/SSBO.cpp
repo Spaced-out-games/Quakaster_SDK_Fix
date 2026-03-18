@@ -2,7 +2,7 @@
 #include "SSBO.h"
 #include "GL/glew.h"
 
-namespace gfx {
+namespace qk::gfx {
 	
 	size_t SSBO_impl::capacity() {
 		return m_Capacity;

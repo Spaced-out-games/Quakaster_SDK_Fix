@@ -1,8 +1,13 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// gfx/VertexBuffer.h
+/// Purpose: Represents a Vertex Buffer stored on the GPU
+/// **************************************************************************************************
+
 #pragma once
 #include "gfx.h"
 
 
-namespace gfx {
+namespace qk::gfx {
 	// TODO: Separate initialization from uploads
 
 	class QK_API VertexBuffer_impl {
@@ -37,8 +42,8 @@ namespace gfx {
 			init_impl();
 		}
 
-		void upload(const vertex_t* data, size_t count, unsigned int usage) {
-			upload_impl(data, count, sizeof(vertex_t), usage);
+		void upload(const vertex_t* data, size_t numVertices, unsigned int usage) {
+			upload_impl(data, numVertices, sizeof(vertex_t), usage);
 		}
 
 		void bind() const { bind_impl(); }

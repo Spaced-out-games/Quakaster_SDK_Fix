@@ -1,3 +1,8 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// gfx/VertexArray.h
+/// Purpose: Represents a Vertex Array stored on the GPU
+/// **************************************************************************************************
+
 #pragma once
 #include "../core.h"
 #include "types.h"
@@ -5,7 +10,7 @@
 #include "VertexBufferLayout.h"
 
 
-namespace gfx {
+namespace qk::gfx {
 	class QK_API VertexArray {
 			Handle m_Handle = NULL_HANDLE;
 			void apply_impl(const VertexBufferLayout& layout) const;

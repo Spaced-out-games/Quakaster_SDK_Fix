@@ -3,7 +3,7 @@
 #include "../core.h"
 #include <stdint.h>
 
-namespace gfx {
+namespace qk::gfx {
 	
 	struct FSSBOAccessMode {
 		union {

@@ -1,9 +1,15 @@
-﻿#pragma once
+﻿/// **************************************** QUAKASTER ENGINE **************************************** 
+/// gfx/gfx.h
+/// Purpose: Defines some fundamental wrappers for managing the gfx module lifetime.
+/// **************************************************************************************************
+
+
+#pragma once
 #include "../core.h"
 #include "types.h"
 
 
-namespace gfx {
+namespace qk::gfx {
 
 	// Initializes GLEW  ¯\_(ツ)_/¯
 	void QK_API init();
