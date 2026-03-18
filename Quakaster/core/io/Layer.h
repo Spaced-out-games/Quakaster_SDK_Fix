@@ -1,10 +1,15 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/io/Layer.c
+/// Purpose: Defines an interface for layered event propagation
+/// ************************************************************************************************** 
+
 #pragma once
 #include "Event.h"
 #include "../../core.h"
 
 
-namespace qk {
-	struct QK_API ILayer {
+namespace qk::io {
+	struct QK_API Layer {
 
 		EEventCategory filter = EEventCategory::cat_null;
 
@@ -15,11 +20,13 @@ namespace qk {
 		};
 
 
-		virtual ~ILayer() = default;
+		virtual ~Layer() = default;
 		[[nodiscard]] virtual EBlock on_event(const Event& evt) = 0;
 		virtual void on_render() = 0;
-		// virtual void on_attach();
-		// virtual void on_detach();
+		virtual void on_attach() = 0;
+		virtual void on_detach() = 0;
+
+
 		void subscribe(EEventCategory category);
 		void unsubscribe(EEventCategory category);
 	};
