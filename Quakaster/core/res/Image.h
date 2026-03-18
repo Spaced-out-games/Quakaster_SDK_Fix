@@ -1,3 +1,7 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/res/Image.h
+/// Purpose: Defines a structure that can load images from disk
+/// ************************************************************************************************** 
 #pragma once
 #include "../../core.h"
 #include <stdint.h>
@@ -8,7 +12,7 @@
 
 
 
-namespace qk {
+namespace qk::resource {
 	class QK_API Image {
 		uint8_t* m_Data = nullptr;
 		int m_Width = 0;

@@ -1,7 +1,12 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/res/Image.h
+/// Purpose: Implements a structure that can load images from disk
+/// ************************************************************************************************** 
+
 #include "Image.h"
 #include "stb_image.h"
 #include <cassert>
-namespace qk {
+namespace qk::resource {
 
 	Image::Image(const std::string& path) {
 		load_image(*this, path);
