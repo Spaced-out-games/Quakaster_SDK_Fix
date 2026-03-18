@@ -1,6 +1,10 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// gfx/CMeshInstance.h
+/// Purpose: 
+/// **************************************************************************************************
 #pragma once
 
-namespace gfx {
+namespace qk::gfx {
 
 
 	struct CMeshInstance
