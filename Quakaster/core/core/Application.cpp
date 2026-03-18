@@ -1,8 +1,12 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/core/Application.cpp
+/// Purpose: Handles Application initialization and management
+/// **************************************************************************************************
 #include "Application.h"
 #include "spdlog/spdlog.h"
 
 
-namespace qk {
+namespace qk::core {
 	Application::Application() {
 		spdlog::info("Application ctor called at {:#x}", (uintptr_t)this);
 	}

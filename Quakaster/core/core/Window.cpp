@@ -1,9 +1,13 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/Window.h
+/// Purpose: Impliments a basic Window wrapper for GLFW calls.
+/// ************************************************************************************************** 
 #include "Window.h"
 #include <GLFW/glfw3.h>
 #include "../platform/glfw_EventTranslator.h"
 #include "spdlog/spdlog.h"
 #include <stdexcept>
-namespace qk {
+namespace qk::core {
 
 
 	void Window::set_event_queue(EventQueue* queue) {
@@ -123,7 +127,7 @@ namespace qk {
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include <GLFW/glfw3native.h>
 
-namespace qk {
+namespace qk::core {
 	HWND Window::native() {
 		return glfwGetWin32Window(m_Window);
 	}
