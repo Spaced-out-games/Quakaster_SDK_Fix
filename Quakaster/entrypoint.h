@@ -3,7 +3,7 @@
 #include <memory>
 
 namespace qk {
-	extern std::unique_ptr<qk::Application> create_application(int argc, char** argv);
+	extern std::unique_ptr<qk::core::Application> create_application(int argc, char** argv);
 }
 
 
