@@ -1,9 +1,13 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/io/DefaultEvents.h
+/// Purpose: Declares event views for easy Event manipulation
+/// ************************************************************************************************** 
 #pragma once
 #include "Event.h"
 #include <string>
 #include <format>
 
-namespace qk {
+namespace qk::io {
 
 	struct NullEvent : Event {};
 
@@ -41,13 +45,10 @@ namespace qk {
 	struct MouseMoveEvent : Event {
 		inline float& x() { return view<float>(0); }
 		inline float& y() { return view<float>(sizeof(float)); }
-		// optional: delta_x and delta_y in next 8 bytes if you want
 	};
 
-	// signal
 	struct MouseEnterEvent : Event {};
 
-	// signal
 	struct MouseExitEvent : Event {};
 
 	struct MouseScrollEvent : Event {
@@ -60,28 +61,20 @@ namespace qk {
 		inline int& height() { return view<int>(sizeof(int)); }
 	};
 
-	// signal
 	struct WindowCloseEvent : Event {};
 
-	// signal
 	struct WindowRefreshEvent: Event {};
 
-	// signal
 	struct WindowGainFocusEvent : Event {};
 
-	// signal
 	struct WindowLoseFocusEvent : Event {};
 
-	// signal
 	struct WindowMinimizeEvent : Event {};
 
-	// signal
 	struct WindowMinimizeRestoreEvent : Event {};
 
-	// signal
 	struct WindowMaximizeEvent: Event {};
 
-	// signal
 	struct WindowMaximizeRestoreEvent : Event {};
 
 	struct WindowFramebufferResizeEvent : Event {
@@ -106,7 +99,7 @@ namespace qk {
 	struct DragDropEvent : Event {
 		inline int& count() { return view<int>(0); }
 		char*& paths() { return view<char*>(sizeof(int)); }
-		char* paths(int i) { return paths() + (QK_MAX_STRING_SIZE * i); }
+		char* paths(size_t i) { return paths() + (QK_MAX_STRING_SIZE * i); }
 	};
 
 	struct JoystickConnectEvent : Event {
@@ -116,10 +109,8 @@ namespace qk {
 	struct JoystickDisconnectEvent : Event {
 		inline int& jid() { return view<int>(0); }
 	};
-	// signal
 	struct MonitorConnectEvent : Event {};
 
-	// signal
 	struct MonitorDisconnectEvent: Event {};
 
 	struct Error : Event {
@@ -144,15 +135,18 @@ namespace qk {
 	
 	struct PlatformMouseCursorUnavailableError: Error {};
 
+	// Function pointer type to convert custom events to string representations
 	using EventExToString_pfn_t = std::string(*)(const Event&);
 
+	// Function pointer to convert custom event to string representation
 	inline EventExToString_pfn_t g_EventExToString_pfn = nullptr;
 
+	// Converts any Event to a string
 	std::string to_string(const Event& evt) {
 		using enum EEventType;
 		Event& e = const_cast<Event&>(evt);
 
-		if ((uint32_t)e.m_Type > CUSTOM_EVENT_BEGIN)
+		if ((uint32_t)e.m_Type >= CUSTOM_EVENT_BEGIN)
 		{
 			if (g_EventExToString_pfn)
 			{
