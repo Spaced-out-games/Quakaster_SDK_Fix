@@ -1,10 +1,16 @@
-﻿#pragma once
+﻿/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/utility/ServiceManager
+/// Purpose: Defines a service registry type, capable of integrating with your own 
+/// custom service storage sysetm
+/// **************************************************************************************************
+
+#pragma once
 #include <unordered_map>
 #include <string>
 #include "Service.h"
 #include "spdlog/spdlog.h"
 
-namespace qk {
+namespace qk::util {
 
     struct ServiceEntry;
     using ServiceMap = std::unordered_map<std::string, ServiceEntry>;

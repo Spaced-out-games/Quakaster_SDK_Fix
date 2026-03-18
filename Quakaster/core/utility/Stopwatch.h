@@ -1,10 +1,14 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/utility/Stopwatch.h
+/// Purpose: Times things
+/// **************************************************************************************************
 #pragma once
 #include "../../core.h"
 #include <stdint.h>
 #include "spdlog/spdlog.h"
 #include "time.h"
 
-namespace qk {
+namespace qk::util {
 
 
 	struct QK_API Stopwatch {

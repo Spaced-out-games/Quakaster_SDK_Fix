@@ -1,7 +1,11 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/utility/Service.h
+/// Purpose: Implements a high-level ECS service interface that supports profiling features.
+/// **************************************************************************************************
 #pragma once
 #include <stdint.h>
 #include "../../core.h"
-namespace qk {
+namespace qk::util {
 	struct QK_API IService {
 
 		protected:

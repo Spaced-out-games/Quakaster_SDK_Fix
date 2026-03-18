@@ -1,8 +1,13 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/utility/ScopeTimer.cpp
+/// Purpose: Implements ScopeTimer.h
+/// **************************************************************************************************
+
 #include "ScopeTimer.h"
 #include "spdlog/spdlog.h"
 #include "time.h"
 
-namespace qk {
+namespace qk::util {
 	ScopeTimer::~ScopeTimer() {
 		if (m_Target) (*m_Target += now() - m_StartTime);
 	}

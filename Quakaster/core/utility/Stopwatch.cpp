@@ -1,7 +1,11 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/utility/Stopwatch.cpp
+/// Purpose: Stopwatch implementation.
+/// **************************************************************************************************
 #include "Stopwatch.h"
 
 
-namespace qk {
+namespace qk::util {
 
 
 
