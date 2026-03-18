@@ -1,3 +1,9 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/platform/glfw_EventTranslator.h
+/// Purpose: Implements function callbacks for converting GLFW events to Quakaster 
+/// events and loading them into a queue.
+/// ************************************************************************************************** 
+
 #include "glfw_EventTranslator.h"
 #include "../io/DefaultEvents.h"
 #include "../io/Event.h"
@@ -5,12 +11,14 @@
 #include <algorithm>
 #include "../utility/time.h"
 
+using namespace qk;
+
 namespace qk::io {
 	void on_key(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 
@@ -23,7 +31,7 @@ namespace qk::io {
 		}
 
 
-		kv.timestamp = now();
+		kv.timestamp = util::now();
 		kv.scancode() = scancode;
 		kv.mods() = mods;
 		kv.key() = key;
@@ -35,14 +43,14 @@ namespace qk::io {
 		using enum EEventCategory;
 		using enum EEventType;
 
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 
 		MouseEvent& ev = (MouseEvent&)queue->emplace_back();
 		ev.m_Category = cat_mouse;
 
-		ev.timestamp = now();
+		ev.timestamp = util::now();
 		ev.button() = button;
 		ev.mods() = mods;
 
@@ -58,12 +66,12 @@ namespace qk::io {
 
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 
 		MouseMoveEvent& mv = (MouseMoveEvent&)queue->emplace_back();
-		mv.timestamp = now();
+		mv.timestamp = util::now();
 		mv.m_Category = cat_continuous | cat_mouse;
 		mv.m_Type = MouseMove_evt;
 		mv.x() = (float)xpos;
@@ -75,13 +83,13 @@ namespace qk::io {
 
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 
 		Event& mv = queue->emplace_back();
 		mv.m_Category = cat_mouse | cat_window;
-		mv.timestamp = now();
+		mv.timestamp = util::now();
 
 		if (entered) {
 			mv.m_Type = MouseEnter_evt;
@@ -94,11 +102,11 @@ namespace qk::io {
 	void on_mouse_scroll(GLFWwindow* window, double xoffset, double yoffset) {
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 		MouseScrollEvent& sv = (MouseScrollEvent&)queue->emplace_back();
-		sv.timestamp = now();
+		sv.timestamp = util::now();
 
 		sv.m_Category = cat_mouse | cat_continuous;
 		sv.m_Type = MouseScroll_evt;
@@ -110,11 +118,11 @@ namespace qk::io {
 	void on_window_resize(GLFWwindow* window, int width, int height) {
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 		WindowResizeEvent& rv = (WindowResizeEvent&)queue->emplace_back();
-		rv.timestamp = now();
+		rv.timestamp = util::now();
 
 		rv.m_Category = cat_window | cat_continuous;
 		rv.m_Type = WindowResize_evt;
@@ -126,11 +134,11 @@ namespace qk::io {
 	void on_window_close(GLFWwindow* window) {
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 		WindowCloseEvent& cv = (WindowCloseEvent&)queue->emplace_back();
-		cv.timestamp = now();
+		cv.timestamp = util::now();
 
 		cv.m_Category = cat_window;
 		cv.m_Type = WindowClose_evt;
@@ -139,12 +147,12 @@ namespace qk::io {
 	void on_window_refresh(GLFWwindow* window) {
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 		WindowRefreshEvent& rv = (WindowRefreshEvent&)queue->emplace_back();
 		rv.m_Category = cat_window;
-		rv.timestamp = now();
+		rv.timestamp = util::now();
 
 		rv.m_Type = WindowRefresh_evt;
 	}
@@ -152,11 +160,11 @@ namespace qk::io {
 	void on_window_focus(GLFWwindow* window, int focus) {
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 		Event& ev = queue->emplace_back();
-		ev.timestamp = now();
+		ev.timestamp = util::now();
 
 		ev.m_Category = cat_window;
 		if (focus) {
@@ -170,11 +178,11 @@ namespace qk::io {
 	void on_window_minimize(GLFWwindow* window, int iconified) {
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 		Event& ev = queue->emplace_back();
-		ev.timestamp = now();
+		ev.timestamp = util::now();
 
 		ev.m_Category = cat_window;
 
@@ -190,26 +198,30 @@ namespace qk::io {
 	void on_window_maximize(GLFWwindow* window, int maximized) {
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 
 		if (!queue) return;
 		Event& ev = queue->emplace_back();
-		ev.timestamp = now();
+		ev.timestamp = util::now();
 
 		ev.m_Category = cat_window;
 		ev.m_Type = maximized ? WindowMaximize_evt : WindowMaximizeRestored_evt;
 	}
 
 	void on_framebuffer_resize(GLFWwindow* window, int width, int height) {
+		
+		// NOTICE: This couples us to OpenGL, but until we have some kind of viewport flushing
+		// mechanism going, this will have to work.
+		glViewport(0, 0, width, height);
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 
 		if (!queue) return;
 		WindowFramebufferResizeEvent& ev = (WindowFramebufferResizeEvent&)queue->emplace_back();
-		ev.timestamp = now();
+		ev.timestamp = util::now();
 
 		ev.m_Category = cat_window;
 		ev.m_Type = FramebufferResize_evt;
@@ -222,12 +234,12 @@ namespace qk::io {
 	void on_window_DPI_update(GLFWwindow* window, float xscale, float yscale) {
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 
 		if (!queue) return;
 		WindowDPIUpdateEvent& ev = (WindowDPIUpdateEvent&)queue->emplace_back();
-		ev.timestamp = now();
+		ev.timestamp = util::now();
 		ev.m_Category = cat_window;
 		ev.m_Type = WindowDPIUpdate_evt;
 		ev.xscale() = (float)xscale;
@@ -236,12 +248,12 @@ namespace qk::io {
 	void on_textinput(GLFWwindow* window, unsigned int codepoint) {
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 
 		if (!queue) return;
 		TextInputEvent& ev = (TextInputEvent&)queue->emplace_back();
-		ev.timestamp = now();
+		ev.timestamp = util::now();
 		ev.m_Category = cat_text;
 		ev.m_Type = TextInput_evt;
 		ev.code() = codepoint;
@@ -251,12 +263,12 @@ namespace qk::io {
 	void on_textinputEx(GLFWwindow* window, unsigned int codepoint, int modifiers){
 		using enum EEventCategory;
 		using enum EEventType;
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 
 		if (!queue) return;
 		TextInputEventEx& ev = (TextInputEventEx&)queue->emplace_back();
-		ev.timestamp = now();
+		ev.timestamp = util::now();
 		ev.m_Category = cat_text;
 		ev.m_Type = TextInputEx_evt;
 		ev.code() = codepoint;
@@ -268,12 +280,12 @@ namespace qk::io {
 		using enum EEventCategory;
 		using enum EEventType;
 
-		Window* target = (Window*)glfwGetWindowUserPointer(window);
+		core::Window* target = (core::Window*)glfwGetWindowUserPointer(window);
 		auto* queue = target->queue();
 		if (!queue) return;
 
 		DragDropEvent& ev = (DragDropEvent&)queue->emplace_back();
-		ev.timestamp = now();
+		ev.timestamp = util::now();
 		ev.m_Category = cat_window;
 		ev.m_Type = DragDrop_evt;
 		ev.count() = pathcount;

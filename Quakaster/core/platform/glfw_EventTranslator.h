@@ -1,3 +1,8 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/platform/glfw_EventTranslator.h
+/// Purpose: Defines function callbacks for converting GLFW events to Quakaster events.
+/// ************************************************************************************************** 
+
 #pragma once
 #include <GLFW/glfw3.h>
 #include "../../core.h"
