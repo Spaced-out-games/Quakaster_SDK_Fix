@@ -41,7 +41,7 @@ namespace qk::util {
     // ServiceManager wraps any storage
     // ----------------------------------------
     template <ServiceStorageConcept Storage>
-    struct ServiceManager {
+    struct BasicServiceManager {
         Storage* storage;
         ServiceMap map;
 
