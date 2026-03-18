@@ -3,7 +3,7 @@
 #include "GL/glew.h"
 
 
-namespace gfx {
+namespace qk::gfx {
 
 	bool ShaderProgram::init(const Handle frag, const Handle vert) {
 
@@ -37,5 +37,10 @@ namespace gfx {
     void ShaderProgram::unbind() {
         glUseProgram(0);
     }
+
+    Handle ShaderProgram::handle() const {
+        return m_Handle;
+    }
+
 
 }
