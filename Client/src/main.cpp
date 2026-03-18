@@ -1,8 +1,11 @@
+// stdlib
 #include <iostream>
-#include "entrypoint.h"
-
-#include <thread>
 #include <stdint.h>
+#include <vector>
+#include <thread>
+
+// core
+#include "entrypoint.h"
 #include "core/core/Window.h"
 #include "core/io/EventQueue.h"
 #include "core/io/DefaultEvents.h"
@@ -11,17 +14,21 @@
 #include "core/res/Image.h"
 #include "services/entt_service_storage.h"
 
-#include "gfx/gfx.h"
-#include "GL/glew.h"
-#include "gui/gui.h"
 
-
+// glm
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 #include "glm/mat4x4.hpp"
 
+// ECS
+#include "ent/System.h"
 #include "ent/CGraphNode.h"
+#include "entt/entity/view.hpp"
+#include "ent/Scene.h"
+
+// graphics
+#include "gfx/gfx.h"
 #include "gfx/VertexBuffer.h"
 #include "gfx/VertexBufferLayout.h"
 #include "gfx/IndexBuffer.h"
@@ -30,7 +37,17 @@
 #include "gfx/CommandBuffer.h"
 #include "gfx/Shader.h"
 #include "gfx/Texture.h"
+#include "gfx/Canvas3D.h"
+#include "GL/glew.h"
+
+//gui
+#include "gui/gui.h"
+
+
 #include "DebugEventLayer.h"
+#include "vgui/Canvas2D.h"
+#include "DebugEventLayer.h"
+
 
 struct texPoint2D {
 	glm::vec2 position;
@@ -57,88 +74,81 @@ void main() {
 )";
 
 const char* fragShaderSrc = R"frag(
-#version 330 core
-out vec4 FragColor;
-in vec2 TexCoord;
-uniform sampler2D texture1;
+	#version 330 core
+	out vec4 FragColor;
+	in vec2 TexCoord;
+	uniform sampler2D texture1;
 
-void main() {
-    FragColor = texture(texture1, TexCoord);
-}
+	void main() {
+		FragColor = texture(texture1, TexCoord);
+	}
 )frag";
-#include <vector>
-#include "entt/entity/view.hpp"
-#include "ent/System.h"
-#include "vgui/Canvas2D.h"
-#include "DebugEventLayer.h"
-#include "gfx/Canvas3D.h"
+
 
 
 using namespace qk::resource;
 using namespace qk::core;
 using namespace qk::gfx;
+using ServiceStorageType = qk::svc::entt_service_storage;
+using ServiceManager = util::BasicServiceManager<ServiceStorageType>;
+
 
 struct MyApp : Application {
 
 	// window
 	Window window;
-	// queue, stack, registry, and systems
-	std::shared_ptr<EventQueue> queue;
+
+	// queue, stack
+	EventQueue queue;
 	LayerStack stack;
-	entt::registry registry;
+	ServiceManager* svc_manager = nullptr;
+
+	// ECS
+	qk::ent::Scene scene;
+	//entt::registry registry;
 	std::vector<qk::ent::System> systems;
 
+
+
+	// graphics
+	gfx::CommandBuffer commands;
 	gfx::VertexArray arr;
 	gfx::VertexBuffer<texPoint2D> buffer;
 	gfx::VertexBufferLayout layout;
 	gfx::ShaderProgram program;
 	gfx::Texture texture;
-	gfx::CommandBuffer commands;
+
+
 	
 
 
 
 	void init(int argc, char** argv) override {
 
+		// hook up the event queue
+		stack.attach_queue(&queue);
+		window.set_event_queue(&queue);
+
+
+		// add layers
+		auto& debug = stack.emplace_layer<DebugEventLayer>();
+		auto& c3d = stack.emplace_layer<gfx::Canvas3D>();
 
 
 
 
+		// init services
+		scene.add_service<ServiceManager>();
+		svc_manager = &scene.get_service<ServiceManager>();
 
-		/*
-		qk::ent::GraphNodeService svc(registry);
-
-		entt::entity root = svc.new_root();
-
-		auto a = svc.add_child(root);
-		auto b = svc.add_child(root);
-		auto c = svc.add_child(root);
-		auto d = svc.add_child(root);
-		svc.add_child(b);
-		svc.add_child(b);
-		svc.add_child(b);
-
-		svc.print_tree(root);
-
-		spdlog::info("------------------------------------------------------------------------------");
-
-		svc.detach_child(root, b);
-		svc.print_tree(root);
-		spdlog::info("------------------------------------------------------------------------------");
-		svc.print_tree(b);
-
-		std::vector<entt::entity> dirty;
-		get_dirty_entities(dirty);
-
-		spdlog::info("------------------------------------------------------------------------------");
-
-		std::cout << "Dirty:";
-		for (auto e : dirty) {
-			std::cout << (uint32_t)e << " ";
-		}*/
+		scene.add_service<ServiceStorageType>();
+		svc_manager->storage = &scene.get_service<ServiceStorageType>();
 
 
-		queue = std::make_shared<EventQueue>();
+			
+		// init systems
+
+
 
 		//auto pLayer = std::make_unique<qk::DebugEventLayer>();
 
@@ -148,26 +158,18 @@ struct MyApp : Application {
 		Application::init(argc, argv);
 		qk::init(3,3);
 
-		// Set up queues, services, stacks, and systems
-		//auto& SvcMgr = registry.ctx().emplace<qk::ServiceManager<qk::integrations::entt_service_storage>>();
-		//auto& SvcStg = registry.ctx().emplace<qk::integrations::entt_service_storage>(&registry);
-		//SvcMgr.storage = &SvcStg;
-		//auto& evt_queue = registry.ctx().emplace<qk::EventQueue>();
-		//stack.attach_queue(&evt_queue);
-
-
-
-
 		// Window initialization
 		window.init(Window::Size{ 480, 480 }, "Demo");
 		window.make_context_current();
-		window.set_event_queue(queue.get());
 
 		// initialize gui and gfx
 		gui::mount(window.handle());
-
 		gfx::init();
 		
+		// Unfortunately, this has to go here until we deal with the ctor
+		auto& c2d = stack.emplace_layer<vgui::Canvas2D>(256);
+
+
 		Image img("C:/Users/devin/Desktop/morty.jpg");
 
 		texture.init(img, GL_TEXTURE_2D);
@@ -196,22 +198,19 @@ struct MyApp : Application {
 		program.init(hFrag, hVert);
 		
 		//*/
-		stack.attach_queue(queue.get());
 
 
-		stack.emplace_layer<DebugEventLayer>();
-		auto& canvas = stack.emplace_layer<vgui::Canvas2D>(256);
+
 
 
 		commands.bindVertexArray(arr);
 		commands.bindTexture(texture);
 		commands.bindShaderProgram(program);
 		commands.drawVertexArray(GL_TRIANGLE_STRIP, 0, buffer.count());
-		auto& c3d = stack.emplace_layer<gfx::Canvas3D>();
 		c3d.m_CommandBuffer = &commands;
 
 		
-		canvas.m_Persist = true;
+		c2d.m_Persist = true;
 
 
 
@@ -268,7 +267,7 @@ struct MyApp : Application {
 
 
 		stack.render();
-		queue->clear();
+		queue.clear();
 		set_status(window.should_close());
 		
 	}
