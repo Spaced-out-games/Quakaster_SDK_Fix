@@ -3,7 +3,7 @@
 /// Purpose: Defines type to attribute mappings for OpenGL
 /// </summary>
 
-namespace gfx {
+namespace qk::gfx {
 
     template<>
     inline constexpr bool VertexTypeImplemented<int> = true;

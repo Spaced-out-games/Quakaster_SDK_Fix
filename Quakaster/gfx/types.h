@@ -1,18 +1,22 @@
-///
+/// **************************************** QUAKASTER ENGINE **************************************** 
 /// gfx/types.h
-/// Purpose: Defines some essential primitive gfx types
-///
+/// Purpose: Defines some core gfx:: types
+/// **************************************************************************************************
 
 
 #pragma once
 #include "GL/glew.h"
 
-namespace gfx {
+namespace qk::gfx {
 	using Handle = unsigned int;
+
+	using TextureType = unsigned int;
 
 	static constexpr Handle NULL_HANDLE = 0;
 
 	using VertexAttribute = unsigned int;
+
+	using PrimitiveType = unsigned int;
 
 	template<typename>
 	inline constexpr bool VertexTypeImplemented = false;
