@@ -1,3 +1,8 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/io/Event.h
+/// Purpose: Defines an interface for Quakaster events
+/// ************************************************************************************************** 
+
 #pragma once
 #include <stdint.h>
 #include "../../../core.h"
@@ -6,7 +11,7 @@
 #include <cassert>
 #define QK_MAX_STRING_SIZE 256
 #define QK_MAX_PATHS 128
-namespace qk {
+namespace qk::io {
 
 
 
@@ -125,6 +130,7 @@ namespace qk {
 
 	};
 
+	// The uint32_t where custom events begin being defined.
 	static constexpr uint32_t CUSTOM_EVENT_BEGIN = 1u << 31;
 
 	
@@ -173,9 +179,10 @@ namespace qk {
 
 	
 
-
+	// Custom event destruction function pointer type
 	using EventEx_dtor_pfn_t = void(*)(Event&);
 
+	// Sets the event destruction callback function
 	void QK_API SetEventExDtor_fn(EventEx_dtor_pfn_t dtor);
 
 

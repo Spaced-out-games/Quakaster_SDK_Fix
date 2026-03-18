@@ -1,6 +1,10 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/io/Event.h
+/// Purpose: Handles Quakaster event destruction and callback setup functionality.
+/// ************************************************************************************************** 
 #include "Event.h"
 
-namespace qk {
+namespace qk::io {
 
 	EventEx_dtor_pfn_t g_EventEx_dtor = nullptr;
 
