@@ -1,7 +1,12 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// console/Convar.cpp
+/// Purpose: Defines Convar implementatino
+/// ************************************************************************************************** 
+
 #include "Convar.h"
 
 
-namespace qk::console {
+namespace qk::CLI {
 	Convar::Convar(convar_t value, const std::string& description, convar_validate_pfn_t validator) :
 		m_Value(value), m_Validator(validator), m_Description(description) {
 

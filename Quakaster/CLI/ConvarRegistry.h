@@ -1,10 +1,18 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// console/ConvarRegistry.h
+/// Purpose: Wraps convar storage in a convenient hash map
+/// ************************************************************************************************** 
+
+
+// TODO: add bool has(),  maybe iterator support
+
 #pragma once
 #include "Convar.h"
 #include "../core.h"
 #include <unordered_map>
 #include <string>
 
-namespace qk::console {
+namespace qk::CLI {
 
 	class QK_API ConvarRegistry {
 		std::unordered_map<std::string, Convar> m_Convars;

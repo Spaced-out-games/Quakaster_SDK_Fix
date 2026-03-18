@@ -1,7 +1,11 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// console/ConvarRegistry.h
+/// Purpose: Implements ConvarRegistry.
+/// ************************************************************************************************** 
 #include "ConvarRegistry.h"
 
 
-namespace qk::console {
+namespace qk::CLI {
 	bool ConvarRegistry::has(const std::string& id) {
 		return m_Convars.contains(id);
 	}
