@@ -1,10 +1,15 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/utility/ResourceLock.h
+/// Purpose: Locks a resource for reading and writing
+/// ************************************************************************************************** 
+
 #pragma once
 #include <stdint.h>
 #include <concepts>
 #include <utility>
 
 
-namespace qk {
+namespace qk::util {
 	template <class T>
 	class ResourceLock;
 
