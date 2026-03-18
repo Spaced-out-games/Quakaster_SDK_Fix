@@ -2,9 +2,11 @@
 #include <cassert>
 #include "GL/glew.h"
 
+using namespace qk::resource;
 
-namespace gfx {
-	void Texture::init(qk::Image& img, unsigned int type) {
+
+namespace qk::gfx {
+	void Texture::init(Image& img, TextureType type) {
 		assert(!m_Handle);
 
 		// override, for now:
@@ -50,5 +52,10 @@ namespace gfx {
 	Handle Texture::handle() const {
 		return m_Handle;
 	}
+
+	TextureType Texture::type() const {
+		return m_Type;
+	}
+
 
 }

@@ -1,18 +1,27 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// gfx/Texture.h
+/// Purpose: Represents a Texture resource ready for use anywhere you deem fit.
+/// **************************************************************************************************
+
 #pragma once
 #include "../core.h"
 #include "types.h"
 #include "../core/res/Image.h"
-namespace gfx {
+
+using namespace qk::resource;
+
+namespace qk::gfx {
 
 	static unsigned int filter_mode = 0x2600; // GL_NEAREST
 
 	class QK_API Texture {
 		Handle m_Handle = 0;
-		unsigned int m_Type = 0;
+		TextureType m_Type = 0;
 		public:
 			Texture() = default;
-			void init(qk::Image& img, unsigned int type);
+			void init(Image& img, TextureType type);
 			void bind();
 			Handle handle() const;
+			TextureType type() const;
 	};
 }
