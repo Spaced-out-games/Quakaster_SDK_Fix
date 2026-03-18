@@ -1,9 +1,14 @@
+/// **************************************** QUAKASTER ENGINE **************************************** 
+/// core/io/LayerStack.cpp
+/// Purpose: Implements layered event propagation
+/// ************************************************************************************************** 
 #include "LayerStack.h"
 
 
-namespace qk {
+namespace qk::io {
 
-	void LayerStack::insert_layer(std::unique_ptr<ILayer>&& layer) {
+	void LayerStack::insert_layer(std::unique_ptr<Layer>&& layer) {
+		layer->on_attach();
 		m_Layers.push_back(std::move(layer));
 	}
 
@@ -17,7 +22,7 @@ namespace qk {
 
 		if (!m_Queue) return;
 
-		ILayer::EBlock BlockResult = {};
+		Layer::EBlock BlockResult = {};
 
 
 		for (const Event& evt: m_Queue->events())
@@ -25,7 +30,7 @@ namespace qk {
 			for (auto& layerPtr : m_Layers) {
 				if (!(layerPtr->filter & evt.m_Category)) continue;
 				BlockResult = layerPtr->on_event(evt);       // unique_ptr operator-> gives raw pointer
-				if (BlockResult == ILayer::EBlock::Block) break;
+				if (BlockResult == Layer::EBlock::Block) break;
 			}
 		}
 
