@@ -27,6 +27,7 @@
 #include "gfx/IndexBuffer.h"
 #include "gfx/VertexArray.h"
 #include "gfx/ShaderProgram.h"
+#include "gfx/CommandBuffer.h"
 #include "gfx/Shader.h"
 #include "gfx/Texture.h"
 #include "DebugEventLayer.h"
@@ -68,15 +69,22 @@ void main() {
 #include <vector>
 #include "entt/entity/view.hpp"
 #include "ent/System.h"
-#include "vgui/vgui.h"
+#include "vgui/Canvas2D.h"
+#include "DebugEventLayer.h"
+#include "gfx/Canvas3D.h"
 
-struct MyApp : qk::Application {
+
+using namespace qk::resource;
+using namespace qk::core;
+using namespace qk::gfx;
+
+struct MyApp : Application {
 
 	// window
-	qk::Window window;
+	Window window;
 	// queue, stack, registry, and systems
-	std::shared_ptr<qk::EventQueue> queue;
-	qk::LayerStack stack;
+	std::shared_ptr<EventQueue> queue;
+	LayerStack stack;
 	entt::registry registry;
 	std::vector<qk::ent::System> systems;
 
@@ -85,9 +93,8 @@ struct MyApp : qk::Application {
 	gfx::VertexBufferLayout layout;
 	gfx::ShaderProgram program;
 	gfx::Texture texture;
-
-
-
+	gfx::CommandBuffer commands;
+	
 
 
 
@@ -131,7 +138,7 @@ struct MyApp : qk::Application {
 		}*/
 
 
-		queue = std::make_shared<qk::EventQueue>();
+		queue = std::make_shared<EventQueue>();
 
 		//auto pLayer = std::make_unique<qk::DebugEventLayer>();
 
@@ -152,7 +159,7 @@ struct MyApp : qk::Application {
 
 
 		// Window initialization
-		window.init(qk::Window::Size{ 480, 480 }, "Demo");
+		window.init(Window::Size{ 480, 480 }, "Demo");
 		window.make_context_current();
 		window.set_event_queue(queue.get());
 
@@ -161,10 +168,10 @@ struct MyApp : qk::Application {
 
 		gfx::init();
 		
-		qk::Image img("C:/Users/devin/Desktop/morty.jpg");
+		Image img("C:/Users/devin/Desktop/morty.jpg");
 
 		texture.init(img, GL_TEXTURE_2D);
-		/*
+		///*
 		layout.push<float>(2, false);
 		layout.push<float>(2, false);
 
@@ -187,21 +194,56 @@ struct MyApp : qk::Application {
 		gfx::Handle hVert = vert.compile();
 
 		program.init(hFrag, hVert);
-		program.bind();
-		*/
-
-		vgui::Layer2D* raw = new vgui::Layer2D(65536);
-
-		std::unique_ptr<qk::ILayer> layer(raw);
-
-		stack.insert_layer(std::move(layer));
-
+		
+		//*/
 		stack.attach_queue(queue.get());
-		auto& canvas = *((vgui::Layer2D*)stack[0]);
+
+
+		stack.emplace_layer<DebugEventLayer>();
+		auto& canvas = stack.emplace_layer<vgui::Canvas2D>(256);
+
+
+		commands.bindVertexArray(arr);
+		commands.bindTexture(texture);
+		commands.bindShaderProgram(program);
+		commands.drawVertexArray(GL_TRIANGLE_STRIP, 0, buffer.count());
+		auto& c3d = stack.emplace_layer<gfx::Canvas3D>();
+		c3d.m_CommandBuffer = &commands;
+
+		
 		canvas.m_Persist = true;
-		vgui::draw_triangle(canvas, { 0.0, 0.0 }, { 1.0,0.0 }, { 1.0,1.0 }, { 0.0, 0.0, 1.0, 1.0 });
 
 
+
+
+		/*
+		canvas.draw_triangle(
+			{ 0.0f, 0.0f },
+			{ 0.0f, 1920.0f },
+			{ 1080.0f, 1920.0f },
+			{ 0.0f, 0.0f, 1.0f, 1.0f }
+		);
+
+		canvas.draw_triangle(
+			{ 0.0f, 0.0f },
+			{ 1080.0f, 0.0f },
+			{ 1080.0f, 1920.0f },
+			{ 0.0f, 1.0f, 1.0f, 1.0f }
+		);
+
+		canvas.draw_rect(
+			{ 270.0f, 0.0f },
+			{ 540.0f, 1920.0f },
+			{ 1.0f, 0.0f, 0.0f, 1.0f }
+		);
+
+		canvas.draw_image(
+			texture.handle(),
+			{ 0.0f, 960.0f },
+			{ 480.0f, 480.0f }
+		);
+
+		*/
 
 	}
 
@@ -210,20 +252,16 @@ struct MyApp : qk::Application {
 	void run() override {
 		
 		//auto& SvcMgr = registry.ctx().get<qk::ServiceManager<qk::integrations::entt_service_storage>>();
-		/*
-		arr.bind();
-		program.bind();
-		gui::begin_frame();
+		///*
+		//gui::begin_frame();
 
-		gui::begin("hello");
-		gui::text("hello world");
-		gui::end();
+		//gui::begin("hello");
+		//gui::text("hello world");
+		//gui::end();
 
-		gui::end_frame();
+		//gui::end_frame();
 
-
-		gfx::drawArrays(GL_TRIANGLE_STRIP, 0, buffer.count());
-		*/
+		//*/
 		window.swap_buffers();
 		window.pollEvents();
 		stack.propagate_events();
@@ -247,7 +285,7 @@ struct MyApp : qk::Application {
 
 };
 
-std::unique_ptr<qk::Application> qk::create_application(int argc, char** argv) {
+std::unique_ptr<Application> qk::create_application(int argc, char** argv) {
 	return std::make_unique<MyApp>();
 }
 
