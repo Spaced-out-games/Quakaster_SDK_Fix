@@ -133,6 +133,7 @@ struct MyApp : Application {
 	gfx::VertexBuffer<glm::vec2>  onscreen_vbo;
 	gfx::Canvas2D c2d;
 	
+	gfx::Texture morty_tex;
 
 
 
@@ -156,7 +157,7 @@ struct MyApp : Application {
 		Application::init(argc, argv);
 		qk::init(3, 3);
 
-		window.init(Window::Size{ 1090, 1080 }, "Demo");
+		window.init(Window::Size{ 1920, 1080 }, "Demo");
 		window.make_context_current();
 
 		gui::mount(window.handle());
@@ -183,14 +184,15 @@ struct MyApp : Application {
 		onscreen_layout.push<float>(2);
 		onscreen_vao.apply(onscreen_vbo, onscreen_layout);
 
-
+		Image morty("C:/Users/devin/Desktop/goblin scout.jpg");
+		morty_tex.init(morty, GL_TEXTURE_2D);
 
 
 
 		// ----------------------------------------
 		// FrameBuffer initializations
 		// ----------------------------------------
-		Image offscreen_img(480, 480, 3);
+		Image offscreen_img(240, 240, 3);
 		offscreen_tex.init(offscreen_img, GL_TEXTURE_2D);
 		offscreen.init();
 		if (!offscreen.attach(offscreen_tex, 0)) {
@@ -214,14 +216,13 @@ struct MyApp : Application {
 
 
 		offscreen_cmdbuff.bindFramebuffer(offscreen);
-		offscreen_cmdbuff.setViewport(0, 0, 480, 480);
+		offscreen_cmdbuff.setViewport(0, 0, offscreen_img.width(), offscreen_img.height());
 		offscreen_cmdbuff.clear(GL_COLOR_BUFFER_BIT, 0, 0, 0, 1);
 
 		c2d.begin(&offscreen_cmdbuff);
-		c2d.draw_triangle({ -0.5f, -0.5f },
-			{ 0.5f,  0.5f },
-			{ 0.5f, -0.5f },
-			{ 1, 0, 0 });
+		c2d.bind_texture(morty_tex);
+		//offscreen_cmdbuff.bindTexture(morty_tex.handle(), GL_TEXTURE_2D, 0);
+		c2d.draw_rect({ -1,-1 }, { 2, 2 }, { 1,1,1 });
 		c2d.end();
 
 

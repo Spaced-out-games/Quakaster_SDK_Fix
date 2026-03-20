@@ -20,6 +20,7 @@
     <ClInclude Include="gfx\CommandBuffer.h" />
     <ClInclude Include="gfx\DrawCommand.h" />
     <ClInclude Include="gfx\FrameBuffer.h" />
+    <ClInclude Include="gfx\FullscreenBlitter.h" />
     <ClInclude Include="gfx\Texture.h" />
     <ClInclude Include="gui\gui.h" />
     <ClInclude Include="gui\Widget.h" />

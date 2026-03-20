@@ -9,16 +9,7 @@ namespace qk::gfx {
 		command.handles[0] = vertexarray.handle();
 
 	}
-	void CommandBuffer::bindTexture(const Texture& texture, unsigned int slot) {
 
-		auto& command = m_CommandBuffer.emplace_back();
-		command.type = ECommandType::BIND_TEXTURE;
-		command.handles[0] = texture.handle();
-		command.handles[1] = texture.type();
-		command.handles[2] = slot;
-
-
-	}
 	void CommandBuffer::bindTexture(gfx::Handle handle, TextureType type, unsigned int slot) {
 
 		auto& command = m_CommandBuffer.emplace_back();

@@ -20,7 +20,6 @@ namespace qk::gfx {
 		std::vector<DrawCommand> m_CommandBuffer;
 		public:
 			void bindVertexArray(const VertexArray& vertexarray);
-			void bindTexture(const Texture& texture, unsigned int slot);
 			void bindTexture(gfx::Handle handle, TextureType type, unsigned int slot);
 			void bindShaderProgram(const ShaderProgram& program);
 			void bindFramebuffer(gfx::Handle handle);

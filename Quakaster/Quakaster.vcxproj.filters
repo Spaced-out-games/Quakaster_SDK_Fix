@@ -471,6 +471,9 @@
     <ClInclude Include="vgui\Canvas2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gfx\FullscreenBlitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\core\Application.cpp">

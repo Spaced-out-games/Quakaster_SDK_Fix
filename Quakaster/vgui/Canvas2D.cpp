@@ -170,7 +170,7 @@ namespace qk::gfx {
 	inline void Canvas2D::bind_texture(Texture& target) {
 		if (!m_CommandBuffer) return;
 
-		m_CommandBuffer->bindTexture(target.handle(), 0, 0);
+		m_CommandBuffer->bindTexture(target.handle(), target.type(), 0);
 	}
 
 
