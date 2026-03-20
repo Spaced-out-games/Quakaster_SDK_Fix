@@ -17,11 +17,21 @@ namespace qk::gfx {
 	class QK_API Texture {
 		Handle m_Handle = 0;
 		TextureType m_Type = 0;
+
+		// NOTE: These are NOT wired up! THese are here to test Framebuffer
+		uint32_t m_Width = 480;
+		uint32_t m_Height = 480;
 		public:
 			Texture() = default;
 			void init(Image& img, TextureType type);
 			void bind();
 			Handle handle() const;
 			TextureType type() const;
+			void destroy();
+			~Texture();
+			uint32_t width() const;
+			uint32_t height() const;
+
+
 	};
 }

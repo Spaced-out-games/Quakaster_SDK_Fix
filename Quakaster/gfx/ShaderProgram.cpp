@@ -42,5 +42,20 @@ namespace qk::gfx {
         return m_Handle;
     }
 
+    void ShaderProgram::destroy() {
+        if (m_Handle == NULL_HANDLE) return;
+        glDeleteProgram(m_Handle);
+        m_Handle = NULL_HANDLE;
+    }
+    ShaderProgram::~ShaderProgram() {
+        destroy();
+    }
+
+    gfx::Handle ShaderProgram::uniform(const std::string& name) {
+        int hdl =  glGetUniformLocation(handle(), name.c_str());
+        return hdl;
+
+    }
+
 
 }

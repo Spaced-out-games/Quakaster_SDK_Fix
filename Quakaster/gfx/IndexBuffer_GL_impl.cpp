@@ -16,12 +16,7 @@ namespace qk::gfx {
 	}
 
 
-	IndexBuffer_impl::~IndexBuffer_impl()
-	{
-		if (m_Handle != NULL_HANDLE) {
-			glDeleteBuffers(1, &m_Handle);
-		}
-	}
+
 
 	void IndexBuffer_impl::bind_impl() const {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Handle);
@@ -44,4 +39,13 @@ namespace qk::gfx {
 		glGetIntegerv(GL_ELEMENT_ARRAY_BUFFER_BINDING, &h);
 		return static_cast<Handle>(h);
 	}
+	void IndexBuffer_impl::destroy_impl() {
+		if(m_Handle == NULL_HANDLE) return;
+		glDeleteBuffers(1, &m_Handle);
+		m_Handle = NULL_HANDLE;
+	}
+	IndexBuffer_impl::~IndexBuffer_impl() {
+		destroy_impl();
+	}
+
 }

@@ -23,6 +23,7 @@ namespace qk::gfx {
         void unbind_impl() const;
         uint32_t size_impl(uint32_t elem_size) const;
         Handle handle_impl();
+        void destroy_impl();
         static Handle current_bound() noexcept;
         template<class> friend class IndexBuffer;
 
@@ -54,6 +55,10 @@ namespace qk::gfx {
 
         static Handle current_bound() noexcept {
             return IndexBuffer_impl::current_bound();
+        }
+
+        void destroy() {
+            destroy_impl();
         }
 
     };

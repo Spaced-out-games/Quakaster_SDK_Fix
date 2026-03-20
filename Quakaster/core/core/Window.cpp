@@ -55,6 +55,13 @@ namespace qk::core {
 	void Window::resize(Window::Size new_size) {
 		glfwSetWindowSize(m_Window, new_size.w, new_size.h);
 	}
+
+	Window::Size Window::get_size() const {
+		Window::Size sz;
+		glfwGetWindowSize(m_Window, &sz.w, &sz.h);
+		return sz;
+	}
+
 	void* Window::handle() {
 		return m_Window;
 	}

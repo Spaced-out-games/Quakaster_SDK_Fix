@@ -20,6 +20,7 @@ namespace qk::gfx {
 			void upload_impl(const void* data, size_t count, size_t elem_size, unsigned int usage);
 			void bind_impl() const;
 			void unbind_impl() const;
+			void destroy_impl();
 	};
 
 
@@ -48,6 +49,15 @@ namespace qk::gfx {
 
 		void bind() const { bind_impl(); }
 		void unbind() const { unbind_impl(); }
+
+		void destroy() {
+			destroy_impl();
+		}
+
+
+		~VertexBuffer() {
+			destroy();
+		}
 
 	};
 

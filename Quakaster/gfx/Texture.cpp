@@ -8,6 +8,8 @@ using namespace qk::resource;
 namespace qk::gfx {
 	void Texture::init(Image& img, TextureType type) {
 		assert(!m_Handle);
+		m_Width = img.width();
+		m_Height = img.height();
 
 		// override, for now:
 		type = GL_TEXTURE_2D;
@@ -57,5 +59,22 @@ namespace qk::gfx {
 		return m_Type;
 	}
 
+	Texture::~Texture() {
+		destroy();
+	}
+
+
+	void Texture::destroy() {
+		if (m_Handle == NULL_HANDLE) return;
+		glDeleteTextures(1, &m_Handle);
+		m_Handle = NULL_HANDLE;
+	}
+
+	uint32_t Texture::width() const {
+		return m_Width;
+	}
+	uint32_t Texture::height() const {
+		return m_Height;
+	}
 
 }

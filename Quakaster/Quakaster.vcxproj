@@ -14,13 +14,19 @@
     <ClInclude Include="core\utility\ResourceLock.h" />
     <ClInclude Include="core\utility\ScopeTimer.h" />
     <ClInclude Include="core\utility\time.h" />
+    <ClInclude Include="ent\Scene.h" />
+    <ClInclude Include="gfx\c2d.h" />
+    <ClInclude Include="gfx\Canvas3D.h" />
+    <ClInclude Include="gfx\CommandBuffer.h" />
+    <ClInclude Include="gfx\DrawCommand.h" />
+    <ClInclude Include="gfx\FrameBuffer.h" />
     <ClInclude Include="gfx\Texture.h" />
     <ClInclude Include="gui\gui.h" />
     <ClInclude Include="gui\Widget.h" />
     <ClInclude Include="services\GraphNodeService.h" />
     <ClInclude Include="gfx\CMeshInstance.h" />
-    <ClInclude Include="console\Convar.h" />
-    <ClInclude Include="console\ConvarRegistry.h" />
+    <ClInclude Include="CLI\Convar.h" />
+    <ClInclude Include="CLI\ConvarRegistry.h" />
     <ClInclude Include="services\ConvarService.h" />
     <ClInclude Include="core.h" />
     <ClInclude Include="core\core\Application.h" />
@@ -28,7 +34,7 @@
     <ClInclude Include="core\io\EventQueue.h" />
     <ClInclude Include="core\platform\glfw_EventTranslator.h" />
     <ClInclude Include="core\io\Event.h" />
-    <ClInclude Include="core\io\ILayer.h" />
+    <ClInclude Include="core\io\Layer.h" />
     <ClInclude Include="core\utility\Service.h" />
     <ClInclude Include="ent\System.h" />
     <ClInclude Include="core\io\LayerStack.h" />
@@ -156,11 +162,16 @@
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\tweakme.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\version.h" />
     <ClInclude Include="thirdparty\stb_image\stb_image.h" />
-    <ClInclude Include="vgui\vgui.h" />
+    <ClInclude Include="vgui\Canvas2D.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="console\Convar.cpp" />
-    <ClCompile Include="console\ConvarRegistry.cpp" />
+    <ClCompile Include="CLI\Convar.cpp" />
+    <ClCompile Include="CLI\ConvarRegistry.cpp" />
+    <ClCompile Include="gfx\c2d.cpp" />
+    <ClCompile Include="gfx\Canvas3D.cpp" />
+    <ClCompile Include="gfx\CommandBuffer.cpp" />
+    <ClCompile Include="gfx\DrawCommand.cpp" />
+    <ClCompile Include="gfx\Framebuffer.cpp" />
     <ClCompile Include="gfx\Texture.cpp" />
     <ClCompile Include="gfx\VertexBufferLayout.cpp" />
     <ClCompile Include="gui\gui.cpp" />
@@ -170,10 +181,9 @@
     <ClCompile Include="core\io\Event.cpp" />
     <ClCompile Include="core\io\EventQueue.cpp" />
     <ClCompile Include="core\platform\glfw_EventTranslator.cpp" />
-    <ClCompile Include="core\io\ILayer.cpp" />
+    <ClCompile Include="core\io\Layer.cpp" />
     <ClCompile Include="core\utility\Service.cpp" />
     <ClCompile Include="core\io\LayerStack.cpp" />
-    <ClCompile Include="core\utility\ServiceManager.cpp" />
     <ClCompile Include="core\utility\ScopeTimer.cpp" />
     <ClCompile Include="core\utility\Stopwatch.cpp" />
     <ClCompile Include="core\utility\time.cpp" />
@@ -197,7 +207,7 @@
     <ClCompile Include="thirdparty\imgui\imgui\imgui_tables.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui_widgets.cpp" />
     <ClCompile Include="thirdparty\stb_image\stb_image.cpp" />
-    <ClCompile Include="vgui\vgui.cpp" />
+    <ClCompile Include="vgui\Canvas2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="thirdparty\glfw\src\CMakeLists.txt" />
@@ -243,6 +253,7 @@
     <OutDir>$(SolutionDir)Quakaster\out\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)Quakaster\intermediate\$(Configuration)-$(Platform)\</IntDir>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <ExternalIncludePath>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\spdlog-1.x;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
@@ -256,9 +267,11 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\spdlog-1.x\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\imgui;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\pfr\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\entt\src;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\stb_image;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
       <ShowIncludes>true</ShowIncludes>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -282,6 +295,11 @@
       <AdditionalIncludeDirectories>C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glfw\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glm-master\glm-master;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\spdlog-1.x\include;C:\Users\devin\source\repos\Quakaster_SDK_Fix\Quakaster\thirdparty\glew-2.2.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>true</ShowIncludes>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <FloatingPointExceptions>true</FloatingPointExceptions>
+      <StringPooling>true</StringPooling>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

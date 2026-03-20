@@ -24,5 +24,10 @@ namespace qk::gfx {
 
 			Handle handle() const;
 
+			void destroy();
+
+			gfx::Handle uniform(const std::string& name);
+			~ShaderProgram();
+
 	};
 }

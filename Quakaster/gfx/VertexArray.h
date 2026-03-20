@@ -32,6 +32,7 @@ namespace qk::gfx {
 				apply_impl(layout);
 			}
 
+			void destroy();
 
 			VertexArray();
 			~VertexArray();

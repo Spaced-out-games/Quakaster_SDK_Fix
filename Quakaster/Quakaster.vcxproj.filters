@@ -39,7 +39,7 @@
     <ClInclude Include="core\io\EventQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="core\io\ILayer.h">
+    <ClInclude Include="core\io\Layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\io\LayerStack.h">
@@ -378,10 +378,10 @@
     <ClInclude Include="gfx\gfx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="console\Convar.h">
+    <ClInclude Include="CLI\Convar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="console\ConvarRegistry.h">
+    <ClInclude Include="CLI\ConvarRegistry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="services\ConvarService.h">
@@ -450,7 +450,25 @@
     <ClInclude Include="gfx\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vgui\vgui.h">
+    <ClInclude Include="gfx\DrawCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\CommandBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\Canvas3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ent\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\FrameBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\c2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vgui\Canvas2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -473,13 +491,10 @@
     <ClCompile Include="core\io\LayerStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="core\io\ILayer.cpp">
+    <ClCompile Include="core\io\Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\utility\Stopwatch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="core\utility\ServiceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\utility\Service.cpp">
@@ -515,10 +530,10 @@
     <ClCompile Include="gfx\gfx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="console\Convar.cpp">
+    <ClCompile Include="CLI\Convar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="console\ConvarRegistry.cpp">
+    <ClCompile Include="CLI\ConvarRegistry.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="services\ConvarService.cpp">
@@ -566,10 +581,25 @@
     <ClCompile Include="gfx\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vgui\vgui.cpp">
+    <ClCompile Include="gfx\VertexBufferLayout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gfx\VertexBufferLayout.cpp">
+    <ClCompile Include="gfx\CommandBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\DrawCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\Canvas3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\Framebuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\c2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vgui\Canvas2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

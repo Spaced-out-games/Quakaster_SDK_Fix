@@ -75,6 +75,8 @@ namespace qk::core {
 			// Resizes the window
 			void resize(Window::Size new_size);
 
+			Size get_size() const;
+
 			// Gets a platform handle (GLFWWindow*, SDLWindow*...)
 			void* handle();
 			#ifdef _WIN32

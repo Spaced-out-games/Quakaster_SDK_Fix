@@ -15,8 +15,15 @@ namespace qk::gfx {
 
 	}
 
-	VertexArray::~VertexArray() {
+	void VertexArray::destroy() {
+		if (m_Handle != NULL_HANDLE) return;
 		glDeleteVertexArrays(1, &m_Handle);
+		m_Handle = NULL_HANDLE;
+	}
+
+
+	VertexArray::~VertexArray() {
+		destroy();
 	}
 	void VertexArray::bind() const {
 		glBindVertexArray(m_Handle);

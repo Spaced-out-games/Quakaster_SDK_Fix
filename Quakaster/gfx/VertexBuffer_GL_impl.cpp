@@ -38,6 +38,13 @@ namespace qk::gfx {
 		#endif
 	}
 
+	void VertexBuffer_impl::destroy_impl() {
+		if (m_Handle == NULL_HANDLE) return;
+		glDeleteBuffers(1, &m_Handle);
+		m_Handle = NULL_HANDLE;
+	}
+
+
 	
 
 

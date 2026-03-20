@@ -1,3 +1,5 @@
+﻿
+
 // stdlib
 #include <iostream>
 #include <stdint.h>
@@ -39,7 +41,8 @@
 #include "gfx/Texture.h"
 #include "gfx/Canvas3D.h"
 #include "GL/glew.h"
-
+#include "gfx/c2d.h"
+#include "vgui/Canvas2D.h"
 //gui
 #include "gui/gui.h"
 
@@ -55,42 +58,51 @@ struct texPoint2D {
 };
 
 
-const std::vector<texPoint2D> points = {
-	{{0.0, 0.0}, {0.0,1.0}},
-	{{0.0, 1.0}, {0.0,0.0}},
-	{{1.0, 0.0}, {1.0,1.0}},
-	{{1.0, 1.0}, {1.0,0.0}}
+const std::vector<glm::vec2> points = {
+	{-1.0f, -1.0f},
+	{-1.0f,  1.0f},
+	{ 1.0f, -1.0f},
+	{ 1.0f,  1.0f}
 };
 
-const char* vertexShaderSrc = R"(
-#version 330 core
-layout(location = 0) in vec2 aPos;
-layout(location = 1) in vec2 aTexCoord;
-out vec2 TexCoord;
-void main() {
-    gl_Position = vec4(aPos, 0.0, 1.0);
-	TexCoord = aTexCoord;
-}
-)";
 
-const char* fragShaderSrc = R"frag(
-	#version 330 core
-	out vec4 FragColor;
-	in vec2 TexCoord;
-	uniform sampler2D texture1;
-
-	void main() {
-		FragColor = texture(texture1, TexCoord);
-	}
-)frag";
 
 
 
 using namespace qk::resource;
 using namespace qk::core;
 using namespace qk::gfx;
+using namespace qk;
+
 using ServiceStorageType = qk::svc::entt_service_storage;
 using ServiceManager = util::BasicServiceManager<ServiceStorageType>;
+
+
+const std::string onscreen_vert_src = R"(
+	#version 330 core
+	layout(location = 0) in vec2 aPos;
+	out vec2 aTexCoord;
+	void main() {
+		gl_Position.xy = aPos;
+		gl_Position.zw = vec2(0,1);
+		aTexCoord = aPos * 0.5 + 0.5; // maps NDC [-1,1] → [0,1]
+    }
+)";
+
+const std::string onscreen_frag_src = R"(
+	#version 330 core
+
+	in vec2 aTexCoord;
+
+	out vec4 FragColor;
+
+	uniform sampler2D texture1;
+
+	void main() {
+		FragColor = texture(texture1, aTexCoord);
+	}
+
+)";
 
 
 struct MyApp : Application {
@@ -109,174 +121,148 @@ struct MyApp : Application {
 	std::vector<qk::ent::System> systems;
 
 
-
 	// graphics
-	gfx::CommandBuffer commands;
-	gfx::VertexArray arr;
-	gfx::VertexBuffer<texPoint2D> buffer;
-	gfx::VertexBufferLayout layout;
-	gfx::ShaderProgram program;
-	gfx::Texture texture;
+	gfx::CommandBuffer offscreen_cmdbuff;
+	gfx::FrameBuffer   offscreen;
+	gfx::Texture	   offscreen_tex;
+	// don't need the shader, vao, vbo, shader, and texture, since it's handled by c2d
 
-
+	gfx::Texture	   onscreen_tex;
+	gfx::ShaderProgram onscreen_shader;
+	gfx::VertexArray   onscreen_vao;
+	gfx::VertexBuffer<glm::vec2>  onscreen_vbo;
+	gfx::Canvas2D c2d;
 	
+
 
 
 
 	void init(int argc, char** argv) override {
 
-		// hook up the event queue
+		// ----------------------------------------
+		// CORE SETUP
+		// ----------------------------------------
 		stack.attach_queue(&queue);
 		window.set_event_queue(&queue);
 
-
-		// add layers
 		auto& debug = stack.emplace_layer<DebugEventLayer>();
 		auto& c3d = stack.emplace_layer<gfx::Canvas3D>();
 
-
-
-
-		// init services
 		scene.add_service<ServiceManager>();
 		svc_manager = &scene.get_service<ServiceManager>();
-
 		scene.add_service<ServiceStorageType>();
 		svc_manager->storage = &scene.get_service<ServiceStorageType>();
 
-
-			
-		// init systems
-
-
-
-		//auto pLayer = std::make_unique<qk::DebugEventLayer>();
-
-		//stack.insert_layer(std::move(pLayer));
-
-		// Set up the application
 		Application::init(argc, argv);
-		qk::init(3,3);
+		qk::init(3, 3);
 
-		// Window initialization
-		window.init(Window::Size{ 480, 480 }, "Demo");
+		window.init(Window::Size{ 1090, 1080 }, "Demo");
 		window.make_context_current();
 
-		// initialize gui and gfx
 		gui::mount(window.handle());
 		gfx::init();
+		c2d.init();
+
+		// ----------------------------------------
+		// onscreen initializations
+		// ----------------------------------------
 		
-		// Unfortunately, this has to go here until we deal with the ctor
-		auto& c2d = stack.emplace_layer<vgui::Canvas2D>(256);
+		// shader
+		gfx::Shader onscreen_vert(onscreen_vert_src, GL_VERTEX_SHADER);
+		gfx::Shader onscreen_frag(onscreen_frag_src, GL_FRAGMENT_SHADER);
+		onscreen_shader.init(onscreen_frag.compile(), onscreen_vert.compile());
+
+		// VartexArray
+		onscreen_vao.init();
+		onscreen_vao.bind();
+
+		// Vertex Buffer
+		onscreen_vbo.init();
+		onscreen_vbo.upload(points.data(), points.size(), GL_STATIC_DRAW);
+		gfx::VertexBufferLayout onscreen_layout;
+		onscreen_layout.push<float>(2);
+		onscreen_vao.apply(onscreen_vbo, onscreen_layout);
 
 
-		Image img("C:/Users/devin/Desktop/morty.jpg");
-
-		texture.init(img, GL_TEXTURE_2D);
-		///*
-		layout.push<float>(2, false);
-		layout.push<float>(2, false);
 
 
-		arr.init();
-		arr.bind();
 
-		buffer.init();
-		buffer.upload(points.data(), points.size(), GL_STATIC_DRAW);
-		buffer.bind();
-
-		arr.apply(buffer, layout);
-
-
-		gfx::Shader frag(fragShaderSrc, GL_FRAGMENT_SHADER);
-		gfx::Shader vert(vertexShaderSrc, GL_VERTEX_SHADER);
+		// ----------------------------------------
+		// FrameBuffer initializations
+		// ----------------------------------------
+		Image offscreen_img(480, 480, 3);
+		offscreen_tex.init(offscreen_img, GL_TEXTURE_2D);
+		offscreen.init();
+		if (!offscreen.attach(offscreen_tex, 0)) {
+			spdlog::error("INCOMPLETE FRAMEBUFFER!");
+		}
 
 
-		gfx::Handle hFrag = frag.compile();
-		gfx::Handle hVert = vert.compile();
 
-		program.init(hFrag, hVert);
+
+
+
+		// bind the offscreen image
+
+
+
+		// ----------------------------------------
+		// DRAW
+		// ----------------------------------------
+		// bypass c2d so we inject the offscreen framebuffer bind
+		//offscreen_cmdbuff.bindFramebuffer(offscreen);
+
+
+		offscreen_cmdbuff.bindFramebuffer(offscreen);
+		offscreen_cmdbuff.setViewport(0, 0, 480, 480);
+		offscreen_cmdbuff.clear(GL_COLOR_BUFFER_BIT, 0, 0, 0, 1);
+
+		c2d.begin(&offscreen_cmdbuff);
+		c2d.draw_triangle({ -0.5f, -0.5f },
+			{ 0.5f,  0.5f },
+			{ 0.5f, -0.5f },
+			{ 1, 0, 0 });
+		c2d.end();
+
+
+		auto sz = window.get_size();
+
+		offscreen_cmdbuff.bindFramebuffer(0);
+		offscreen_cmdbuff.setViewport(0, 0, sz.w, sz.h); // REQUIRED
+		offscreen_cmdbuff.bindVertexArray(onscreen_vao);
+		offscreen_cmdbuff.bindShaderProgram(onscreen_shader);
+		offscreen_cmdbuff.bindTexture(offscreen_tex.handle(), GL_TEXTURE_2D, 0);
+		offscreen_cmdbuff.setUniformi(onscreen_shader.uniform("texture1"), 0);
+
+		offscreen_cmdbuff.drawVertexArray(GL_TRIANGLE_STRIP, 0, 4);
+
+
 		
-		//*/
 
 
-
-
-
-		commands.bindVertexArray(arr);
-		commands.bindTexture(texture);
-		commands.bindShaderProgram(program);
-		commands.drawVertexArray(GL_TRIANGLE_STRIP, 0, buffer.count());
-		c3d.m_CommandBuffer = &commands;
-
-		
-		c2d.m_Persist = true;
-
-
-
-
-		/*
-		canvas.draw_triangle(
-			{ 0.0f, 0.0f },
-			{ 0.0f, 1920.0f },
-			{ 1080.0f, 1920.0f },
-			{ 0.0f, 0.0f, 1.0f, 1.0f }
-		);
-
-		canvas.draw_triangle(
-			{ 0.0f, 0.0f },
-			{ 1080.0f, 0.0f },
-			{ 1080.0f, 1920.0f },
-			{ 0.0f, 1.0f, 1.0f, 1.0f }
-		);
-
-		canvas.draw_rect(
-			{ 270.0f, 0.0f },
-			{ 540.0f, 1920.0f },
-			{ 1.0f, 0.0f, 0.0f, 1.0f }
-		);
-
-		canvas.draw_image(
-			texture.handle(),
-			{ 0.0f, 960.0f },
-			{ 480.0f, 480.0f }
-		);
-
-		*/
-
-	}
+    }
 
 
 
 	void run() override {
-		
-		//auto& SvcMgr = registry.ctx().get<qk::ServiceManager<qk::integrations::entt_service_storage>>();
-		///*
-		//gui::begin_frame();
 
-		//gui::begin("hello");
-		//gui::text("hello world");
-		//gui::end();
-
-		//gui::end_frame();
-
-		//*/
 		window.swap_buffers();
 		window.pollEvents();
 		stack.propagate_events();
 
 
 		stack.render();
+		gfx::call(offscreen_cmdbuff);
 		queue.clear();
 		set_status(window.should_close());
-		
+
 	}
 
 	MyApp() = default;
 
 	~MyApp() override {
 		window.destroy();
-		gfx::close();
+		//gfx::close();
 		qk::close();
 	}
 
