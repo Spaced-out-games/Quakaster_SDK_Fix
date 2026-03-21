@@ -33,6 +33,7 @@
 #include "gfx/gfx.h"
 #include "gfx/VertexBuffer.h"
 #include "gfx/VertexBufferLayout.h"
+#include "gfx/FullscreenBlitter.h"
 #include "gfx/IndexBuffer.h"
 #include "gfx/VertexArray.h"
 #include "gfx/ShaderProgram.h"
@@ -42,6 +43,8 @@
 #include "gfx/Canvas3D.h"
 #include "GL/glew.h"
 #include "gfx/c2d.h"
+#include "CRenderTarget.h"
+
 #include "vgui/Canvas2D.h"
 //gui
 #include "gui/gui.h"
@@ -127,19 +130,15 @@ struct MyApp : Application {
 	gfx::Texture	   offscreen_tex;
 	// don't need the shader, vao, vbo, shader, and texture, since it's handled by c2d
 
-	gfx::Texture	   onscreen_tex;
-	gfx::ShaderProgram onscreen_shader;
-	gfx::VertexArray   onscreen_vao;
-	gfx::VertexBuffer<glm::vec2>  onscreen_vbo;
+
 	gfx::Canvas2D c2d;
 	
 	gfx::Texture morty_tex;
+	FullscreenBlitter blit;
+	gfx::CRenderTarget renderTarget;
 
 
-
-
-	void init(int argc, char** argv) override {
-
+	void init_core(int argc, char** argv) {
 		// ----------------------------------------
 		// CORE SETUP
 		// ----------------------------------------
@@ -163,26 +162,22 @@ struct MyApp : Application {
 		gui::mount(window.handle());
 		gfx::init();
 		c2d.init();
+	}
+
+
+
+
+	void init(int argc, char** argv) override {
+
+
+		init_core(argc, argv);
+
+
 
 		// ----------------------------------------
 		// onscreen initializations
 		// ----------------------------------------
 		
-		// shader
-		gfx::Shader onscreen_vert(onscreen_vert_src, GL_VERTEX_SHADER);
-		gfx::Shader onscreen_frag(onscreen_frag_src, GL_FRAGMENT_SHADER);
-		onscreen_shader.init(onscreen_frag.compile(), onscreen_vert.compile());
-
-		// VartexArray
-		onscreen_vao.init();
-		onscreen_vao.bind();
-
-		// Vertex Buffer
-		onscreen_vbo.init();
-		onscreen_vbo.upload(points.data(), points.size(), GL_STATIC_DRAW);
-		gfx::VertexBufferLayout onscreen_layout;
-		onscreen_layout.push<float>(2);
-		onscreen_vao.apply(onscreen_vbo, onscreen_layout);
 
 		Image morty("C:/Users/devin/Desktop/goblin scout.jpg");
 		morty_tex.init(morty, GL_TEXTURE_2D);
@@ -200,45 +195,28 @@ struct MyApp : Application {
 		}
 
 
-
-
-
-
-		// bind the offscreen image
-
-
-
 		// ----------------------------------------
-		// DRAW
+		// DRAW OFFSCREEN
 		// ----------------------------------------
-		// bypass c2d so we inject the offscreen framebuffer bind
-		//offscreen_cmdbuff.bindFramebuffer(offscreen);
 
 
 		offscreen_cmdbuff.bindFramebuffer(offscreen);
 		offscreen_cmdbuff.setViewport(0, 0, offscreen_img.width(), offscreen_img.height());
-		offscreen_cmdbuff.clear(GL_COLOR_BUFFER_BIT, 0, 0, 0, 1);
 
 		c2d.begin(&offscreen_cmdbuff);
 		c2d.bind_texture(morty_tex);
-		//offscreen_cmdbuff.bindTexture(morty_tex.handle(), GL_TEXTURE_2D, 0);
 		c2d.draw_rect({ -1,-1 }, { 2, 2 }, { 1,1,1 });
 		c2d.end();
 
+		// ----------------------------------------
+		// DRAW OFFSCREEN
+		// ----------------------------------------
 
 		auto sz = window.get_size();
 
-		offscreen_cmdbuff.bindFramebuffer(0);
-		offscreen_cmdbuff.setViewport(0, 0, sz.w, sz.h); // REQUIRED
-		offscreen_cmdbuff.bindVertexArray(onscreen_vao);
-		offscreen_cmdbuff.bindShaderProgram(onscreen_shader);
-		offscreen_cmdbuff.bindTexture(offscreen_tex.handle(), GL_TEXTURE_2D, 0);
-		offscreen_cmdbuff.setUniformi(onscreen_shader.uniform("texture1"), 0);
+		blit.setRenderTarget(offscreen_tex.handle());
 
-		offscreen_cmdbuff.drawVertexArray(GL_TRIANGLE_STRIP, 0, 4);
-
-
-		
+		blit.init(sz.w, sz.h);		
 
 
     }
@@ -254,6 +232,7 @@ struct MyApp : Application {
 
 		stack.render();
 		gfx::call(offscreen_cmdbuff);
+		gfx::call(blit.m_CommandBuffer);
 		queue.clear();
 		set_status(window.should_close());
 

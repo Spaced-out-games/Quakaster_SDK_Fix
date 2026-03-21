@@ -173,6 +173,7 @@
     <ClCompile Include="gfx\CommandBuffer.cpp" />
     <ClCompile Include="gfx\DrawCommand.cpp" />
     <ClCompile Include="gfx\Framebuffer.cpp" />
+    <ClCompile Include="gfx\FullscreenBlitter.cpp" />
     <ClCompile Include="gfx\Texture.cpp" />
     <ClCompile Include="gfx\VertexBufferLayout.cpp" />
     <ClCompile Include="gui\gui.cpp" />
