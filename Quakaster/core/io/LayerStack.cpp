@@ -27,10 +27,17 @@ namespace qk::io {
 
 		for (const Event& evt: m_Queue->events())
 		{
-			for (auto& layerPtr : m_Layers) {
+			for (auto it = m_Layers.rbegin(); it != m_Layers.rend(); ++it)
+			{
+				auto& layerPtr = *it;
+
 				if (!(layerPtr->filter & evt.m_Category)) continue;
-				BlockResult = layerPtr->on_event(evt);       // unique_ptr operator-> gives raw pointer
-				if (BlockResult == Layer::EBlock::Block) break;
+
+				BlockResult = layerPtr->on_event(evt);
+
+				if (BlockResult == Layer::EBlock::Block) {
+					break;
+				}
 			}
 		}
 

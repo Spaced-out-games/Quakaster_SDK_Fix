@@ -170,6 +170,28 @@ namespace qk::io {
 
 			return *reinterpret_cast<T*>(m_Payload + offset);
 		}
+		template<typename T>
+		inline const T& view(size_t offset = 0) const
+		{
+			static_assert(std::is_trivially_copyable_v<T>,
+				"Event::view<T>: T must be trivially copyable");
+
+			static_assert(std::is_standard_layout_v<T>,
+				"Event::view<T>: T must have standard layout");
+
+			constexpr size_t payload_size = sizeof(m_Payload);
+
+			// bounds check
+			assert(offset + sizeof(T) <= payload_size &&
+				"Event::view<T>: payload overflow");
+
+			// alignment check
+			uintptr_t addr = reinterpret_cast<uintptr_t>(m_Payload + offset);
+			assert(addr % alignof(T) == 0 &&
+				"Event::view<T>: misaligned access");
+
+			return *reinterpret_cast<const T*>(m_Payload + offset);
+		}
 
 
 	};

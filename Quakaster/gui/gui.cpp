@@ -30,6 +30,8 @@ namespace qk::gui {
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
+
+
     }
 
     void end_frame()
@@ -352,6 +354,7 @@ namespace qk::gui {
     ImDrawList* get_window_draw_list()
     {
         return ImGui::GetWindowDrawList();
+        
     }
 
     ImDrawList* get_background_draw_list()
@@ -364,4 +367,38 @@ namespace qk::gui {
         return ImGui::GetForegroundDrawList();
     }
 
+    void demo(bool* pOpen) {
+        ImGui::ShowDemoWindow();
+    }
+
+    ImGuiKey GlfwKeyToImGuiKey(int key)
+    {
+        switch (key)
+        {
+        case GLFW_KEY_TAB: return ImGuiKey_Tab;
+        case GLFW_KEY_LEFT: return ImGuiKey_LeftArrow;
+        case GLFW_KEY_RIGHT: return ImGuiKey_RightArrow;
+        case GLFW_KEY_UP: return ImGuiKey_UpArrow;
+        case GLFW_KEY_DOWN: return ImGuiKey_DownArrow;
+        case GLFW_KEY_PAGE_UP: return ImGuiKey_PageUp;
+        case GLFW_KEY_PAGE_DOWN: return ImGuiKey_PageDown;
+        case GLFW_KEY_HOME: return ImGuiKey_Home;
+        case GLFW_KEY_END: return ImGuiKey_End;
+        case GLFW_KEY_INSERT: return ImGuiKey_Insert;
+        case GLFW_KEY_DELETE: return ImGuiKey_Delete;
+        case GLFW_KEY_BACKSPACE: return ImGuiKey_Backspace;
+        case GLFW_KEY_SPACE: return ImGuiKey_Space;
+        case GLFW_KEY_ENTER: return ImGuiKey_Enter;
+        case GLFW_KEY_ESCAPE: return ImGuiKey_Escape;
+
+        case GLFW_KEY_A: return ImGuiKey_A;
+        case GLFW_KEY_C: return ImGuiKey_C;
+        case GLFW_KEY_V: return ImGuiKey_V;
+        case GLFW_KEY_X: return ImGuiKey_X;
+        case GLFW_KEY_Y: return ImGuiKey_Y;
+        case GLFW_KEY_Z: return ImGuiKey_Z;
+
+        default: return ImGuiKey_None;
+        }
+    }
 }

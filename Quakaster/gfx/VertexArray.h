@@ -32,6 +32,14 @@ namespace qk::gfx {
 				apply_impl(layout);
 			}
 
+			
+			void apply(const VertexBuffer_impl& buffer, const VertexBufferLayout& layout) const {
+				bind();
+				buffer.bind_impl();
+
+				apply_impl(layout);
+			}
+
 			void destroy();
 
 			VertexArray();

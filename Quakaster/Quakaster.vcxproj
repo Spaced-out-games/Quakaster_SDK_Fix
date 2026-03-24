@@ -11,6 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Documents\Visual Studio 2022\Projects\ModernQuickMenuBuilder\Backend\qmb\AcceleratedLinkedList.h" />
+    <ClInclude Include="core\utility\AcceleratedLinkedList.h" />
     <ClInclude Include="core\utility\ResourceLock.h" />
     <ClInclude Include="core\utility\ScopeTimer.h" />
     <ClInclude Include="core\utility\time.h" />
@@ -18,11 +20,13 @@
     <ClInclude Include="gfx\c2d.h" />
     <ClInclude Include="gfx\Canvas3D.h" />
     <ClInclude Include="gfx\CommandBuffer.h" />
+    <ClInclude Include="gfx\CRenderTarget.h" />
     <ClInclude Include="gfx\DrawCommand.h" />
     <ClInclude Include="gfx\FrameBuffer.h" />
     <ClInclude Include="gfx\FullscreenBlitter.h" />
     <ClInclude Include="gfx\Texture.h" />
     <ClInclude Include="gui\gui.h" />
+    <ClInclude Include="gui\GUILayer.h" />
     <ClInclude Include="gui\Widget.h" />
     <ClInclude Include="services\GraphNodeService.h" />
     <ClInclude Include="gfx\CMeshInstance.h" />
@@ -44,7 +48,6 @@
     <ClInclude Include="core\core\Window.h" />
     <ClInclude Include="gfx\gfx.h" />
     <ClInclude Include="gfx\IndexBuffer.h" />
-    <ClInclude Include="gfx\Mesh.h" />
     <ClInclude Include="gfx\Shader.h" />
     <ClInclude Include="gfx\ShaderProgram.h" />
     <ClInclude Include="gfx\types.h" />
@@ -57,6 +60,7 @@
     <ClInclude Include="math\CMatrix.h" />
     <ClInclude Include="math\CTransform.h" />
     <ClInclude Include="core\res\Image.h" />
+    <ClInclude Include="spacial\SpatialHashMap.h" />
     <ClInclude Include="thirdparty\imgui\imgui\imgui.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\async.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\async_logger-inl.h" />
@@ -163,20 +167,23 @@
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\tweakme.h" />
     <ClInclude Include="thirdparty\spdlog-1.x\include\spdlog\version.h" />
     <ClInclude Include="thirdparty\stb_image\stb_image.h" />
-    <ClInclude Include="vgui\Canvas2D.h" />
+    <ClInclude Include="gfx\Renderer2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CLI\Convar.cpp" />
     <ClCompile Include="CLI\ConvarRegistry.cpp" />
+    <ClCompile Include="core\io\DefaultEvents.cpp" />
     <ClCompile Include="gfx\c2d.cpp" />
     <ClCompile Include="gfx\Canvas3D.cpp" />
     <ClCompile Include="gfx\CommandBuffer.cpp" />
+    <ClCompile Include="gfx\CRenderTarget.cpp" />
     <ClCompile Include="gfx\DrawCommand.cpp" />
     <ClCompile Include="gfx\Framebuffer.cpp" />
     <ClCompile Include="gfx\FullscreenBlitter.cpp" />
     <ClCompile Include="gfx\Texture.cpp" />
     <ClCompile Include="gfx\VertexBufferLayout.cpp" />
     <ClCompile Include="gui\gui.cpp" />
+    <ClCompile Include="gui\GUILayer.cpp" />
     <ClCompile Include="services\ConvarService.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="core\core\Application.cpp" />
@@ -209,12 +216,14 @@
     <ClCompile Include="thirdparty\imgui\imgui\imgui_tables.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui\imgui_widgets.cpp" />
     <ClCompile Include="thirdparty\stb_image\stb_image.cpp" />
-    <ClCompile Include="vgui\Canvas2D.cpp" />
+    <ClCompile Include="gfx\Renderer2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="thirdparty\glfw\src\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\Documents\Visual Studio 2022\Projects\ModernQuickMenuBuilder\Backend\qmb\AcceleratedLinkedList.inl" />
+    <None Include="core\utility\AcceleratedLinkedList.inl" />
     <None Include="gfx\types_GL.inl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

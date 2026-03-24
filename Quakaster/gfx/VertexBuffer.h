@@ -11,16 +11,20 @@ namespace qk::gfx {
 	// TODO: Separate initialization from uploads
 
 	class QK_API VertexBuffer_impl {
-		protected:
-			Handle m_Handle = NULL_HANDLE;
-			unsigned int m_Count = 0;
-			VertexBuffer_impl();
-			~VertexBuffer_impl();
-			void init_impl();
-			void upload_impl(const void* data, size_t count, size_t elem_size, unsigned int usage);
-			void bind_impl() const;
-			void unbind_impl() const;
-			void destroy_impl();
+			//protected:
+				Handle m_Handle = NULL_HANDLE;
+				size_t m_Count = 0;
+		public:
+
+				VertexBuffer_impl();
+				~VertexBuffer_impl();
+				void init_impl();
+				void upload_impl(const void* data, size_t count, size_t elem_size, unsigned int usage);
+				void bind_impl() const;
+				void unbind_impl() const;
+				void destroy_impl();
+				size_t count() const;
+				
 	};
 
 

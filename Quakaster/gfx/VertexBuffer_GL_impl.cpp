@@ -34,7 +34,7 @@ namespace qk::gfx {
 	}
 	void VertexBuffer_impl::unbind_impl() const {
 		#ifdef _DEBUG
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		#endif
 	}
 
@@ -43,6 +43,10 @@ namespace qk::gfx {
 		glDeleteBuffers(1, &m_Handle);
 		m_Handle = NULL_HANDLE;
 	}
+	size_t VertexBuffer_impl::count() const {
+		return m_Count;
+	}
+
 
 
 	

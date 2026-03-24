@@ -399,9 +399,6 @@
     <ClInclude Include="gfx\CMeshInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gfx\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="core\utility\ResourceLock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -468,10 +465,25 @@
     <ClInclude Include="gfx\c2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vgui\Canvas2D.h">
+    <ClInclude Include="gfx\Renderer2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="gfx\FullscreenBlitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\CRenderTarget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\GUILayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Documents\Visual Studio 2022\Projects\ModernQuickMenuBuilder\Backend\qmb\AcceleratedLinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\utility\AcceleratedLinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spacial\SpatialHashMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -602,10 +614,19 @@
     <ClCompile Include="gfx\c2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vgui\Canvas2D.cpp">
+    <ClCompile Include="gfx\Renderer2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gfx\FullscreenBlitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\CRenderTarget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\GUILayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="core\io\DefaultEvents.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -614,6 +635,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="gfx\types_GL.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\..\..\..\Documents\Visual Studio 2022\Projects\ModernQuickMenuBuilder\Backend\qmb\AcceleratedLinkedList.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="core\utility\AcceleratedLinkedList.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

@@ -14,6 +14,9 @@ namespace qk::gfx {
 
 		void bind();
 
+		void unbind();
+
+
 		bool attach(Texture& texture, unsigned int slot);
 
 		Handle handle() const;

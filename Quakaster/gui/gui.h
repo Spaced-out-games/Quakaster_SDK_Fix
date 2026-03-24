@@ -109,5 +109,7 @@ namespace qk::gui {
 	QK_API ImDrawList* get_window_draw_list();
 	QK_API ImDrawList* get_background_draw_list();
 	QK_API ImDrawList* get_foreground_draw_list();
+	QK_API void demo(bool* pOpen);
+	QK_API ImGuiKey GlfwKeyToImGuiKey(int key);
 
 }
