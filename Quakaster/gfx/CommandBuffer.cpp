@@ -84,6 +84,16 @@ namespace qk::gfx {
 		command.handles[3] = std::bit_cast<unsigned int>(b);
 		command.handles[4] = std::bit_cast<unsigned int>(a);
 	}
+	void CommandBuffer::drawArraysInstanced(PrimitiveType primitive_t, unsigned int first, unsigned int num_vertices, unsigned int num_instances) {
+		auto& command = m_CommandBuffer.emplace_back();
+		command.type = ECommandType::DRAW_ARRAYS_INSTANCED;
+		command.handles[0] = primitive_t;
+		command.handles[1] = first;
+		command.handles[2] = num_vertices;
+		command.handles[3] = num_instances;
+
+
+	}
 
 
 	size_t CommandBuffer::size() const {

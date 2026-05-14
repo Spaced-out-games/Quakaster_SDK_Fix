@@ -52,7 +52,7 @@
 #include "DebugEventLayer.h"
 #include "gfx/Renderer2D.h"
 #include "DebugEventLayer.h"
-
+#include "gfx/TextureBuffer.h"
 
 
 using namespace qk::resource;
@@ -93,6 +93,8 @@ struct MyApp : Application {
 	FullscreenBlitter blit;
 
 	gfx::CRenderTarget renderTarget;
+	TextureBuffer tb;
+	
 
 
 	void init_core(int argc, char** argv) {
@@ -116,6 +118,7 @@ struct MyApp : Application {
 		window.init(Window::Size{ 1920, 1080 }, "Demo");
 		window.make_context_current();
 
+
 		gfx::init();
 		c2d.init();
 	}
@@ -125,10 +128,16 @@ struct MyApp : Application {
 
 	void init(int argc, char** argv) override {
 		init_core(argc, argv);
+
+		tb.init(GL_STATIC_DRAW, GL_RGBA32F);
+
+		glm::vec4 positions = glm::vec4{1.0,1.0,0.0,0.0};
+
+
+		tb.upload(&positions, sizeof(positions));
 		auto& gui = stack.emplace_layer<gui::GUILayer>(&window);
 
 		
-
 
 		Image morty("C:/Users/devin/Desktop/goblin scout.jpg");
 		morty_tex.init(morty, GL_TEXTURE_2D);
@@ -139,7 +148,8 @@ struct MyApp : Application {
 
 
 		c2d.begin(&offscreen_cmdbuff);
-		c2d.bind_texture(morty_tex);
+		c2d.bind_texture(morty_tex, 1);
+		c2d.bind_texture(tb.m_Texture, 0);
 		c2d.draw_rect({ -1,-1 }, { 2, 2 }, { 1,1,1 });
 		c2d.end();
 
@@ -165,9 +175,9 @@ struct MyApp : Application {
 		stack.propagate_events();
 
 
-		gfx::call(renderTarget.m_OffscreenCommandBuffer);
-		gfx::call(offscreen_cmdbuff);
-		gfx::call(blit.m_CommandBuffer);
+		// gfx::call(renderTarget.m_OffscreenCommandBuffer);
+		 gfx::call(offscreen_cmdbuff);
+		// gfx::call(blit.m_CommandBuffer);
 		stack.render();
 
 		queue.clear();

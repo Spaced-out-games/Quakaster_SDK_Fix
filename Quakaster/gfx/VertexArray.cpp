@@ -43,7 +43,8 @@ namespace qk::gfx {
 		glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &h);
 		return static_cast<Handle>(h);
 	}
-	void VertexArray::apply_impl(const VertexBufferLayout& layout) const {
+	
+	void VertexArray::apply_impl(const VertexBufferLayout& layout, VertexBufferLayoutCursor cursor) const {
 		unsigned int location = 0;
 		unsigned int offset = 0;
 

@@ -24,7 +24,9 @@
     <ClInclude Include="gfx\DrawCommand.h" />
     <ClInclude Include="gfx\FrameBuffer.h" />
     <ClInclude Include="gfx\FullscreenBlitter.h" />
+    <ClInclude Include="gfx\Mesh.h" />
     <ClInclude Include="gfx\Texture.h" />
+    <ClInclude Include="gfx\TextureBuffer.h" />
     <ClInclude Include="gui\gui.h" />
     <ClInclude Include="gui\GUILayer.h" />
     <ClInclude Include="gui\Widget.h" />
@@ -180,7 +182,9 @@
     <ClCompile Include="gfx\DrawCommand.cpp" />
     <ClCompile Include="gfx\Framebuffer.cpp" />
     <ClCompile Include="gfx\FullscreenBlitter.cpp" />
+    <ClCompile Include="gfx\Mesh.cpp" />
     <ClCompile Include="gfx\Texture.cpp" />
+    <ClCompile Include="gfx\TextureBuffer.cpp" />
     <ClCompile Include="gfx\VertexBufferLayout.cpp" />
     <ClCompile Include="gui\gui.cpp" />
     <ClCompile Include="gui\GUILayer.cpp" />

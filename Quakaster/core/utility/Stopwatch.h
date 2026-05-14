@@ -10,7 +10,6 @@
 
 namespace qk::util {
 
-
 	struct QK_API Stopwatch {
 		uint64_t m_StartTime = 0;
 		uint64_t m_TotalTime = 0;
@@ -26,6 +25,5 @@ namespace qk::util {
 		[[nodiscard]] double total_time_ms() const;
 		[[nodiscard]] double total_time_s() const;
 	};
-
 
 }

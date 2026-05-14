@@ -486,6 +486,12 @@
     <ClInclude Include="spacial\SpatialHashMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="gfx\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gfx\TextureBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="core\core\Application.cpp">
@@ -627,6 +633,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="core\io\DefaultEvents.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gfx\TextureBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

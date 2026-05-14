@@ -11,8 +11,7 @@ namespace qk::gfx {
 		m_Width = img.width();
 		m_Height = img.height();
 
-		// override, for now:
-		type = GL_TEXTURE_2D;
+
 
 		m_Type = type;
 
@@ -41,7 +40,6 @@ namespace qk::gfx {
 			GL_UNSIGNED_BYTE,
 			img.data()
 		);
-
 		glTexParameteri(m_Type, GL_TEXTURE_MAG_FILTER, filter_mode);
 		glTexParameteri(m_Type, GL_TEXTURE_MIN_FILTER, filter_mode);
 

@@ -49,6 +49,9 @@ namespace qk::gfx {
 				(void*)command.handles[3]
 			);
 			break;
+		case DRAW_ARRAYS_INSTANCED:
+			glDrawArraysInstanced(command.handles[0], command.handles[1], command.handles[2], command.handles[3]);
+			break;
 		case CLEAR:
 			r = std::bit_cast<float>(command.handles[1]);
 			g = std::bit_cast<float>(command.handles[2]);

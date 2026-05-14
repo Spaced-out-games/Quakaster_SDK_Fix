@@ -22,7 +22,10 @@ namespace qk::gfx
         VertexAttribute type;
         unsigned int count;
         bool normalized;
+        unsigned int divisor = 0; // 0 = per-vertex, per Nth instance otherwise
     };
+
+    using VertexBufferLayoutCursor = unsigned int;
 
 
     unsigned int get_attribute_size(VertexAttribute attribute);
@@ -43,12 +46,13 @@ namespace qk::gfx
         public:
 
             template<class T>
-            void push(unsigned int count, bool normalized = false)
+            void push(unsigned int count, bool normalized = false, unsigned int divisor = 0)
             {
                 m_Elements.emplace_back(VertexBufferLayoutElement{
                     VertexAttribute_cast<T>(),
                     count,
-                    normalized
+                    normalized,
+                    divisor
                     });
 
                 m_Stride += count * sizeof(T);

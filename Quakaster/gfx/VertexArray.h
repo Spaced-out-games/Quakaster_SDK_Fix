@@ -12,8 +12,14 @@
 
 namespace qk::gfx {
 	class QK_API VertexArray {
-			Handle m_Handle = NULL_HANDLE;
-			void apply_impl(const VertexBufferLayout& layout) const;
+		Handle m_Handle = NULL_HANDLE;
+
+		void apply_impl(const VertexBufferLayout& layout, VertexBufferLayoutCursor cursor) const;
+
+		inline void apply_impl(const VertexBufferLayout& layout) const {
+			VertexBufferLayoutCursor cursor = 0;
+			apply_impl(layout, cursor);
+		}
 
 		public:
 			void bind() const;

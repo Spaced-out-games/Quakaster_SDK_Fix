@@ -15,6 +15,7 @@ namespace qk::gfx {
 	static unsigned int filter_mode = 0x2600; // GL_NEAREST
 
 	class QK_API Texture {
+		friend class TextureBuffer;
 		Handle m_Handle = 0;
 		TextureType m_Type = 0;
 

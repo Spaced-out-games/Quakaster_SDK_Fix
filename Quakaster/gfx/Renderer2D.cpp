@@ -44,6 +44,26 @@ namespace qk::gfx {
 		}
 	)";
 
+	// temporary; for TextureBuffer testing
+	const std::string frag_bypass_src = R"(
+		#version 330 core
+
+		in vec2 vUV;
+		in vec4 vColor;
+
+		out vec4 FragColor;
+
+		uniform sampler2D uTexture;
+		uniform samplerBuffer uTextureBuffer;
+
+		void main()
+		{
+			// vec4 tex = texture(uTexture, vUV);
+			vec4 tex = texelFetch(uTextureBuffer, 0); // fetch just the first vec4
+			FragColor = vec4(tex.rgb, 1.0f);// * vColor;
+		}
+	)";
+
 
 
 	void Renderer2D::init() {
@@ -56,7 +76,7 @@ namespace qk::gfx {
 		m_IndexBuffer.init();
 		m_IndexBuffer.bind();
 
-		Shader frag(frag_src, GL_FRAGMENT_SHADER);
+		Shader frag(frag_bypass_src, GL_FRAGMENT_SHADER);
 		Shader vert(vert_src, GL_VERTEX_SHADER);
 		m_Shader.init(frag.compile(), vert.compile());
 		m_Shader.bind();
@@ -67,7 +87,6 @@ namespace qk::gfx {
 		auto* pPixel = white_img.data();
 		pPixel[0] = 255; pPixel[1] = 255; pPixel[2] = 255;
 		m_WhiteTex.init(white_img, GL_TEXTURE_2D);
-
 		VertexBufferLayout layout;
 		layout.push<float>(2); // position
 		layout.push<float>(2); // uv
@@ -167,10 +186,10 @@ namespace qk::gfx {
 		);
 	}
 
-	inline void Renderer2D::bind_texture(Texture& target) {
+	inline void Renderer2D::bind_texture(Texture& target, unsigned int slot) {
 		if (!m_CommandBuffer) return;
 
-		m_CommandBuffer->bindTexture(target.handle(), target.type(), 0);
+		m_CommandBuffer->bindTexture(target.handle(), target.type(), slot);
 	}
 
 

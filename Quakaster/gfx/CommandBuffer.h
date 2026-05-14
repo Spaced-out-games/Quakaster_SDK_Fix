@@ -26,6 +26,8 @@ namespace qk::gfx {
 			void bindFramebuffer(const FrameBuffer& framebuffer);
 			void drawVertexArray(PrimitiveType primitive_t, unsigned int first, unsigned int count);
 			void drawElements(PrimitiveType primitive_t, unsigned int count, VertexAttribute type, uint32_t offsetBytes);
+			void drawArraysInstanced(PrimitiveType primitive_t, unsigned int first, unsigned int num_vertices, unsigned int num_instances);
+
 			void setUniformi(unsigned int location, int value);
 			void setViewport(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
 			void clear(unsigned int flags, float r, float g, float b, float a);

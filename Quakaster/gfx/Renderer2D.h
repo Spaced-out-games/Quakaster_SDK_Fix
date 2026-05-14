@@ -76,7 +76,7 @@ namespace qk::gfx {
 		uint32_t index_count() const;
 
 
-		inline void bind_texture(Texture& target);
+		inline void bind_texture(Texture& target, unsigned int slot);
 
 		inline void draw_triangle(glm::vec2 a, glm::vec2 b, glm::vec2 c, glm::vec3 color);
 		inline void draw_rect(glm::vec2 pos, glm::vec2 size, glm::vec3 color);
